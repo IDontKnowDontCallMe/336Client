@@ -14,7 +14,6 @@ import vo.OrderVO;
 
 public class MarketerOrdersPane extends VBox{
 
-	//以后用工厂模式替换之
 	OrderController controller = new MockOrderController();
 	
 	private HBox radioBox;
