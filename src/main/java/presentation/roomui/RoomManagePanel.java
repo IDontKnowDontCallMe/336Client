@@ -7,24 +7,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 
-//ÏÔÊ¾¾Æµê¿Í·¿¹ÜÀíµÄÃæ°å£¬ÓÃÓÚ¾Æµê¹¤×÷ÈËÔ±
 public class RoomManagePanel {
 	
-	//ÏÔÊ¾¾ÆµêµÄ¿Í·¿ÁĞ±í
 	public void getRoomList(){
 		SplitPane pane = new SplitPane();
 		pane.setOrientation(Orientation.VERTICAL);
 		pane.setDividerPositions(0.2,0,8);
 		
-		Button add = new Button("Ìí¼Ó");
-		Button edit = new Button("±à¼­");
+		Button add = new Button("æ·»åŠ ");
+		Button edit = new Button("ç¼–è¾‘");
 		HBox hBox = new HBox();
 		hBox.getChildren().addAll(add,edit);
 		
 		TableView tableView = new TableView<>();
-		TableColumn RoomID = new TableColumn("·¿¼äºÅ");  
-        TableColumn RoomType = new TableColumn("·¿¼äÀàĞÍ");  
-        TableColumn guest = new TableColumn("Èë×¡ÈË");  
+		TableColumn RoomID = new TableColumn("æˆ¿é—´å·");  
+        TableColumn RoomType = new TableColumn("æˆ¿é—´ç±»å‹");  
+        TableColumn guest = new TableColumn("å…¥ä½äºº");  
        
         tableView.getColumns().addAll(RoomID, RoomType, guest);  
         
@@ -32,12 +30,10 @@ public class RoomManagePanel {
         pane.getItems().addAll(hBox,tableView);
 	}
 	
-	//ÏÔÊ¾ĞÂÔö/±à¼­¿Í·¿ĞÅÏ¢µÄ½çÃæ
 	public void edit(){
 		
 	}
 	
-	//Í£Ö¹ÏÔÊ¾
 	public void back(){
 		
 	}

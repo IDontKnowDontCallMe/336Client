@@ -13,25 +13,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-//��ʾ�ͻ���Ϣ�����
 public class CustomerInfoPanel {
 	
-	//��ʾ�ÿͻ������ñ仯�б�
 	public void getCredit(){
 		
 	}
 	
-	//��ʾĳһ�����ñ仯�ľ�����Ϣ
 	public void getConcreteCredit(){
 		
 	}
 	
-	//��ʾ�ÿͻ��Ļ�����Ϣ
 	public void getInfo(){
 		
 	}
 	
-	//��ʾ�༭������Ϣ�Ľ���
 	public void getInfoEdit(){
 		SplitPane pane = new SplitPane();
         pane.setOrientation(Orientation.VERTICAL);
@@ -101,12 +96,10 @@ public class CustomerInfoPanel {
         pane.getItems().addAll(customerInfo,creditPane);
 	}
 	
-	//��ʾע���Ա�Ľ���
 	public void registerVIP(){
 		
 	}
 	
-	//ֹͣ��ʾ�����
 	public void back(){
 		
 	}
