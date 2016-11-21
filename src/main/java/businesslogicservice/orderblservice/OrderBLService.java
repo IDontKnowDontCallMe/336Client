@@ -2,9 +2,7 @@ package businesslogicservice.orderblservice;
 
 import java.util.List;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
 
-import po.OrderPO;
 import vo.OrderVO;
 
 /**
