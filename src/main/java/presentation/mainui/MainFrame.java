@@ -5,7 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import bussinesslogic.factory.BLFactory;
+import businesslogic.factory.BLFactory;
 import data.factory.DataFactory;
 import po.OrderPO;
 

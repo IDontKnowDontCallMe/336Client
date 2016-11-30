@@ -1,4 +1,4 @@
-package businesslogic.BLFactory;
+package businesslogic.factory;
 
 import java.rmi.Remote;
 import businesslogicservice.customerblservice.CustomerBLService;
