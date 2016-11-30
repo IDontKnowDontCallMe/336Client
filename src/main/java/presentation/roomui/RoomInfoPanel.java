@@ -9,8 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+//��ʾ�ͷ���Ϣ����壬�������ڣ��ͻ��ӾƵ���Ϣ�в鿴�ͷ���Ϣʱ
 public class RoomInfoPanel {
 
+	//��ʾ���巿����Ϣ
 	public void show(){
 		AnchorPane anchorPane = new AnchorPane();
 		GridPane grid = new GridPane();
@@ -52,6 +54,7 @@ public class RoomInfoPanel {
         grid.add(hbBtn, 0, 4);
 	}
 	
+	//ֹͣ��ʾ���
 	public void back(){
 		
 	}

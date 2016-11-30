@@ -15,6 +15,7 @@ import vo.OrderVO;
 public class HotelOrdersPane extends VBox{
 
 	private int hotelID;
+	//以后用工厂模式替换之
 	OrderController controller = new MockOrderController();
 	
 	private HBox radioBox;

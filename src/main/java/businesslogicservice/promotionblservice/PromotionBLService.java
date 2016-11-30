@@ -1,40 +1,45 @@
 package businesslogicservice.promotionblservice;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-import po.OrderPO;
+import vo.CustomerVO;
 import vo.HotelPromotionVO;
 import vo.LevelVO;
+import vo.OrderVO;
 import vo.WebPromotionVO;
 
-public interface PromotionBLService {
+public interface PromotionBLService extends Remote{
 	
 	
-	public List<HotelPromotionVO> getHotelPromotionList(int hotelID);
+	public List<HotelPromotionVO> getHotelPromotionList(int hotelID) throws RemoteException;
 	
-	public boolean addHotelPromotion(HotelPromotionVO vo);
+	public boolean addHotelPromotion(HotelPromotionVO hotelPromotionVO) throws RemoteException;
 	
-	public boolean updateHotelPromotion(HotelPromotionVO vo);
+	public boolean updateHotelPromotion(HotelPromotionVO hotelPromotionVO) throws RemoteException;
 	
-	public boolean deleteHotelPromotion(int hotelID, String promotionName);
+	public boolean deleteHotelPromotion(HotelPromotionVO vo) throws RemoteException;
 	
-	public List<WebPromotionVO> getWebPromotionList();
+	public List<WebPromotionVO> getWebPromotionList() throws RemoteException;
 	
-	public boolean addWebPromotion(WebPromotionVO vo);
+	public boolean addWebPromotion(WebPromotionVO webPromotionVO) throws RemoteException;
 	
-	public boolean updateWebPromotion(WebPromotionVO vo);
+	public boolean updateWebPromotion(WebPromotionVO webPromotionVO) throws RemoteException;
 	
-	public boolean deleteWebPromotion(String promotionName);
+	public boolean deleteWebPromotion(WebPromotionVO webPromotionVO) throws RemoteException;
 	
-	public boolean setLevelMethod(LevelVO vo);
+	public boolean setLevelMethod(LevelVO levelVO) throws RemoteException;
 	
-	public LevelVO getLevelMethod();
+	public LevelVO getLevelMethod() throws RemoteException;
 	
+	public boolean updateLevelInfo(LevelVO levelVO);
 	
+	public int calculateOrder(OrderVO orderVO, CustomerVO customerVO) throws RemoteException;
 	
-	public int calculateOrder(OrderPO po);
+	public int calculateLevel(int credit) throws RemoteException;
+
 	
-	public int calculateLevel(int credit);
 	
 
 }

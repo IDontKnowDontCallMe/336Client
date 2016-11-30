@@ -1,26 +1,44 @@
 package vo;
 
+import java.time.LocalDate;
+
 public class CustomerVO {
 	
-	String name;
-	String phoneNumber;
+	public int customerID;
+	public String customerName;
+	public String phoneNumber;
+	public boolean isBirthVIP;
+	public LocalDate birthday;
+	public boolean isCompanyVIP;
+	public String companyName;
+	public int credit;
+	public int level;
 	
-	String VIPType;
-	String VIPbirthday;
-	String VIPcompany;
 	
-	int credit;
-	int level;
-	
-	public CustomerVO(String name, String phoneNumber, String VIPType, String VIPbirthday, String VIPcompany, int credit, int level){
-		this.name = name;
+	public CustomerVO(int customerID, String customerName, String phoneNumber, boolean isBirthVIP, LocalDate birthday, 
+						boolean isCompanyVIP, String companyName, int credit, int level){
+		this.customerID = customerID;
+		this.customerName = customerName;
 		this.phoneNumber = phoneNumber;
-		this.VIPbirthday = VIPbirthday;
-		this.VIPType = VIPType;
-		this.VIPcompany = VIPcompany;
+		this.isBirthVIP = isBirthVIP;
+		this.birthday = birthday;
+		this.isCompanyVIP = isCompanyVIP;
+		this.companyName = companyName;
 		this.credit = credit;
 		this.level = level;
-		
 	}
-
+	
+	public CustomerVO(CustomerVO vo){
+		this.customerID = vo.customerID;
+		this.customerName = vo.customerName;
+		this.phoneNumber = vo.phoneNumber;
+		this.isBirthVIP = vo.isBirthVIP;
+		this.birthday = vo.birthday;
+		this.isCompanyVIP = vo.isCompanyVIP;
+		this.companyName = vo.companyName;
+		this.credit = vo.credit;
+		this.level = vo.level;
+	}
 }
+
+

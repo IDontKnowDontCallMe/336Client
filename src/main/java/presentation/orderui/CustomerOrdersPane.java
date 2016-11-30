@@ -5,17 +5,21 @@ import java.util.List;
 
 import businesslogic.orderbl.OrderController;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
 public class CustomerOrdersPane extends VBox{
 
 	private int customerID;
+	//以后用工厂模式替换之
 	OrderController controller = new MockOrderController();
 	
 	private HBox radioBox;
@@ -25,16 +29,16 @@ public class CustomerOrdersPane extends VBox{
 	private RadioButton executedButton;
 	private RadioButton revokedButton;
 	private RadioButton abnormalButton;
+	private Button backButton;
 	
 	private ScrollPane listPane;
 	private VBox orderBox;
 	
 	
 	public CustomerOrdersPane(int customerID) {
-		// TODO Auto-generated constructor stub
+		
 		this.customerID = customerID;
 		initRadioButton();
-		//OrderController controller = new MockOrderController();
 		List<OrderVO> orderList = controller.getCustomerOrder(customerID);
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
@@ -42,6 +46,7 @@ public class CustomerOrdersPane extends VBox{
 		listPane = new ScrollPane(orderBox);
 		this.getChildren().addAll(radioBox,listPane);
 		this.setPrefWidth(500);
+		this.getStylesheets().add(getClass().getResource("scrollbar.css").toExternalForm());
 	}
 	
 	private void initRadioButton(){
@@ -74,10 +79,15 @@ public class CustomerOrdersPane extends VBox{
 				}
 				);
 		
+		backButton = new Button("返回");
+		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED	, (event)->{
+			TheMainFrame.backTo();
+		});
+		
 		radioBox = new HBox();
 		radioBox.setSpacing(10);
 		radioBox.setPrefWidth(500);
-		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton);
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton);
 	}
 	
 	private void buildOrderBox(List<OrderVO> orderList){

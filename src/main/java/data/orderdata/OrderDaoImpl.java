@@ -50,7 +50,7 @@ public class OrderDaoImpl implements OrderDao{
 				int total = res.getInt("total");
 				
 				po = new OrderPO(orderID, customerName, customerID, producingTime, hotelName, hotelID, roomName,
-						                roomNum, hasChildren, peopleNum, checkInTime, checkOutTime, total, orderState, checkOutTime);
+						                roomNum, hasChildren, peopleNum, checkInTime, checkOutTime, total, orderState);
 			}
 			
 			pps.close();
