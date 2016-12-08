@@ -1,18 +1,21 @@
 package presentation.mainui;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Stack;
-
+import bussinesslogic.factory.BLFactory;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import presentation.promotionui.LevelPanel;
 
 public class TheMainFrame extends Application {
 
 	private static Stack<Parent> parentStack;
 	private static Scene scene;
+	private BLFactory blFactory;
 
 	public static void jumpTo(Parent parent) {
 
@@ -27,18 +30,31 @@ public class TheMainFrame extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		scene = new Scene(new LoginPane(), 500, 500);
+		linkToServer();
+		scene = new Scene(new LoginPane(), 1100, 700);
 		parentStack = new Stack<Parent>();
 
 		primaryStage.setScene(scene);
-		scene.getStylesheets().add(getClass().getResource("scrollbar.css").toExternalForm());
 
 		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	private void linkToServer() {
+		try {
+			blFactory = BLFactory.getInstance();
+			blFactory.setRemote(Naming.lookup("rmi://localhost:8888/controllerRemoteFactory"));
+			System.out.println("linked");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

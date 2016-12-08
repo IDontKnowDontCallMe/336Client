@@ -22,16 +22,29 @@ public class WebMarketerMainPane extends VBox {
 		Button logoutButton = new Button("注销登录");
 
 		this.getChildren().addAll(webPromotionButton, levelButton, marketerOrderButton, creditButton, logoutButton);
+		
+		
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new WebPromotionPanel());
+			try {
+				TheMainFrame.jumpTo(new WebPromotionPanel());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 
+		
 		levelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.jumpTo(new LevelPanel());
 		});
 
 		marketerOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new MarketerOrdersPane());
+			try {
+				TheMainFrame.jumpTo(new MarketerOrdersPane());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 
 		creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {

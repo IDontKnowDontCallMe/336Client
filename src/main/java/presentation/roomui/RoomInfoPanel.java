@@ -1,61 +1,55 @@
 package presentation.roomui;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import vo.RoomVO;
 
-//��ʾ�ͷ���Ϣ����壬�������ڣ��ͻ��ӾƵ���Ϣ�в鿴�ͷ���Ϣʱ
-public class RoomInfoPanel {
+public class RoomInfoPanel extends GridPane {
 
-	//��ʾ���巿����Ϣ
-	public void show(){
-		AnchorPane anchorPane = new AnchorPane();
-		GridPane grid = new GridPane();
-		anchorPane.getChildren().add(grid);
-		anchorPane.setLeftAnchor(grid, 50.0);
-		anchorPane.setTopAnchor(grid, 100.0);
+	private int hotelID;
+	ScrollPane roomPane;
 
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+	public RoomInfoPanel(List<RoomVO> roomList) {
 
-        Label userName = new Label("房型");
-        grid.add(userName, 0, 1);
-        TextField userTextField = new TextField("总统套房");
-        userTextField.setEditable(false);
-        userTextField.setBackground(null);
-        grid.add(userTextField, 1, 1);
+		super();
+		this.setHgap(10);
+		this.setVgap(20);
 
-        Label birthday = new Label("简介：");
-        grid.add(birthday, 0, 2);
-        TextField birthdayfield = new TextField();
-        birthdayfield.setEditable(false);
-        birthdayfield.setBackground(null);
-        grid.add(birthdayfield, 1, 2);
-        
-        Label address = new Label("设施设备:");
-        grid.add(address, 0, 3);
-        TextField addressfield = new TextField();
-        addressfield.setEditable(false);
-        addressfield.setBackground(null);
-        grid.add(addressfield, 1, 3);
+		this.hotelID = hotelID;
 
-        Button edit = new Button("编辑");
-        Button save = new Button("保存");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().addAll(edit,save);
-        grid.add(hbBtn, 0, 4);
-	}
-	
-	//ֹͣ��ʾ���
-	public void back(){
+		roomPane = new ScrollPane();
 		
+		TableView<RoomCell> tableView = new TableView<>();
+		roomPane.setContent(tableView);
+
+		TableColumn<RoomCell, String> roomIDCol = new TableColumn<>("房间号");
+		roomIDCol.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+		TableColumn<RoomCell, String> roomNameCol = new TableColumn<>("房间类型");
+		roomNameCol.setCellValueFactory(new PropertyValueFactory<>("roomName"));
+		TableColumn<RoomCell, String> priceCol = new TableColumn<>("房间单价");
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		TableColumn<RoomCell, String> numOfRoomCol = new TableColumn<>("房间数量");
+		numOfRoomCol.setCellValueFactory(new PropertyValueFactory<>("numOfRoom"));
+		TableColumn<RoomCell, String> serviceCol = new TableColumn<>("服务设施");
+		serviceCol.setCellValueFactory(new PropertyValueFactory<>("service"));
+		TableColumn<RoomCell, String> maxNumOfPeopleCol = new TableColumn<>("最大房客数");
+		maxNumOfPeopleCol.setCellValueFactory(new PropertyValueFactory<>("maxNumOfPeople"));
+
+		tableView.getColumns().addAll(roomIDCol, roomNameCol, priceCol, numOfRoomCol, serviceCol, maxNumOfPeopleCol);
+		tableView.setPrefWidth(450);
+		ObservableList<RoomCell> roomCells = FXCollections.observableArrayList();
+		for (RoomVO vo : roomList) {
+			RoomCell cell = new RoomCell(vo);
+			roomCells.add(cell);
+		}
+
+		tableView.setItems(roomCells);
 	}
 }
