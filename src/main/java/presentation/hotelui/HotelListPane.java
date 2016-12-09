@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import presentation.orderui.ProducingOrderDialog;
-import presentation.roomui.MockRoomController;
 import vo.HotelVO;
 import vo.RoomVO;
 
@@ -20,8 +19,10 @@ public class HotelListPane extends ScrollPane {
 
 	private int customerID;
 
-	public HotelListPane(List<HotelVO> hotelList) {
+	public HotelListPane(List<HotelVO> hotelList, int customerID) throws RemoteException {
 		super();
+		this.customerID = customerID;
+
 		VBox vBox = new VBox();
 		vBox.setSpacing(20);
 		this.setContent(vBox);
@@ -38,13 +39,13 @@ public class HotelListPane extends ScrollPane {
 		private Button produceButton;
 		private Button detailedButton;
 
-		public SimpleHotelCell(HotelVO hotelVO) {
+		public SimpleHotelCell(HotelVO hotelVO) throws RemoteException {
 			super();
 			this.hotelVO = hotelVO;
 
 			this.setHgap(10);
 			this.setVgap(20);
-			
+
 			this.add(new Text(hotelVO.hotelName), 1, 0, 1, 1);
 			this.add(new Text(String.valueOf(hotelVO.commentScore) + "分"), 2, 0, 1, 1);
 			this.add(new Text(String.valueOf(hotelVO.bookedTag)), 4, 1, 1, 1);
@@ -54,20 +55,17 @@ public class HotelListPane extends ScrollPane {
 
 			produceButton = new Button("下订单");
 			this.add(produceButton, 5, 1, 1, 1);
-			
-			
+			List<RoomVO> roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelVO.hotelID);
 			produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-				List<RoomVO> roomList =null;
+				ProducingOrderDialog producingOrderDialog = null;
 				try {
-					roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelVO.hotelID);
-				} catch (RemoteException e1) {
+					producingOrderDialog = new ProducingOrderDialog(customerID, hotelVO, roomList, 0);
+				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e.printStackTrace();
 				}
-				ProducingOrderDialog producingOrderDialog = new ProducingOrderDialog(customerID, hotelVO, roomList, 0);
 				producingOrderDialog.show();
 			});
-			
 
 			detailedButton = new Button("详情");
 			this.add(detailedButton, 6, 1, 1, 1);

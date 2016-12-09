@@ -25,7 +25,7 @@ public class HotelSearchPane extends VBox {
 	private int customerID;
 	private AreaVO areaVO;
 
-	public HotelSearchPane(AreaVO areaVO, int customerID) {
+	public HotelSearchPane(AreaVO areaVO, int customerID) throws RemoteException {
 		this.customerID = customerID;
 		this.areaVO = areaVO;
 		
@@ -124,15 +124,9 @@ public class HotelSearchPane extends VBox {
 		this.getChildren().add(hBox);
 	}
 
-	private void initHotelListPane() {
-		List<HotelVO> hotelList = null;
-		try {
-			hotelList = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		HotelListPane hotelListPane = new HotelListPane(hotelList);
+	private void initHotelListPane() throws RemoteException {
+		List<HotelVO> hotelList = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
+		HotelListPane hotelListPane = new HotelListPane(hotelList, customerID);
 		this.getChildren().add(hotelListPane);
 	}
 

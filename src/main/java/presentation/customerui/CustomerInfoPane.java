@@ -1,6 +1,9 @@
 package presentation.customerui;
 
+import java.rmi.RemoteException;
 import java.util.List;
+
+import bussinesslogic.factory.BLFactory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +22,7 @@ import vo.CreditVO;
 import vo.CustomerVO;
 
 public class CustomerInfoPane extends GridPane {
-    
+
 	private int customerID;
 
 	private GridPane infoPane;
@@ -37,7 +40,7 @@ public class CustomerInfoPane extends GridPane {
 
 	private ScrollPane creditPane;
 
-	public CustomerInfoPane(int customerID) {
+	public CustomerInfoPane(int customerID) throws RemoteException {
 		super();
 		this.customerID = customerID;
 
@@ -56,12 +59,12 @@ public class CustomerInfoPane extends GridPane {
 		this.add(titleBox, 0, 0, 1, 1);
 		this.add(infoPane, 0, 1, 1, 1);
 		this.add(creditPane, 0, 2, 2, 1);
-		
-		this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());
+
+		// this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());
 	}
 
-	private void initInfoPane() {
-		CustomerVO customerVO = MockCustomerController.getInstance().getCustomerInfo(customerID);
+	private void initInfoPane() throws RemoteException {
+		CustomerVO customerVO = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
 
 		infoPane = new GridPane();
 
@@ -106,12 +109,21 @@ public class CustomerInfoPane extends GridPane {
 				infoPane.add(nameText, 1, 0, 1, 1);
 				infoPane.add(phoneNumberText, 1, 1, 1, 1);
 
-				CustomerVO vo = MockCustomerController.getInstance().getCustomerInfo(customerID);
+				CustomerVO vo = null;
+				try {
+					vo = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 				vo.customerName = nameTextField.getText();
 				vo.phoneNumber = phoneTextField.getText();
-				if (MockCustomerController.getInstance().updateCustomerInfo(customerVO)) {
-					nameText.setText(nameTextField.getText());
-					phoneNumberText.setText(phoneTextField.getText());
+				try {
+					if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(vo)) {
+						nameText.setText(nameTextField.getText());
+						phoneNumberText.setText(phoneTextField.getText());
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 
 				editButton.setText("编辑");
@@ -120,7 +132,7 @@ public class CustomerInfoPane extends GridPane {
 
 	}
 
-	private void initCreditList() {
+	private void initCreditList() throws RemoteException {
 		creditPane = new ScrollPane();
 		TableView<CreditCell> tableView = new TableView<>();
 		creditPane.setContent(tableView);
@@ -138,7 +150,7 @@ public class CustomerInfoPane extends GridPane {
 
 		tableView.getColumns().addAll(producingTimeCol, orderIDCol, actionCol, creditDeltaCol, creditResultCol);
 		tableView.setPrefWidth(450);
-		List<CreditVO> creditList = MockCustomerController.getInstance().getCreditList(customerID);
+		List<CreditVO> creditList = BLFactory.getInstance().getCustomerBLService().getCreditList(customerID);
 		ObservableList<CreditCell> creditCells = FXCollections.observableArrayList();
 		for (CreditVO vo : creditList) {
 			CreditCell cell = new CreditCell(vo);
@@ -158,7 +170,7 @@ public class CustomerInfoPane extends GridPane {
 
 		public CreditCell(CreditVO vo) {
 			producingTime = new SimpleStringProperty(vo.producingDateTime.toString());
-			orderID = new SimpleStringProperty(vo.orderID == -1 ? "无" : String.valueOf(vo.orderID));
+			orderID = new SimpleStringProperty(Integer.parseInt(vo.orderID) == -1 ? "无" : String.valueOf(vo.orderID));
 			action = new SimpleStringProperty(String.valueOf(vo.action));
 			creditDelta = new SimpleStringProperty(String.valueOf(vo.creditDelta));
 			creditResult = new SimpleStringProperty(String.valueOf(vo.creditResult));
@@ -203,7 +215,6 @@ public class CustomerInfoPane extends GridPane {
 		public String getCreditResult() {
 			return creditResult.get();
 		}
-		
-		
+
 	}
 }
