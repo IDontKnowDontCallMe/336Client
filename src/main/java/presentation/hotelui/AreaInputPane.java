@@ -2,8 +2,10 @@ package presentation.hotelui;
 
 import java.rmi.RemoteException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -16,10 +18,8 @@ public class AreaInputPane extends VBox {
 	final int COLUMN_COUNT = 10;
 
 	private int customerID;
-	private Text cityText;
-	private Text businessCircleText;
-	private TextField cityTextField;
-	private TextField businessCircleTextField;
+	private ChoiceBox cityBox;
+	private ChoiceBox businessCircleBox;
 
 	private Button confirmButton;
 	private Button backButton;
@@ -33,27 +33,26 @@ public class AreaInputPane extends VBox {
 		gridPane.setHgap(10);
 		gridPane.setVgap(20);
 
-		cityText = new Text("城市");
-		businessCircleText = new Text("商圈");
-		cityTextField = new TextField();
-		cityTextField.setPrefColumnCount(COLUMN_COUNT);
+		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
+		cityBox = new ChoiceBox<String>(cityList);
+		cityBox.getSelectionModel().select(0);
 
-		businessCircleTextField = new TextField();
-		businessCircleTextField.setPrefColumnCount(COLUMN_COUNT);
+		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
+		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox.getSelectionModel().select(0);
 
-		gridPane.add(cityText, 0, 0, 1, 1);
-		gridPane.add(cityTextField, 1, 0, 1, 1);
-		gridPane.add(businessCircleText, 0, 1, 1, 1);
-		gridPane.add(businessCircleTextField, 1, 1, 1, 1);
+		gridPane.add(new Text("请选择城市"), 0, 0, 1, 1);
+		gridPane.add(cityBox, 1, 0, 1, 1);
+		gridPane.add(new Text("请选择商圈"), 0, 1, 1, 1);
+		gridPane.add(businessCircleBox, 1, 1, 1, 1);
 
 		confirmButton = new Button("开始搜索");
 		gridPane.add(confirmButton, 0, 2, 1, 1);
 
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			String city = cityTextField.getText();
-			String businessCircle = businessCircleTextField.getText();
-			System.out.println("city is " + city);
-			System.out.println("business circle is " + businessCircle);
+			String city = cityBox.getValue().toString();
+			String businessCircle = businessCircleBox.getValue().toString();
+
 			try {
 				TheMainFrame.jumpTo(new HotelSearchPane(new AreaVO(city, businessCircle), customerID));
 			} catch (RemoteException e) {
