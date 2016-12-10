@@ -2,7 +2,6 @@ package presentation.hotelui;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -70,14 +69,16 @@ public class HotelListPane extends ScrollPane {
 			this.add(produceButton, 5, 1, 1, 1);
 			List<RoomVO> roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelVO.hotelID);
 			produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-				ProducingOrderDialog producingOrderDialog = null;
+
 				try {
-					producingOrderDialog = new ProducingOrderDialog(customerID, hotelVO, roomList, 0);
+					ProducingOrderDialog producingOrderDialog = new ProducingOrderDialog(customerID, hotelVO, roomList,
+							0);
+					producingOrderDialog.show();
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				producingOrderDialog.show();
+
 			});
 
 			detailedButton = new Button("详情");

@@ -94,12 +94,10 @@ public class CustomerInfoPane extends GridPane {
 
 				Optional<LocalDate> result = birthVIPDialog.showAndWait();
 				if (result.isPresent()) {
-					customerVO.birthday = result.get();
-					customerVO.isBirthVIP = true;
 					try {
-						if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(customerVO)) {
+						if (BLFactory.getInstance().getCustomerBLService().registerBirthVIP(customerID, result.get())) {
 							infoPane.getChildren().remove(setBirthVIPButton);
-							infoPane.add(new Text(result.get().toString()), 1, 3, 1, 1);
+							infoPane.add(new Text("已注册，生日为" + result.get().toString()), 1, 3, 1, 1);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -121,12 +119,12 @@ public class CustomerInfoPane extends GridPane {
 
 				Optional<String> result = companyVIPDialog.showAndWait();
 				if (result.isPresent()) {
-					customerVO.companyName = result.get();
-					customerVO.isCompanyVIP = true;
+
 					try {
-						if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(customerVO)) {
+						if (BLFactory.getInstance().getCustomerBLService().registerCompanyVIP(customerID,
+								result.get())) {
 							infoPane.getChildren().remove(setCompanyVIPButton);
-							infoPane.add(new Text(result.get()), 1, 4, 1, 1);
+							infoPane.add(new Text("已注册，企业名称为" + result.get()), 1, 4, 1, 1);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
