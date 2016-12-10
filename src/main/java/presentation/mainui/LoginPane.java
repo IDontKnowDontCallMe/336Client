@@ -1,8 +1,13 @@
 package presentation.mainui;
 
+import java.rmi.RemoteException;
+import java.util.Optional;
 
+import bussinesslogic.factory.BLFactory;
+import vo.CustomerVO;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,8 +35,25 @@ public class LoginPane extends AnchorPane {
 		registerButton.setId("registerbutton");
 		hint = new Label("有 Aipapa ID 吗?");
 
-		
-		this.getChildren().addAll(userIDTextField,passwordField,loginButton,registerButton,hint);
+		registerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			Dialog<CustomerVO> registerDialog = new RegisterDialog();
+
+			Optional<CustomerVO> result = registerDialog.showAndWait();
+			if (result.isPresent()) {
+				CustomerVO customerVO = result.get();
+				// 添加新用户信息及密码
+				try {
+					if (BLFactory.getInstance().getUserBLService().addCustomer(customerVO)) {
+						TheMainFrame.jumpTo(new CustomerMainPane(customerVO.customerID));
+					}
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+		this.getChildren().addAll(userIDTextField, passwordField, loginButton, registerButton, hint);
 		AnchorPane.setLeftAnchor(userIDTextField, 425.0);
 		AnchorPane.setLeftAnchor(passwordField, 425.0);
 		AnchorPane.setTopAnchor(userIDTextField, 420.0);
@@ -43,37 +65,35 @@ public class LoginPane extends AnchorPane {
 		AnchorPane.setLeftAnchor(registerButton, 520.0);
 		AnchorPane.setTopAnchor(registerButton, 481.0);
 
-
-
-
 		loginButton.setAlignment(Pos.CENTER_RIGHT);
 
 		loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new CustomerMainPane(Integer.valueOf(userIDTextField.getText())));
-		});
 
-		// WebManager
-		Button webManagerButton = new Button("网站管理人员快捷入口(用于测试)");
-		this.getChildren().add(webManagerButton);
-		AnchorPane.setTopAnchor(webManagerButton, 20.0);
-		webManagerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new WebManagerMainPane());
-		});
+			// 可能会有问题？
 
-		// WebMarketer
-		Button webMarketerButton = new Button("网站营销人员快捷入口(用于测试)");
-		this.getChildren().add(webMarketerButton);
-		AnchorPane.setTopAnchor(webMarketerButton, 50.0);
-		webMarketerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new WebMarketerMainPane());
-		});
+			try {
+				String res = BLFactory.getInstance().getUserBLService()
+						.login(Integer.parseInt(userIDTextField.getText()), passwordField.getText());
+				switch (res) {
+				case ("customer"):
+					TheMainFrame.jumpTo(new CustomerMainPane(Integer.valueOf(userIDTextField.getText())));
+					break;
+				case ("hotelWorker"):
+					TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
+					break;
+				case ("webMarketer"):
+					TheMainFrame.jumpTo(new WebMarketerMainPane());
+					break;
+				case ("webManager"):
+					TheMainFrame.jumpTo(new WebManagerMainPane());
+					break;
+				}
 
-		// HotelWorker
-		Button hotelWorkerButton = new Button("酒店工作人员快捷入口(用于测试)");
-		this.getChildren().add(hotelWorkerButton);
-		AnchorPane.setTopAnchor(hotelWorkerButton, 80.0);
-		hotelWorkerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
+			} catch (NumberFormatException | RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		});
 
 		this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());

@@ -3,11 +3,8 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import presentation.customerui.CustomerInfoPane;
 import presentation.hotelui.AreaInputPane;
 import presentation.hotelui.BookedHotelPane;
@@ -21,10 +18,9 @@ public class CustomerMainPane extends AnchorPane {
 		super();
 		this.customerID = customerID;
 		Button searchButton = new Button();
-        
 
 		searchButton.setId("searchButton");
-		
+
 		Button orderListButton = new Button();
 		orderListButton.setId("orderListButton");
 
@@ -48,7 +44,7 @@ public class CustomerMainPane extends AnchorPane {
 		AnchorPane.setTopAnchor(infoButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 950.0);
 		AnchorPane.setTopAnchor(logoutButton, 100.0);
-		
+
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.jumpTo(new AreaInputPane(customerID));
 		});
@@ -82,9 +78,8 @@ public class CustomerMainPane extends AnchorPane {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
-		
-		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());
 
+		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());
 
 	}
 
