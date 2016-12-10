@@ -22,7 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import presentation.mainui.TheMainFrame;
-import presentation.roomui.MockRoomController;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
 import vo.RoomVO;
@@ -205,7 +204,6 @@ public class WorkerHotelInfoPane extends GridPane {
 			}
 
 			// 将newRoomList加入BL层
-			// .......
 
 		});
 		tableView.setItems(roomCells);

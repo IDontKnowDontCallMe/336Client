@@ -46,9 +46,22 @@ public class HotelListPane extends ScrollPane {
 			this.setHgap(10);
 			this.setVgap(20);
 
+			String booked = "";
+			switch (hotelVO.bookedTag) {
+			case (2):
+				booked = "曾入住";
+				break;
+			case (1):
+				booked = "预订过";
+				break;
+			case (0):
+				booked = "未预订过";
+				break;
+			}
+
 			this.add(new Text(hotelVO.hotelName), 1, 0, 1, 1);
 			this.add(new Text(String.valueOf(hotelVO.commentScore) + "分"), 2, 0, 1, 1);
-			this.add(new Text(String.valueOf(hotelVO.bookedTag)), 4, 1, 1, 1);
+			this.add(new Text(booked), 4, 1, 1, 1);
 			this.add(new Text(String.valueOf(hotelVO.score) + "星级"), 3, 0, 1, 1);
 			this.add(new Text("¥" + String.valueOf(hotelVO.minPrice) + "起"), 4, 0, 1, 1);
 			this.add(new Text(String.valueOf(hotelVO.address)), 1, 1, 3, 1);
