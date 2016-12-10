@@ -29,6 +29,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import presentation.mainui.TheMainFrame;
 import vo.CalculationConditionVO;
 import vo.CustomerVO;
 import vo.HotelVO;
@@ -79,13 +80,17 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		gridPane.add(new Text("房间类型"), 0, 1, 1, 1);
 		gridPane.add(roomTypeChoiceBox, 1, 1, 1, 1);
 
-		roomTypeChoiceBox.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				updateTotal(customerID);
-				totalText.setText(String.valueOf(total));
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		roomTypeChoiceBox.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				try {
+					updateTotal(customerID);
+					totalText.setText(String.valueOf(total));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -136,7 +141,6 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 			@Override
 			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
 					LocalDate newValue) {
-				// TODO Auto-generated method stub
 				try {
 					updateTotal(customerID);
 				} catch (RemoteException e) {
@@ -145,23 +149,17 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 				}
 			}
 		});
-		checkInDatePicker.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				updateTotal(customerID);
-				totalText.setText(String.valueOf(total));
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+		checkOutDatePicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
 
-		checkOutDatePicker.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				updateTotal(customerID);
-				totalText.setText(String.valueOf(total));
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
+					LocalDate newValue) {
+				try {
+					updateTotal(customerID);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -245,12 +243,29 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 					root.setAlignment(Pos.BASELINE_CENTER);
 					root.setSpacing(20);
 					root.getChildren().addAll(new Label("下订单成功，可至“我的订单”查看"), closeButton);
-					Scene scene = new Scene(root);
+					Scene scene = new Scene(root, 200, 90);
 					popup.setScene(scene);
 					popup.setTitle("提示");
 					popup.show();
 					System.out.println("succeed in producing order");
+					
+					this.close();
 				} else {
+					Stage popup = new Stage();
+					popup.setAlwaysOnTop(true);
+					popup.initModality(Modality.APPLICATION_MODAL);
+					Button closeButton = new Button("确定");
+					closeButton.setOnAction(e -> {
+						popup.close();
+					});
+					VBox root = new VBox();
+					root.setAlignment(Pos.BASELINE_CENTER);
+					root.setSpacing(20);
+					root.getChildren().addAll(new Label("诶呦喂，出错啦，等会再试试吧"), closeButton);
+					Scene scene = new Scene(root, 200, 90);
+					popup.setScene(scene);
+					popup.setTitle("提示");
+					popup.show();
 					System.out.println("failed.");
 				}
 			} catch (RemoteException e) {
