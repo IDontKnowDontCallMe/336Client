@@ -1,13 +1,17 @@
 package presentation.customerui;
 
+import java.time.LocalDate;
+
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Optional;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
+import presentation.userui.CreditDialog;
 import vo.CreditVO;
 import vo.CustomerVO;
 
@@ -82,11 +87,57 @@ public class CustomerInfoPane extends GridPane {
 
 		infoPane.add(new Text("生日会员"), 0, 3, 1, 1);
 		setBirthVIPButton = new Button("注册");
-		infoPane.add(setBirthVIPButton, 1, 3, 1, 1);
+		if (!BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID).isBirthVIP) {
+			infoPane.add(setBirthVIPButton, 1, 3, 1, 1);
+			setBirthVIPButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+				Dialog<LocalDate> birthVIPDialog = new BirthVIPDialog();
+
+				Optional<LocalDate> result = birthVIPDialog.showAndWait();
+				if (result.isPresent()) {
+					customerVO.birthday = result.get();
+					customerVO.isBirthVIP = true;
+					try {
+						if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(customerVO)) {
+							infoPane.getChildren().remove(setBirthVIPButton);
+							infoPane.add(new Text(result.get().toString()), 1, 3, 1, 1);
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			});
+		} else {
+			infoPane.add(new Text("已注册，生日为" + customerVO.birthday.toString()), 1, 3, 1, 1);
+		}
 
 		infoPane.add(new Text("企业会员"), 0, 4, 1, 1);
 		setCompanyVIPButton = new Button("注册");
-		infoPane.add(setCompanyVIPButton, 1, 4, 1, 1);
+		if (!BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID).isCompanyVIP) {
+			infoPane.add(setCompanyVIPButton, 1, 4, 1, 1);
+			setCompanyVIPButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+				Dialog<String> companyVIPDialog = new CompanyVIPDialog();
+
+				Optional<String> result = companyVIPDialog.showAndWait();
+				if (result.isPresent()) {
+					customerVO.companyName = result.get();
+					customerVO.isCompanyVIP = true;
+					try {
+						if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(customerVO)) {
+							infoPane.getChildren().remove(setCompanyVIPButton);
+							infoPane.add(new Text(result.get()), 1, 4, 1, 1);
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			});
+		} else {
+			infoPane.add(new Text("已注册，企业名称为" + customerVO.companyName), 1, 4, 1, 1);
+		}
 
 		editButton = new Button("编辑");
 		infoPane.add(editButton, 2, 1, 1, 1);
@@ -109,16 +160,16 @@ public class CustomerInfoPane extends GridPane {
 				infoPane.add(nameText, 1, 0, 1, 1);
 				infoPane.add(phoneNumberText, 1, 1, 1, 1);
 
-				CustomerVO vo = null;
+				CustomerVO newVO = null;
 				try {
-					vo = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
+					newVO = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
-				vo.customerName = nameTextField.getText();
-				vo.phoneNumber = phoneTextField.getText();
+				newVO.customerName = nameTextField.getText();
+				newVO.phoneNumber = phoneTextField.getText();
 				try {
-					if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(vo)) {
+					if (BLFactory.getInstance().getCustomerBLService().updateCustomerInfo(newVO)) {
 						nameText.setText(nameTextField.getText());
 						phoneNumberText.setText(phoneTextField.getText());
 					}
