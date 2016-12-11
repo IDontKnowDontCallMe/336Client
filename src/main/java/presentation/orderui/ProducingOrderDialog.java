@@ -1,14 +1,10 @@
 package presentation.orderui;
 
-import java.awt.Choice;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.value.ChangeListener;
@@ -33,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import presentation.mainui.TheMainFrame;
 import vo.CalculationConditionVO;
 import vo.CustomerVO;
 import vo.HotelVO;
