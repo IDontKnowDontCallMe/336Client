@@ -82,6 +82,8 @@ public class HotelOrdersPane extends VBox{
 		radioBox.setSpacing(10);
 		radioBox.setPrefWidth(500);
 		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton);
+		
+		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 	}
 	
 	private void buildOrderBox(List<OrderVO> orderList){

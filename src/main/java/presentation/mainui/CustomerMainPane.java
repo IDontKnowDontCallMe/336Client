@@ -44,11 +44,11 @@ public class CustomerMainPane extends AnchorPane {
 		orderListButton.setId("orderListButton");
 		orderListButton.setMinSize(r, r);
 		orderListButton.setMaxSize(r,r);
-				
+		
 		Label hotel = new Label();
 		hotel.setFont(Font.font(icon.getFamily(), dim));
 		hotel.setText(String.valueOf('\uf015'));
-		Button hotelListButton = new Button("查找酒店", hotel);
+		Button hotelListButton = new Button("查看预订过的酒店", hotel);
 		hotelListButton.setWrapText(true);
 		hotelListButton.setContentDisplay(ContentDisplay.TOP);
 		hotelListButton.setId("hotelListButton");

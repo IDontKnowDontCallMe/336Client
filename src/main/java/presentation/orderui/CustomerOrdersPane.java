@@ -44,9 +44,13 @@ public class CustomerOrdersPane extends VBox{
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
 		listPane = new ScrollPane(orderBox);
+		
+		listPane.setId("list");
+		radioBox.setId("radio");
+		orderBox.setId("order");
 		this.getChildren().addAll(radioBox,listPane);
 		this.setPrefWidth(500);
-		this.getStylesheets().add(getClass().getResource("scrollbar.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());
 	}
 	
 	private void initRadioButton(){

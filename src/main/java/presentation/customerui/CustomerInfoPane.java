@@ -65,7 +65,7 @@ public class CustomerInfoPane extends GridPane {
 		this.add(infoPane, 0, 1, 1, 1);
 		this.add(creditPane, 0, 2, 2, 1);
 
-		// this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());
+		 this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	private void initInfoPane() throws RemoteException {

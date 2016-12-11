@@ -70,7 +70,7 @@ public class CustomerOrderCell extends GridPane {
 
 		this.setHgap(10);
 		this.setVgap(20);
-
+		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());
 	}
 
 }
