@@ -1,7 +1,6 @@
 package presentation.hotelui;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 import bussinesslogic.factory.BLFactory;
@@ -20,7 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
@@ -34,7 +32,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	private HBox addBox2;
 	private VBox roomBox;
 
-	final int COLUMN = 6;
+	final int COLUMN = 15;
 	private Button backButton;
 	private Button infoEditButton;
 	private Button addButton;
@@ -76,6 +74,11 @@ public class WorkerHotelInfoPane extends GridPane {
 		this.add(new Text("房型列表"), 0, 2, 1, 1);
 		this.add(roomBox, 0, 3, 2, 1);
 
+		backButton = new Button("返回");
+		this.add(backButton, 1, 0, 1, 1);
+		backButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			TheMainFrame.backTo();
+		});
 	}
 
 	private void initRoomPane(int hotelID) throws RemoteException {
@@ -93,46 +96,27 @@ public class WorkerHotelInfoPane extends GridPane {
 		tableView.setEditable(true);
 		roomPane.setContent(tableView);
 
-		TableColumn<RoomCell, String> roomIDCol = new TableColumn<>("房间号");
-		roomIDCol.setCellValueFactory(new PropertyValueFactory<>("roomID"));
-
 		TableColumn<RoomCell, String> roomNameCol = new TableColumn<>("房间类型");
 		roomNameCol.setCellValueFactory(new PropertyValueFactory<>("roomName"));
 		roomNameCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
-		roomNameCol.setOnEditCommit((CellEditEvent<RoomCell, String> t) -> {
-			((RoomCell) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRoomName(t.getNewValue());
-		});
 
 		TableColumn<RoomCell, String> priceCol = new TableColumn<>("房间单价");
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 		priceCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
-		priceCol.setOnEditCommit((CellEditEvent<RoomCell, String> t) -> {
-			((RoomCell) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPrice(t.getNewValue());
-		});
 
 		TableColumn<RoomCell, String> numOfRoomCol = new TableColumn<>("房间数量");
 		numOfRoomCol.setCellValueFactory(new PropertyValueFactory<>("numOfRoom"));
 		numOfRoomCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
-		numOfRoomCol.setOnEditCommit((CellEditEvent<RoomCell, String> t) -> {
-			((RoomCell) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumOfRoom(t.getNewValue());
-		});
 
 		TableColumn<RoomCell, String> serviceCol = new TableColumn<>("服务设施");
 		serviceCol.setCellValueFactory(new PropertyValueFactory<>("service"));
 		serviceCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
-		serviceCol.setOnEditCommit((CellEditEvent<RoomCell, String> t) -> {
-			((RoomCell) t.getTableView().getItems().get(t.getTablePosition().getRow())).setService(t.getNewValue());
-		});
 
 		TableColumn<RoomCell, String> maxNumOfPeopleCol = new TableColumn<>("最大房客数");
 		maxNumOfPeopleCol.setCellValueFactory(new PropertyValueFactory<>("maxNumOfPeople"));
 		maxNumOfPeopleCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
-		maxNumOfPeopleCol.setOnEditCommit((CellEditEvent<RoomCell, String> t) -> {
-			((RoomCell) t.getTableView().getItems().get(t.getTablePosition().getRow()))
-					.setMaxNumOfPeople(t.getNewValue());
-		});
 
-		tableView.getColumns().addAll(roomIDCol, roomNameCol, priceCol, numOfRoomCol, serviceCol, maxNumOfPeopleCol);
+		tableView.getColumns().addAll(roomNameCol, priceCol, numOfRoomCol, serviceCol, maxNumOfPeopleCol);
 		tableView.setPrefWidth(450);
 		ObservableList<RoomCell> roomCells = FXCollections.observableArrayList();
 
@@ -160,56 +144,33 @@ public class WorkerHotelInfoPane extends GridPane {
 		}
 		addButton = new Button("新增房间类型");
 		addButton.setOnAction((ActionEvent e) -> {
-			int count = 0;
-			for (RoomVO vo : roomList) {
-				count++;
-			}
-			final int COUNT = count;
-
-			roomCells.add(new RoomCell(String.valueOf(COUNT + 1), addRoomNameTextField.getText(),
-					addPriceTextField.getText(), addNumOfRoomTextField.getText(), addServiceTextField.getText(),
+			roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
+					addNumOfRoomTextField.getText(), addServiceTextField.getText(),
 					addMaxNumOfPeopleTextField.getText()));
+			RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(), Integer.parseInt(addPriceTextField.getText()),
+					Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
+					Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
+			roomList.add(newVO);
+
 			addRoomNameTextField.clear();
 			addNumOfRoomTextField.clear();
 			addServiceTextField.clear();
 			addMaxNumOfPeopleTextField.clear();
 			addPriceTextField.clear();
 
-			RoomVO newVO = new RoomVO(COUNT + 1, addRoomNameTextField.getText(),
-					Integer.parseInt(addPriceTextField.getText()), Integer.parseInt(addNumOfRoomTextField.getText()),
-					addServiceTextField.getText(), Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
-			roomList.add(newVO);
-			// 将newVO加入BL层
-			// .......
-
-			TheMainFrame.backTo();
+			try {
+				if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
+					System.out.print("add a room type successfully.");
+				}
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
 		});
 
-		backButton = new Button("返回");
-		backButton.setOnAction((ActionEvent e) -> {
-			List<RoomVO> newRoomList = new ArrayList<RoomVO>();
-
-			int count = 0;
-			for (RoomVO vo : roomList) {
-				count++;
-			}
-			for (int i = 0; i < count; i++) {
-				RoomVO updateVO = new RoomVO(Integer.parseInt(tableView.getColumns().get(0).getCellData(i).toString()),
-						tableView.getColumns().get(1).getCellData(i).toString(),
-						Integer.parseInt(tableView.getColumns().get(2).getCellData(i).toString()),
-						Integer.parseInt(tableView.getColumns().get(3).getCellData(i).toString()),
-						tableView.getColumns().get(4).getCellData(i).toString(),
-						Integer.parseInt(tableView.getColumns().get(5).getCellData(i).toString()));
-				newRoomList.add(updateVO);
-			}
-
-			// 将newRoomList加入BL层
-
-		});
 		tableView.setItems(roomCells);
 
 		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
-		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton, backButton);
+		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton);
 		roomBox.getChildren().addAll(roomPane, addBox1, addBox2);
 	}
 
@@ -282,7 +243,13 @@ public class WorkerHotelInfoPane extends GridPane {
 				infoPane.add(workerText, 1, 5, 1, 1);
 				infoPane.add(phoneNumberText, 1, 6, 1, 1);
 
-				HotelVO newVO = MockHotelController.getInstance().getHotelInfo(hotelID);
+				HotelVO newVO = null;
+				try {
+					newVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
+
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 
 				newVO.hotelName = nameTextField.getText();
 				newVO.address = addressTextField.getText();
@@ -291,13 +258,18 @@ public class WorkerHotelInfoPane extends GridPane {
 				newVO.workerName = workerTextField.getText();
 				newVO.phoneNumber = phoneNumberTextField.getText();
 
-				nameText.setText(nameTextField.getText());
-				addressText.setText(addressTextField.getText());
-				introductionText.setText(introductionTextField.getText());
-				serviceText.setText(serviceTextField.getText());
-				workerText.setText(workerTextField.getText());
-				phoneNumberText.setText(phoneNumberTextField.getText());
-
+				try {
+					if (BLFactory.getInstance().getHotelBLService().updateSimpleHotelInfo(newVO)) {
+						nameText.setText(nameTextField.getText());
+						addressText.setText(addressTextField.getText());
+						introductionText.setText(introductionTextField.getText());
+						serviceText.setText(serviceTextField.getText());
+						workerText.setText(workerTextField.getText());
+						phoneNumberText.setText(phoneNumberTextField.getText());
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 				infoEditButton.setText("编辑");
 			}
 		});
