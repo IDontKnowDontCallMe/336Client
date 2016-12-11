@@ -19,16 +19,19 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
 import vo.HotelVO;
+import vo.SearchConditionVO;
 
 public class HotelSearchPane extends VBox {
 
 	private int customerID;
 	private AreaVO areaVO;
+	private List<HotelVO> list;
+	private HotelListPane hotelListPane;
 
 	public HotelSearchPane(AreaVO areaVO, int customerID) throws RemoteException {
 		this.customerID = customerID;
 		this.areaVO = areaVO;
-		
+
 		this.setSpacing(20);
 		initSearchPane();
 		initSortingPane();
@@ -39,11 +42,23 @@ public class HotelSearchPane extends VBox {
 		GridPane gridPane = new GridPane();
 		gridPane.setHgap(15);
 		gridPane.setVgap(15);
-		
+
 		Text hotelNameText = new Text("酒店名称");
 		TextField hotelNameTextField = new TextField();
 		gridPane.add(new HBox(hotelNameText, hotelNameTextField), 0, 0, 3, 1);
 		Button searchButton = new Button("搜索");
+		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			SearchConditionVO searchConditionVO = new SearchConditionVO(customerID, hotelNameTextField.getText(), false,
+					0, false, 0, 0, false, null, null, 0, false, 0, false, 0, false, false);
+			try {
+				list = BLFactory.getInstance().getHotelBLService().search(areaVO, searchConditionVO);
+				changeHotelListPane();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		});
 		Button backButton = new Button("退出搜索");
 		gridPane.add(searchButton, 3, 0, 1, 1);
 		gridPane.add(backButton, 4, 0, 1, 1);
@@ -125,8 +140,15 @@ public class HotelSearchPane extends VBox {
 	}
 
 	private void initHotelListPane() throws RemoteException {
-		List<HotelVO> hotelList = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
-		HotelListPane hotelListPane = new HotelListPane(hotelList, customerID);
+		list = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
+		hotelListPane = new HotelListPane(list, customerID);
+		this.getChildren().add(hotelListPane);
+	}
+	
+	private void changeHotelListPane() throws RemoteException {
+		this.getChildren().remove(hotelListPane);
+		hotelListPane = new HotelListPane(list, customerID);
+		
 		this.getChildren().add(hotelListPane);
 	}
 

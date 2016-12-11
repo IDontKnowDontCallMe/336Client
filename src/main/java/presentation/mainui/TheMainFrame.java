@@ -44,7 +44,6 @@ public class TheMainFrame extends Application {
 	}
 
 	private void linkToServer() {
-		// System.setProperty(key, value)
 		// 172.26.102.100
 		try {
 			blFactory = BLFactory.getInstance();
