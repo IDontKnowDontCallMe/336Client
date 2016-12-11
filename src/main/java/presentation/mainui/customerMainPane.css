@@ -2,7 +2,7 @@
 /* The main scrollbar **track** CSS class  */
 	
 	.root{
-	-fx-background-color:rgb(45.0,161.0,250.0);
+	-fx-background-image:url("蓝色1.png");
     }
 
  .button{
