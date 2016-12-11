@@ -1,10 +1,14 @@
 package presentation.orderui;
 
+import java.awt.Choice;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.value.ChangeListener;
@@ -43,6 +47,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 	GridPane gridPane;
 	ChoiceBox<String> roomTypeChoiceBox;
+	ChoiceBox<LocalTime> timeChoiceBox;
 	DatePicker checkInDatePicker;
 	DatePicker checkOutDatePicker;
 	TextField numTextField;
@@ -211,12 +216,23 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		childrenCheckBox.setSelected(false);
 		gridPane.add(childrenCheckBox, 0, 4, 1, 1);
 
+		gridPane.add(new Text("选择最晚到店时间"), 0, 5, 1, 1);
+		timeChoiceBox = new ChoiceBox();
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(6));
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(7));
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(8));
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(9));
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(10));
+		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(11));
+		timeChoiceBox.getSelectionModel().select(0);
+
+		gridPane.add(timeChoiceBox, 1, 5, 1, 1);
 		totalText = new Text("0");
 		HBox totalBox = new HBox(new Text("优惠后总价:"), totalText);
-		gridPane.add(totalBox, 0, 5, 1, 1);
+		gridPane.add(totalBox, 0, 6, 1, 1);
 
 		Button produceButton = new Button("生产订单");
-		gridPane.add(produceButton, 0, 6, 1, 1);
+		gridPane.add(produceButton, 0, 7, 1, 1);
 		produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			CustomerVO vo = null;
 			try {
@@ -227,7 +243,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 			}
 			OrderVO orderVO = new OrderVO(-1, vo.customerName, customerID, vo.phoneNumber, LocalDateTime.now(),
 					hotelVO.hotelName, roomTypeChoiceBox.getValue(), Integer.valueOf(numTextField.getText()), 1,
-					childrenCheckBox.isSelected(), checkInDatePicker.getValue(), LocalTime.MIDNIGHT.minusSeconds(1),
+					childrenCheckBox.isSelected(), checkInDatePicker.getValue(), timeChoiceBox.getValue(),
 					checkOutDatePicker.getValue(), Integer.valueOf(totalText.getText()), "正常", false);
 
 			try {
@@ -248,7 +264,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 					popup.setTitle("提示");
 					popup.show();
 					System.out.println("succeed in producing order");
-					
+
 					this.close();
 				} else {
 					Stage popup = new Stage();
