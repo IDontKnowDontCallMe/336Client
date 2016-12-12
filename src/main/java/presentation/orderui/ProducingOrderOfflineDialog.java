@@ -40,7 +40,6 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 
 	private GridPane gridPane;
 	private ChoiceBox<String> roomTypeChoiceBox;
-	private ChoiceBox<LocalTime> timeChoiceBox;
 	private DatePicker checkInDatePicker;
 	private DatePicker checkOutDatePicker;
 	private TextField numTextField;
@@ -61,6 +60,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 
 		initUI();
 		this.getDialogPane().setContent(gridPane);
+		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		updateTotal();
 
 		ButtonType cancel = new ButtonType("取消", ButtonData.CANCEL_CLOSE);
@@ -215,7 +215,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 		gridPane.add(new Text("客户姓名"), 0, 5, 1, 1);
 		customerNameTextField = new TextField();
 		customerNameTextField.setPrefColumnCount(10);
-		gridPane.add(customerNameTextField, 1, 6, 1, 1);
+		gridPane.add(customerNameTextField, 1, 5, 1, 1);
 
 		gridPane.add(new Text("客户联系电话"), 0, 6, 1, 1);
 		phoneNumberTextField = new TextField();
@@ -234,8 +234,8 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 			OrderVO orderVO = new OrderVO(-1, customerNameTextField.getText(), 23333, phoneNumberTextField.getText(),
 					LocalDateTime.now(), hotelVO.hotelName, roomTypeChoiceBox.getValue(),
 					Integer.valueOf(numTextField.getText()), 1, childrenCheckBox.isSelected(),
-					checkInDatePicker.getValue(), timeChoiceBox.getValue(), checkOutDatePicker.getValue(),
-					Integer.valueOf(totalText.getText()), "正常", false);
+					checkInDatePicker.getValue(), LocalTime.now(), checkOutDatePicker.getValue(),
+					Integer.valueOf(totalText.getText()), "已执行未离店", false);
 
 			try {
 				if (BLFactory.getInstance().getOrderBLService().produceOrder(orderVO, updateTotal())) {
