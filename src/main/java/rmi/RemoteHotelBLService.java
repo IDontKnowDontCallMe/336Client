@@ -31,6 +31,8 @@ public interface RemoteHotelBLService extends Remote{
 	public boolean addComment(CommentVO commentVO) throws RemoteException;
 
 	public HotelVO getHotelInfo(int hotelID) throws RemoteException;
+	
+	public int getHotelIDbyOrderID(int orderID) throws RemoteException;
 
 	public boolean update(HotelVO hotelVO) throws RemoteException;
 

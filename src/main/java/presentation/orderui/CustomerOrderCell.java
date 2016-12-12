@@ -72,9 +72,11 @@ public class CustomerOrderCell extends GridPane {
 				if (result.isPresent()) {
 					try {
 						if (BLFactory.getInstance().getHotelBLService().addComment(result.get())) {
-							// presentation层无法更改orderVO，bl层需要在addComment方法里添加方法将订单的hasComment属性改为true
-							System.out.println("comment");
-							this.getChildren().remove(button);
+							if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "已评价")) {
+								System.out.println("comment");
+								this.getChildren().remove(button);
+							}
+							
 						}
 					} catch (RemoteException e1) {
 						e1.printStackTrace();

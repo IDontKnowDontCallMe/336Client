@@ -21,8 +21,8 @@ public class HotelWorkerMainPane extends VBox {
 
 		Button manageButton = new Button("酒店基本信息维护");
 		Button hotelPromotionButton = new Button("酒店促销策略制定");
-		Button offlineButton = new Button("线下入住与退房办理");
-		Button orderListButton = new Button("线上入住与退房办理");
+		Button offlineButton = new Button("线下入住办理");
+		Button orderListButton = new Button("线上订单办理");
 		Button logoutButton = new Button("注销登录");
 
 		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);

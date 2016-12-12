@@ -26,7 +26,7 @@ public class CommentDialog extends Dialog {
 	GridPane gridPane;
 	private TextArea commentTextArea;
 
-	public CommentDialog(OrderVO vo) {
+	public CommentDialog(OrderVO orderVO) {
 		super();
 		gridPane = new GridPane();
 		gridPane.setHgap(10);
@@ -55,21 +55,17 @@ public class CommentDialog extends Dialog {
 			public CommentVO call(ButtonType param) {
 
 				if (param.getButtonData() == ButtonData.OK_DONE) {
-					String comment = commentTextArea.getText();
-					List<HotelVO> hotelList = null;
 					int hotelID = -1;
 					try {
-						hotelList = BLFactory.getInstance().getHotelBLService().getBookedHotelList(vo.customerID);
+						hotelID = BLFactory.getInstance().getHotelBLService().getHotelIDbyOrderID(orderVO.orderID);
 					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					for (HotelVO hotelVO : hotelList) {
-						if (hotelVO.hotelName.equals(vo.hotelName)) {
-							hotelID = hotelVO.hotelID;
-						}
-					}
-					return new CommentVO(hotelID, vo.hotelName, vo.roomName, vo.customerID, comment,
-							scoreBox.getValue(), LocalDateTime.now());
+
+					return new CommentVO(hotelID, orderVO.hotelName, orderVO.roomName, orderVO.customerID,
+							commentTextArea.getText(),
+							Double.valueOf(scoreBox.getSelectionModel().getSelectedIndex() + 1), LocalDateTime.now());
 				} else {
 					return null;
 				}

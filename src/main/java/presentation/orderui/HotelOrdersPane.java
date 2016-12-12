@@ -4,12 +4,15 @@ import java.rmi.RemoteException;
 import java.util.List;
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
 public class HotelOrdersPane extends VBox {
@@ -23,6 +26,7 @@ public class HotelOrdersPane extends VBox {
 	private RadioButton revokedButton;
 	private RadioButton leftButton;
 	private RadioButton abnormalButton;
+	private Button backButton;
 
 	private ScrollPane listPane;
 	private VBox orderBox;
@@ -36,7 +40,13 @@ public class HotelOrdersPane extends VBox {
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
 		listPane = new ScrollPane(orderBox);
-		this.getChildren().addAll(radioBox, listPane);
+
+		backButton = new Button("返回");
+		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			TheMainFrame.backTo();
+		});
+
+		this.getChildren().addAll(radioBox, backButton, listPane);
 		this.setPrefWidth(500);
 	}
 
@@ -73,12 +83,13 @@ public class HotelOrdersPane extends VBox {
 							} catch (RemoteException e) {
 								e.printStackTrace();
 							}
-						}
-						try {
-							buildOrderBox(BLFactory.getInstance().getOrderBLService().filterHotelList(hotelID,
-									(String) newToggle.getUserData()));
-						} catch (RemoteException e) {
-							e.printStackTrace();
+						} else {
+							try {
+								buildOrderBox(BLFactory.getInstance().getOrderBLService().filterHotelList(hotelID,
+										(String) newToggle.getUserData()));
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				});
