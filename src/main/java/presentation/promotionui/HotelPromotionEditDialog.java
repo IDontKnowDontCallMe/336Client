@@ -28,23 +28,23 @@ public class HotelPromotionEditDialog extends Dialog {
 	final int LESS_COLUMN_COUNT = 2;
 	final int BOX_SPACING = 15;
 
-	HBox paramBox;
-	HBox startBox;
-	HBox endBox;
-	HBox discountBox;
-	VBox promotionBox;
-	Text editText;
-	Label startTimeLabel;
-	Label endTimeLabel;
-	Label companyNameLabel;
-	Label minNumLabel;
-	Label discountLabel;
-	TextField companyNameTextField;
-	TextField minNumTextField;
-	TextField discountTextField;
-	DatePicker startDatePicker;
-	DatePicker endDatePicker;
-	GridPane gridPane;
+	private HBox paramBox;
+	private HBox startBox;
+	private HBox endBox;
+	private HBox discountBox;
+	private VBox promotionBox;
+	private Text editText;
+	private Label startTimeLabel;
+	private Label endTimeLabel;
+	private Label companyNameLabel;
+	private Label minNumLabel;
+	private Label discountLabel;
+	private TextField companyNameTextField;
+	private TextField minNumTextField;
+	private TextField discountTextField;
+	private DatePicker startDatePicker;
+	private DatePicker endDatePicker;
+	private GridPane gridPane;
 
 	public HotelPromotionEditDialog(HotelPromotionVO hotelPromotionVO) {
 		super();
