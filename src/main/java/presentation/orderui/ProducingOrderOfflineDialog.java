@@ -235,7 +235,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 					LocalDateTime.now(), hotelVO.hotelName, roomTypeChoiceBox.getValue(),
 					Integer.valueOf(numTextField.getText()), 1, childrenCheckBox.isSelected(),
 					checkInDatePicker.getValue(), timeChoiceBox.getValue(), checkOutDatePicker.getValue(),
-					Integer.valueOf(totalText.getText()), "正常", false);
+					Integer.valueOf(totalText.getText()), "已执行未离店", false);
 
 			try {
 				if (BLFactory.getInstance().getOrderBLService().produceOrder(orderVO, updateTotal())) {
