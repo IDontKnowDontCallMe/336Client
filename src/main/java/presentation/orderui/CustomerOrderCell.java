@@ -2,6 +2,7 @@ package presentation.orderui;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.OrderVO;
@@ -24,7 +25,7 @@ public class CustomerOrderCell extends GridPane {
 	public CustomerOrderCell(OrderVO orderVO) {
 		super();
 		this.orderVO = orderVO;
-
+		this.setId("grid");
 		hotelText = new Text(orderVO.hotelName);
 		this.add(hotelText, 0, 0, 3, 1);
 		stateText = new Text(orderVO.orderState);

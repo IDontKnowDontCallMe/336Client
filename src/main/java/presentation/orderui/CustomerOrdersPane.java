@@ -12,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Toggle;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import presentation.mainui.TheMainFrame;
@@ -22,7 +23,7 @@ public class CustomerOrdersPane extends VBox{
 	private int customerID;
 	//以后用工厂模式替换之
 	
-	private HBox radioBox;
+	private AnchorPane radioBox;
 	private ToggleGroup toggleGroup;
 	private RadioButton allButton;
 	private RadioButton unexecutedButton;
@@ -41,11 +42,13 @@ public class CustomerOrdersPane extends VBox{
 		initRadioButton();
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getCustomerOrder(customerID);
 		orderBox = new VBox();
-		orderBox.setSpacing(15);
+		orderBox.setSpacing(10);
 		buildOrderBox(orderList);
-		listPane = new ScrollPane(orderBox);
 		
-		listPane.setId("list");
+		listPane = new ScrollPane();
+		listPane.setContent(orderBox);
+		orderBox.setTranslateX(150.0);
+		
 		radioBox.setId("radio");
 		orderBox.setId("order");
 		this.getChildren().addAll(radioBox,listPane);
@@ -93,9 +96,7 @@ public class CustomerOrdersPane extends VBox{
 			TheMainFrame.backTo();
 		});
 		
-		radioBox = new HBox();
-		radioBox.setSpacing(10);
-		radioBox.setPrefWidth(500);
+		radioBox = new AnchorPane();
 		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton);
 	}
 	

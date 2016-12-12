@@ -3,12 +3,25 @@
 	
 	.root{
 	-fx-background-image:url(bluebg.png);
-	-fx-padding: 0;
+  -fx-padding: 0;
    -fx-border-style: solid;
-  -fx-border-width: 1px;
+  -fx-border-width: 5px;
   -fx-border-color: #d4d4d4;
   -fx-border-radius: 3px;
   -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
+    }
+    
+    #grid{
+    	-fx-min-height:200;
+    	-fx-min-width:800;
+  -fx-padding: 0;
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-border-radius: 1px;
+  -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
+  	-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
+
     }
 
  .button{
