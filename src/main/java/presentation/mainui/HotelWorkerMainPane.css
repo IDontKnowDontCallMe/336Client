@@ -1,0 +1,126 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+	.root{
+	-fx-background-image:url(redbg3.png);
+    }
+    
+
+	  .scroll-bar:horizontal .track,
+	 .scroll-bar:vertical .track{
+	    -fx-background-color:transparent;
+	    -fx-border-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-border-radius:2em;
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 .scroll-bar:horizontal .increment-button ,
+	 .scroll-bar:horizontal .decrement-button {
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 0 10 0;
+	 
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 
+	.scroll-bar:vertical .increment-button ,
+	.scroll-bar:vertical .decrement-button {
+	 
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 10 0 0;
+	 
+	}
+	 
+ 	.scroll-bar .increment-arrow,
+	.scroll-bar .decrement-arrow
+	{
+	    -fx-shape: " ";
+	    -fx-padding:0;
+	}
+	 
+	 .scroll-bar:horizontal .thumb,
+	 .scroll-bar:vertical .thumb {
+	    -fx-background-color:derive(black,90%);
+	    -fx-background-insets: 2, 0, 0;
+	    -fx-background-radius: 5em;
+	 
+	}
+	
+	 /* 普通按钮 */       
+   .button{
+  -fx-background-color: #1B9AF7;
+  -fx-border-color: #1B9AF7;
+  -fx-text-fill: #FFF;
+  -fx-font-size: 16.0px;
+  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -fx-text-alignment: center;
+  -fx-min-height: 40.0px;
+  -fx-padding: 0.0 40.0px;
+  -fx-cursor: pointer; }
+   .button:hover,  .button:focus {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #4cb0f9;    
+    -fx-text-fill: #FFF; 
+    }
+   .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255.0, 255.0, 255.0, 0.3),10.0,0.0,0.0,1.0px);
+    -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;
+    -fx-text-fill: #0880d7;
+    }
+
+	
+	 .choice-box{
+ 	-fx-mark-color: white ;
+  -fx-padding: 0;
+  -fx-background-color:#1B9AF7;
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-border-radius: 3px;
+  -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
+
+   }
+          
+         
+  .choice-box .label{
+     -fx-text-alignment: left;
+     
+          	  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+          }
+      .choice-box .separator{
+      	-fx-color: #5e53e4;
+      }    
+          
+    .choice-box .context-menu {    	
+    -fx-font-size: 12.8px;
+    -fx-min-height: 40px;
+  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    -fx-background-color:#1B9AF7;
+     -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-border-radius: 3px;
+  -fx-cursor: pointer;
+  -fx-padding:0;
+}      
+.choice-box .menu-item{	
+          -fx-min-height: 40px;
+    -fx-padding: 6px 7px;
+    -fx-color: #666;
+          
+}
+
+.choice-box .menu-item:hover,choice-box .menu-item:focused {
+  -fx-background-color: #665ce6;
+  -fx-text-fill: #f2f2f2;
+}
+
+    #list,#radio,#order{
+    	-fx-background-color:null;
+    }
+ 
+	
+	

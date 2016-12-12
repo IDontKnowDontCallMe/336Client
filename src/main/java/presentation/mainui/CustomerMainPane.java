@@ -69,7 +69,7 @@ public class CustomerMainPane extends AnchorPane {
 		Label back = new Label();
 		back.setFont(Font.font(icon.getFamily(), 45));
 		back.setText(String.valueOf('\uf011'));
-		Button logoutButton = new Button("", back);
+		Button logoutButton = new Button("注销", back);
 		logoutButton.setWrapText(true);
 		logoutButton.setContentDisplay(ContentDisplay.TOP);
 		logoutButton.setId("backButton");
