@@ -3,6 +3,8 @@ package presentation.promotionui;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -22,25 +24,27 @@ public class WebPromotionEditDialog extends Dialog {
 	final int LESS_COLUMN_COUNT = 2;
 	final int BOX_SPACING = 15;
 
-	HBox paramBox;
-	HBox startBox;
-	HBox endBox;
-	HBox discountBox;
-	VBox promotionBox;
-	Text editText;
-	Button confirmButton;
-	Label startTimeLabel;
-	Label endTimeLabel;
-	Label businessCircleNameLabel;
-	Label discountLabel;
-	TextField businessCircleNameTextField;
-	TextField discountTextField;
-	DatePicker startDatePicker;
-	DatePicker endDatePicker;
-	GridPane gridPane;
+	private HBox paramBox;
+	private HBox startBox;
+	private HBox endBox;
+	private HBox discountBox;
+	private VBox promotionBox;
+	private Text editText;
+	private Label startTimeLabel;
+	private Label endTimeLabel;
+	private Label businessCircleLabel;
+	private Label discountLabel;
+	private ChoiceBox cityBox;
+	private ChoiceBox businessCircleBox;
+
+	private TextField discountTextField;
+	private DatePicker startDatePicker;
+	private DatePicker endDatePicker;
+	private GridPane gridPane;
 
 	public WebPromotionEditDialog(WebPromotionVO webPromotionVO) {
 		super();
+
 		gridPane = new GridPane();
 		gridPane.setHgap(10);
 		gridPane.setVgap(20);
@@ -85,17 +89,17 @@ public class WebPromotionEditDialog extends Dialog {
 						startDate = startDatePicker.getValue();
 					}
 					if (endDatePicker != null) {
-						startDate = startDatePicker.getValue();
+						endDate = endDatePicker.getValue();
 					}
-					if (businessCircleNameTextField != null) {
-						businessCircleName = businessCircleNameTextField.getText();
+					if (businessCircleBox != null && cityBox != null) {
+						businessCircleName = businessCircleBox.getValue().toString();
 					}
 
 					if (discountTextField.getText() != null) {
 						discount = Double.valueOf(discountTextField.getText());
 					}
-					return new WebPromotionVO(webPromotionVO.promotionType, startDate, endDate, cityName, businessCircleName,
-							discount);
+					return new WebPromotionVO(webPromotionVO.promotionType, startDate, endDate, cityName,
+							businessCircleName, discount);
 				} else {
 					return null;
 				}
@@ -162,15 +166,26 @@ public class WebPromotionEditDialog extends Dialog {
 	}
 
 	public void showBusinessCirclePromotionBox() {
-		businessCircleNameLabel = new Label("输入特定商圈名称: ");
-		businessCircleNameTextField = new TextField();
-		businessCircleNameTextField.setText(webPromotionVO.businessCircleName);
-		businessCircleNameTextField.setPrefColumnCount(COLUMN_COUNT);
-		// 加上城市cityName，并变为复选框
+		businessCircleLabel = new Label("选择城市和商圈");
+		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
+		cityBox = new ChoiceBox<String>(cityList);
+		cityBox.getSelectionModel().select(0);
+
+		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
+		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		int index = -1;
+		for (String s : businessCircleList) {
+			index++;
+			if (s.equals(webPromotionVO.businessCircleName)) {
+				break;
+			}
+		}
+		businessCircleBox.getSelectionModel().select(index);
+
 		paramBox = new HBox();
 		paramBox.setSpacing(BOX_SPACING);
 		paramBox.getChildren().clear();
-		paramBox.getChildren().addAll(businessCircleNameLabel, businessCircleNameTextField);
+		paramBox.getChildren().addAll(businessCircleLabel, cityBox, businessCircleBox);
 
 		promotionBox.getChildren().add(paramBox);
 		showDiscountBox();

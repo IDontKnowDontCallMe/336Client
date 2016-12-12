@@ -19,32 +19,34 @@ import vo.WebPromotionVO;
 public class WebPromotionAddDialog extends Dialog {
 
 	WebPromotionVO webPromotionVO;
-	Text webPromotionTypeChoiceText;
-	ChoiceBox webPromotionTypeChoiceBox;
+	private Text webPromotionTypeChoiceText;
+	private ChoiceBox webPromotionTypeChoiceBox;
 
 	final int COLUMN_COUNT = 10;
 	final int YEAR_COLUMN_COUNT = 3;
 	final int LESS_COLUMN_COUNT = 2;
 	final int BOX_SPACING = 15;
-	HBox chooseBox;
-	HBox paramBox;
-	HBox startBox;
-	HBox endBox;
-	HBox discountBox;
-	VBox promotionBox;
-	Button confirmButton;
-	Label startTimeLabel;
-	Label endTimeLabel;
-	Label businessCircleNameLabel;
-	Label discountLabel;
-	TextField businessCircleNameTextField;
-	TextField discountTextField;
-	DatePicker startDatePicker;
-	DatePicker endDatePicker;
-	GridPane gridPane;
+	private HBox chooseBox;
+	private HBox paramBox;
+	private HBox startBox;
+	private HBox endBox;
+	private HBox discountBox;
+	private VBox promotionBox;
+	private Label startTimeLabel;
+	private Label endTimeLabel;
+	private Label businessCircleLabel;
+	private Label discountLabel;
+	private ChoiceBox cityBox;
+	private ChoiceBox businessCircleBox;
+
+	private TextField discountTextField;
+	private DatePicker startDatePicker;
+	private DatePicker endDatePicker;
+	private GridPane gridPane;
 
 	public WebPromotionAddDialog() {
 		super();
+
 		gridPane = new GridPane();
 		gridPane.setHgap(10);
 		gridPane.setVgap(20);
@@ -101,12 +103,11 @@ public class WebPromotionAddDialog extends Dialog {
 						startDate = startDatePicker.getValue();
 					}
 					if (endDatePicker != null) {
-						startDate = startDatePicker.getValue();
+						endDate = endDatePicker.getValue();
 					}
-					if (businessCircleNameTextField != null) {
-						businessCircleName = businessCircleNameTextField.getText();
+					if (cityBox != null && businessCircleBox != null) {
+						businessCircleName = businessCircleBox.getValue().toString();
 					}
-
 					if (discountTextField.getText() != null) {
 						discount = Double.valueOf(discountTextField.getText());
 					}
@@ -173,15 +174,21 @@ public class WebPromotionAddDialog extends Dialog {
 	}
 
 	public void showBusinessCirclePromotionBox() {
-		businessCircleNameLabel = new Label("输入特定商圈名称: ");
-		businessCircleNameTextField = new TextField();
-		businessCircleNameTextField.setPrefColumnCount(COLUMN_COUNT);
-		// 加上城市cityName，并变为复选框
+		businessCircleLabel = new Label("选择城市和商圈");
+		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
+		cityBox = new ChoiceBox<String>(cityList);
+		cityBox.getSelectionModel().select(0);
+
+		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
+		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox.getSelectionModel().select(0);
+
 		paramBox = new HBox();
 		paramBox.setSpacing(BOX_SPACING);
 		paramBox.getChildren().clear();
-		paramBox.getChildren().addAll(businessCircleNameLabel, businessCircleNameTextField);
+		paramBox.getChildren().addAll(businessCircleLabel, cityBox, businessCircleBox);
 
 		promotionBox.getChildren().addAll(paramBox, showDiscountBox());
+
 	}
 }

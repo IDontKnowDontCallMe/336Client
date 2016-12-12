@@ -1,6 +1,11 @@
 package presentation.promotionui;
 
+import java.rmi.RemoteException;
+import java.util.Optional;
+
+import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -10,15 +15,14 @@ public class WebPromotionCell extends GridPane {
 
 	WebPromotionVO webPromotionVO;
 
-	Text webPromotionTypeText;
-	Text startTimeText;
-	Text endTimeText;
-	Text businessCircleNameText;
-	Text minNumText;
-	Text discountText;
+	private Text webPromotionTypeText;
+	private Text startTimeText;
+	private Text endTimeText;
+	private Text businessCircleText;
+	private Text discountText;
 
-	Button editButton;
-	Button deleteButton;
+	private Button editButton;
+	private Button deleteButton;
 
 	public WebPromotionCell(WebPromotionVO webPromotionVO) {
 		super();
@@ -26,15 +30,15 @@ public class WebPromotionCell extends GridPane {
 
 		webPromotionTypeText = new Text(webPromotionVO.promotionType);
 		this.add(webPromotionTypeText, 0, 0, 3, 1);
-		if (webPromotionVO.startTime != null) {
+		if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
 			startTimeText = new Text("开始时间: " + webPromotionVO.startTime.toString());
 			endTimeText = new Text("结束时间: " + webPromotionVO.endTime.toString());
 			this.add(startTimeText, 0, 1, 3, 1);
 			this.add(endTimeText, 4, 1, 3, 1);
 		}
 		if (webPromotionVO.businessCircleName != null) {
-			businessCircleNameText = new Text("特定商圈名称: " + webPromotionVO.businessCircleName);
-			this.add(businessCircleNameText, 0, 1, 3, 1);
+			businessCircleText = new Text("特定商圈名称: " + webPromotionVO.businessCircleName);
+			this.add(businessCircleText, 0, 1, 3, 1);
 		}
 
 		discountText = new Text("折扣: " + webPromotionVO.discount);
@@ -42,14 +46,41 @@ public class WebPromotionCell extends GridPane {
 
 		editButton = new Button("编辑");
 		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-			System.out.println("edit");
-			WebPromotionEditDialog webPromotionEditDialog = new WebPromotionEditDialog(webPromotionVO);
-			webPromotionEditDialog.show();
+			Dialog<WebPromotionVO> webPeomotionEditDialog = new WebPromotionEditDialog(webPromotionVO);
+
+			Optional<WebPromotionVO> result = webPeomotionEditDialog.showAndWait();
+			if (result.isPresent()) {
+				try {
+					if (BLFactory.getInstance().getPromotionBLService().updateWebPromotion(result.get())) {
+						System.out.println("edit");
+						if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
+							startTimeText.setText(webPromotionVO.startTime.toString());
+							endTimeText.setText(webPromotionVO.endTime.toString());
+						}
+						if (webPromotionVO.businessCircleName != null) {
+							businessCircleText.setText(webPromotionVO.businessCircleName);
+						}
+						discountText.setText(String.valueOf(webPromotionVO.discount));
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		});
 
 		deleteButton = new Button("删除");
 		deleteButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-			System.out.println("delete");
+			try {
+				if(BLFactory.getInstance().getPromotionBLService().deleteWebPromotion(webPromotionVO)){
+					System.out.println("delete");
+					this.getChildren().clear();
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		});
 
 		this.add(editButton, 10, 0, 1, 1);

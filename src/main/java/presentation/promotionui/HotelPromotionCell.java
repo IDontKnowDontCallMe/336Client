@@ -67,6 +67,7 @@ public class HotelPromotionCell extends GridPane {
 						if (hotelPromotionVO.minNum != -1) {
 							minNumText.setText(String.valueOf(hotelPromotionVO.minNum));
 						}
+						discountText.setText(String.valueOf(hotelPromotionVO.discount));
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
