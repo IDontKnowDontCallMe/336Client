@@ -2,32 +2,31 @@ package presentation.orderui;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
 public class CustomerOrdersPane extends VBox {
+	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 	private int customerID;
-<<<<<<< HEAD
-	//以后用工厂模式替换之
 	
 	private AnchorPane radioBox;
-=======
 
-	private HBox radioBox;
->>>>>>> refs/remotes/origin/master
 	private ToggleGroup toggleGroup;
 	private RadioButton allButton;
 	private RadioButton unexecutedButton;
@@ -52,15 +51,17 @@ public class CustomerOrdersPane extends VBox {
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
 		orderBox.setTranslateX(150.0);
+		orderBox.setTranslateY(15.0);
 		
 		radioBox.setId("radio");
 		orderBox.setId("order");
 
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-		this.getChildren().addAll(radioBox, backButton, listPane);
+		
+		this.getChildren().addAll(radioBox, listPane);
+		
+		
+		
+		
 		this.setPrefWidth(500);
 		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());
 	}
@@ -87,8 +88,7 @@ public class CustomerOrdersPane extends VBox {
 		abnormalButton.setUserData("异常");
 		abnormalButton.setToggleGroup(toggleGroup);
 
-		toggleGroup.selectedToggleProperty()
-				.addListener((ObservableValue<? extends Toggle> obvalue, Toggle oldToggle, Toggle newToggle) -> {
+		toggleGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> obvalue, Toggle oldToggle, Toggle newToggle) -> {
 					if (oldToggle.getUserData().equals(newToggle.getUserData())) {
 						return;
 					} else {
@@ -107,27 +107,39 @@ public class CustomerOrdersPane extends VBox {
 							}
 						}
 					}
-<<<<<<< HEAD
 				}
 				);
 		
-		backButton = new Button("返回");
+		Label back = new Label();
+		back.setFont(Font.font(icon.getFamily(), 27));
+		back.setText(String.valueOf('\uf112'));
+		backButton = new Button("返回", back);
+		backButton.setWrapText(true);
+		backButton.setContentDisplay(ContentDisplay.TOP);
+		backButton.setId("backButton");
+		backButton.setShape(new Circle(29));
+		backButton.setMinSize(58, 58);
+		backButton.setMaxSize(58, 58);
+		
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED	, (event)->{
 			TheMainFrame.backTo();
 		});
 		
 		radioBox = new AnchorPane();
 		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton);
-=======
-				});
-
-		radioBox = new HBox();
-		radioBox.setSpacing(10);
-		radioBox.setPrefWidth(500);
-		radioBox.getChildren().addAll(allButton, unexecutedButton, executedButton, leftButton, revokedButton,
-				abnormalButton);
-
->>>>>>> refs/remotes/origin/master
+		
+		AnchorPane.setLeftAnchor(allButton, 50.0);
+		AnchorPane.setTopAnchor(allButton, 30.0);
+		AnchorPane.setRightAnchor(backButton, 20.0);
+		AnchorPane.setTopAnchor(backButton, 10.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 180.0);
+		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
+		AnchorPane.setLeftAnchor(executedButton, 320.0);
+		AnchorPane.setTopAnchor(executedButton, 30.0);
+		AnchorPane.setLeftAnchor(revokedButton, 505.0);
+		AnchorPane.setTopAnchor(revokedButton, 30.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 635.0);
+		AnchorPane.setTopAnchor(abnormalButton, 30.0);
 	}
 
 	private void buildOrderBox(List<OrderVO> orderList) {

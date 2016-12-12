@@ -80,63 +80,71 @@
   	
     -fx-opacity:3.0 ; 
     }
-	
-	 .choice-box{
- 	-fx-mark-color: white ;
-  -fx-padding: 0;
-  -fx-background-color:#1B9AF7;
-   -fx-border-style: solid;
-  -fx-border-width: 1px;
-  -fx-border-color: #d4d4d4;
-  -fx-border-radius: 3px;
-  -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
-
-   }
           
-         
-  .choice-box .label{
-     -fx-text-alignment: left;
-     
-          	  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-          }
-      .choice-box .separator{
-      	-fx-color: #5e53e4;
-      }    
-          
-    .choice-box .context-menu {    	
-    -fx-font-size: 12.8px;
-    -fx-min-height: 40px;
-  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    -fx-background-color:#1B9AF7;
-     -fx-border-style: solid;
-  -fx-border-width: 1px;
-  -fx-border-color: #d4d4d4;
-  -fx-border-radius: 3px;
-  -fx-cursor: pointer;
-  -fx-padding:0;
-}      
-.choice-box .menu-item{	
-          -fx-min-height: 40px;
-    -fx-padding: 6px 7px;
-    -fx-color: #666;
-          
-}
-
-.choice-box .menu-item:hover,choice-box .menu-item:focused {
-  -fx-background-color: #665ce6;
-  -fx-text-fill: #f2f2f2;
-}
 
     
     #radio{
-    	-fx-min-height:100;
+    	-fx-min-height:80;
     	
     }
+    
+    .scroll-pane{
+    	-fx-border-width:0;
+    }
+    
     .scroll-pane > .viewport {
    -fx-background-image: url(bluebg.png);
 }
     
 
+ #backbutton{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -fx-text-fill:white;
+   }
+    #backbutton.label{
+   	-fx-text-fill:white;
+   }
+   #backbutton:hover .label{
+ 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 	 }
+ 	  #backbutton:hover{
+ 	-fx-background-color: rgba(234, 246, 255, 0.9); 
+ 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   #backbutton:pressed .label{
+    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+     #backbutton:pressed{
+  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+    
+    
+    
+    .radio-button .dot{
+  -fx-mark-color: #1B9AF7 ;
+    }
+    
+    .radio-button {
+    	-fx-font-family: "Helvetica Neue","Helvetica","Arial","PingFang SC","Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+    	-fx-text-fill:white;
+    	-fx-font-size:16px;
+    	
+    }
  
+ .radio-button .radio {
+  -fx-background-color: white;
+}
 	
 	

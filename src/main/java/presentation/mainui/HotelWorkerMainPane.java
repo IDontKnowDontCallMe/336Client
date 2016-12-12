@@ -3,8 +3,11 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
 import presentation.orderui.HotelOrdersPane;
 import presentation.orderui.ProducingOrderOfflineDialog;
@@ -19,8 +22,32 @@ public class HotelWorkerMainPane extends VBox {
 		super();
 		this.hotelID = hotelID;
 
+		int r =200;
+		int dim = 130;
+		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
+
+		Label search = new Label();
+		search.setFont(Font.font(icon.getFamily(), dim));
+		search.setText(String.valueOf('\uf002'));
+		Button searchButton = new Button("搜索酒店", search);
+		searchButton.setWrapText(true);
+		searchButton.setContentDisplay(ContentDisplay.TOP);
+		searchButton.setId("searchButton");
+		searchButton.setMinSize(r, r);
+		searchButton.setMaxSize(r, r);
+		
 		Button manageButton = new Button("酒店基本信息维护");
-		Button hotelPromotionButton = new Button("酒店促销策略制定");
+		
+		Label hotelPromotion = new Label();
+		hotelPromotion.setFont(Font.font(icon.getFamily(), dim));
+		hotelPromotion.setText(String.valueOf('\uf0cb'));
+		Button hotelPromotionButton = new Button("酒店促销策略制定", hotelPromotion);
+		hotelPromotionButton.setWrapText(true);
+		hotelPromotionButton.setContentDisplay(ContentDisplay.TOP);
+		hotelPromotionButton.setId("searchButton");
+		hotelPromotionButton.setMinSize(r, r);
+		hotelPromotionButton.setMaxSize(r, r);
+		
 		Button offlineButton = new Button("线下入住办理");
 		Button orderListButton = new Button("线上订单办理");
 		Button logoutButton = new Button("注销登录");
