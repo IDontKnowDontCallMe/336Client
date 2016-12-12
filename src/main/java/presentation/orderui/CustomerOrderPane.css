@@ -3,6 +3,7 @@
 	.root{
 	-fx-background-image:url(bluebg.png);
     }
+    
 
 	  .scroll-bar:horizontal .track,
 	 .scroll-bar:vertical .track{

@@ -46,7 +46,7 @@ public class AreaInputPane extends AnchorPane {
 		Label comfirm = new Label();
 		comfirm.setFont(Font.font(icon.getFamily(), 45));
 		comfirm.setText(String.valueOf('\uf002'));
-		confirmButton = new Button("", comfirm);
+		confirmButton = new Button("搜索", comfirm);
 		confirmButton.setWrapText(true);
 		confirmButton.setContentDisplay(ContentDisplay.TOP);
 		confirmButton.setId("backButton");
@@ -57,7 +57,7 @@ public class AreaInputPane extends AnchorPane {
 		Label back = new Label();
 		back.setFont(Font.font(icon.getFamily(), 45));
 		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("", back);
+		backButton = new Button("返回", back);
 		backButton.setWrapText(true);
 		backButton.setContentDisplay(ContentDisplay.TOP);
 		backButton.setId("backButton");
