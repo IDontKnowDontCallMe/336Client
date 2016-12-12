@@ -7,6 +7,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import presentation.hotelui.WorkerHotelInfoPane;
 import presentation.orderui.HotelOrdersPane;
+import presentation.orderui.ProducingOrderDialog;
+import presentation.orderui.ProducingOrderOfflineDialog;
 import presentation.promotionui.HotelPromotionPanel;
 
 public class HotelWorkerMainPane extends VBox {
@@ -47,7 +49,13 @@ public class HotelWorkerMainPane extends VBox {
 		});
 
 		offlineButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			// TheMainFrame.jumpTo();
+			try {
+				ProducingOrderOfflineDialog producingOrderOfflineDialog = new ProducingOrderOfflineDialog(hotelID);
+				producingOrderOfflineDialog.show();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 
 		onlineButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
