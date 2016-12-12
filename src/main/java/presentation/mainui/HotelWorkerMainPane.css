@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
 	.root{
-	-fx-background-image:url(bluebg.png);
+	-fx-background-image:url(redbg3.png);
     }
     
 
@@ -47,39 +47,30 @@
 	    -fx-background-radius: 5em;
 	 
 	}
-
- .button{
-   -fx-background-color:null;
-  -fx-border-width: 2.0px;
-  -fx-border-style: solid;
-  -fx-border-color:white;
-  -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  -fx-text-fill:white;
-   }
-   .label{
-   	-fx-text-fill:white;
-   }
-  .button:hover .label{
- 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
- 	 }
- 	 .button:hover{
- 	-fx-background-color: rgba(234, 246, 255, 0.9); 
- 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
- 		
- 	 }
- 	 
-   .button:pressed .label{
-    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
-    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-    	-fx-opacity:3.0
-    } 
-    .button:pressed{
-  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
-  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-  	
-    -fx-opacity:3.0 ; 
+	
+	 /* 普通按钮 */       
+   .button{
+  -fx-background-color: #1B9AF7;
+  -fx-border-color: #1B9AF7;
+  -fx-text-fill: #FFF;
+  -fx-font-size: 16.0px;
+  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -fx-text-alignment: center;
+  -fx-min-height: 40.0px;
+  -fx-padding: 0.0 40.0px;
+  -fx-cursor: pointer; }
+   .button:hover,  .button:focus {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #4cb0f9;    
+    -fx-text-fill: #FFF; 
     }
+   .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255.0, 255.0, 255.0, 0.3),10.0,0.0,0.0,1.0px);
+    -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;
+    -fx-text-fill: #0880d7;
+    }
+
 	
 	 .choice-box{
  	-fx-mark-color: white ;

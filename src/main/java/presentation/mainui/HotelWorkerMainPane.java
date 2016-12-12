@@ -27,9 +27,18 @@ public class HotelWorkerMainPane extends VBox {
 		Button orderListButton = new Button("查看订单");
 		Button logoutButton = new Button("注销登录");
 
+		
+		
+		
 		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, onlineButton, orderListButton,
 				logoutButton);
 
+		
+		
+		
+		
+		
+		
 		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
 				TheMainFrame.jumpTo(new WorkerHotelInfoPane(hotelID));
@@ -73,5 +82,8 @@ public class HotelWorkerMainPane extends VBox {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
+		
+		
+		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
 	}
 }

@@ -38,7 +38,7 @@ public class CustomerMainPane extends AnchorPane {
 		Label order = new Label();
 		order.setFont(Font.font(icon.getFamily(), dim));
 		order.setText(String.valueOf('\uf03a'));
-		Button orderListButton = new Button("查看订单", order);
+		Button orderListButton = new Button("我的订单", order);
 		orderListButton.setWrapText(true);
 		orderListButton.setContentDisplay(ContentDisplay.TOP);
 		orderListButton.setId("orderListButton");
@@ -48,7 +48,7 @@ public class CustomerMainPane extends AnchorPane {
 		Label hotel = new Label();
 		hotel.setFont(Font.font(icon.getFamily(), dim));
 		hotel.setText(String.valueOf('\uf015'));
-		Button hotelListButton = new Button("查看预订过的酒店", hotel);
+		Button hotelListButton = new Button("预订过的酒店", hotel);
 		hotelListButton.setWrapText(true);
 		hotelListButton.setContentDisplay(ContentDisplay.TOP);
 		hotelListButton.setId("hotelListButton");
@@ -58,7 +58,7 @@ public class CustomerMainPane extends AnchorPane {
 		Label info = new Label();
 		info.setFont(Font.font(icon.getFamily(), dim));
 		info.setText(String.valueOf('\uf2bc'));
-		Button infoButton = new Button("个人信息", info);
+		Button infoButton = new Button("我的信息", info);
 		infoButton.setWrapText(true);
 		infoButton.setContentDisplay(ContentDisplay.TOP);
 		infoButton.setId("infoButton");
@@ -69,7 +69,7 @@ public class CustomerMainPane extends AnchorPane {
 		Label back = new Label();
 		back.setFont(Font.font(icon.getFamily(), 45));
 		back.setText(String.valueOf('\uf011'));
-		Button logoutButton = new Button("", back);
+		Button logoutButton = new Button("注销", back);
 		logoutButton.setWrapText(true);
 		logoutButton.setContentDisplay(ContentDisplay.TOP);
 		logoutButton.setId("backButton");
