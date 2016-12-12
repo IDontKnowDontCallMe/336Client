@@ -3,10 +3,7 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 import java.util.Optional;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
-
 import bussinesslogic.factory.BLFactory;
-import vo.CustomerVO;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,6 +27,7 @@ public class LoginPane extends AnchorPane {
 	private Button loginButton;
 	private Button registerButton;
 	private Label hint;
+	private int ID;
 
 	public LoginPane() {
 		super();
@@ -45,20 +43,28 @@ public class LoginPane extends AnchorPane {
 		hint = new Label("有 Aipapa ID 吗?");
 
 		registerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			Dialog<CustomerVO> registerDialog = new RegisterDialog();
+			Dialog<Integer> registerDialog = new RegisterDialog();
 
-			Optional<CustomerVO> result = registerDialog.showAndWait();
+			Optional<Integer> result = registerDialog.showAndWait();
 			if (result.isPresent()) {
-				CustomerVO customerVO = result.get();
-				// 添加新用户信息及密码
-				try {
-					if (BLFactory.getInstance().getUserBLService().addCustomer(customerVO)) {
-						TheMainFrame.jumpTo(new CustomerMainPane(customerVO.customerID));
-					}
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ID = result.get();
+				Stage popup1 = new Stage();
+				popup1.setAlwaysOnTop(true);
+				popup1.initModality(Modality.APPLICATION_MODAL);
+				Button closeButton1 = new Button("确定");
+				closeButton1.setOnAction(e -> {
+					popup1.close();
+					TheMainFrame.jumpTo(new CustomerMainPane(ID));
+				});
+				VBox root1 = new VBox();
+				root1.setAlignment(Pos.BASELINE_CENTER);
+				root1.setSpacing(20);
+				root1.getChildren().addAll(new Label("您的账号为" + ID + ","), new Label("该账号将用于今后的登录"), closeButton1);
+				Scene scene1 = new Scene(root1, 250, 120);
+				popup1.setScene(scene1);
+				popup1.setTitle("账号消息");
+				popup1.show();
+
 			}
 		});
 
@@ -75,7 +81,7 @@ public class LoginPane extends AnchorPane {
 		AnchorPane.setTopAnchor(registerButton, 481.0);
 
 		loginButton.setAlignment(Pos.CENTER_RIGHT);
-		
+
 		loginButton.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
