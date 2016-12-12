@@ -20,7 +20,6 @@ import vo.OrderVO;
 public class CustomerOrdersPane extends VBox{
 
 	private int customerID;
-	//以后用工厂模式替换之
 	
 	private HBox radioBox;
 	private ToggleGroup toggleGroup;

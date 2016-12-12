@@ -1,7 +1,10 @@
 package presentation.orderui;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
@@ -13,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.CommentVO;
+import vo.HotelVO;
 import vo.OrderVO;
 
 public class CommentDialog extends Dialog {
@@ -52,9 +56,20 @@ public class CommentDialog extends Dialog {
 
 				if (param.getButtonData() == ButtonData.OK_DONE) {
 					String comment = commentTextArea.getText();
-					System.out.print("订单评价时间为" + LocalDateTime.now());
-					return new CommentVO(0, vo.hotelName, vo.roomName, vo.customerID, comment, scoreBox.getValue(),
-							LocalDateTime.now());// hotelID?
+					List<HotelVO> hotelList = null;
+					int hotelID = -1;
+					try {
+						hotelList = BLFactory.getInstance().getHotelBLService().getBookedHotelList(vo.customerID);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					for (HotelVO hotelVO : hotelList) {
+						if (hotelVO.hotelName.equals(vo.hotelName)) {
+							hotelID = hotelVO.hotelID;
+						}
+					}
+					return new CommentVO(hotelID, vo.hotelName, vo.roomName, vo.customerID, comment,
+							scoreBox.getValue(), LocalDateTime.now());
 				} else {
 					return null;
 				}
