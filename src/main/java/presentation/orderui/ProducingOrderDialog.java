@@ -69,7 +69,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 	}
 
-	private void initUI(int customerID, int roomIndex) {
+	private void initUI(int customerID, int roomIndex) throws RemoteException {
 		gridPane = new GridPane();
 
 		roomTypeChoiceBox = new ChoiceBox<String>();
@@ -228,6 +228,22 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 		Button produceButton = new Button("生产订单");
 		gridPane.add(produceButton, 0, 7, 1, 1);
+		produceButton.setDisable(false);
+
+		String problem = BLFactory.getInstance().getOrderBLService().canBeProduced(calculationConditionVO);
+
+		Text tipText = new Text();
+		if (problem.equals("房间不足")) {
+			produceButton.setDisable(true);
+			tipText.setText("您所预订的房间不足, 无法预订");
+			gridPane.add(tipText, 1, 7, 1, 1);
+		}
+		if (problem.equals("信用值小于0")) {
+			produceButton.setDisable(true);
+			tipText.setText("您的信用值小于0, 无法预订");
+			gridPane.add(tipText, 1, 7, 1, 1);
+		}
+
 		produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			CustomerVO vo = null;
 			try {
@@ -236,6 +252,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+
 			OrderVO orderVO = new OrderVO(-1, vo.customerName, customerID, vo.phoneNumber, LocalDateTime.now(),
 					hotelVO.hotelName, roomTypeChoiceBox.getValue(), Integer.valueOf(numTextField.getText()), 1,
 					childrenCheckBox.isSelected(), checkInDatePicker.getValue(), timeChoiceBox.getValue(),
