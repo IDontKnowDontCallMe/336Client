@@ -3,19 +3,14 @@ package presentation.hotelui;
 import java.rmi.RemoteException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
@@ -25,6 +20,7 @@ public class AreaInputPane extends AnchorPane {
 	final int COLUMN_COUNT = 10;
 
 	private int customerID;
+
 	private ComboBox<String> cityBox;
 	private ComboBox<String> businessCircleBox;
 
@@ -35,7 +31,7 @@ public class AreaInputPane extends AnchorPane {
 		super();
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.customerID = customerID;
-		
+
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
 		cityBox = new ComboBox<String>(cityList);
 		cityBox.getSelectionModel().select(0);
@@ -70,8 +66,8 @@ public class AreaInputPane extends AnchorPane {
 		chooseCity.setId("lb1");
 		Label chooseBussin = new Label("请选择商圈：");
 		chooseBussin.setId("lb2");
-		this.getChildren().addAll(cityBox,businessCircleBox,confirmButton,backButton,chooseCity,chooseBussin);
-		
+		this.getChildren().addAll(cityBox, businessCircleBox, confirmButton, backButton, chooseCity, chooseBussin);
+
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			String city = cityBox.getValue().toString();
 			String businessCircle = businessCircleBox.getValue().toString();
@@ -87,17 +83,17 @@ public class AreaInputPane extends AnchorPane {
 		AnchorPane.setLeftAnchor(chooseCity, 420.0);
 		AnchorPane.setTopAnchor(cityBox, 213.0);
 		AnchorPane.setLeftAnchor(cityBox, 546.0);
-		
+
 		AnchorPane.setTopAnchor(chooseBussin, 312.0);
 		AnchorPane.setLeftAnchor(chooseBussin, 420.0);
 		AnchorPane.setTopAnchor(businessCircleBox, 305.0);
 		AnchorPane.setLeftAnchor(businessCircleBox, 546.0);
-		
+
 		AnchorPane.setTopAnchor(confirmButton, 410.0);
 		AnchorPane.setLeftAnchor(confirmButton, 450.0);
 		AnchorPane.setTopAnchor(backButton, 410.0);
 		AnchorPane.setLeftAnchor(backButton, 580.0);
-		
+
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});

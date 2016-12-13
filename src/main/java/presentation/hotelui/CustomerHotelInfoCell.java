@@ -8,14 +8,14 @@ public class CustomerHotelInfoCell extends GridPane {
 
 	OrderVO orderVO;
 
-	Text hotelText;
-	Text roomText;
-	Text checkInText;
-	Text checkOutText;
-	Text numText;
-	Text childrenText;
-	Text totalText;
-	Text stateText;
+	private Text hotelText;
+	private Text roomText;
+	private Text checkInText;
+	private Text checkOutText;
+	private Text numText;
+	private Text childrenText;
+	private Text totalText;
+	private Text stateText;
 
 	public CustomerHotelInfoCell(OrderVO orderVO) {
 		super();
