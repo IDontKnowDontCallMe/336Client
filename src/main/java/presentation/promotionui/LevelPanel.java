@@ -39,7 +39,7 @@ public class LevelPanel extends GridPane {
 
 	private VBox levelMethodBox;
 	LevelVO levelVO;
-	
+
 	public LevelPanel() throws RemoteException {
 		super();
 		levelVO = BLFactory.getInstance().getPromotionBLService().getLevelMethod();
@@ -49,7 +49,7 @@ public class LevelPanel extends GridPane {
 
 		int creditDistance = levelVO.creditDistance;
 		int maxLevel = levelVO.maxLevel;
-		double discountDistance = levelVO.discountDistance;
+		double discountDistance = BLFactory.getInstance().getPromotionBLService().getLevelPromotion().discountDistance;
 
 		title = new Text("会员等级制度");
 		editButton = new Button("编辑");
@@ -130,7 +130,8 @@ public class LevelPanel extends GridPane {
 				newVO.discountDistance = Double.parseDouble(discountDistanceTextField.getText());
 
 				try {
-					if (BLFactory.getInstance().getPromotionBLService().updateLevelMethod(newVO)) {
+					if (BLFactory.getInstance().getPromotionBLService().updateLevelMethod(newVO)
+							&& BLFactory.getInstance().getPromotionBLService().updateLevelPromotion(newVO)) {
 						creditDistanceText.setText(creditDistanceTextField.getText());
 						maxLevelText.setText(maxLevelTextField.getText());
 						discountDistanceText.setText(discountDistanceTextField.getText());

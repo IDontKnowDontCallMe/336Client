@@ -44,11 +44,6 @@ public class HotelOrdersPane extends AnchorPane {
 		orderBox.setTranslateX(150.0);
 		orderBox.setTranslateY(15.0);
 
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-
 		this.getChildren().addAll(radioBox, backButton, listPane);
 		this.setPrefWidth(500);
 	}
@@ -97,11 +92,17 @@ public class HotelOrdersPane extends AnchorPane {
 					}
 				});
 
+		backButton = new Button("返回");
+		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			TheMainFrame.backTo();
+		});
+
+		
 		radioBox = new HBox();
 		radioBox.setSpacing(10);
 		radioBox.setPrefWidth(500);
 		radioBox.getChildren().addAll(allButton, unexecutedButton, executedButton, leftButton, revokedButton,
-				abnormalButton);
+				abnormalButton, backButton);
 
 		AnchorPane.setLeftAnchor(allButton, 50.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);

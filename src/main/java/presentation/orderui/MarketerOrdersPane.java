@@ -19,10 +19,11 @@ public class MarketerOrdersPane extends VBox {
 	private Button backButton;
 	private ScrollPane listPane;
 	private VBox orderBox;
+	private List<OrderVO> orderList;
 
 	public MarketerOrdersPane() throws RemoteException {
 		initTitle();
-		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getAbnormalOrdersOfToday();
+		orderList = BLFactory.getInstance().getOrderBLService().getAbnormalOrdersOfToday();
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);

@@ -54,13 +54,13 @@ public class WebPromotionCell extends GridPane {
 					if (BLFactory.getInstance().getPromotionBLService().updateWebPromotion(result.get())) {
 						System.out.println("edit");
 						if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
-							startTimeText.setText(webPromotionVO.startTime.toString());
-							endTimeText.setText(webPromotionVO.endTime.toString());
+							startTimeText.setText("开始时间: " + result.get().startTime.toString());
+							endTimeText.setText("结束时间: " + result.get().endTime.toString());
 						}
 						if (webPromotionVO.businessCircleName != null) {
-							businessCircleText.setText(webPromotionVO.businessCircleName);
+							businessCircleText.setText("特定商圈名称: " + result.get().businessCircleName);
 						}
-						discountText.setText(String.valueOf(webPromotionVO.discount));
+						discountText.setText(String.valueOf("折扣: " + result.get().discount));
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
@@ -72,7 +72,7 @@ public class WebPromotionCell extends GridPane {
 		deleteButton = new Button("删除");
 		deleteButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
-				if(BLFactory.getInstance().getPromotionBLService().deleteWebPromotion(webPromotionVO)){
+				if (BLFactory.getInstance().getPromotionBLService().deleteWebPromotion(webPromotionVO)) {
 					System.out.println("delete");
 					this.getChildren().clear();
 				}
@@ -80,7 +80,7 @@ public class WebPromotionCell extends GridPane {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 		});
 
 		this.add(editButton, 10, 0, 1, 1);
