@@ -33,7 +33,8 @@ public class CustomerInfoCell extends GridPane {
 		this.customerVO = customerVO;
 		customerID = customerVO.customerID;
 		infoPane = new GridPane();
-
+		
+		//这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
 		nameText = new Text(customerVO.customerName);
 		infoPane.add(nameText, 1, 0, 1, 1);
@@ -46,7 +47,7 @@ public class CustomerInfoCell extends GridPane {
 		levelText = new Text(String.valueOf(customerVO.level));
 		infoPane.add(levelText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("生日会员  "), 0, 3, 1, 1);
+		infoPane.add(new Text("生日会员"), 0, 3, 1, 1);
 		if (customerVO.isBirthVIP) {
 			birthdayText = new Text(String.valueOf(customerVO.birthday));
 		} else {
@@ -54,7 +55,7 @@ public class CustomerInfoCell extends GridPane {
 		}
 		infoPane.add(birthdayText, 1, 3, 1, 1);
 
-		infoPane.add(new Text("企业会员  "), 0, 4, 1, 1);
+		infoPane.add(new Text("企业会员"), 0, 4, 1, 1);
 		if (customerVO.isCompanyVIP) {
 			companyText = new Text(customerVO.companyName);
 		} else {
@@ -98,43 +99,41 @@ public class CustomerInfoCell extends GridPane {
 				infoPane.add(birthdayText, 1, 3, 1, 1);
 				infoPane.add(companyText, 1, 4, 1, 1);
 
-				CustomerVO vo = null;
-				try {
-					vo = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				vo.customerName = nameTextField.getText();
-				vo.phoneNumber = phoneTextField.getText();
+				CustomerVO newVO = customerVO;
+				newVO.customerName = nameTextField.getText();
+				newVO.phoneNumber = phoneTextField.getText();
 				if (birthdayDatePicker.getValue() != null) {
-					vo.isBirthVIP = true;
-					vo.birthday = birthdayDatePicker.getValue();
+					newVO.isBirthVIP = true;
+					newVO.birthday = birthdayDatePicker.getValue();
 				} else {
-					vo.isBirthVIP = false;
-					vo.birthday = null;
+					newVO.isBirthVIP = false;
+					newVO.birthday = null;
 				}
 				if (companyTextField.getText().equals("")) {
-					vo.isBirthVIP = false;
-					vo.companyName = null;
+					newVO.isBirthVIP = false;
+					newVO.companyName = null;
 				} else {
-					vo.isCompanyVIP = true;
-					vo.companyName = companyTextField.getText();
+					newVO.isCompanyVIP = true;
+					newVO.companyName = companyTextField.getText();
 				}
-				if (MockCustomerController.getInstance().updateCustomerInfo(customerVO)) {
-					nameText.setText(nameTextField.getText());
-					phoneNumberText.setText(phoneTextField.getText());
-					if (birthdayDatePicker.getValue() != null) {
-						birthdayText.setText(String.valueOf(birthdayDatePicker.getValue()));
-					} else {
-						birthdayText.setText("无");
-					}
-					if (companyTextField.getText().equals("")) {
-						companyText.setText("无");
-					} else {
-						companyText.setText(companyTextField.getText());
-					}
+				try {
+					if (BLFactory.getInstance().getUserBLService().updateCustomer(newVO)) {
+						nameText.setText(nameTextField.getText());
+						phoneNumberText.setText(phoneTextField.getText());
+						if (birthdayDatePicker.getValue() != null) {
+							birthdayText.setText(String.valueOf(birthdayDatePicker.getValue()));
+						} else {
+							birthdayText.setText("无");
+						}
+						if (companyTextField.getText().equals("")) {
+							companyText.setText("无");
+						} else {
+							companyText.setText(companyTextField.getText());
+						}
 
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 
 				editButton.setText("编辑");

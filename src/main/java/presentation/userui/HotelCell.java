@@ -13,7 +13,6 @@ import vo.HotelVO;
 
 public class HotelCell extends GridPane {
 	HotelVO hotelVO;
-	private int hotelID;
 	private GridPane infoPane;
 	private Text nameText;
 	private Text hotelText;
@@ -25,7 +24,6 @@ public class HotelCell extends GridPane {
 	public HotelCell(HotelVO hotelVO) {
 		super();
 		this.hotelVO = hotelVO;
-		hotelID = hotelVO.hotelID;
 		infoPane = new GridPane();
 
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
@@ -48,9 +46,7 @@ public class HotelCell extends GridPane {
 		phoneTextField = new TextField();
 		phoneTextField.setPrefColumnCount(8);
 
-		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) ->
-
-		{
+		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (editButton.getText().equals("编辑")) {
 				infoPane.getChildren().removeAll(nameText, phoneNumberText);
 				nameTextField.setText(nameText.getText());
@@ -64,18 +60,16 @@ public class HotelCell extends GridPane {
 				infoPane.add(nameText, 1, 0, 1, 1);
 				infoPane.add(phoneNumberText, 1, 2, 1, 1);
 
-				HotelVO vo = null;
+				HotelVO newVO = hotelVO;
+				newVO.workerName = nameTextField.getText();
+				newVO.phoneNumber = phoneTextField.getText();
 				try {
-					vo = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
+					if (BLFactory.getInstance().getUserBLService().updateHotelWorker(newVO)) {
+						nameText.setText(nameTextField.getText());
+						phoneNumberText.setText(phoneTextField.getText());
+					}
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				vo.workerName = nameTextField.getText();
-				vo.phoneNumber = phoneTextField.getText();
-				if (MockHotelController.getInstance().update(hotelVO)) {
-					nameText.setText(nameTextField.getText());
-					phoneNumberText.setText(phoneTextField.getText());
 				}
 
 				editButton.setText("编辑");

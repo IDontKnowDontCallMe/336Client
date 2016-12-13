@@ -1,7 +1,6 @@
 package presentation.userui;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ public class WebMarketerCell extends GridPane {
 
 	WebMarketerVO webMarketerVO;
 
-	private int webMarketerID;
 	private GridPane infoPane;
 	private Text nameText;
 	private Text phoneNumberText;
@@ -26,7 +24,6 @@ public class WebMarketerCell extends GridPane {
 	public WebMarketerCell(WebMarketerVO webMarketerVO) {
 		super();
 		this.webMarketerVO = webMarketerVO;
-		webMarketerID = webMarketerVO.ID;
 		infoPane = new GridPane();
 
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
@@ -45,9 +42,7 @@ public class WebMarketerCell extends GridPane {
 		phoneTextField = new TextField();
 		phoneTextField.setPrefColumnCount(8);
 
-		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) ->
-
-		{
+		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (editButton.getText().equals("编辑")) {
 				infoPane.getChildren().removeAll(nameText, phoneNumberText);
 				nameTextField.setText(nameText.getText());
@@ -61,23 +56,12 @@ public class WebMarketerCell extends GridPane {
 				infoPane.add(nameText, 1, 0, 1, 1);
 				infoPane.add(phoneNumberText, 1, 1, 1, 1);
 
-				WebMarketerVO vo = null;
-				List<WebMarketerVO> list = null;
-				try {
-					list = BLFactory.getInstance().getUserBLService().getWebMarketerList();
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
-				}
-				for (WebMarketerVO v : list) {
-					if (v.ID == webMarketerID) {
-						vo = v;
-					}
-				}
+				WebMarketerVO newVO = webMarketerVO;
 
-				vo.name = nameTextField.getText();
-				vo.phoneNumber = phoneTextField.getText();
+				newVO.name = nameTextField.getText();
+				newVO.phoneNumber = phoneTextField.getText();
 				try {
-					if (MockUserController.getInstance().updateWebMarketer(webMarketerVO)) {
+					if (BLFactory.getInstance().getUserBLService().updateWebMarketer(newVO)) {
 						nameText.setText(nameTextField.getText());
 						phoneNumberText.setText(phoneTextField.getText());
 					}

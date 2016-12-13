@@ -9,22 +9,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import presentation.hotelui.MockHotelController;
 import vo.HotelVO;
 
 public class AddHotelDialog extends Dialog {
 	final int COLUMN_COUNT = 8;
-	GridPane gridPane;
-	Text title;
-	Text hotelNameText;
-	Text workerNameText;
-	Text phoneNumberText;
-	TextField hotelNameTextField;
-	TextField workerNameTextField;
-	TextField phoneNumberTextField;
-	HBox hotelNameBox;
-	HBox workerNameBox;
-	HBox phoneNumberBox;
+	private GridPane gridPane;
+	private Text title;
+	private Text hotelNameText;
+	private Text workerNameText;
+	private Text phoneNumberText;
+	private TextField hotelNameTextField;
+	private TextField workerNameTextField;
+	private TextField phoneNumberTextField;
+	private HBox hotelNameBox;
+	private HBox workerNameBox;
+	private HBox phoneNumberBox;
 
 	public AddHotelDialog() {
 		super();
@@ -69,7 +68,7 @@ public class AddHotelDialog extends Dialog {
 			@Override
 			public HotelVO call(ButtonType param) {
 				if (param.getButtonData() == ButtonData.OK_DONE) {
-					HotelVO vo = new HotelVO(0, hotelNameTextField.getText(), "", "", "", "", "", 0, 0,
+					HotelVO vo = new HotelVO(0, hotelNameTextField.getText(), null, null, null, null, null, 0, 0,
 							workerNameTextField.getText(), phoneNumberTextField.getText(), 0, 0);
 					return vo;
 				} else {

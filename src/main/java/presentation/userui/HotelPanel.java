@@ -39,13 +39,19 @@ public class HotelPanel extends VBox {
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("add hotel!");
 				Dialog<HotelVO> addHotelDialog = new AddHotelDialog();
 
 				Optional<HotelVO> result = addHotelDialog.showAndWait();
 				if (result.isPresent()) {
-					HotelVO vo = result.get();
-					System.out.println("new hotel is " + vo.hotelName);
+					try {
+						if (BLFactory.getInstance().getUserBLService().addHotel(result.get())) {
+							System.out.println("add hotel!");
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				} else {
 					System.out.println("nothing added");
 				}
