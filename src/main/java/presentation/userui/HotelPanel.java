@@ -25,8 +25,10 @@ public class HotelPanel extends VBox {
 	private Button backButton;
 	private HBox titleBox;
 
+	private List<HotelVO> hotelList;
+
 	public HotelPanel() throws RemoteException {
-		List<HotelVO> hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
+		hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
 
 		hotelBox = new VBox();
 		hotelBox.setSpacing(15);
@@ -46,6 +48,8 @@ public class HotelPanel extends VBox {
 					try {
 						if (BLFactory.getInstance().getUserBLService().addHotel(result.get())) {
 							System.out.println("add hotel!");
+							hotelList.add(result.get());
+							buildHotelBox(hotelList);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block

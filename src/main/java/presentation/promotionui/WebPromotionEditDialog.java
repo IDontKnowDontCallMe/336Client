@@ -93,6 +93,7 @@ public class WebPromotionEditDialog extends Dialog {
 					}
 					if (businessCircleBox != null && cityBox != null) {
 						businessCircleName = businessCircleBox.getValue().toString();
+						cityName = cityBox.getValue().toString();
 					}
 
 					if (discountTextField.getText() != null) {

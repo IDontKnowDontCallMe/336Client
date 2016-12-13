@@ -24,17 +24,15 @@ public class CustomerInfoCell extends GridPane {
 	private Text companyText;
 	private TextField nameTextField;
 	private TextField phoneTextField;
-	private TextField companyTextField;
 	private Button editButton;
-	private DatePicker birthdayDatePicker;
 
 	public CustomerInfoCell(CustomerVO customerVO) {
 		super();
 		this.customerVO = customerVO;
 		customerID = customerVO.customerID;
 		infoPane = new GridPane();
-		
-		//这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
+
+		// 这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
 		nameText = new Text(customerVO.customerName);
 		infoPane.add(nameText, 1, 0, 1, 1);
@@ -70,30 +68,18 @@ public class CustomerInfoCell extends GridPane {
 		nameTextField.setPrefColumnCount(8);
 		phoneTextField = new TextField();
 		phoneTextField.setPrefColumnCount(8);
-		companyTextField = new TextField();
-		companyTextField.setPrefColumnCount(8);
-		birthdayDatePicker = new DatePicker();
 
-		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) ->
-
-		{
+		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (editButton.getText().equals("编辑")) {
-				infoPane.getChildren().removeAll(nameText, phoneNumberText, birthdayText, companyText);
+				infoPane.getChildren().removeAll(nameText, phoneNumberText);
 				nameTextField.setText(nameText.getText());
 				phoneTextField.setText(phoneNumberText.getText());
 
-				if (customerVO.isBirthVIP) {
-					birthdayDatePicker.setValue(customerVO.birthday);
-				}
-				companyTextField.setText(companyText.getText());
-
 				infoPane.add(nameTextField, 1, 0, 1, 1);
 				infoPane.add(phoneTextField, 1, 1, 1, 1);
-				infoPane.add(birthdayDatePicker, 1, 3, 1, 1);
-				infoPane.add(companyTextField, 1, 4, 1, 1);
 				editButton.setText("保存");
 			} else if (editButton.getText().equals("保存")) {
-				infoPane.getChildren().removeAll(nameTextField, phoneTextField, birthdayDatePicker, companyTextField);
+				infoPane.getChildren().removeAll(nameTextField, phoneTextField);
 				infoPane.add(nameText, 1, 0, 1, 1);
 				infoPane.add(phoneNumberText, 1, 1, 1, 1);
 				infoPane.add(birthdayText, 1, 3, 1, 1);
@@ -102,35 +88,11 @@ public class CustomerInfoCell extends GridPane {
 				CustomerVO newVO = customerVO;
 				newVO.customerName = nameTextField.getText();
 				newVO.phoneNumber = phoneTextField.getText();
-				if (birthdayDatePicker.getValue() != null) {
-					newVO.isBirthVIP = true;
-					newVO.birthday = birthdayDatePicker.getValue();
-				} else {
-					newVO.isBirthVIP = false;
-					newVO.birthday = null;
-				}
-				if (companyTextField.getText().equals("")) {
-					newVO.isBirthVIP = false;
-					newVO.companyName = null;
-				} else {
-					newVO.isCompanyVIP = true;
-					newVO.companyName = companyTextField.getText();
-				}
+
 				try {
 					if (BLFactory.getInstance().getUserBLService().updateCustomer(newVO)) {
 						nameText.setText(nameTextField.getText());
 						phoneNumberText.setText(phoneTextField.getText());
-						if (birthdayDatePicker.getValue() != null) {
-							birthdayText.setText(String.valueOf(birthdayDatePicker.getValue()));
-						} else {
-							birthdayText.setText("无");
-						}
-						if (companyTextField.getText().equals("")) {
-							companyText.setText("无");
-						} else {
-							companyText.setText(companyTextField.getText());
-						}
-
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();

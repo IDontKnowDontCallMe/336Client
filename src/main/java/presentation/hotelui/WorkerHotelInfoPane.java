@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,7 +49,8 @@ public class WorkerHotelInfoPane extends GridPane {
 	private TextField addressTextField;
 	private TextField introductionTextField;
 	private TextField serviceTextField;
-	private TextField businessCircleTextField;
+	private ComboBox<String> businessCircleBox;
+
 	private TextField addRoomNameTextField;
 	private TextField addNumOfRoomTextField;
 	private TextField addServiceTextField;
@@ -222,8 +224,9 @@ public class WorkerHotelInfoPane extends GridPane {
 				introductionTextField.setPrefColumnCount(COLUMN);
 				serviceTextField = new TextField(hotelVO.service);
 				serviceTextField.setPrefColumnCount(COLUMN);
-				businessCircleTextField = new TextField(hotelVO.businessCircle);
-				businessCircleTextField.setPrefColumnCount(COLUMN);
+				ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
+				businessCircleBox = new ComboBox<String>(businessCircleList);
+				businessCircleBox.getSelectionModel().select(0);
 
 				ObservableList<String> scoreList = FXCollections.observableArrayList("1星", "2星", "3星", "4星", "5星");
 				scoreChoiceBox = new ChoiceBox<>(scoreList);
@@ -233,13 +236,13 @@ public class WorkerHotelInfoPane extends GridPane {
 				infoPane.add(addressTextField, 1, 2, 1, 1);
 				infoPane.add(introductionTextField, 1, 3, 1, 1);
 				infoPane.add(serviceTextField, 1, 4, 1, 1);
-				infoPane.add(businessCircleTextField, 1, 5, 1, 1);
+				infoPane.add(businessCircleBox, 1, 5, 1, 1);
 				infoPane.add(scoreChoiceBox, 1, 6, 1, 1);
 
 				infoEditButton.setText("保存");
 			} else if (infoEditButton.getText().equals("保存")) {
 				infoPane.getChildren().removeAll(nameTextField, addressTextField, introductionTextField,
-						serviceTextField, businessCircleTextField, scoreChoiceBox);
+						serviceTextField, businessCircleBox, scoreChoiceBox);
 				infoPane.add(nameText, 1, 1, 1, 1);
 				infoPane.add(addressText, 1, 2, 1, 1);
 				infoPane.add(introductionText, 1, 3, 1, 1);
@@ -259,7 +262,7 @@ public class WorkerHotelInfoPane extends GridPane {
 				newVO.address = addressTextField.getText();
 				newVO.introduction = introductionTextField.getText();
 				newVO.service = serviceTextField.getText();
-				newVO.businessCircle = businessCircleTextField.getText();
+				newVO.businessCircle = businessCircleBox.getValue().toString();
 				newVO.score = scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1;
 
 				try {
@@ -268,7 +271,7 @@ public class WorkerHotelInfoPane extends GridPane {
 						addressText.setText(addressTextField.getText());
 						introductionText.setText(introductionTextField.getText());
 						serviceText.setText(serviceTextField.getText());
-						businessCircleText.setText(businessCircleTextField.getText());
+						businessCircleText.setText(businessCircleBox.getValue().toString());
 						scoreText.setText(String.valueOf(scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1));
 					}
 				} catch (RemoteException e) {
