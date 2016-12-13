@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +25,8 @@ public class AreaInputPane extends AnchorPane {
 	final int COLUMN_COUNT = 10;
 
 	private int customerID;
-	private ChoiceBox cityBox;
-	private ChoiceBox businessCircleBox;
-
+	private ComboBox cityBox;
+	private ComboBox businessCircleBox;
 	private Button confirmButton;
 	private Button backButton;
 
@@ -36,11 +36,11 @@ public class AreaInputPane extends AnchorPane {
 		this.customerID = customerID;
 		
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
-		cityBox = new ChoiceBox<String>(cityList);
+		cityBox = new ComboBox<String>(cityList);
 		cityBox.getSelectionModel().select(0);
 
 		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
-		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox = new ComboBox<String>(businessCircleList);
 		businessCircleBox.getSelectionModel().select(0);
 
 		Label comfirm = new Label();
