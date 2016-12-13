@@ -58,16 +58,16 @@ public class HotelPromotionCell extends GridPane {
 					if (BLFactory.getInstance().getPromotionBLService().updateHotelPromotion(result.get())) {
 						System.out.println("edit");
 						if (hotelPromotionVO.startTime != null && hotelPromotionVO.endTime != null) {
-							startTimeText.setText(hotelPromotionVO.startTime.toString());
-							endTimeText.setText(hotelPromotionVO.endTime.toString());
+							startTimeText.setText("开始时间: " + hotelPromotionVO.startTime.toString());
+							endTimeText.setText("结束时间: " + hotelPromotionVO.endTime.toString());
 						}
 						if (hotelPromotionVO.companyName != null) {
-							companyNameText.setText(hotelPromotionVO.companyName);
+							companyNameText.setText("合作企业名称: " + hotelPromotionVO.companyName);
 						}
 						if (hotelPromotionVO.minNum != -1) {
-							minNumText.setText(String.valueOf(hotelPromotionVO.minNum));
+							minNumText.setText(String.valueOf("最小预订房间数量: " + hotelPromotionVO.minNum));
 						}
-						discountText.setText(String.valueOf(hotelPromotionVO.discount));
+						discountText.setText("折扣: " + String.valueOf(hotelPromotionVO.discount));
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block

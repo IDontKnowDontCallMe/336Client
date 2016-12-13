@@ -101,7 +101,7 @@ public class HotelPromotionEditDialog extends Dialog {
 						startDate = startDatePicker.getValue();
 					}
 					if (endDatePicker != null) {
-						startDate = startDatePicker.getValue();
+						startDate = endDatePicker.getValue();
 					}
 					if (companyNameTextField != null) {
 						companyName = companyNameTextField.getText();
