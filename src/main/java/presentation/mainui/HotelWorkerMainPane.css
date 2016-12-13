@@ -3,7 +3,9 @@
 	.root{
 	-fx-background-image:url(redbg3.png);
     }
-	.button{
+
+          
+  .button{
    -fx-background-color:null;
   -fx-border-width: 2.0px;
   -fx-border-style: solid;
@@ -20,21 +22,17 @@
  	 }
  	 .button:hover{
  	-fx-background-color: rgba(255, 234, 246, 0.9); 
- 		 		 	-fx-text-fill:rgba(253, 119, 130, 0.9) ; 
+ 		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
  		
  	 }
  	 
    .button:pressed .label{
-    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
     	-fx-text-fill:rgba(255, 255, 255, 0.5);
     	-fx-opacity:3.0
     } 
     .button:pressed{
-  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+  	-fx-background-color: rgba(252, 90, 101, 0.7) ;
   	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
   	
     -fx-opacity:3.0 ; 
     }
-          
-         
- 
