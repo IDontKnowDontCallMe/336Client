@@ -54,7 +54,7 @@ public class HotelOrderCell extends GridPane {
 
 		this.setHgap(10);
 		this.setVgap(20);
-
+		this.getStylesheets().add(getClass().getResource("HotelOrderCell").toExternalForm());
 	}
 
 	private void setButton(String state) throws RemoteException {
