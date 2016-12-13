@@ -130,18 +130,19 @@ public class CustomerOrdersPane extends VBox {
 		
 		AnchorPane.setLeftAnchor(allButton, 50.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 160.0);
+		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
+		AnchorPane.setLeftAnchor(executedButton, 290.0);
+		AnchorPane.setTopAnchor(executedButton, 30.0);
+		AnchorPane.setLeftAnchor(leftButton, 475.0);
+		AnchorPane.setTopAnchor(leftButton, 30.0);
+		AnchorPane.setLeftAnchor(revokedButton, 655.0);
+		AnchorPane.setTopAnchor(revokedButton, 30.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 785.0);
+		AnchorPane.setTopAnchor(abnormalButton, 30.0);
+		
 		AnchorPane.setRightAnchor(backButton, 20.0);
 		AnchorPane.setTopAnchor(backButton, 10.0);
-		AnchorPane.setLeftAnchor(unexecutedButton, 180.0);
-		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
-		AnchorPane.setLeftAnchor(executedButton, 320.0);
-		AnchorPane.setTopAnchor(executedButton, 30.0);
-		AnchorPane.setLeftAnchor(revokedButton, 505.0);
-		AnchorPane.setTopAnchor(revokedButton, 30.0);
-		AnchorPane.setLeftAnchor(abnormalButton, 635.0);
-		AnchorPane.setTopAnchor(abnormalButton, 30.0);
-		AnchorPane.setLeftAnchor(leftButton, 755.0);
-		AnchorPane.setTopAnchor(leftButton, 30.0);
 	}
 
 	private void buildOrderBox(List<OrderVO> orderList) {

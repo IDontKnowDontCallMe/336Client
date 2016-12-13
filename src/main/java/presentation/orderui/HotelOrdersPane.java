@@ -10,12 +10,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
-public class HotelOrdersPane extends VBox {
+public class HotelOrdersPane extends AnchorPane {
 
 	private int hotelID;
 	private HBox radioBox;
@@ -40,6 +41,8 @@ public class HotelOrdersPane extends VBox {
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
 		listPane = new ScrollPane(orderBox);
+		orderBox.setTranslateX(150.0);
+		orderBox.setTranslateY(15.0);
 
 		backButton = new Button("返回");
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
@@ -99,6 +102,22 @@ public class HotelOrdersPane extends VBox {
 		radioBox.setPrefWidth(500);
 		radioBox.getChildren().addAll(allButton, unexecutedButton, executedButton, leftButton, revokedButton,
 				abnormalButton);
+
+		AnchorPane.setLeftAnchor(allButton, 50.0);
+		AnchorPane.setTopAnchor(allButton, 30.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 160.0);
+		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
+		AnchorPane.setLeftAnchor(executedButton, 290.0);
+		AnchorPane.setTopAnchor(executedButton, 30.0);
+		AnchorPane.setLeftAnchor(leftButton, 475.0);
+		AnchorPane.setTopAnchor(leftButton, 30.0);
+		AnchorPane.setLeftAnchor(revokedButton, 655.0);
+		AnchorPane.setTopAnchor(revokedButton, 30.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 785.0);
+		AnchorPane.setTopAnchor(abnormalButton, 30.0);
+
+		AnchorPane.setRightAnchor(backButton, 20.0);
+		AnchorPane.setTopAnchor(backButton, 10.0);
 
 		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 	}
