@@ -11,17 +11,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import presentation.customerui.MockCustomerController;
 import vo.CustomerVO;
 
 public class CreditDialog extends Dialog {
 
 	final int COLUMN_COUNT = 8;
-	GridPane gridPane;
-	Text title;
-	Text creditTitle;
-	TextField creditTextField;
-	HBox creditBox;
+	private GridPane gridPane;
+	private Text title;
+	private Text creditTitle;
+	private TextField creditTextField;
+	private HBox creditBox;
 
 	public CreditDialog(int customerID) {
 		super();
