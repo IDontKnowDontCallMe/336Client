@@ -40,18 +40,19 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 	HotelVO hotelVO;
 	List<RoomVO> roomList;
 
-	GridPane gridPane;
-	ChoiceBox<String> roomTypeChoiceBox;
-	ChoiceBox<LocalTime> timeChoiceBox;
-	DatePicker checkInDatePicker;
-	DatePicker checkOutDatePicker;
-	TextField numTextField;
-	Button addButton;
-	Button subButton;
-	CheckBox childrenCheckBox;
-	Text totalText;
+	private GridPane gridPane;
+	private ChoiceBox<String> roomTypeChoiceBox;
+	private ChoiceBox<LocalTime> timeChoiceBox;
+	private DatePicker checkInDatePicker;
+	private DatePicker checkOutDatePicker;
+	private TextField numTextField;
+	private Button addButton;
+	private Button subButton;
+	private Button produceButton;
+	private CheckBox childrenCheckBox;
+	private Text totalText;
 
-	int total;
+	private int total;
 	CalculationConditionVO calculationConditionVO;
 	OrderVO orderVO;
 
@@ -226,23 +227,9 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		HBox totalBox = new HBox(new Text("优惠后总价:"), totalText);
 		gridPane.add(totalBox, 0, 6, 1, 1);
 
-		Button produceButton = new Button("生产订单");
+		produceButton = new Button("生产订单");
 		gridPane.add(produceButton, 0, 7, 1, 1);
 		produceButton.setDisable(false);
-
-		String problem = BLFactory.getInstance().getOrderBLService().canBeProduced(calculationConditionVO);
-
-		Text tipText = new Text();
-		if (problem.equals("房间不足")) {
-			produceButton.setDisable(true);
-			tipText.setText("您所预订的房间不足, 无法预订");
-			gridPane.add(tipText, 1, 7, 1, 1);
-		}
-		if (problem.equals("信用值小于0")) {
-			produceButton.setDisable(true);
-			tipText.setText("您的信用值小于0, 无法预订");
-			gridPane.add(tipText, 1, 7, 1, 1);
-		}
 
 		produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			CustomerVO vo = null;
@@ -311,6 +298,20 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 				roomList.get(roomIndex).price, false, hotelVO.city, hotelVO.businessCircle);
 		total = BLFactory.getInstance().getOrderBLService().calculateTotal(calculationConditionVO);
 		totalText.setText(String.valueOf(total));
+
+		String problem = BLFactory.getInstance().getOrderBLService().canBeProduced(calculationConditionVO);
+
+		Text tipText = new Text();
+		if (problem.equals("房间不足")) {
+			produceButton.setDisable(true);
+			tipText.setText("您所预订的房间不足, 无法预订");
+			gridPane.add(tipText, 1, 7, 1, 1);
+		}
+		if (problem.equals("信用值小于0")) {
+			produceButton.setDisable(true);
+			tipText.setText("您的信用值小于0, 无法预订");
+			gridPane.add(tipText, 1, 7, 1, 1);
+		}
 
 		return calculationConditionVO;
 	}

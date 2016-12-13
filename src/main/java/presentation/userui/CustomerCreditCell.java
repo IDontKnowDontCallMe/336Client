@@ -29,7 +29,7 @@ public class CustomerCreditCell extends GridPane {
 		this.customerVO = customerVO;
 		infoPane = new GridPane();
 
-		//这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
+		// 这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
 		nameText = new Text(customerVO.customerName);
 		infoPane.add(nameText, 1, 0, 1, 1);
@@ -68,10 +68,11 @@ public class CustomerCreditCell extends GridPane {
 				Optional<Integer> result = creditDialog.showAndWait();
 				if (result.isPresent()) {
 					try {
-						if(BLFactory.getInstance().getUserBLService().updateCreditOfCustomer(customerVO.customerID, result.get())){
-							creditText.setText(String.valueOf(customerVO.credit));
+						if (BLFactory.getInstance().getUserBLService().updateCreditOfCustomer(customerVO.customerID,
+								result.get())) {
+							creditText.setText(String.valueOf(customerVO.credit + result.get()));
 							System.out.println("add credit!");
-							System.out.println("new credit is " + customerVO.credit);
+							System.out.println("new credit is " + customerVO.credit + result.get());
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
