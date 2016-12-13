@@ -28,15 +28,6 @@ public class HotelWorkerMainPane extends AnchorPane {
 		int dim = 130;
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
-		Label search = new Label();
-		search.setFont(Font.font(icon.getFamily(), dim));
-		search.setText(String.valueOf('\uf002'));
-		Button searchButton = new Button("搜索酒店", search);
-		searchButton.setWrapText(true);
-		searchButton.setContentDisplay(ContentDisplay.TOP);
-		searchButton.setId("searchButton");
-		searchButton.setMinSize(r, r);
-		searchButton.setMaxSize(r, r);
 		
 		Label manage = new Label();
 		manage.setFont(Font.font(icon.getFamily(), dim));
@@ -96,10 +87,10 @@ public class HotelWorkerMainPane extends AnchorPane {
 		
 		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
 
-		AnchorPane.setLeftAnchor(searchButton, 250.0);
-		AnchorPane.setTopAnchor(searchButton, 100.0);
-		AnchorPane.setLeftAnchor(orderListButton, 600.0);
+		AnchorPane.setLeftAnchor(orderListButton, 250.0);
 		AnchorPane.setTopAnchor(orderListButton, 100.0);
+		AnchorPane.setLeftAnchor(offlineButton, 600.0);
+		AnchorPane.setTopAnchor(offlineButton, 100.0);
 		AnchorPane.setLeftAnchor(hotelPromotionButton, 250.0);
 		AnchorPane.setTopAnchor(hotelPromotionButton, 400.0);
 		AnchorPane.setLeftAnchor(manageButton, 600.0);

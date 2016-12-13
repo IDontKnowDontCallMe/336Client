@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -24,8 +25,8 @@ public class AreaInputPane extends AnchorPane {
 	final int COLUMN_COUNT = 10;
 
 	private int customerID;
-	private ChoiceBox cityBox;
-	private ChoiceBox businessCircleBox;
+	private ComboBox<String> cityBox;
+	private ComboBox<String> businessCircleBox;
 
 	private Button confirmButton;
 	private Button backButton;
@@ -36,11 +37,11 @@ public class AreaInputPane extends AnchorPane {
 		this.customerID = customerID;
 		
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
-		cityBox = new ChoiceBox<String>(cityList);
+		cityBox = new ComboBox<String>(cityList);
 		cityBox.getSelectionModel().select(0);
 
 		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
-		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox = new ComboBox<String>(businessCircleList);
 		businessCircleBox.getSelectionModel().select(0);
 
 		Label comfirm = new Label();
@@ -49,7 +50,7 @@ public class AreaInputPane extends AnchorPane {
 		confirmButton = new Button("搜索", comfirm);
 		confirmButton.setWrapText(true);
 		confirmButton.setContentDisplay(ContentDisplay.TOP);
-		confirmButton.setId("backButton");
+		confirmButton.setId("comfirmButton");
 		confirmButton.setShape(new Circle(40));
 		confirmButton.setMinSize(80, 80);
 		confirmButton.setMaxSize(80, 80);
@@ -84,17 +85,17 @@ public class AreaInputPane extends AnchorPane {
 		});
 		AnchorPane.setTopAnchor(chooseCity, 222.0);
 		AnchorPane.setLeftAnchor(chooseCity, 420.0);
-		AnchorPane.setTopAnchor(cityBox, 220.0);
+		AnchorPane.setTopAnchor(cityBox, 213.0);
 		AnchorPane.setLeftAnchor(cityBox, 546.0);
 		
-		AnchorPane.setTopAnchor(chooseBussin, 282.0);
+		AnchorPane.setTopAnchor(chooseBussin, 312.0);
 		AnchorPane.setLeftAnchor(chooseBussin, 420.0);
-		AnchorPane.setTopAnchor(businessCircleBox, 280.0);
-		AnchorPane.setLeftAnchor(businessCircleBox, 550.0);
+		AnchorPane.setTopAnchor(businessCircleBox, 305.0);
+		AnchorPane.setLeftAnchor(businessCircleBox, 546.0);
 		
-		AnchorPane.setTopAnchor(confirmButton, 375.0);
+		AnchorPane.setTopAnchor(confirmButton, 410.0);
 		AnchorPane.setLeftAnchor(confirmButton, 450.0);
-		AnchorPane.setTopAnchor(backButton, 375.0);
+		AnchorPane.setTopAnchor(backButton, 410.0);
 		AnchorPane.setLeftAnchor(backButton, 580.0);
 		
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {

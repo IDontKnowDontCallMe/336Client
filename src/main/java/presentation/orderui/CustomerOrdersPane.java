@@ -126,7 +126,7 @@ public class CustomerOrdersPane extends VBox {
 		});
 		
 		radioBox = new AnchorPane();
-		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton);
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
 		
 		AnchorPane.setLeftAnchor(allButton, 50.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
@@ -140,6 +140,8 @@ public class CustomerOrdersPane extends VBox {
 		AnchorPane.setTopAnchor(revokedButton, 30.0);
 		AnchorPane.setLeftAnchor(abnormalButton, 635.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
+		AnchorPane.setLeftAnchor(leftButton, 755.0);
+		AnchorPane.setTopAnchor(leftButton, 30.0);
 	}
 
 	private void buildOrderBox(List<OrderVO> orderList) {
