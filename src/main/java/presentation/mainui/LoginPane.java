@@ -40,7 +40,7 @@ public class LoginPane extends AnchorPane {
 
 		registerButton = new Button("现在注册一个");
 		registerButton.setId("registerbutton");
-		hint = new Label("有 Aipapa ID 吗?");
+		hint = new Label("有 ipapa ID 吗?");
 
 		registerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			Dialog<Integer> registerDialog = new RegisterDialog();
@@ -82,84 +82,58 @@ public class LoginPane extends AnchorPane {
 
 		loginButton.setAlignment(Pos.CENTER_RIGHT);
 
-		loginButton.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		if (userIDTextField.getText() != null & passwordField.getText() != null) {
+			userIDTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+				@Override
+				public void handle(KeyEvent event) {
+					if (event.getCode().equals(KeyCode.ENTER)) {
+						try {
+							login();
+						} catch (NumberFormatException | RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+				}
+			});
+
+			passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+				@Override
+				public void handle(KeyEvent event) {
+					if (event.getCode().equals(KeyCode.ENTER)) {
+						try {
+							login();
+						} catch (NumberFormatException | RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+				}
+			});
+		}
+
+		userIDTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.ENTER) {
-					try {
-						String res = BLFactory.getInstance().getUserBLService()
-								.login(Integer.parseInt(userIDTextField.getText()), passwordField.getText());
-						switch (res) {
-						case ("NOT_FOUND"):
-							Stage popup1 = new Stage();
-							popup1.setAlwaysOnTop(true);
-							popup1.initModality(Modality.APPLICATION_MODAL);
-							Button closeButton1 = new Button("确定");
-							closeButton1.setOnAction(e -> {
-								popup1.close();
-							});
-							VBox root1 = new VBox();
-							root1.setAlignment(Pos.BASELINE_CENTER);
-							root1.setSpacing(20);
-							root1.getChildren().addAll(new Label("账号不存在！"), closeButton1);
-							Scene scene1 = new Scene(root1, 200, 90);
-							popup1.setScene(scene1);
-							popup1.setTitle("提示");
-							popup1.show();
-							break;
-						case ("has logined"):
-							Stage popup2 = new Stage();
-							popup2.setAlwaysOnTop(true);
-							popup2.initModality(Modality.APPLICATION_MODAL);
-							Button closeButton2 = new Button("确定");
-							closeButton2.setOnAction(e -> {
-								popup2.close();
-							});
-							VBox root2 = new VBox();
-							root2.setAlignment(Pos.BASELINE_CENTER);
-							root2.setSpacing(20);
-							root2.getChildren().addAll(new Label("账号已在其他设备登录！"), closeButton2);
-							Scene scene2 = new Scene(root2, 200, 90);
-							popup2.setScene(scene2);
-							popup2.setTitle("提示");
-							popup2.show();
-							break;
-						case ("password wrong"):
-							Stage popup3 = new Stage();
-							popup3.setAlwaysOnTop(true);
-							popup3.initModality(Modality.APPLICATION_MODAL);
-							Button closeButton3 = new Button("确定");
-							closeButton3.setOnAction(e -> {
-								popup3.close();
-							});
-							VBox root3 = new VBox();
-							root3.setAlignment(Pos.BASELINE_CENTER);
-							root3.setSpacing(20);
-							root3.getChildren().addAll(new Label("密码错误！"), closeButton3);
-							Scene scene3 = new Scene(root3, 200, 90);
-							popup3.setScene(scene3);
-							popup3.setTitle("提示");
-							popup3.show();
-							break;
-						case ("customer"):
-							TheMainFrame.jumpTo(new CustomerMainPane(Integer.valueOf(userIDTextField.getText())));
-							break;
-						case ("hotelWorker"):
-							TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
-							break;
-						case ("webMarketer"):
-							TheMainFrame.jumpTo(new WebMarketerMainPane());
-							break;
-						case ("webManager"):
-							TheMainFrame.jumpTo(new WebManagerMainPane());
-							break;
-						}
+				if (event.getCode().equals(KeyCode.DOWN)) {
+					passwordField.requestFocus();
+					;
+				}
 
-					} catch (NumberFormatException | RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			}
+		});
+
+		passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode().equals(KeyCode.UP)) {
+					userIDTextField.requestFocus();
 				}
 
 			}
@@ -168,82 +142,86 @@ public class LoginPane extends AnchorPane {
 		loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 
 			try {
-				String res = BLFactory.getInstance().getUserBLService()
-						.login(Integer.parseInt(userIDTextField.getText()), passwordField.getText());
-				switch (res) {
-				case ("NOT_FOUND"):
-					Stage popup1 = new Stage();
-					popup1.setAlwaysOnTop(true);
-					popup1.initModality(Modality.APPLICATION_MODAL);
-					Button closeButton1 = new Button("确定");
-					closeButton1.setOnAction(e -> {
-						popup1.close();
-					});
-					VBox root1 = new VBox();
-					root1.setAlignment(Pos.BASELINE_CENTER);
-					root1.setSpacing(20);
-					root1.getChildren().addAll(new Label("账号不存在！"), closeButton1);
-					Scene scene1 = new Scene(root1, 200, 90);
-					popup1.setScene(scene1);
-					popup1.setTitle("提示");
-					popup1.show();
-					break;
-				case ("has logined"):
-					Stage popup2 = new Stage();
-					popup2.setAlwaysOnTop(true);
-					popup2.initModality(Modality.APPLICATION_MODAL);
-					Button closeButton2 = new Button("确定");
-					closeButton2.setOnAction(e -> {
-						popup2.close();
-					});
-					VBox root2 = new VBox();
-					root2.setAlignment(Pos.BASELINE_CENTER);
-					root2.setSpacing(20);
-					root2.getChildren().addAll(new Label("账号已在其他设备登录！"), closeButton2);
-					Scene scene2 = new Scene(root2, 200, 90);
-					popup2.setScene(scene2);
-					popup2.setTitle("提示");
-					popup2.show();
-					break;
-				case ("password wrong"):
-					Stage popup3 = new Stage();
-					popup3.setAlwaysOnTop(true);
-					popup3.initModality(Modality.APPLICATION_MODAL);
-					Button closeButton3 = new Button("确定");
-					closeButton3.setOnAction(e -> {
-						popup3.close();
-					});
-					VBox root3 = new VBox();
-					root3.setAlignment(Pos.BASELINE_CENTER);
-					root3.setSpacing(20);
-					root3.getChildren().addAll(new Label("密码错误！"), closeButton3);
-					Scene scene3 = new Scene(root3, 200, 90);
-					popup3.setScene(scene3);
-					popup3.setTitle("提示");
-					popup3.show();
-					break;
-				case ("customer"):
-					TheMainFrame.jumpTo(new CustomerMainPane(Integer.valueOf(userIDTextField.getText())));
-					break;
-				case ("hotelWorker"):
-					TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
-					break;
-				case ("webMarketer"):
-					TheMainFrame.jumpTo(new WebMarketerMainPane());
-					break;
-				case ("webManager"):
-					TheMainFrame.jumpTo(new WebManagerMainPane());
-					break;
-				}
-
+				login();
 			} catch (NumberFormatException | RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		});
 
 		this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());
+	}
+
+	private void login() throws NumberFormatException, RemoteException {
+
+		String res = BLFactory.getInstance().getUserBLService().login(Integer.parseInt(userIDTextField.getText()),
+				passwordField.getText());
+		switch (res) {
+		case ("NOT_FOUND"):
+			Stage popup1 = new Stage();
+			popup1.setAlwaysOnTop(true);
+			popup1.initModality(Modality.APPLICATION_MODAL);
+			Button closeButton1 = new Button("确定");
+			closeButton1.setOnAction(e -> {
+				popup1.close();
+			});
+			VBox root1 = new VBox();
+			root1.setAlignment(Pos.BASELINE_CENTER);
+			root1.setSpacing(20);
+			root1.getChildren().addAll(new Label("账号不存在！"), closeButton1);
+			Scene scene1 = new Scene(root1, 200, 90);
+			popup1.setScene(scene1);
+			popup1.setTitle("提示");
+			popup1.show();
+			break;
+		case ("has logined"):
+			Stage popup2 = new Stage();
+			popup2.setAlwaysOnTop(true);
+			popup2.initModality(Modality.APPLICATION_MODAL);
+			Button closeButton2 = new Button("确定");
+			closeButton2.setOnAction(e -> {
+				popup2.close();
+			});
+			VBox root2 = new VBox();
+			root2.setAlignment(Pos.BASELINE_CENTER);
+			root2.setSpacing(20);
+			root2.getChildren().addAll(new Label("账号已在其他设备登录！"), closeButton2);
+			Scene scene2 = new Scene(root2, 200, 90);
+			popup2.setScene(scene2);
+			popup2.setTitle("提示");
+			popup2.show();
+			break;
+		case ("password wrong"):
+			Stage popup3 = new Stage();
+			popup3.setAlwaysOnTop(true);
+			popup3.initModality(Modality.APPLICATION_MODAL);
+			Button closeButton3 = new Button("确定");
+			closeButton3.setOnAction(e -> {
+				popup3.close();
+			});
+			VBox root3 = new VBox();
+			root3.setAlignment(Pos.BASELINE_CENTER);
+			root3.setSpacing(20);
+			root3.getChildren().addAll(new Label("密码错误！"), closeButton3);
+			Scene scene3 = new Scene(root3, 200, 90);
+			popup3.setScene(scene3);
+			popup3.setTitle("提示");
+			popup3.show();
+			break;
+		case ("customer"):
+			TheMainFrame.jumpTo(new CustomerMainPane(Integer.valueOf(userIDTextField.getText())));
+			break;
+		case ("hotelWorker"):
+			TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
+			break;
+		case ("webMarketer"):
+			TheMainFrame.jumpTo(new WebMarketerMainPane());
+			break;
+		case ("webManager"):
+			TheMainFrame.jumpTo(new WebManagerMainPane());
+			break;
+
+		}
 	}
 
 }
