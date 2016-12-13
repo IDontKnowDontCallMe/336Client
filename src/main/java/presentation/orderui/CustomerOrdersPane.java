@@ -51,10 +51,8 @@ public class CustomerOrdersPane extends VBox {
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
 		orderBox.setTranslateX(150.0);
-		orderBox.setTranslateY(15.0);
 		
 		radioBox.setId("radio");
-		orderBox.setId("order");
 
 		
 		this.getChildren().addAll(radioBox, listPane);
@@ -128,17 +126,17 @@ public class CustomerOrdersPane extends VBox {
 		radioBox = new AnchorPane();
 		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
 		
-		AnchorPane.setLeftAnchor(allButton, 50.0);
+		AnchorPane.setLeftAnchor(allButton, 53.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
-		AnchorPane.setLeftAnchor(unexecutedButton, 160.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 165.0);
 		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
 		AnchorPane.setLeftAnchor(executedButton, 290.0);
 		AnchorPane.setTopAnchor(executedButton, 30.0);
-		AnchorPane.setLeftAnchor(leftButton, 475.0);
+		AnchorPane.setLeftAnchor(leftButton, 455.0);
 		AnchorPane.setTopAnchor(leftButton, 30.0);
-		AnchorPane.setLeftAnchor(revokedButton, 655.0);
+		AnchorPane.setLeftAnchor(revokedButton, 620.0);
 		AnchorPane.setTopAnchor(revokedButton, 30.0);
-		AnchorPane.setLeftAnchor(abnormalButton, 785.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
 		
 		AnchorPane.setRightAnchor(backButton, 20.0);

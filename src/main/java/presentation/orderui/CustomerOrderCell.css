@@ -2,9 +2,9 @@
 /* The main scrollbar **track** CSS class  */
 	
     
-    #grid{
-    		-fx-background-image:url(order.png);
-    	-fx-min-height:200;
+    #pane{
+    		-fx-background-image:url(ordertest.png);
+    	-fx-min-height:170;
     	-fx-min-width:800;
   -fx-padding: 0;
    -fx-border-style: solid;
@@ -23,7 +23,7 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   -fx-text-fill:white;
    }
    .label{
@@ -49,5 +49,50 @@
   	
     -fx-opacity:3.0 ; 
     }
+    
+    #hotelname{
+    	-fx-min-width:260;
+    	-fx-min-height:42;
+    	-fx-font-size: 24px;
+    }
+    #state{
+    	-fx-min-width:133;
+    	-fx-min-height:35;
+    	-fx-font-size: 16px;
+    }
+    #orderid{
+    	-fx-min-width:400;
+    	-fx-min-height:25;
+    	-fx-font-size: 16px;
+    }
+    #roomname,#children,#num{
+    	-fx-min-width:60;
+    	-fx-min-height:24;
+    	-fx-font-size: 16px;
+    	-fx-alignment:center;
+    }
+    #total{
+    	-fx-min-width:68;
+    	-fx-min-height:40;
+    	-fx-font-size: 22px;
+    	-fx-alignment:center;
+    }
+    #checkintime,#checkouttime{
+    	-fx-min-width:395;
+    	-fx-min-height:28;
+    	-fx-font-size: 18px;
+    }
+    #revoke{
+    	-fx-min-width:68;
+    	-fx-min-height:40;
+    	-fx-font-size:16px;
+    }
+    
+    
+    
+    
+    
+    
+    
 	
 	
