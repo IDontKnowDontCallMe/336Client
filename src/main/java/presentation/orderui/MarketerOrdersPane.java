@@ -14,7 +14,6 @@ import vo.OrderVO;
 
 public class MarketerOrdersPane extends VBox {
 
-	// 以后用工厂模式替换之
 	private HBox titleBox;
 	private Text title;
 	private Button backButton;
@@ -22,8 +21,7 @@ public class MarketerOrdersPane extends VBox {
 	private VBox orderBox;
 
 	public MarketerOrdersPane() throws RemoteException {
-		initRadioButton();
-		// OrderController controller = new MockOrderController();
+		initTitle();
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getAbnormalOrdersOfToday();
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
@@ -33,7 +31,7 @@ public class MarketerOrdersPane extends VBox {
 		this.setPrefWidth(500);
 	}
 
-	private void initRadioButton() {
+	private void initTitle() {
 		title = new Text("处理异常订单");
 		backButton = new Button("返回");
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
