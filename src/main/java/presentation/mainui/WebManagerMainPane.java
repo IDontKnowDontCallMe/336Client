@@ -1,19 +1,18 @@
 package presentation.mainui;
 
 import java.rmi.RemoteException;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.userui.CustomerInfoPanel;
 import presentation.userui.HotelPanel;
 import presentation.userui.WebMarketerPanel;
 
-public class WebManagerMainPane extends VBox {
+public class WebManagerMainPane extends AnchorPane {
 
 	public WebManagerMainPane() {
 		super();
@@ -66,6 +65,16 @@ public class WebManagerMainPane extends VBox {
 		
 
 		this.getChildren().addAll(customerManageButton, hotelManageButton, webMarketerManageButton, logoutButton);
+		
+		AnchorPane.setLeftAnchor(customerManageButton, 124.0);
+		AnchorPane.setTopAnchor(customerManageButton, 250.0);
+		AnchorPane.setLeftAnchor(hotelManageButton, 450.0);
+		AnchorPane.setTopAnchor(hotelManageButton, 250.0);
+		AnchorPane.setLeftAnchor(webMarketerManageButton, 776.0);
+		AnchorPane.setTopAnchor(webMarketerManageButton, 250.0);
+		AnchorPane.setLeftAnchor(logoutButton, 985.0);
+		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
 				TheMainFrame.jumpTo(new CustomerInfoPanel());
@@ -93,6 +102,8 @@ public class WebManagerMainPane extends VBox {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
+
+		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());
 
 	}
 }
