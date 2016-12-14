@@ -40,7 +40,7 @@ public class LoginPane extends AnchorPane {
 
 		registerButton = new Button("现在注册一个");
 		registerButton.setId("registerbutton");
-		hint = new Label("有 ipapa ID 吗?");
+		hint = new Label("有 Aipapa ID 吗?");
 
 		registerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			Dialog<Integer> registerDialog = new RegisterDialog();
@@ -82,47 +82,22 @@ public class LoginPane extends AnchorPane {
 
 		loginButton.setAlignment(Pos.CENTER_RIGHT);
 
-		if (userIDTextField.getText() != null & passwordField.getText() != null) {
-			userIDTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-				@Override
-				public void handle(KeyEvent event) {
-					if (event.getCode().equals(KeyCode.ENTER)) {
-						try {
-							login();
-						} catch (NumberFormatException | RemoteException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-				}
-			});
-
-			passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-				@Override
-				public void handle(KeyEvent event) {
-					if (event.getCode().equals(KeyCode.ENTER)) {
-						try {
-							login();
-						} catch (NumberFormatException | RemoteException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-				}
-			});
-		}
-
 		userIDTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.DOWN)) {
 					passwordField.requestFocus();
-					;
+
+				}
+				if (event.getCode().equals(KeyCode.ENTER) && userIDTextField.getText() != ""
+						&& passwordField.getText() != "") {
+					try {
+						login();
+					} catch (NumberFormatException | RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 			}
@@ -134,6 +109,15 @@ public class LoginPane extends AnchorPane {
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.UP)) {
 					userIDTextField.requestFocus();
+				}
+				if (event.getCode().equals(KeyCode.ENTER) && userIDTextField.getText() != ""
+						&& passwordField.getText() != "") {
+					try {
+						login();
+					} catch (NumberFormatException | RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 			}
