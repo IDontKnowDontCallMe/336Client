@@ -272,7 +272,8 @@ public class WorkerHotelInfoPane extends GridPane {
 						introductionText.setText(introductionTextField.getText());
 						serviceText.setText(serviceTextField.getText());
 						businessCircleText.setText(businessCircleBox.getValue().toString());
-						scoreText.setText(String.valueOf(scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1));
+						scoreText.setText(
+								String.valueOf(scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1) + "星");
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();
