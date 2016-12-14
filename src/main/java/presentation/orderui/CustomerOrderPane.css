@@ -8,7 +8,6 @@
 	  .scroll-bar:horizontal .track,
 	 .scroll-bar:vertical .track{
 		-fx-background-color: rgb(45,161,250);
-	    -fx-border-color:transparent;
 	    -fx-background-radius: 0em;
 	    -fx-border-radius:2em;
 	}
@@ -89,8 +88,10 @@
     }
     
     .scroll-pane{
-    	-fx-border-width:0;
-    }
+		-fx-border-color:rgb(45,161,250) ;
+		-fx-border-style:solid;
+		-fx-border-width:1px;
+	}
     
     .scroll-pane > .viewport {
    -fx-background-image: url(bluebg.png);
