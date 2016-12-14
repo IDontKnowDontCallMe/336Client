@@ -64,7 +64,7 @@ public class CustomerInfoPane extends GridPane {
 		this.add(infoPane, 0, 1, 1, 1);
 		this.add(creditPane, 0, 2, 2, 1);
 
-		 this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	private void initInfoPane() throws RemoteException {
@@ -218,7 +218,7 @@ public class CustomerInfoPane extends GridPane {
 
 		public CreditCell(CreditVO vo) {
 			producingTime = new SimpleStringProperty(vo.producingDateTime.toString());
-			orderID = new SimpleStringProperty(Integer.parseInt(vo.orderID) == -1 ? "无" : String.valueOf(vo.orderID));
+			orderID = new SimpleStringProperty(vo.orderID);
 			action = new SimpleStringProperty(String.valueOf(vo.action));
 			creditDelta = new SimpleStringProperty(String.valueOf(vo.creditDelta));
 			creditResult = new SimpleStringProperty(String.valueOf(vo.creditResult));

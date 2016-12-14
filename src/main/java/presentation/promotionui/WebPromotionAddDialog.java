@@ -20,7 +20,7 @@ public class WebPromotionAddDialog extends Dialog {
 
 	WebPromotionVO webPromotionVO;
 	private Text webPromotionTypeChoiceText;
-	private ComboBox webPromotionTypeChoiceBox;
+	private ComboBox<String> webPromotionTypeChoiceBox;
 
 	final int COLUMN_COUNT = 10;
 	final int YEAR_COLUMN_COUNT = 3;
@@ -36,8 +36,8 @@ public class WebPromotionAddDialog extends Dialog {
 	private Label endTimeLabel;
 	private Label businessCircleLabel;
 	private Label discountLabel;
-	private ComboBox cityBox;
-	private ComboBox businessCircleBox;
+	private ComboBox<String> cityBox;
+	private ComboBox<String> businessCircleBox;
 
 	private TextField discountTextField;
 	private DatePicker startDatePicker;
@@ -74,16 +74,21 @@ public class WebPromotionAddDialog extends Dialog {
 		ButtonType cancel = new ButtonType("取消", ButtonData.CANCEL_CLOSE);
 		this.getDialogPane().getButtonTypes().addAll(ok, cancel);
 
+		discountLabel = new Label();
+
 		webPromotionTypeChoiceBox.getSelectionModel().selectedIndexProperty()
 				.addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
 					switch (new_val.intValue()) {
 					case (0):
 						promotionBox.getChildren().clear();
 						showTimePromotionBox();
+						discountLabel.setText("输入折扣: ");
 						break;
 					case (1):
 						promotionBox.getChildren().clear();
 						showBusinessCirclePromotionBox();
+						discountLabel.setText("每升一级在该商圈折扣减少: ");
+
 						break;
 					}
 				});
@@ -124,7 +129,7 @@ public class WebPromotionAddDialog extends Dialog {
 	}
 
 	public HBox showDiscountBox() {
-		discountLabel = new Label("输入折扣: ");
+
 		discountTextField = new TextField();
 		discountTextField.setPrefColumnCount(COLUMN_COUNT);
 		discountTextField.setTooltip(new Tooltip("输入不大于1的小数"));
