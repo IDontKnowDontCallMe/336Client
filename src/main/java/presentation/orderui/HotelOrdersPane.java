@@ -46,7 +46,7 @@ public class HotelOrdersPane extends VBox {
 
 		radioBox.setId("radio");
 
-		this.getChildren().addAll(radioBox, backButton, listPane);
+		this.getChildren().addAll(radioBox,listPane);
 		this.setPrefWidth(500);
 		
 		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
@@ -58,22 +58,28 @@ public class HotelOrdersPane extends VBox {
 		allButton = new RadioButton("全部订单");
 		allButton.setUserData("全部订单");
 		allButton.setSelected(true);
+		allButton.setId("all");
 		allButton.setToggleGroup(toggleGroup);
 		unexecutedButton = new RadioButton("未执行订单");
 		unexecutedButton.setUserData("正常");
 		unexecutedButton.setToggleGroup(toggleGroup);
+		unexecutedButton.setId("all");
 		executedButton = new RadioButton("已执行未离店订单");
 		executedButton.setUserData("已执行未离店");
 		executedButton.setToggleGroup(toggleGroup);
+		executedButton.setId("all");
 		leftButton = new RadioButton("已执行已离店订单");
 		leftButton.setUserData("已执行已离店");
 		leftButton.setToggleGroup(toggleGroup);
+		leftButton.setId("all");
 		revokedButton = new RadioButton("已撤销订单");
 		revokedButton.setUserData("已撤销");
 		revokedButton.setToggleGroup(toggleGroup);
+		revokedButton.setId("all");
 		abnormalButton = new RadioButton("异常订单");
 		abnormalButton.setUserData("异常");
 		abnormalButton.setToggleGroup(toggleGroup);
+		abnormalButton.setId("all");
 
 		toggleGroup.selectedToggleProperty()
 				.addListener((ObservableValue<? extends Toggle> obvalue, Toggle oldToggle, Toggle newToggle) -> {
@@ -98,6 +104,7 @@ public class HotelOrdersPane extends VBox {
 				});
 
 		backButton = new Button("返回");
+		backButton.setId("back");
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
@@ -122,7 +129,6 @@ public class HotelOrdersPane extends VBox {
 		AnchorPane.setRightAnchor(backButton, 20.0);
 		AnchorPane.setTopAnchor(backButton, 10.0);
 
-		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 	}
 
 	private void buildOrderBox(List<OrderVO> orderList) throws RemoteException {
