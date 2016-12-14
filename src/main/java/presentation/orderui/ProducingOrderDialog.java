@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
@@ -41,8 +42,8 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 	List<RoomVO> roomList;
 
 	private GridPane gridPane;
-	private ChoiceBox<String> roomTypeChoiceBox;
-	private ChoiceBox<LocalTime> timeChoiceBox;
+	private ComboBox<String> roomTypeChoiceBox;
+	private ComboBox<LocalTime> timeChoiceBox;
 	private DatePicker checkInDatePicker;
 	private DatePicker checkOutDatePicker;
 	private TextField numTextField;
@@ -73,7 +74,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 	private void initUI(int customerID, int roomIndex) throws RemoteException {
 		gridPane = new GridPane();
 
-		roomTypeChoiceBox = new ChoiceBox<String>();
+		roomTypeChoiceBox = new ComboBox<String>();
 		for (RoomVO vo : roomList) {
 			roomTypeChoiceBox.getItems().add(vo.roomName);
 		}
@@ -213,7 +214,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		gridPane.add(childrenCheckBox, 0, 4, 1, 1);
 
 		gridPane.add(new Text("选择最晚到店时间"), 0, 5, 1, 1);
-		timeChoiceBox = new ChoiceBox();
+		timeChoiceBox = new ComboBox();
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(6));
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(7));
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(8));

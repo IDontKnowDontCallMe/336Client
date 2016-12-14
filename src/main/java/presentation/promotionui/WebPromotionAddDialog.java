@@ -20,7 +20,7 @@ public class WebPromotionAddDialog extends Dialog {
 
 	WebPromotionVO webPromotionVO;
 	private Text webPromotionTypeChoiceText;
-	private ChoiceBox webPromotionTypeChoiceBox;
+	private ComboBox webPromotionTypeChoiceBox;
 
 	final int COLUMN_COUNT = 10;
 	final int YEAR_COLUMN_COUNT = 3;
@@ -36,8 +36,8 @@ public class WebPromotionAddDialog extends Dialog {
 	private Label endTimeLabel;
 	private Label businessCircleLabel;
 	private Label discountLabel;
-	private ChoiceBox cityBox;
-	private ChoiceBox businessCircleBox;
+	private ComboBox cityBox;
+	private ComboBox businessCircleBox;
 
 	private TextField discountTextField;
 	private DatePicker startDatePicker;
@@ -57,7 +57,7 @@ public class WebPromotionAddDialog extends Dialog {
 
 		webPromotionTypeChoiceText = new Text("请选择新增网站促销策略类型: ");
 		ObservableList<String> webPromotionTypeList = FXCollections.observableArrayList("特定时间促销策略", "特定商圈促销策略");
-		ChoiceBox<String> webPromotionTypeChoiceBox = new ChoiceBox<>(webPromotionTypeList);
+		webPromotionTypeChoiceBox = new ComboBox<String>(webPromotionTypeList);
 
 		promotionBox = new VBox();
 		promotionBox.setSpacing(BOX_SPACING);
@@ -111,8 +111,8 @@ public class WebPromotionAddDialog extends Dialog {
 					if (discountTextField.getText() != null) {
 						discount = Double.valueOf(discountTextField.getText());
 					}
-					return new WebPromotionVO(webPromotionTypeChoiceBox.getValue(), startDate, endDate, cityName,
-							businessCircleName, discount);
+					return new WebPromotionVO(webPromotionTypeChoiceBox.getValue().toString(), startDate, endDate,
+							cityName, businessCircleName, discount);
 				} else {
 					return null;
 				}
@@ -176,11 +176,11 @@ public class WebPromotionAddDialog extends Dialog {
 	public void showBusinessCirclePromotionBox() {
 		businessCircleLabel = new Label("选择城市和商圈");
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
-		cityBox = new ChoiceBox<String>(cityList);
+		cityBox = new ComboBox<String>(cityList);
 		cityBox.getSelectionModel().select(0);
 
 		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
-		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox = new ComboBox<String>(businessCircleList);
 		businessCircleBox.getSelectionModel().select(0);
 
 		paramBox = new HBox();

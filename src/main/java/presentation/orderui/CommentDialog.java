@@ -2,13 +2,13 @@ package presentation.orderui;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -16,7 +16,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.CommentVO;
-import vo.HotelVO;
 import vo.OrderVO;
 
 public class CommentDialog extends Dialog {
@@ -35,7 +34,7 @@ public class CommentDialog extends Dialog {
 		gridPane.add(new Text("评分"), 0, 0, 1, 1);
 
 		ObservableList<Integer> scoreList = FXCollections.observableArrayList(1, 2, 3, 4, 5);
-		ChoiceBox<Integer> scoreBox = new ChoiceBox<>(scoreList);
+		ComboBox<Integer> scoreBox = new ComboBox<>(scoreList);
 
 		gridPane.add(scoreBox, 1, 0, 1, 1);
 		gridPane.add(new Text("评价"), 0, 1, 1, 1);

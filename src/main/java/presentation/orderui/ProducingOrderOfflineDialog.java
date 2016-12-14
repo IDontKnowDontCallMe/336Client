@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
@@ -39,7 +40,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 	List<RoomVO> roomList;
 
 	private GridPane gridPane;
-	private ChoiceBox<String> roomTypeChoiceBox;
+	private ComboBox<String> roomTypeChoiceBox;
 	private DatePicker checkInDatePicker;
 	private DatePicker checkOutDatePicker;
 	private TextField numTextField;
@@ -73,7 +74,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 
 		List<RoomVO> roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 
-		roomTypeChoiceBox = new ChoiceBox<String>();
+		roomTypeChoiceBox = new ComboBox<String>();
 		for (RoomVO vo : roomList) {
 			roomTypeChoiceBox.getItems().add(vo.roomName);
 		}

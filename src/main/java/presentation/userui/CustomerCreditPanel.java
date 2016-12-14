@@ -21,8 +21,10 @@ public class CustomerCreditPanel extends VBox {
 	private Text title;
 	private Button backButton;
 
+	private List<CustomerVO> customerList;
+
 	public CustomerCreditPanel() throws RemoteException {
-		List<CustomerVO> customerList = BLFactory.getInstance().getUserBLService().getCustomerList();
+		customerList = BLFactory.getInstance().getUserBLService().getCustomerList();
 
 		customerBox = new VBox();
 		customerBox.setSpacing(15);

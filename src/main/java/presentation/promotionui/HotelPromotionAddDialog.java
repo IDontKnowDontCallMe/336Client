@@ -18,8 +18,7 @@ import vo.HotelPromotionVO;
 
 public class HotelPromotionAddDialog extends Dialog {
 
-	private HotelPromotionVO hotelPromotionVO;
-	private ChoiceBox hotelPromotionTypeChoiceBox;
+	private ComboBox<String> hotelPromotionTypeChoiceBox;
 
 	final int COLUMN_COUNT = 10;
 	final int YEAR_COLUMN_COUNT = 3;
@@ -56,7 +55,7 @@ public class HotelPromotionAddDialog extends Dialog {
 
 		ObservableList<String> hotelPromotionTypeList = FXCollections.observableArrayList("预订多间促销策略", "特定时间促销策略",
 				"合作企业促销策略", "客户生日促销策略");
-		ChoiceBox<String> hotelPromotionTypeChoiceBox = new ChoiceBox<>(hotelPromotionTypeList);
+		hotelPromotionTypeChoiceBox = new ComboBox<String>(hotelPromotionTypeList);
 
 		promotionBox = new VBox();
 		promotionBox.setSpacing(BOX_SPACING);
@@ -121,8 +120,8 @@ public class HotelPromotionAddDialog extends Dialog {
 					if (discountTextField.getText() != null) {
 						discount = Double.valueOf(discountTextField.getText());
 					}
-					return new HotelPromotionVO(hotelID, hotelPromotionTypeChoiceBox.getValue(), startDate, endDate,
-							companyName, minNum, discount);
+					return new HotelPromotionVO(hotelID, hotelPromotionTypeChoiceBox.getValue().toString(), startDate,
+							endDate, companyName, minNum, discount);
 				} else {
 					return null;
 				}

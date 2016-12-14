@@ -57,7 +57,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	private TextField addMaxNumOfPeopleTextField;
 	private TextField addPriceTextField;
 
-	private ChoiceBox<String> scoreChoiceBox;
+	private ComboBox<String> scoreChoiceBox;
 
 	HotelVO hotelVO;
 	List<RoomVO> roomList;
@@ -229,7 +229,7 @@ public class WorkerHotelInfoPane extends GridPane {
 				businessCircleBox.getSelectionModel().select(0);
 
 				ObservableList<String> scoreList = FXCollections.observableArrayList("1星", "2星", "3星", "4星", "5星");
-				scoreChoiceBox = new ChoiceBox<>(scoreList);
+				scoreChoiceBox = new ComboBox<>(scoreList);
 				scoreChoiceBox.getSelectionModel().select(hotelVO.score - 1);
 
 				infoPane.add(nameTextField, 1, 1, 1, 1);

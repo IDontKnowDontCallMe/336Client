@@ -4,18 +4,15 @@ import java.rmi.RemoteException;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import presentation.customerui.MockCustomerController;
 import vo.CustomerVO;
 
 public class CustomerInfoCell extends GridPane {
 
 	CustomerVO customerVO;
-	private int customerID;
 	private GridPane infoPane;
 	private Text nameText;
 	private Text phoneNumberText;
@@ -29,7 +26,6 @@ public class CustomerInfoCell extends GridPane {
 	public CustomerInfoCell(CustomerVO customerVO) {
 		super();
 		this.customerVO = customerVO;
-		customerID = customerVO.customerID;
 		infoPane = new GridPane();
 
 		// 这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气

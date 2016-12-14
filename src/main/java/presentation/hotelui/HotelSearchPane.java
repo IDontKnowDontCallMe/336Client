@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -128,19 +129,19 @@ public class HotelSearchPane extends VBox {
 		gridPane.add(new HBox(subButton, numTextField, addButton), 4, 1, 1, 1);
 
 		ObservableList<String> roomTypeList = FXCollections.observableArrayList("不限", "单人间(1人)", "双人房(2人)", "三人房(3人)");
-		ChoiceBox<String> roomTypeChoiceBox = new ChoiceBox<>(roomTypeList);
+		ComboBox<String> roomTypeChoiceBox = new ComboBox<>(roomTypeList);
 		roomTypeChoiceBox.getSelectionModel().select(0);
 		ObservableList<String> priceIntervalList = FXCollections.observableArrayList("不限", "0 - 150 ¥", "151 - 300 ¥",
 				"301 - 450 ¥", "451 - 600 ¥", "601 ¥ 以上");
-		ChoiceBox<String> priceIntervalChoiceBox = new ChoiceBox<>(priceIntervalList);
+		ComboBox<String> priceIntervalChoiceBox = new ComboBox<>(priceIntervalList);
 		priceIntervalChoiceBox.getSelectionModel().select(0);
 
 		ObservableList<String> scoreList = FXCollections.observableArrayList("不限", "2星以上", "3星以上", "4星以上", "5星");
-		ChoiceBox<String> scoreChoiceBox = new ChoiceBox<>(scoreList);
+		ComboBox<String> scoreChoiceBox = new ComboBox<>(scoreList);
 		scoreChoiceBox.getSelectionModel().select(0);
 
 		ObservableList<String> commentScoreList = FXCollections.observableArrayList("不限", "2分以上", "3分以上", "4分以上");
-		ChoiceBox<String> commentScoreChoiceBox = new ChoiceBox<>(commentScoreList);
+		ComboBox<String> commentScoreChoiceBox = new ComboBox<>(commentScoreList);
 		commentScoreChoiceBox.getSelectionModel().select(0);
 
 		CheckBox isInteractiveCheckBox = new CheckBox("是联合搜索条件");

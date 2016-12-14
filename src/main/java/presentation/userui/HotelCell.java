@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import presentation.hotelui.MockHotelController;
 import vo.HotelVO;
 
 public class HotelCell extends GridPane {

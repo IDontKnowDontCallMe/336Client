@@ -15,23 +15,23 @@ public class CustomerOrderCell extends Pane {
 
 	OrderVO orderVO;
 
-	Label hotelName;
-	Label roomName;
-	Label checkInTime;
-	Label checkOutTime;
-	Label num;
-	Label children;
-	Label total;
-	Label state;
-	Label revoke;
-	Label orderID;
-	Button button;
+	private Label hotelName;
+	private Label roomName;
+	private Label checkInTime;
+	private Label checkOutTime;
+	private Label num;
+	private Label children;
+	private Label total;
+	private Label state;
+	private Label revoke;
+	private Label orderID;
+	private Button button;
 
 	public CustomerOrderCell(OrderVO orderVO) {
 		super();
 		this.orderVO = orderVO;
 		this.setId("pane");
-		orderID = new Label("订单编号   "+Integer.toString(orderVO.orderID));
+		orderID = new Label("订单编号   " + Integer.toString(orderVO.orderID));
 		this.getChildren().add(orderID);
 		orderID.setLayoutX(12.0);
 		orderID.setLayoutY(3.0);
@@ -77,7 +77,6 @@ public class CustomerOrderCell extends Pane {
 		children.setLayoutY(120.0);
 		children.setId("children");
 
-
 		if (orderVO.orderState.equals("正常")) {
 			button = new Button("撤销");
 			button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
@@ -106,7 +105,7 @@ public class CustomerOrderCell extends Pane {
 								System.out.println("comment");
 								this.getChildren().remove(button);
 							}
-							
+
 						}
 					} catch (RemoteException e1) {
 						e1.printStackTrace();
