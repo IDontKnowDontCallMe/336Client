@@ -16,10 +16,10 @@ import javafx.scene.layout.VBox;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
-public class HotelOrdersPane extends AnchorPane {
+public class HotelOrdersPane extends VBox {
 
 	private int hotelID;
-	private HBox radioBox;
+	private AnchorPane radioBox;
 	private ToggleGroup toggleGroup;
 	private RadioButton allButton;
 	private RadioButton unexecutedButton;
@@ -38,14 +38,19 @@ public class HotelOrdersPane extends AnchorPane {
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getHotelOrder(hotelID);
 
 		orderBox = new VBox();
-		orderBox.setSpacing(15);
+		orderBox.setSpacing(10);
 		buildOrderBox(orderList);
-		listPane = new ScrollPane(orderBox);
+		listPane = new ScrollPane();
+		listPane.setContent(orderBox);
 		orderBox.setTranslateX(150.0);
-		orderBox.setTranslateY(15.0);
 
-		this.getChildren().addAll(radioBox, backButton, listPane);
+		radioBox.setId("radio");
+
+		this.getChildren().addAll(radioBox,listPane);
 		this.setPrefWidth(500);
+		
+		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+
 	}
 
 	private void initRadioButton() {
@@ -53,22 +58,28 @@ public class HotelOrdersPane extends AnchorPane {
 		allButton = new RadioButton("全部订单");
 		allButton.setUserData("全部订单");
 		allButton.setSelected(true);
+		allButton.setId("all");
 		allButton.setToggleGroup(toggleGroup);
 		unexecutedButton = new RadioButton("未执行订单");
 		unexecutedButton.setUserData("正常");
 		unexecutedButton.setToggleGroup(toggleGroup);
+		unexecutedButton.setId("all");
 		executedButton = new RadioButton("已执行未离店订单");
 		executedButton.setUserData("已执行未离店");
 		executedButton.setToggleGroup(toggleGroup);
+		executedButton.setId("all");
 		leftButton = new RadioButton("已执行已离店订单");
 		leftButton.setUserData("已执行已离店");
 		leftButton.setToggleGroup(toggleGroup);
+		leftButton.setId("all");
 		revokedButton = new RadioButton("已撤销订单");
 		revokedButton.setUserData("已撤销");
 		revokedButton.setToggleGroup(toggleGroup);
+		revokedButton.setId("all");
 		abnormalButton = new RadioButton("异常订单");
 		abnormalButton.setUserData("异常");
 		abnormalButton.setToggleGroup(toggleGroup);
+		abnormalButton.setId("all");
 
 		toggleGroup.selectedToggleProperty()
 				.addListener((ObservableValue<? extends Toggle> obvalue, Toggle oldToggle, Toggle newToggle) -> {
@@ -93,34 +104,31 @@ public class HotelOrdersPane extends AnchorPane {
 				});
 
 		backButton = new Button("返回");
+		backButton.setId("back");
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
 
 		
-		radioBox = new HBox();
-		radioBox.setSpacing(10);
-		radioBox.setPrefWidth(500);
-		radioBox.getChildren().addAll(allButton, unexecutedButton, executedButton, leftButton, revokedButton,
-				abnormalButton, backButton);
-
-		AnchorPane.setLeftAnchor(allButton, 50.0);
+		radioBox = new AnchorPane();
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
+		
+		AnchorPane.setLeftAnchor(allButton, 53.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
-		AnchorPane.setLeftAnchor(unexecutedButton, 160.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 165.0);
 		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
 		AnchorPane.setLeftAnchor(executedButton, 290.0);
 		AnchorPane.setTopAnchor(executedButton, 30.0);
-		AnchorPane.setLeftAnchor(leftButton, 475.0);
+		AnchorPane.setLeftAnchor(leftButton, 455.0);
 		AnchorPane.setTopAnchor(leftButton, 30.0);
-		AnchorPane.setLeftAnchor(revokedButton, 655.0);
+		AnchorPane.setLeftAnchor(revokedButton, 620.0);
 		AnchorPane.setTopAnchor(revokedButton, 30.0);
-		AnchorPane.setLeftAnchor(abnormalButton, 785.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
-
+		
 		AnchorPane.setRightAnchor(backButton, 20.0);
 		AnchorPane.setTopAnchor(backButton, 10.0);
 
-		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 	}
 
 	private void buildOrderBox(List<OrderVO> orderList) throws RemoteException {

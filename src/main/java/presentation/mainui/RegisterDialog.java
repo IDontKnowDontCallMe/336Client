@@ -11,7 +11,6 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import vo.CustomerVO;
 
 public class RegisterDialog extends Dialog {
 
@@ -49,15 +48,20 @@ public class RegisterDialog extends Dialog {
 
 			@Override
 			public Integer call(ButtonType param) {
-				int ID = -1;
-				try {
-					ID = BLFactory.getInstance().getUserBLService().register(nameTextField.getText(),
-							phoneTextField.getText(), passwordTextField.getText());
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (param.getButtonData() == ButtonData.OK_DONE) {
+
+					int ID = -1;
+					try {
+						ID = BLFactory.getInstance().getUserBLService().register(nameTextField.getText(),
+								phoneTextField.getText(), passwordTextField.getText());
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return ID;
+				} else {
+					return null;
 				}
-				return ID;
 			}
 		};
 		this.setResultConverter(resultConverter);

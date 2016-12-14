@@ -11,7 +11,7 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  	-fx-font-family: "PingFang SC";
   -fx-text-fill:white;
    }
    .label{
@@ -85,7 +85,7 @@
 }
 
 #lb1,#lb2{
-	-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
+  	-fx-font-family: "PingFang SC";
 	-fx-font-size: 18px;
 }
 
@@ -99,7 +99,7 @@
   -fx-border-style: solid;
   -fx-border-width: 1px;
   -fx-border-color: #d4d4d4;
-  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  	-fx-font-family: "PingFang SC";
     }
     
     .text-input{

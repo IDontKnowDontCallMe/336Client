@@ -29,9 +29,8 @@ public class HotelOrderCell extends GridPane {
 	public HotelOrderCell(OrderVO orderVO) throws RemoteException {
 		super();
 		this.orderVO = orderVO;
-		
+		this.setId("gridp");
 		orderID = new Label(Integer.toString(orderVO.orderID));
-		
 		
 		customerNameText = new Text(orderVO.customerName);
 		this.add(customerNameText, 0, 0, 1, 1);
@@ -54,12 +53,14 @@ public class HotelOrderCell extends GridPane {
 
 		setButton(orderVO.orderState);
 		if (button != null) {
+			button.setId("btn");
 			this.add(button, 4, 2, 1, 1);
 		}
 
 		this.setHgap(10);
 		this.setVgap(20);
 		this.getStylesheets().add(getClass().getResource("HotelOrderCell.css").toExternalForm());
+
 	}
 
 	private void setButton(String state) throws RemoteException {
