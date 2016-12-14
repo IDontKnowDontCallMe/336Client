@@ -34,8 +34,8 @@ public class WebPromotionEditDialog extends Dialog {
 	private Label endTimeLabel;
 	private Label businessCircleLabel;
 	private Label discountLabel;
-	private ChoiceBox cityBox;
-	private ChoiceBox businessCircleBox;
+	private ComboBox<String> cityBox;
+	private ComboBox<String> businessCircleBox;
 
 	private TextField discountTextField;
 	private DatePicker startDatePicker;
@@ -112,7 +112,13 @@ public class WebPromotionEditDialog extends Dialog {
 	}
 
 	public void showDiscountBox() {
-		discountLabel = new Label("输入折扣: ");
+		discountLabel = new Label();
+		if (startDatePicker != null) {
+			discountLabel.setText("输入折扣: ");
+		}
+		if (businessCircleBox != null && cityBox != null) {
+			discountLabel.setText("会员每升一级在该商圈订酒店时折扣减少: ");
+		}
 		discountTextField = new TextField();
 		discountTextField.setPrefColumnCount(COLUMN_COUNT);
 		discountTextField.setTooltip(new Tooltip("输入不大于1的小数"));
@@ -169,11 +175,11 @@ public class WebPromotionEditDialog extends Dialog {
 	public void showBusinessCirclePromotionBox() {
 		businessCircleLabel = new Label("选择城市和商圈");
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
-		cityBox = new ChoiceBox<String>(cityList);
+		cityBox = new ComboBox<String>(cityList);
 		cityBox.getSelectionModel().select(0);
 
 		ObservableList<String> businessCircleList = FXCollections.observableArrayList("栖霞区", "鼓楼区", "秦淮区");
-		businessCircleBox = new ChoiceBox<String>(businessCircleList);
+		businessCircleBox = new ComboBox<String>(businessCircleList);
 		int index = -1;
 		for (String s : businessCircleList) {
 			index++;
