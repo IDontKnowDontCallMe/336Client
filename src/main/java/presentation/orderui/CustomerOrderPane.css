@@ -54,7 +54,7 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  	-fx-font-family: "PingFang SC";
   -fx-text-fill:white;
    }
    .label{
@@ -103,8 +103,8 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  -fx-text-fill:white;
+    -fx-font-family:"PingFang SC";  
+    -fx-text-fill:white;
    }
     #backbutton.label{
    	-fx-text-fill:white;
@@ -137,7 +137,7 @@
     }
     
     .radio-button {
-    	-fx-font-family: "Helvetica Neue","Helvetica","Arial","PingFang SC","Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+  	-fx-font-family: "PingFang SC";
     	-fx-text-fill:white;
     	-fx-font-size:14px;
     	

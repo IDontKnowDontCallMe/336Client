@@ -30,6 +30,8 @@ public class MarketerOrdersPane extends VBox {
 		listPane = new ScrollPane(orderBox);
 		this.getChildren().addAll(titleBox, listPane);
 		this.setPrefWidth(500);
+		
+		this.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
 	}
 
 	private void initTitle() {

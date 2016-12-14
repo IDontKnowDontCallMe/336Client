@@ -47,6 +47,7 @@ public class MarketerOrderCell extends GridPane {
 
 		this.setHgap(10);
 		this.setVgap(20);
+		this.getStylesheets().add(getClass().getResource("MarketerOrderCell.css").toExternalForm());
 
 	}
 

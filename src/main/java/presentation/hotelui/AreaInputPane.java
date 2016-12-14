@@ -41,26 +41,26 @@ public class AreaInputPane extends AnchorPane {
 		businessCircleBox.getSelectionModel().select(0);
 
 		Label comfirm = new Label();
-		comfirm.setFont(Font.font(icon.getFamily(), 45));
+		comfirm.setFont(Font.font(icon.getFamily(), 46));
 		comfirm.setText(String.valueOf('\uf002'));
 		confirmButton = new Button("搜索", comfirm);
 		confirmButton.setWrapText(true);
 		confirmButton.setContentDisplay(ContentDisplay.TOP);
 		confirmButton.setId("comfirmButton");
-		confirmButton.setShape(new Circle(40));
-		confirmButton.setMinSize(80, 80);
-		confirmButton.setMaxSize(80, 80);
+		confirmButton.setShape(new Circle(42));
+		confirmButton.setMinSize(84, 84);
+		confirmButton.setMaxSize(84, 84);
 
 		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 45));
+		back.setFont(Font.font(icon.getFamily(), 46));
 		back.setText(String.valueOf('\uf112'));
 		backButton = new Button("返回", back);
 		backButton.setWrapText(true);
 		backButton.setContentDisplay(ContentDisplay.TOP);
 		backButton.setId("backButton");
-		backButton.setShape(new Circle(40));
-		backButton.setMinSize(80, 80);
-		backButton.setMaxSize(80, 80);
+		backButton.setShape(new Circle(42));
+		backButton.setMinSize(84, 84);
+		backButton.setMaxSize(84, 84);
 
 		Label chooseCity = new Label("请选择城市：");
 		chooseCity.setId("lb1");

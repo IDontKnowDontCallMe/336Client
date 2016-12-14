@@ -80,9 +80,9 @@ public class HotelWorkerMainPane extends AnchorPane {
 		logoutButton.setWrapText(true);
 		logoutButton.setContentDisplay(ContentDisplay.TOP);
 		logoutButton.setId("backButton");
-		logoutButton.setShape(new Circle(40));
-		logoutButton.setMinSize(80, 80);
-		logoutButton.setMaxSize(80, 80);
+		logoutButton.setShape(new Circle(42));
+		logoutButton.setMinSize(84, 84);
+		logoutButton.setMaxSize(84, 84);
 		
 		
 		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);

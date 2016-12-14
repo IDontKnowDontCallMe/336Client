@@ -109,15 +109,15 @@ public class CustomerOrdersPane extends VBox {
 				);
 		
 		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 27));
+		back.setFont(Font.font(icon.getFamily(), 28));
 		back.setText(String.valueOf('\uf112'));
 		backButton = new Button("返回", back);
 		backButton.setWrapText(true);
 		backButton.setContentDisplay(ContentDisplay.TOP);
 		backButton.setId("backButton");
-		backButton.setShape(new Circle(29));
-		backButton.setMinSize(58, 58);
-		backButton.setMaxSize(58, 58);
+		backButton.setShape(new Circle(31));
+		backButton.setMinSize(62, 62);
+		backButton.setMaxSize(62, 62);
 		
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED	, (event)->{
 			TheMainFrame.backTo();

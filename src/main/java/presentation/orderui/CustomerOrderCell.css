@@ -12,7 +12,7 @@
   -fx-border-color: #d4d4d4;
   -fx-border-radius: 1px;
   -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
-  	-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
+  	-fx-font-family: "PingFang SC";
 
     }
 
@@ -23,7 +23,7 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  	-fx-font-family: "PingFang SC";
   -fx-text-fill:white;
    }
    .label{
@@ -66,15 +66,16 @@
     	-fx-font-size: 16px;
     }
     #roomname,#children,#num{
-    	-fx-min-width:60;
+    	-fx-min-width:95;
     	-fx-min-height:24;
-    	-fx-font-size: 16px;
+    	-fx-font-size: 15px;
     	-fx-alignment:center;
     }
     #total{
-    	-fx-min-width:68;
+    	-fx-min-width:86;
+    	-fx-max-width:86;
+    	-fx-font-size:16px;
     	-fx-min-height:40;
-    	-fx-font-size: 22px;
     	-fx-alignment:center;
     }
     #checkintime,#checkouttime{

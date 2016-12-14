@@ -12,8 +12,7 @@
   -fx-border-color: #d4d4d4;
   -fx-border-radius: 1px;
   -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
-  	-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
-
+    -fx-font-family:"PingFang SC";
     }
 
 
@@ -23,8 +22,8 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  -fx-text-fill:white;
+    -fx-font-family:"PingFang SC"; 
+     -fx-text-fill:white;
    }
    .label{
    	-fx-text-fill:white;

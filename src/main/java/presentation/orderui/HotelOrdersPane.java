@@ -16,10 +16,10 @@ import javafx.scene.layout.VBox;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
-public class HotelOrdersPane extends AnchorPane {
+public class HotelOrdersPane extends VBox {
 
 	private int hotelID;
-	private HBox radioBox;
+	private AnchorPane radioBox;
 	private ToggleGroup toggleGroup;
 	private RadioButton allButton;
 	private RadioButton unexecutedButton;
@@ -38,14 +38,19 @@ public class HotelOrdersPane extends AnchorPane {
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getHotelOrder(hotelID);
 
 		orderBox = new VBox();
-		orderBox.setSpacing(15);
+		orderBox.setSpacing(10);
 		buildOrderBox(orderList);
-		listPane = new ScrollPane(orderBox);
+		listPane = new ScrollPane();
+		listPane.setContent(orderBox);
 		orderBox.setTranslateX(150.0);
-		orderBox.setTranslateY(15.0);
+
+		radioBox.setId("radio");
 
 		this.getChildren().addAll(radioBox, backButton, listPane);
 		this.setPrefWidth(500);
+		
+		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+
 	}
 
 	private void initRadioButton() {
@@ -98,25 +103,22 @@ public class HotelOrdersPane extends AnchorPane {
 		});
 
 		
-		radioBox = new HBox();
-		radioBox.setSpacing(10);
-		radioBox.setPrefWidth(500);
-		radioBox.getChildren().addAll(allButton, unexecutedButton, executedButton, leftButton, revokedButton,
-				abnormalButton, backButton);
-
-		AnchorPane.setLeftAnchor(allButton, 50.0);
+		radioBox = new AnchorPane();
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
+		
+		AnchorPane.setLeftAnchor(allButton, 53.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
-		AnchorPane.setLeftAnchor(unexecutedButton, 160.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 165.0);
 		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
 		AnchorPane.setLeftAnchor(executedButton, 290.0);
 		AnchorPane.setTopAnchor(executedButton, 30.0);
-		AnchorPane.setLeftAnchor(leftButton, 475.0);
+		AnchorPane.setLeftAnchor(leftButton, 455.0);
 		AnchorPane.setTopAnchor(leftButton, 30.0);
-		AnchorPane.setLeftAnchor(revokedButton, 655.0);
+		AnchorPane.setLeftAnchor(revokedButton, 620.0);
 		AnchorPane.setTopAnchor(revokedButton, 30.0);
-		AnchorPane.setLeftAnchor(abnormalButton, 785.0);
+		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
-
+		
 		AnchorPane.setRightAnchor(backButton, 20.0);
 		AnchorPane.setTopAnchor(backButton, 10.0);
 

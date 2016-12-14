@@ -11,8 +11,8 @@
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  -fx-text-fill:white;
+-fx-font-size:15px;
+    -fx-font-family:"PingFang SC";  -fx-text-fill:white;
    }
    .label{
    	-fx-text-fill:white;

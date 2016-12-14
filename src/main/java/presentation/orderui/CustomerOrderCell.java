@@ -48,12 +48,12 @@ public class CustomerOrderCell extends Pane {
 		state.setId("state");
 		roomName = new Label(orderVO.roomName);
 		this.getChildren().add(roomName);
-		roomName.setLayoutX(538.0);
+		roomName.setLayoutX(521.0);
 		roomName.setLayoutY(50.0);
 		roomName.setId("roomname");
 		total = new Label("¥" + String.valueOf(orderVO.total));
 		this.getChildren().add(total);
-		total.setLayoutX(627.0);
+		total.setLayoutX(618.0);
 		total.setLayoutY(78.0);
 		total.setId("total");
 		checkInTime = new Label("入住时间  " + orderVO.checkInTime);
@@ -68,12 +68,12 @@ public class CustomerOrderCell extends Pane {
 		checkOutTime.setId("checkouttime");
 		num = new Label(String.valueOf(orderVO.roomNum) + "间");
 		this.getChildren().add(num);
-		num.setLayoutX(538.0);
+		num.setLayoutX(521.0);
 		num.setLayoutY(85.0);
 		num.setId("num");
 		children = new Label(orderVO.hasChildren ? "有" : "无" + "儿童");
 		this.getChildren().add(children);
-		children.setLayoutX(538.0);
+		children.setLayoutX(521.0);
 		children.setLayoutY(120.0);
 		children.setId("children");
 
@@ -83,9 +83,8 @@ public class CustomerOrderCell extends Pane {
 				try {
 					if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "已撤销")) {
 						System.out.println("revoke");
-						revoke = new Label("已撤销");
+						state.setText("已撤销");
 						this.getChildren().remove(button);
-						this.getChildren().add(revoke);
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
