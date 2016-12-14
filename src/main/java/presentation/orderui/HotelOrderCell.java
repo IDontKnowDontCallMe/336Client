@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -23,11 +24,15 @@ public class HotelOrderCell extends GridPane {
 	private Text totalText;
 	private Text stateText;
 	private Button button;
+	private Label orderID;
 
 	public HotelOrderCell(OrderVO orderVO) throws RemoteException {
 		super();
 		this.orderVO = orderVO;
-
+		
+		orderID = new Label(Integer.toString(orderVO.orderID));
+		
+		
 		customerNameText = new Text(orderVO.customerName);
 		this.add(customerNameText, 0, 0, 1, 1);
 		customerPhoneText = new Text(orderVO.customerPhoneNumber);

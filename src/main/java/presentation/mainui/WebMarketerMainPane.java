@@ -23,7 +23,7 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		Label webPromotion = new Label();
 		webPromotion.setFont(Font.font(icon.getFamily(), dim));
-		webPromotion.setText(String.valueOf('\uf2bc'));
+		webPromotion.setText(String.valueOf('\uf044'));
 		Button webPromotionButton = new Button("网站促销策略制定", webPromotion);
 		webPromotionButton.setWrapText(true);
 		webPromotionButton.setContentDisplay(ContentDisplay.TOP);
@@ -33,7 +33,7 @@ public class WebMarketerMainPane extends AnchorPane {
 		
 		Label level = new Label();
 		level.setFont(Font.font(icon.getFamily(), dim));
-		level.setText(String.valueOf('\uf2bc'));
+		level.setText(String.valueOf('\uf0cb'));
 		Button levelButton = new Button("等级策略制定", level);
 		levelButton.setWrapText(true);
 		levelButton.setContentDisplay(ContentDisplay.TOP);
@@ -43,7 +43,7 @@ public class WebMarketerMainPane extends AnchorPane {
 		
 		Label marketerOrder = new Label();
 		marketerOrder.setFont(Font.font(icon.getFamily(), dim));
-		marketerOrder.setText(String.valueOf('\uf2bc'));
+		marketerOrder.setText(String.valueOf('\uf0ea'));
 		Button marketerOrderButton = new Button("异常订单处理", marketerOrder);
 		marketerOrderButton.setWrapText(true);
 		marketerOrderButton.setContentDisplay(ContentDisplay.TOP);
@@ -53,7 +53,7 @@ public class WebMarketerMainPane extends AnchorPane {
 		
 		Label credit = new Label();
 		credit.setFont(Font.font(icon.getFamily(), dim));
-		credit.setText(String.valueOf('\uf2bc'));
+		credit.setText(String.valueOf('\uf283'));
 		Button creditButton = new Button("信用充值", credit);
 		creditButton.setWrapText(true);
 		creditButton.setContentDisplay(ContentDisplay.TOP);
