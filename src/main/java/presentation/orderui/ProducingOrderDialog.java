@@ -16,7 +16,6 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -52,6 +51,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 	private Button produceButton;
 	private CheckBox childrenCheckBox;
 	private Text totalText;
+	private HBox tipBox;
 
 	private int total;
 	CalculationConditionVO calculationConditionVO;
@@ -62,6 +62,8 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		this.hotelVO = hotelVO;
 		this.roomList = roomList;
 
+		tipBox = new HBox();
+		
 		initUI(customerID, roomIndex);
 		this.getDialogPane().setContent(gridPane);
 		updateTotal(customerID);
@@ -187,6 +189,9 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 			try {
 				updateTotal(customerID);
 				totalText.setText(String.valueOf(total));
+				gridPane.getChildren().remove(tipBox);
+				gridPane.add(tipBox, 1, 7, 1, 1);
+
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -203,6 +208,9 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 			try {
 				updateTotal(customerID);
 				totalText.setText(String.valueOf(total));
+				gridPane.getChildren().remove(tipBox);
+				gridPane.add(tipBox, 1, 7, 1, 1);
+
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -214,7 +222,7 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		gridPane.add(childrenCheckBox, 0, 4, 1, 1);
 
 		gridPane.add(new Text("选择最晚到店时间"), 0, 5, 1, 1);
-		timeChoiceBox = new ComboBox();
+		timeChoiceBox = new ComboBox<LocalTime>();
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(6));
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(7));
 		timeChoiceBox.getItems().add(LocalTime.NOON.plusHours(8));
@@ -302,18 +310,29 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 		String problem = BLFactory.getInstance().getOrderBLService().canBeProduced(calculationConditionVO);
 
-		Text tipText = new Text();
 		if (problem.equals("房间不足")) {
 			produceButton.setDisable(true);
-			tipText.setText("您所预订的房间不足, 无法预订");
-			gridPane.add(tipText, 1, 7, 1, 1);
-		}
-		if (problem.equals("信用值小于0")) {
+			Text tipText1 = new Text("您所预订的房间不足, 无法预订");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText1);
+
+		} else if (problem.equals("信用值小于0")) {
 			produceButton.setDisable(true);
-			tipText.setText("您的信用值小于0, 无法预订");
-			gridPane.add(tipText, 1, 7, 1, 1);
+			Text tipText2 = new Text("您的信用值小于0, 无法预订");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText2);
+
+		} else if (problem.equals("房间充足")) {
+			produceButton.setDisable(false);
+			Text tipText3 = new Text("");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText3);
 		}
 
+		
 		return calculationConditionVO;
 	}
 

@@ -33,16 +33,17 @@ public class WebPromotionCell extends GridPane {
 		if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
 			startTimeText = new Text("开始时间: " + webPromotionVO.startTime.toString());
 			endTimeText = new Text("结束时间: " + webPromotionVO.endTime.toString());
+			discountText = new Text("折扣: " + webPromotionVO.discount);
+			this.add(discountText, 3, 0, 3, 1);
 			this.add(startTimeText, 0, 1, 3, 1);
 			this.add(endTimeText, 4, 1, 3, 1);
 		}
 		if (webPromotionVO.businessCircleName != null) {
 			businessCircleText = new Text("特定商圈名称: " + webPromotionVO.businessCircleName);
+			discountText = new Text("会员每升一级在该商圈订酒店折扣减少: " + webPromotionVO.discount);
+			this.add(discountText, 3, 0, 3, 1);
 			this.add(businessCircleText, 0, 1, 3, 1);
 		}
-
-		discountText = new Text("折扣: " + webPromotionVO.discount);
-		this.add(discountText, 3, 0, 3, 1);
 
 		editButton = new Button("编辑");
 		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
@@ -56,11 +57,13 @@ public class WebPromotionCell extends GridPane {
 						if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
 							startTimeText.setText("开始时间: " + result.get().startTime.toString());
 							endTimeText.setText("结束时间: " + result.get().endTime.toString());
+							discountText.setText(String.valueOf("折扣: " + result.get().discount));
 						}
 						if (webPromotionVO.businessCircleName != null) {
 							businessCircleText.setText("特定商圈名称: " + result.get().businessCircleName);
+							discountText.setText(String.valueOf("会员每升ß一级在该商圈订酒店时折扣减少: " + result.get().discount));
 						}
-						discountText.setText(String.valueOf("折扣: " + result.get().discount));
+
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
