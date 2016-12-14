@@ -42,15 +42,14 @@ public class WebManagerMainPane extends AnchorPane {
 		hotelManageButton.setMaxSize(r, r);
 		
 		Label webMarketerManage = new Label();
-		webMarketerManage.setFont(Font.font(icon.getFamily(), 45));
+		webMarketerManage.setFont(Font.font(icon.getFamily(), dim));
 		webMarketerManage.setText(String.valueOf('\uf1e0'));
 		Button webMarketerManageButton = new Button("网站营销人员管理", webMarketerManage);
 		webMarketerManageButton.setWrapText(true);
 		webMarketerManageButton.setContentDisplay(ContentDisplay.TOP);
 		webMarketerManageButton.setId("webMarketerManageButton");
-		webMarketerManageButton.setShape(new Circle(40));
-		webMarketerManageButton.setMinSize(80, 80);
-		webMarketerManageButton.setMaxSize(80, 80);
+		webMarketerManageButton.setMinSize(r, r);
+		webMarketerManageButton.setMaxSize(r, r);
 		
 		Label back = new Label();
 		back.setFont(Font.font(icon.getFamily(), 45));

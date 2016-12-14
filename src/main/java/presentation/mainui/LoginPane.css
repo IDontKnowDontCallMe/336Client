@@ -64,32 +64,33 @@
 #registerbutton:pressed{
 	
 }
-	     #loginbutton {
-  -fx-background-color: #1B9AF7;
-  -fx-border-color: #1B9AF7;
+	      #loginbutton {
+  -fx-background-color: rgb(149,13,135);
+  -fx-border-color: rgb(149,13,135);
   -fx-text-fill: #FFF;
   -fx-font-weight: 300;
   -fx-font-size: 16px;
-  -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -fx-font-family: "PingFang SC";
   -fx-text-alignment: center;
   -fx-min-height: 40px;
   -fx-padding: 0 40px;
   -fx-cursor: pointer;
   
  }
+ /*-fx-background-color: rgb(144,137,187);
+  -fx-border-color: rgb(144,137,187); */
  
 
  #loginbutton:hover, #loginbutton:focus {
-  	-fx-background-color: #4cb0f9;
-    -fx-border-color: #4cb0f9;
+  	-fx-background-color: rgb(152,47,141);
+    -fx-border-color:rgb(159,19,144);
     -fx-text-fill: #FFF; 
     }
   #loginbutton:pressed {
     -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
-            -fx-background-color: #2798eb;
-    -fx-border-color: #2798eb;
-    -fx-text-fill: #0880d7;
+            -fx-background-color: rgb(159,0,144);
+    -fx-border-color: rgb(159,0,144);
+    -fx-text-fill: rgb(162,81,153);
             }
- 
 	
 	
