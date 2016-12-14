@@ -18,33 +18,29 @@ import vo.HotelPromotionVO;
 
 public class HotelPromotionAddDialog extends Dialog {
 
-	HotelPromotionVO hotelPromotionVO;
-	Text hotelPromotionTypeChoiceText;
-	ChoiceBox hotelPromotionTypeChoiceBox;
+	private ComboBox<String> hotelPromotionTypeChoiceBox;
 
 	final int COLUMN_COUNT = 10;
 	final int YEAR_COLUMN_COUNT = 3;
 	final int LESS_COLUMN_COUNT = 2;
 	final int BOX_SPACING = 15;
-	HBox chooseBox;
-	HBox paramBox;
-	HBox startBox;
-	HBox endBox;
-	HBox discountBox;
-	VBox promotionBox;
-	Button confirmButton;
-	Label startTimeLabel;
-	Label endTimeLabel;
-	Label companyNameLabel;
-	Label minNumLabel;
-	Label discountLabel;
-	TextField companyNameTextField;
-	TextField minNumTextField;
-	TextField discountTextField;
-	DatePicker startDatePicker;
-	DatePicker endDatePicker;
-	GridPane gridPane;
-	Text vacant;
+	private HBox chooseBox;
+	private HBox paramBox;
+	private HBox startBox;
+	private HBox endBox;
+	private HBox discountBox;
+	private VBox promotionBox;
+	private Label startTimeLabel;
+	private Label endTimeLabel;
+	private Label companyNameLabel;
+	private Label minNumLabel;
+	private Label discountLabel;
+	private TextField companyNameTextField;
+	private TextField minNumTextField;
+	private TextField discountTextField;
+	private DatePicker startDatePicker;
+	private DatePicker endDatePicker;
+	private GridPane gridPane;
 
 	public HotelPromotionAddDialog(int hotelID) {
 		super();
@@ -59,7 +55,7 @@ public class HotelPromotionAddDialog extends Dialog {
 
 		ObservableList<String> hotelPromotionTypeList = FXCollections.observableArrayList("预订多间促销策略", "特定时间促销策略",
 				"合作企业促销策略", "客户生日促销策略");
-		ChoiceBox<String> hotelPromotionTypeChoiceBox = new ChoiceBox<>(hotelPromotionTypeList);
+		hotelPromotionTypeChoiceBox = new ComboBox<String>(hotelPromotionTypeList);
 
 		promotionBox = new VBox();
 		promotionBox.setSpacing(BOX_SPACING);
@@ -68,7 +64,7 @@ public class HotelPromotionAddDialog extends Dialog {
 
 		Text vacant = new Text("\n\n\n\n\n\n");
 		promotionBox.getChildren().add(vacant);
-		chooseBox.getChildren().addAll(hotelPromotionTypeChoiceText, hotelPromotionTypeChoiceBox);
+		chooseBox.getChildren().addAll(new Text("选择新增酒店促销策略类型"), hotelPromotionTypeChoiceBox);
 		gridPane.add(chooseBox, 0, 0, 1, 1);
 		gridPane.add(promotionBox, 0, 1, 1, 1);
 
@@ -113,7 +109,7 @@ public class HotelPromotionAddDialog extends Dialog {
 						startDate = startDatePicker.getValue();
 					}
 					if (endDatePicker != null) {
-						startDate = startDatePicker.getValue();
+						endDate = endDatePicker.getValue();
 					}
 					if (companyNameTextField != null) {
 						companyName = companyNameTextField.getText();
@@ -124,8 +120,8 @@ public class HotelPromotionAddDialog extends Dialog {
 					if (discountTextField.getText() != null) {
 						discount = Double.valueOf(discountTextField.getText());
 					}
-					return new HotelPromotionVO(hotelID, hotelPromotionTypeChoiceBox.getValue(), startDate, endDate,
-							companyName, minNum, discount);// 第二项不知道对不对
+					return new HotelPromotionVO(hotelID, hotelPromotionTypeChoiceBox.getValue().toString(), startDate,
+							endDate, companyName, minNum, discount);
 				} else {
 					return null;
 				}

@@ -2,7 +2,7 @@
 /* The main scrollbar **track** CSS class  */
 
 	.root{
-	-fx-background-image: url("背景.png");
+	-fx-background-image: url(NJU.png);
 }
 
     
@@ -13,23 +13,17 @@
 		-fx-min-width : 250.0;
 	}
 	
-	#loginbutton{
-		-fx-background-color:#FFFFFF;
-		
-	}
 	
 	.label{
 		-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
 		-fx-text-fill:white;
 	}
-	
+	/* 
 	#loginbutton {
-  /*   -fx-background-color: 
-        rgba(0,0,0,0.28),
-        linear-gradient(#9a9a9a, #909090),
-        linear-gradient(white 0%, #f3f3f3 50%, #ececec 51%, #f2f2f2 100%);
-        */
+
     -fx-background-insets: 0.0 0.0 -1.0 0.0,0.0,1.0;
+    		-fx-background-color:#FFFFFF;
+    
     -fx-background-radius: 5.0,5.0,4.0;
     -fx-padding: 3.0 10.0 3.0 10.0;
     -fx-text-fill: #242d35;
@@ -56,6 +50,7 @@
         
       -fx-text-fill: #696969;
 }
+*/
 
 #registerbutton {
 		-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
@@ -69,6 +64,33 @@
 #registerbutton:pressed{
 	
 }
-	
+	      #loginbutton {
+  -fx-background-color: rgb(149,13,135);
+  -fx-border-color: rgb(149,13,135);
+  -fx-text-fill: #FFF;
+  -fx-font-weight: 300;
+  -fx-font-size: 16px;
+  -fx-font-family: "PingFang SC";
+  -fx-text-alignment: center;
+  -fx-min-height: 40px;
+  -fx-padding: 0 40px;
+  -fx-cursor: pointer;
+  
+ }
+ /*-fx-background-color: rgb(144,137,187);
+  -fx-border-color: rgb(144,137,187); */
+ 
+
+ #loginbutton:hover, #loginbutton:focus {
+  	-fx-background-color: rgb(152,47,141);
+    -fx-border-color:rgb(159,19,144);
+    -fx-text-fill: #FFF; 
+    }
+  #loginbutton:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: rgb(159,0,144);
+    -fx-border-color: rgb(159,0,144);
+    -fx-text-fill: rgb(162,81,153);
+            }
 	
 	

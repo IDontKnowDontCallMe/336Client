@@ -25,8 +25,10 @@ public class HotelPanel extends VBox {
 	private Button backButton;
 	private HBox titleBox;
 
+	private List<HotelVO> hotelList;
+
 	public HotelPanel() throws RemoteException {
-		List<HotelVO> hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
+		hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
 
 		hotelBox = new VBox();
 		hotelBox.setSpacing(15);
@@ -39,13 +41,21 @@ public class HotelPanel extends VBox {
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("add hotel!");
 				Dialog<HotelVO> addHotelDialog = new AddHotelDialog();
 
 				Optional<HotelVO> result = addHotelDialog.showAndWait();
 				if (result.isPresent()) {
-					HotelVO vo = result.get();
-					System.out.println("new hotel is " + vo.hotelName);
+					try {
+						if (BLFactory.getInstance().getUserBLService().addHotel(result.get())) {
+							System.out.println("add hotel!");
+							hotelList.add(result.get());
+							buildHotelBox(hotelList);
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				} else {
 					System.out.println("nothing added");
 				}

@@ -2,26 +2,31 @@ package presentation.promotionui;
 
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Optional;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import presentation.mainui.TheMainFrame;
 import vo.HotelPromotionVO;
 
 public class HotelPromotionPanel extends VBox {
 
+	private List<HotelPromotionVO> hotelPromotionList;
 	private ScrollPane listPane;
 	private VBox hotelPromotionBox;
 	private HBox addBox;
 	private Button addButton;
+	private Button backButton;
 	private Text title;
 
-	public HotelPromotionPanel(int hotelID) throws RemoteException{
-		List<HotelPromotionVO> hotelPromotionList = BLFactory.getInstance().getPromotionBLService().getHotelPromotionList(hotelID);
+	public HotelPromotionPanel(int hotelID) throws RemoteException {
+		hotelPromotionList = BLFactory.getInstance().getPromotionBLService().getHotelPromotionList(hotelID);
 		hotelPromotionBox = new VBox();
 		hotelPromotionBox.setSpacing(15);
 		buildHotelPromotionBox(hotelPromotionList);
@@ -30,16 +35,32 @@ public class HotelPromotionPanel extends VBox {
 		title = new Text("酒店促销策略");
 		addButton = new Button("新增");
 		addButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-			System.out.println("add");
-			HotelPromotionAddDialog hotelPromotionAddDialog = new HotelPromotionAddDialog(hotelID);
-			hotelPromotionAddDialog.show();
+			Dialog<HotelPromotionVO> hotelPeomotionAddDialog = new HotelPromotionAddDialog(hotelID);
+
+			Optional<HotelPromotionVO> result = hotelPeomotionAddDialog.showAndWait();
+			if (result.isPresent()) {
+				try {
+					if (BLFactory.getInstance().getPromotionBLService().addHotelPromotion(result.get())) {
+						System.out.println("add");
+						hotelPromotionList.add(result.get());
+						buildHotelPromotionBox(hotelPromotionList);
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 
 		});
 
+		backButton = new Button("返回");
+		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
+			TheMainFrame.backTo();
+		});
 		addBox = new HBox();
 		addBox.setSpacing(10);
 		addBox.setPrefWidth(500);
-		addBox.getChildren().addAll(title, addButton);
+		addBox.getChildren().addAll(title, addButton, backButton);
 		this.getChildren().addAll(addBox, listPane);
 	}
 

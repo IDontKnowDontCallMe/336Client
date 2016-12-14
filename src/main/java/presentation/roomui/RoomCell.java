@@ -5,14 +5,12 @@ import vo.RoomVO;
 
 public class RoomCell {
 	private SimpleStringProperty roomName;
-	private SimpleStringProperty roomID;
 	private SimpleStringProperty price;
 	private SimpleStringProperty numOfRoom;
 	private SimpleStringProperty service;
 	private SimpleStringProperty maxNumOfPeople;
 
 	public RoomCell(RoomVO vo) {
-		roomID = new SimpleStringProperty(String.valueOf(vo.roomID));
 		roomName = new SimpleStringProperty(String.valueOf(vo.roomName));
 		price = new SimpleStringProperty(String.valueOf(vo.price));
 		numOfRoom = new SimpleStringProperty(String.valueOf(vo.numOfRoom));
@@ -21,23 +19,13 @@ public class RoomCell {
 
 	}
 
-	public RoomCell(String roomID, String roomName, String price, String numOfRoom, String service,
-			String maxNumOfPeople) {
-		
-		this.roomID = new SimpleStringProperty(roomID);
+	public RoomCell(String roomName, String price, String numOfRoom, String service, String maxNumOfPeople) {
+
 		this.roomName = new SimpleStringProperty(roomName);
 		this.price = new SimpleStringProperty(price);
 		this.numOfRoom = new SimpleStringProperty(numOfRoom);
 		this.service = new SimpleStringProperty(service);
 		this.maxNumOfPeople = new SimpleStringProperty(maxNumOfPeople);
-	}
-
-	public void setRoomID(String s) {
-		roomID.set(s);
-	}
-
-	public String getRoomID() {
-		return roomID.get();
 	}
 
 	public void setPrice(String s) {

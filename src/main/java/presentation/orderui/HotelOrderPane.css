@@ -1,0 +1,118 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+	
+	.root{
+	-fx-background-image:url(redbg3.png);
+    }
+    
+
+	  .scroll-bar:horizontal .track,
+	 .scroll-bar:vertical .track{
+		-fx-background-color: rgb(45,161,250);
+	    -fx-border-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-border-radius:2em;
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 .scroll-bar:horizontal .increment-button ,
+	 .scroll-bar:horizontal .decrement-button {
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 0 10 0;
+	 
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 
+	.scroll-bar:vertical .increment-button ,
+	.scroll-bar:vertical .decrement-button {
+	 
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 10 0 0;
+	 
+	}
+	 
+ 	.scroll-bar .increment-arrow,
+	.scroll-bar .decrement-arrow
+	{
+	    -fx-shape: " ";
+	    -fx-padding:0;
+	}
+	 
+	 .scroll-bar:horizontal .thumb,
+	 .scroll-bar:vertical .thumb {
+	    -fx-background-color:white;
+	    -fx-background-insets: 2, 0, 0;
+	    -fx-background-radius: 5em;
+	 
+	}
+
+  .button{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+    -fx-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -fx-text-fill:white;
+   }
+   .label{
+   	-fx-text-fill:white;
+   }
+  .button:hover .label{
+ 		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
+ 	 }
+ 	 .button:hover{
+ 	-fx-background-color: rgba(255, 234, 246, 0.9); 
+ 		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   .button:pressed .label{
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+    .button:pressed{
+  	-fx-background-color: rgba(252, 90, 101, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+
+    
+    #radio{
+    	-fx-min-height:80;
+    	
+    }
+    
+    .scroll-pane{
+    	-fx-border-width:0;
+    }
+    
+    .scroll-pane > .viewport {
+   -fx-background-image: url(redbg3.png);
+}
+    
+
+
+    
+    
+    
+    .radio-button .dot{
+  -fx-mark-color: rgb(249,62,77) ;
+    }
+    
+    .radio-button {
+    	-fx-font-family: "Helvetica Neue","Helvetica","Arial","PingFang SC","Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+    	-fx-text-fill:white;
+    	-fx-font-size:16px;
+    	
+    }
+ 
+ .radio-button .radio {
+  -fx-background-color: white;
+}
+	
+	

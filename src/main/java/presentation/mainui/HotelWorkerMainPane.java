@@ -3,32 +3,110 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import presentation.hotelui.WorkerHotelInfoPane;
 import presentation.orderui.HotelOrdersPane;
+import presentation.orderui.ProducingOrderOfflineDialog;
 import presentation.promotionui.HotelPromotionPanel;
 
-public class HotelWorkerMainPane extends VBox {
+public class HotelWorkerMainPane extends AnchorPane {
 
-	
+	private int hotelID;
+
 	public HotelWorkerMainPane(int hotelID) {
 
 		super();
-		Button manageButton = new Button("酒店基本信息维护");
-		Button hotelPromotionButton = new Button("酒店促销策略制定");
-		Button offlineButton = new Button("线下入住与退房办理");
-		Button onlineButton = new Button("线上入住与退房办理");
-		Button orderListButton = new Button("查看订单");
-		Button logoutButton = new Button("注销登录");
+		this.hotelID = hotelID;
 
-		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, onlineButton, orderListButton,
-				logoutButton);
-
-		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			// TheMainFrame.jumpTo();
-		});
+		int r =200;
+		int dim = 130;
+		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 		
+		Label manage = new Label();
+		manage.setFont(Font.font(icon.getFamily(), dim));
+		manage.setText(String.valueOf('\uf040'));
+		Button manageButton = new Button("酒店基本信息维护", manage);
+		manageButton.setWrapText(true);
+		manageButton.setContentDisplay(ContentDisplay.TOP);
+		manageButton.setId("manage");
+		manageButton.setMinSize(r, r);
+		manageButton.setMaxSize(r, r);
+		
+		
+		Label hotelPromotion = new Label();
+		hotelPromotion.setFont(Font.font(icon.getFamily(), dim));
+		hotelPromotion.setText(String.valueOf('\uf044'));
+		Button hotelPromotionButton = new Button("酒店促销策略制定", hotelPromotion);
+		hotelPromotionButton.setWrapText(true);
+		hotelPromotionButton.setContentDisplay(ContentDisplay.TOP);
+		hotelPromotionButton.setId("hotelPromotionButton");
+		hotelPromotionButton.setMinSize(r, r);
+		hotelPromotionButton.setMaxSize(r, r);
+		
+		Label offline = new Label();
+		offline.setFont(Font.font(icon.getFamily(), dim));
+		offline.setText(String.valueOf('\uf0c5'));
+		Button offlineButton = new Button("线下订单办理", offline);
+		offlineButton.setWrapText(true);
+		offlineButton.setContentDisplay(ContentDisplay.TOP);
+		offlineButton.setId("offline");
+		offlineButton.setMinSize(r, r);
+		offlineButton.setMaxSize(r, r);
+		
+		
+		Label orderList = new Label();
+		orderList.setFont(Font.font(icon.getFamily(), dim));
+		orderList.setText(String.valueOf('\uf108'));
+		Button orderListButton = new Button("线上订单办理", orderList);
+		orderListButton.setWrapText(true);
+		orderListButton.setContentDisplay(ContentDisplay.TOP);
+		orderListButton.setId("orderListButton");
+		orderListButton.setMinSize(r, r);
+		orderListButton.setMaxSize(r, r);
+		
+		
+		
+		Label back = new Label();
+		back.setFont(Font.font(icon.getFamily(), 45));
+		back.setText(String.valueOf('\uf011'));
+		Button logoutButton = new Button("注销", back);
+		logoutButton.setWrapText(true);
+		logoutButton.setContentDisplay(ContentDisplay.TOP);
+		logoutButton.setId("backButton");
+		logoutButton.setShape(new Circle(40));
+		logoutButton.setMinSize(80, 80);
+		logoutButton.setMaxSize(80, 80);
+		
+		
+		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
+
+		AnchorPane.setLeftAnchor(orderListButton, 250.0);
+		AnchorPane.setTopAnchor(orderListButton, 100.0);
+		AnchorPane.setLeftAnchor(offlineButton, 600.0);
+		AnchorPane.setTopAnchor(offlineButton, 100.0);
+		AnchorPane.setLeftAnchor(hotelPromotionButton, 250.0);
+		AnchorPane.setTopAnchor(hotelPromotionButton, 400.0);
+		AnchorPane.setLeftAnchor(manageButton, 600.0);
+		AnchorPane.setTopAnchor(manageButton, 400.0);
+		AnchorPane.setLeftAnchor(logoutButton, 985.0);
+		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
+		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			try {
+				TheMainFrame.jumpTo(new WorkerHotelInfoPane(hotelID));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+
 		hotelPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
 				TheMainFrame.jumpTo(new HotelPromotionPanel(hotelID));
@@ -38,13 +116,14 @@ public class HotelWorkerMainPane extends VBox {
 			}
 		});
 
-		
 		offlineButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			// TheMainFrame.jumpTo();
-		});
-
-		onlineButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			// TheMainFrame.jumpTo();
+			try {
+				ProducingOrderOfflineDialog producingOrderOfflineDialog = new ProducingOrderOfflineDialog(hotelID);
+				producingOrderOfflineDialog.show();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 
 		orderListButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
@@ -58,5 +137,7 @@ public class HotelWorkerMainPane extends VBox {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
+
+		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
 	}
 }

@@ -4,56 +4,52 @@ import java.rmi.RemoteException;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import presentation.customerui.MockCustomerController;
 import presentation.mainui.TheMainFrame;
-import vo.CustomerVO;
 import vo.LevelVO;
 
 public class LevelPanel extends GridPane {
 
 	final int COLUMN_COUNT = 4;
-	Text creditDistanceTitle;
-	Text maxLevelTitle;
-	Text discountDistanceTitle;
-	Text creditDistanceText;
-	Text maxLevelText;
-	Text discountDistanceText;
-	Text percent;
-	Text title;
-	Text vacant;
+	private Text creditDistanceTitle;
+	private Text maxLevelTitle;
+	private Text discountDistanceTitle;
+	private Text creditDistanceText;
+	private Text maxLevelText;
+	private Text discountDistanceText;
+	private Text percent;
+	private Text title;
+	private Text vacant;
 
-	Button editButton;
-	Button backButton;
-	TextField creditDistanceTextField;
-	TextField maxLevelTextField;
-	TextField discountDistanceTextField;
-	HBox creditDistanceBox;
-	HBox maxLevelBox;
-	HBox discountDistanceBox;
-	HBox titleBox;
+	private Button editButton;
+	private Button backButton;
+	private TextField creditDistanceTextField;
+	private TextField maxLevelTextField;
+	private TextField discountDistanceTextField;
+	private HBox creditDistanceBox;
+	private HBox maxLevelBox;
+	private HBox discountDistanceBox;
+	private HBox titleBox;
 
-	VBox levelMethodBox;
+	private VBox levelMethodBox;
+	LevelVO levelVO;
 
 	public LevelPanel() throws RemoteException {
 		super();
-		LevelVO levelVO = MockPromotionController.getInstance().getLevelMethod();
+		levelVO = BLFactory.getInstance().getPromotionBLService().getLevelMethod();
 
 		this.setHgap(10);
 		this.setVgap(20);
 
-		int creditDistance = BLFactory.getInstance().getPromotionBLService().getLevelMethod().creditDistance;
-		int maxLevel = BLFactory.getInstance().getPromotionBLService().getLevelMethod().maxLevel;
-		double discountDistance = BLFactory.getInstance().getPromotionBLService().getLevelMethod().discountDistance;
+		int creditDistance = levelVO.creditDistance;
+		int maxLevel = levelVO.maxLevel;
+		double discountDistance = BLFactory.getInstance().getPromotionBLService().getLevelPromotion().discountDistance;
 
 		title = new Text("会员等级制度");
 		editButton = new Button("编辑");
@@ -128,15 +124,20 @@ public class LevelPanel extends GridPane {
 
 				editButton.setText("编辑");
 
-				LevelVO vo = MockPromotionController.getInstance().getLevelMethod();
-				vo.creditDistance = Integer.parseInt(creditDistanceTextField.getText());
-				vo.maxLevel = Integer.parseInt(maxLevelTextField.getText());
-				vo.discountDistance = Double.parseDouble(discountDistanceTextField.getText());
+				LevelVO newVO = levelVO;
+				newVO.creditDistance = Integer.parseInt(creditDistanceTextField.getText());
+				newVO.maxLevel = Integer.parseInt(maxLevelTextField.getText());
+				newVO.discountDistance = Double.parseDouble(discountDistanceTextField.getText());
 
-				if (MockPromotionController.getInstance().updateLevelInfo(levelVO)) {
-					creditDistanceText.setText(creditDistanceTextField.getText());
-					maxLevelText.setText(maxLevelTextField.getText());
-					discountDistanceText.setText(discountDistanceTextField.getText());
+				try {
+					if (BLFactory.getInstance().getPromotionBLService().updateLevelMethod(newVO)
+							&& BLFactory.getInstance().getPromotionBLService().updateLevelPromotion(newVO)) {
+						creditDistanceText.setText(creditDistanceTextField.getText());
+						maxLevelText.setText(maxLevelTextField.getText());
+						discountDistanceText.setText(discountDistanceTextField.getText());
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 
 			}

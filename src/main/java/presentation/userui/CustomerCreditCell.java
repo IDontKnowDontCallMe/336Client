@@ -1,7 +1,9 @@
 package presentation.userui;
 
+import java.rmi.RemoteException;
 import java.util.Optional;
 
+import bussinesslogic.factory.BLFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -14,7 +16,6 @@ import vo.CustomerVO;
 public class CustomerCreditCell extends GridPane {
 
 	CustomerVO customerVO;
-	private int customerID;
 	private GridPane infoPane;
 	private Text nameText;
 	private Text phoneNumberText;
@@ -26,9 +27,9 @@ public class CustomerCreditCell extends GridPane {
 	public CustomerCreditCell(CustomerVO customerVO) {
 		super();
 		this.customerVO = customerVO;
-		customerID = customerVO.customerID;
 		infoPane = new GridPane();
 
+		// 这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
 		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
 		nameText = new Text(customerVO.customerName);
 		infoPane.add(nameText, 1, 0, 1, 1);
@@ -41,7 +42,7 @@ public class CustomerCreditCell extends GridPane {
 		creditText = new Text(String.valueOf(customerVO.credit));
 		infoPane.add(creditText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("生日会员  "), 0, 3, 1, 1);
+		infoPane.add(new Text("生日会员"), 0, 3, 1, 1);
 		if (customerVO.isBirthVIP) {
 			birthdayText = new Text(String.valueOf(customerVO.birthday));
 		} else {
@@ -49,7 +50,7 @@ public class CustomerCreditCell extends GridPane {
 		}
 		infoPane.add(birthdayText, 1, 3, 1, 1);
 
-		infoPane.add(new Text("企业会员  "), 0, 4, 1, 1);
+		infoPane.add(new Text("企业会员"), 0, 4, 1, 1);
 		if (customerVO.isCompanyVIP) {
 			companyText = new Text(customerVO.companyName);
 		} else {
@@ -62,15 +63,21 @@ public class CustomerCreditCell extends GridPane {
 		editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("add credit!");
 				Dialog<Integer> creditDialog = new CreditDialog(customerVO.customerID);
 
 				Optional<Integer> result = creditDialog.showAndWait();
 				if (result.isPresent()) {
-					int addCredit = result.get();
-					customerVO.credit += addCredit;
-					creditText.setText(String.valueOf(customerVO.credit));
-					System.out.println("new credit is " + customerVO.credit);
+					try {
+						if (BLFactory.getInstance().getUserBLService().updateCreditOfCustomer(customerVO.customerID,
+								result.get())) {
+							creditText.setText(String.valueOf(customerVO.credit + result.get()));
+							System.out.println("add credit!");
+							System.out.println("new credit is " + customerVO.credit + result.get());
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else {
 					System.out.println("nothing changed");
 				}

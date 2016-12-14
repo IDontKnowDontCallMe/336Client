@@ -14,7 +14,7 @@ import vo.RoomVO;
 public class RoomInfoPanel extends GridPane {
 
 	private int hotelID;
-	ScrollPane roomPane;
+	private ScrollPane roomPane;
 
 	public RoomInfoPanel(List<RoomVO> roomList) {
 

@@ -1,7 +1,5 @@
 package presentation.userui;
 
-import java.rmi.RemoteException;
-import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
@@ -11,26 +9,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import presentation.customerui.MockCustomerController;
-import vo.CustomerVO;
 
 public class CreditDialog extends Dialog {
 
 	final int COLUMN_COUNT = 8;
-	GridPane gridPane;
-	Text title;
-	Text creditTitle;
-	TextField creditTextField;
-	HBox creditBox;
+	private GridPane gridPane;
+	private Text title;
+	private Text creditTitle;
+	private TextField creditTextField;
+	private HBox creditBox;
 
 	public CreditDialog(int customerID) {
 		super();
-		try {
-			CustomerVO customerVO = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
-			int credit = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID).credit;
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
 
 		gridPane = new GridPane();
 		gridPane.setHgap(10);

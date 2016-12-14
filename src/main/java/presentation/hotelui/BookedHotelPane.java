@@ -14,7 +14,6 @@ import vo.HotelVO;
 public class BookedHotelPane extends VBox {
 
 	public BookedHotelPane(int customerID) throws RemoteException {
-		// TODO Auto-generated constructor stub
 		Button backButton = new Button("返回");
 		backButton.setAlignment(Pos.CENTER_RIGHT);
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {

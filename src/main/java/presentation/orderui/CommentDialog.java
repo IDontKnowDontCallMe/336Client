@@ -1,11 +1,14 @@
 package presentation.orderui;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
+import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -22,7 +25,7 @@ public class CommentDialog extends Dialog {
 	GridPane gridPane;
 	private TextArea commentTextArea;
 
-	public CommentDialog(OrderVO vo) {
+	public CommentDialog(OrderVO orderVO) {
 		super();
 		gridPane = new GridPane();
 		gridPane.setHgap(10);
@@ -31,7 +34,7 @@ public class CommentDialog extends Dialog {
 		gridPane.add(new Text("评分"), 0, 0, 1, 1);
 
 		ObservableList<Integer> scoreList = FXCollections.observableArrayList(1, 2, 3, 4, 5);
-		ChoiceBox<Integer> scoreBox = new ChoiceBox<>(scoreList);
+		ComboBox<Integer> scoreBox = new ComboBox<>(scoreList);
 
 		gridPane.add(scoreBox, 1, 0, 1, 1);
 		gridPane.add(new Text("评价"), 0, 1, 1, 1);
@@ -51,10 +54,17 @@ public class CommentDialog extends Dialog {
 			public CommentVO call(ButtonType param) {
 
 				if (param.getButtonData() == ButtonData.OK_DONE) {
-					String comment = commentTextArea.getText();
-					System.out.print("订单评价时间为" + LocalDateTime.now());
-					return new CommentVO(0, vo.hotelName, vo.roomName, vo.customerID, comment, scoreBox.getValue(),
-							LocalDateTime.now());// hotelID?
+					int hotelID = -1;
+					try {
+						hotelID = BLFactory.getInstance().getHotelBLService().getHotelIDbyOrderID(orderVO.orderID);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					return new CommentVO(hotelID, orderVO.hotelName, orderVO.roomName, orderVO.customerID,
+							commentTextArea.getText(),
+							Double.valueOf(scoreBox.getSelectionModel().getSelectedIndex() + 1), LocalDateTime.now());
 				} else {
 					return null;
 				}
