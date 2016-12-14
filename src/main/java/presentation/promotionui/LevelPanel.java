@@ -78,7 +78,7 @@ public class LevelPanel extends GridPane {
 
 		creditDistanceText = new Text(String.valueOf(creditDistance));
 		maxLevelText = new Text(String.valueOf(maxLevel));
-		discountDistanceText = new Text(String.valueOf(discountDistance * 100) + "            ");
+		discountDistanceText = new Text(String.valueOf(discountDistance) + "            ");
 
 		creditDistanceBox = new HBox();
 		maxLevelBox = new HBox();
