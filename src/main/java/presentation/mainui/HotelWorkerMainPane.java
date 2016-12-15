@@ -10,7 +10,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;

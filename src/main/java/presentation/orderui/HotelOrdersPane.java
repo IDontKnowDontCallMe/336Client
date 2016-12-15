@@ -5,18 +5,23 @@ import java.util.List;
 import bussinesslogic.factory.BLFactory;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
 public class HotelOrdersPane extends VBox {
+	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 	private int hotelID;
 	private AnchorPane radioBox;
@@ -103,8 +108,16 @@ public class HotelOrdersPane extends VBox {
 					}
 				});
 
-		backButton = new Button("返回");
+		Label back = new Label();
+		back.setFont(Font.font(icon.getFamily(), 28));
+		back.setText(String.valueOf('\uf112'));
+		backButton = new Button("返回", back);
+		backButton.setWrapText(true);
+		backButton.setContentDisplay(ContentDisplay.TOP);
 		backButton.setId("back");
+		backButton.setShape(new Circle(31));
+		backButton.setMinSize(62, 62);
+		backButton.setMaxSize(62, 62);
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});

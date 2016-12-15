@@ -1,0 +1,81 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+
+	.root{
+	-fx-background-image: url(bluebg.png);
+}
+
+	.text-field{
+		
+	}
+	
+	
+	.label{
+		-fx-font-family: "PingFang SC";
+		-fx-text-fill:white;
+	}
+
+	     .button {
+  -fx-background-color: #1B9AF7;
+  -fx-border-color: #1B9AF7;
+  -fx-text-fill: #FFF;
+  -fx-font-weight: 300;
+  -fx-font-size: 15px;
+  -fx-font-family: "PingFang FC";
+  -fx-text-alignment: center;
+  -fx-min-height: 30px;
+  -fx-padding: 0 40px;
+  -fx-cursor: pointer;
+  
+ }
+ 
+
+ .button:hover, .button:focus {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #4cb0f9;
+    -fx-text-fill: #FFF; 
+    }
+  .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;
+    -fx-text-fill: #0880d7;
+            }
+ 
+	   .combo-box .list-cell{
+    	-fx-text-fill: white;
+    	-fx-alignment: center ;
+    	
+    }
+    .combo-box .list-cell:pressed, .combo-box .list-cell:focused{
+    	-fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;    
+    
+    }
+    
+       .combo-box:hover {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #4cb0f9;
+    }
+    
+      .combo-box:pressed, .combo-box:focused {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: #2798eb;
+    -fx-text-fill: #0880d7;
+            }
+    
+
+.combo-box-popup .list-view .list-cell {
+	        	  -fx-color:white;
+	
+		-fx-cell-size:40px;
+		    -fx-background-color: rgb(50,161,244);
+    -fx-text-fill:white;
+}
+.combo-box-popup .list-view .list-cell:hover {
+		-fx-cell-size:40px;
+		    -fx-background-color: rgb(28,144,237);
+    -fx-text-fill:white;
+}
+	

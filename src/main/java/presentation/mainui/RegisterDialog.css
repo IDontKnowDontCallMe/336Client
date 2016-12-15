@@ -1,0 +1,51 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+
+
+    
+	.password-field{
+	-fx-min-width: 250.0;
+	-fx-border-style:solid ;
+				-fx-border-color:rgb(177,2,161);
+	-fx-min-height:24px;
+	
+}
+	.text-field{
+		-fx-min-width : 250.0;
+			-fx-border-style:solid ;
+			-fx-border-color:rgb(177,2,161);
+				-fx-min-height:24px;
+			
+		
+	}
+	
+	
+	 .label{
+		-fx-font-family: "PingFang SC";
+		-fx-font-size:16px;
+	}
+
+
+
+	      .button {
+  -fx-text-fill: #FFF;
+  -fx-font-weight: 300;
+  -fx-font-size: 15px;
+  -fx-font-family: "PingFang SC";
+  -fx-text-alignment: center;
+  -fx-padding: 0 40px;
+  -fx-cursor: pointer;
+  -fx-min-height:35px;
+  -fx-max-height:35px;
+  
+ }
+
+
+ .button:hover, .button:focus {
+    -fx-text-fill: #FFF; 
+    }
+  .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            }
+	
+	

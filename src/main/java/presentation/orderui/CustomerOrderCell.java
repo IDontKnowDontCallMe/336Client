@@ -23,7 +23,6 @@ public class CustomerOrderCell extends Pane {
 	private Label children;
 	private Label total;
 	private Label state;
-	private Label revoke;
 	private Label orderID;
 	private Button button;
 

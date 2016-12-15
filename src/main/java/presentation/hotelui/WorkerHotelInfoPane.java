@@ -2,14 +2,14 @@ package presentation.hotelui;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,13 +20,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
 import vo.RoomVO;
 
 public class WorkerHotelInfoPane extends GridPane {
+	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
+
 	private int hotelID;
 	private GridPane infoPane;
 	private ScrollPane roomPane;
@@ -78,7 +83,17 @@ public class WorkerHotelInfoPane extends GridPane {
 		this.add(new Text("房型列表"), 0, 2, 1, 1);
 		this.add(roomBox, 0, 3, 2, 1);
 
-		backButton = new Button("返回");
+		Label back = new Label();
+		back.setFont(Font.font(icon.getFamily(), 28));
+		back.setText(String.valueOf('\uf112'));
+		backButton = new Button("返回", back);
+		backButton.setWrapText(true);
+		backButton.setContentDisplay(ContentDisplay.TOP);
+		backButton.setId("back");
+		backButton.setShape(new Circle(31));
+		backButton.setMinSize(62, 62);
+		backButton.setMaxSize(62, 62);
+		
 		this.add(backButton, 1, 0, 1, 1);
 		backButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
@@ -176,6 +191,8 @@ public class WorkerHotelInfoPane extends GridPane {
 		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
 		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton);
 		roomBox.getChildren().addAll(roomPane, addBox1, addBox2);
+		
+		//this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
 	private void initInfoPane() {
