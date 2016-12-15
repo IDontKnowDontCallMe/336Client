@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -46,8 +45,10 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 	private TextField numTextField;
 	private Button addButton;
 	private Button subButton;
+	private Button produceButton;
 	private CheckBox childrenCheckBox;
 	private Text totalText;
+	private HBox tipBox;
 
 	private int total;
 	private TextField customerNameTextField;
@@ -58,6 +59,8 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 
 	public ProducingOrderOfflineDialog(int hotelID) throws RemoteException {
 		this.hotelID = hotelID;
+
+		tipBox = new HBox();
 
 		initUI();
 		this.getDialogPane().setContent(gridPane);
@@ -187,6 +190,8 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 			try {
 				updateTotal();
 				totalText.setText(String.valueOf(total));
+				gridPane.getChildren().remove(tipBox);
+				gridPane.add(tipBox, 1, 7, 1, 1);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -203,6 +208,8 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 			try {
 				updateTotal();
 				totalText.setText(String.valueOf(total));
+				gridPane.getChildren().remove(tipBox);
+				gridPane.add(tipBox, 1, 7, 1, 1);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -227,7 +234,7 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 		HBox totalBox = new HBox(new Text("优惠后总价:"), totalText);
 		gridPane.add(totalBox, 0, 7, 1, 1);
 
-		Button produceButton = new Button("生产订单");
+		produceButton = new Button("生产订单");
 		gridPane.add(produceButton, 0, 8, 1, 1);
 
 		HotelVO hotelVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
@@ -292,6 +299,30 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 				roomList.get(roomIndex).price, false, hotelVO.city, hotelVO.businessCircle);
 		total = BLFactory.getInstance().getOrderBLService().calculateTotal(calculationConditionVO);
 		totalText.setText(String.valueOf(total));
+
+		String problem = BLFactory.getInstance().getOrderBLService().canBeProduced(calculationConditionVO);
+
+		if (problem.equals("房间不足")) {
+			produceButton.setDisable(true);
+			Text tipText1 = new Text("您所预订的房间不足, 无法预订");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText1);
+
+		} else if (problem.equals("信用值小于0")) {
+			produceButton.setDisable(true);
+			Text tipText2 = new Text("您的信用值小于0, 无法预订");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText2);
+
+		} else if (problem.equals("房间充足")) {
+			produceButton.setDisable(false);
+			Text tipText3 = new Text("");
+
+			tipBox.getChildren().clear();
+			tipBox.getChildren().add(tipText3);
+		}
 
 		return calculationConditionVO;
 	}
