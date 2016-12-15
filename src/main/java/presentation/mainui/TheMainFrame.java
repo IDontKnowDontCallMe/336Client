@@ -30,7 +30,7 @@ public class TheMainFrame extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		linkToServer();
+	//	linkToServer();
 		scene = new Scene(new LoginPane(), 1100, 700);
 		parentStack = new Stack<Parent>();
 

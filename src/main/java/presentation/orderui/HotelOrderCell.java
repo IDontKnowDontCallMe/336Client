@@ -7,22 +7,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import vo.OrderVO;
 
 public class HotelOrderCell extends GridPane {
 
 	OrderVO orderVO;
 
-	private Text customerNameText;
-	private Text customerPhoneText;
-	private Text roomText;
-	private Text checkInText;
-	private Text checkOutText;
-	private Text numText;
-	private Text childrenText;
-	private Text totalText;
-	private Text stateText;
+	private Label customerName;
+	private Label customerPhone;
+	private Label roomName;
+	private Label checkInTime;
+	private Label checkOutTime;
+	private Label num;
+	private Label children;
+	private Label total;
+	private Label state;
 	private Button button;
 	private Label orderID;
 
@@ -31,25 +30,25 @@ public class HotelOrderCell extends GridPane {
 		this.orderVO = orderVO;
 		this.setId("gridp");
 		orderID = new Label(Integer.toString(orderVO.orderID));
-		
-		customerNameText = new Text(orderVO.customerName);
-		this.add(customerNameText, 0, 0, 1, 1);
-		customerPhoneText = new Text(orderVO.customerPhoneNumber);
-		this.add(customerPhoneText, 1, 0, 2, 1);
-		stateText = new Text(orderVO.orderState);
-		this.add(stateText, 4, 0, 1, 1);
-		roomText = new Text(orderVO.roomName);
-		this.add(roomText, 0, 1, 2, 1);
-		totalText = new Text("¥" + String.valueOf(orderVO.total));
-		this.add(totalText, 4, 1, 1, 1);
-		checkInText = new Text("入 " + orderVO.checkInTime);
-		this.add(checkInText, 0, 2, 1, 1);
-		checkOutText = new Text("离" + orderVO.checkOutTime);
-		this.add(checkOutText, 1, 2, 1, 1);
-		numText = new Text(String.valueOf(orderVO.roomNum) + "间");
-		this.add(numText, 1, 1, 1, 1);
-		childrenText = new Text(orderVO.hasChildren ? "有" : "无" + "儿童");
-		this.add(childrenText, 2, 1, 1, 1);
+		this.getChildren().add(orderID);
+		customerName = new Label(orderVO.customerName);
+		this.add(customerName, 0, 0, 1, 1);
+		customerPhone = new Label(orderVO.customerPhoneNumber);
+		this.add(customerPhone, 1, 0, 2, 1);
+		state = new Label(orderVO.orderState);
+		this.add(state, 4, 0, 1, 1);
+		roomName = new Label(orderVO.roomName);
+		this.add(roomName, 0, 1, 2, 1);
+		total = new Label("¥" + String.valueOf(orderVO.total));
+		this.add(total, 4, 1, 1, 1);
+		checkInTime = new Label("入 " + orderVO.checkInTime);
+		this.add(checkInTime, 0, 2, 1, 1);
+		checkOutTime = new Label("离" + orderVO.checkOutTime);
+		this.add(checkOutTime, 1, 2, 1, 1);
+		num = new Label(String.valueOf(orderVO.roomNum) + "间");
+		this.add(num, 1, 1, 1, 1);
+		children = new Label(orderVO.hasChildren ? "有" : "无" + "儿童");
+		this.add(children, 2, 1, 1, 1);
 
 		setButton(orderVO.orderState);
 		if (button != null) {
@@ -81,7 +80,7 @@ public class HotelOrderCell extends GridPane {
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
 				if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "已执行未离店")) {
-					stateText.setText("已执行未离店");
+					state.setText("已执行未离店");
 					this.getChildren().remove(button);
 					setLeavingButton();
 					System.out.println("excute.");
@@ -98,7 +97,7 @@ public class HotelOrderCell extends GridPane {
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
 				if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "正常")) {
-					stateText.setText("正常");
+					state.setText("正常");
 					this.getChildren().remove(button);
 					setExecutingButton();
 					System.out.println("delay.");
@@ -115,7 +114,7 @@ public class HotelOrderCell extends GridPane {
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
 				if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "已执行已离店")) {
-					stateText.setText("已执行已离店");
+					state.setText("已执行已离店");
 					this.getChildren().remove(button);
 					System.out.println("leave.");
 				}

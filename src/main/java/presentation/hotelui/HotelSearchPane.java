@@ -3,13 +3,11 @@ package presentation.hotelui;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -40,6 +38,8 @@ public class HotelSearchPane extends VBox {
 		initSearchPane();
 		initSortingPane();
 		initHotelListPane();
+		
+		this.getStylesheets().add(getClass().getResource("HotelSearchPane.css").toExternalForm());
 	}
 
 	private void initSearchPane() {
