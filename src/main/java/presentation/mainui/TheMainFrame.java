@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Stack;
+import java.util.TimerTask;
+
 import bussinesslogic.factory.BLFactory;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -37,6 +39,7 @@ public class TheMainFrame extends Application {
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
+		
 	}
 
 	public static void main(String[] args) {
@@ -47,7 +50,7 @@ public class TheMainFrame extends Application {
 		// 172.26.102.100
 		try {
 			blFactory = BLFactory.getInstance();
-			blFactory.setRemote(Naming.lookup("rmi://172.26.204.41:8888/controllerRemoteFactory"));
+			blFactory.setRemote(Naming.lookup("rmi://localhost:8888/controllerRemoteFactory"));
 			System.out.println("linked");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -57,5 +60,8 @@ public class TheMainFrame extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 
 }

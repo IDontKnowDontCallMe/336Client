@@ -1,6 +1,10 @@
 package presentation.mainui;
 
 import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -8,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import presentation.mainui.WebManagerMainPane.SurvivalTast;
 import presentation.orderui.MarketerOrdersPane;
 import presentation.promotionui.LevelPanel;
 import presentation.promotionui.WebPromotionPanel;
@@ -15,8 +20,11 @@ import presentation.userui.CustomerCreditPanel;
 
 public class WebMarketerMainPane extends AnchorPane {
 
-	public WebMarketerMainPane() {
+	private int webMarketerID;
+	
+	public WebMarketerMainPane(int webMarketerID) {
 		super();
+		this.webMarketerID = webMarketerID;
 		int r =200;
 		int dim = 130;
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
@@ -133,7 +141,27 @@ public class WebMarketerMainPane extends AnchorPane {
 			TheMainFrame.backTo();
 		});
 		
+		Timer surviveTimer = new Timer(true);
+		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+		
 		this.getStylesheets().add(getClass().getResource("WebMarketerMainPane.css").toExternalForm());
 
 	}
+	
+	public class SurvivalTast extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				BLFactory.getInstance().getUserBLService().survivalConfirm(webMarketerID);
+				
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 }

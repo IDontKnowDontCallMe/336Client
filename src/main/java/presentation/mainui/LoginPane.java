@@ -199,10 +199,10 @@ public class LoginPane extends AnchorPane {
 			TheMainFrame.jumpTo(new HotelWorkerMainPane(Integer.valueOf(userIDTextField.getText())));
 			break;
 		case ("webMarketer"):
-			TheMainFrame.jumpTo(new WebMarketerMainPane());
+			TheMainFrame.jumpTo(new WebMarketerMainPane(Integer.valueOf(userIDTextField.getText())));
 			break;
 		case ("webManager"):
-			TheMainFrame.jumpTo(new WebManagerMainPane());
+			TheMainFrame.jumpTo(new WebManagerMainPane(Integer.valueOf(userIDTextField.getText())));
 			break;
 
 		}

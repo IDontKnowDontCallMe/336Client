@@ -1,7 +1,10 @@
 package presentation.mainui;
 
 import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -11,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
+import presentation.mainui.CustomerMainPane.SurvivalTast;
 import presentation.orderui.HotelOrdersPane;
 import presentation.orderui.ProducingOrderOfflineDialog;
 import presentation.promotionui.HotelPromotionPanel;
@@ -137,7 +141,26 @@ public class HotelWorkerMainPane extends AnchorPane {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
+		
+		Timer surviveTimer = new Timer(true);
+		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
+	}
+	
+	public class SurvivalTast extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				BLFactory.getInstance().getUserBLService().survivalConfirm(hotelID);
+				
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

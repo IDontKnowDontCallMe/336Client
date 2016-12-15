@@ -1,7 +1,10 @@
 package presentation.mainui;
 
 import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -123,9 +126,29 @@ public class CustomerMainPane extends AnchorPane {
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
+		
+		Timer surviveTimer = new Timer(true);
+		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());
 
+	}
+	
+	
+	public class SurvivalTast extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				BLFactory.getInstance().getUserBLService().survivalConfirm(customerID);
+				
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }
