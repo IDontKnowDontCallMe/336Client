@@ -17,6 +17,11 @@ import presentation.hotelui.AreaInputPane;
 import presentation.hotelui.BookedHotelPane;
 import presentation.orderui.CustomerOrdersPane;
 
+/**
+ * @author samperson1997
+ * 客户主界面
+ *
+ */
 public class CustomerMainPane extends AnchorPane {
 
 	private int customerID;
@@ -135,6 +140,11 @@ public class CustomerMainPane extends AnchorPane {
 	}
 	
 	
+	/**
+	 * @author samperson1997
+	 * 提醒服务器端此账号仍然登陆
+	 *
+	 */
 	public class SurvivalTast extends TimerTask{
 
 		@Override

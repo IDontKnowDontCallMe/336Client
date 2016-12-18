@@ -13,6 +13,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.WebMarketerVO;
 
+/**
+ * @author samperson1997
+ * 网站营销人员信息面板
+ *
+ */
 public class WebMarketerPanel extends VBox {
 
 	private ScrollPane listPane;
@@ -21,7 +26,12 @@ public class WebMarketerPanel extends VBox {
 	private Button backButton;
 	private Text title;
 
+	/**
+	 * @throws RemoteException
+	 * 网站营销人员信息面板
+	 */
 	public WebMarketerPanel() throws RemoteException {
+		
 		List<WebMarketerVO> webMarketerList = BLFactory.getInstance().getUserBLService().getWebMarketerList();
 
 		webMarketerBox = new VBox();
@@ -39,7 +49,13 @@ public class WebMarketerPanel extends VBox {
 		this.getChildren().addAll(titleBox, listPane);
 	}
 
+	/**
+	 * @param webMarketerList
+	 * 建立网站营销人员列表
+	 * 
+	 */
 	public void buildWebMarketerBox(List<WebMarketerVO> webMarketerList) {
+		
 		webMarketerBox.getChildren().clear();
 		for (WebMarketerVO vo : webMarketerList) {
 			webMarketerBox.getChildren().addAll(new WebMarketerCell(vo));

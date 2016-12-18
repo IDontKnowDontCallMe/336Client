@@ -8,6 +8,11 @@ import java.util.List;
 import vo.CreditVO;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * customer模块remote服务
+ *
+ */
 public interface RemoteCustomerService extends Remote{
 
 	public CustomerVO getCustomerInfo(int customerID) throws RemoteException;

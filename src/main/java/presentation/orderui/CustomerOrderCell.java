@@ -11,6 +11,11 @@ import javafx.scene.layout.Pane;
 import vo.CommentVO;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 客户订单列表单元格
+ *
+ */
 public class CustomerOrderCell extends Pane {
 
 	OrderVO orderVO;
@@ -26,7 +31,12 @@ public class CustomerOrderCell extends Pane {
 	private Label orderID;
 	private Button button;
 
+	/**
+	 * @param orderVO
+	 * 客户订单列表单元格
+	 */
 	public CustomerOrderCell(OrderVO orderVO) {
+		
 		super();
 		this.orderVO = orderVO;
 		this.setId("pane");

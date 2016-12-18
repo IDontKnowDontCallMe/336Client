@@ -10,6 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.WebMarketerVO;
 
+/**
+ * @author samperson1997
+ * 网站营销人员信息单元格
+ *
+ */
 public class WebMarketerCell extends GridPane {
 
 	WebMarketerVO webMarketerVO;
@@ -21,7 +26,13 @@ public class WebMarketerCell extends GridPane {
 	private TextField phoneTextField;
 	private Button editButton;
 
+	/**
+	 * @param webMarketerVO
+	 * 网站营销人员信息单元格
+	 * 
+	 */
 	public WebMarketerCell(WebMarketerVO webMarketerVO) {
+		
 		super();
 		this.webMarketerVO = webMarketerVO;
 		infoPane = new GridPane();

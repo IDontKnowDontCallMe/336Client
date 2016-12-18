@@ -2,6 +2,11 @@ package vo;
 
 import java.io.Serializable;
 
+/**
+ * @author samperson1997
+ * 地区vo
+ *
+ */
 public class AreaVO implements Serializable{
 
 	/**

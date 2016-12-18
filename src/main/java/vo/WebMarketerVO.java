@@ -2,6 +2,11 @@ package vo;
 
 import java.io.Serializable;
 
+/**
+ * @author samperson1997
+ * 网站营销人员vo
+ *
+ */
 public class WebMarketerVO implements Serializable{
 	
 	

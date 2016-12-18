@@ -25,6 +25,10 @@ import presentation.mainui.TheMainFrame;
 import vo.CreditVO;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * 客户面板
+ */
 public class CustomerInfoPane extends GridPane {
 
 	private int customerID;
@@ -44,7 +48,13 @@ public class CustomerInfoPane extends GridPane {
 
 	private ScrollPane creditPane;
 
+	/**
+	 * @param customerID
+	 * @throws RemoteException
+	 * 客户面板
+	 */
 	public CustomerInfoPane(int customerID) throws RemoteException {
+		
 		super();
 		this.customerID = customerID;
 
@@ -67,7 +77,12 @@ public class CustomerInfoPane extends GridPane {
 		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
+	/**
+	 * @throws RemoteException
+	 * 初始化客户信息面板
+	 */
 	private void initInfoPane() throws RemoteException {
+		
 		CustomerVO customerVO = BLFactory.getInstance().getCustomerBLService().getCustomerInfo(customerID);
 
 		infoPane = new GridPane();
@@ -180,7 +195,12 @@ public class CustomerInfoPane extends GridPane {
 
 	}
 
+	/**
+	 * @throws RemoteException
+	 * 初始化信用值列表
+	 */
 	private void initCreditList() throws RemoteException {
+		
 		creditPane = new ScrollPane();
 		TableView<CreditCell> tableView = new TableView<>();
 		creditPane.setContent(tableView);
@@ -208,6 +228,10 @@ public class CustomerInfoPane extends GridPane {
 		tableView.setItems(creditCells);
 	}
 
+	/**
+	 * @author samperson1997
+	 * 信用值单元格
+	 */
 	public class CreditCell {
 
 		private SimpleStringProperty producingTime;

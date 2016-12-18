@@ -3,6 +3,11 @@ package vo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * @author samperson1997
+ * 客户vo
+ *
+ */
 public class CustomerVO implements Serializable{
 
 	/**

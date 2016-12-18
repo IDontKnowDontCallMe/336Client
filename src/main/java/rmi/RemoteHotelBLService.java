@@ -11,6 +11,11 @@ import vo.OrderVO;
 import vo.RoomVO;
 import vo.SearchConditionVO;
 
+/**
+ * @author samperson1997
+ * hotel模块remote服务
+ * 
+ */
 public interface RemoteHotelBLService extends Remote{
 	public List<HotelVO> getHotelVOsOfArea(AreaVO areaVO, int customerID)  throws RemoteException;
 

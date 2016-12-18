@@ -13,9 +13,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
-import vo.HotelPromotionVO;
 import vo.WebPromotionVO;
 
+/**
+ * @author samperson1997
+ * 网站促销策略面板
+ *
+ */
 public class WebPromotionPanel extends VBox {
 
 	private List<WebPromotionVO> webPromotionList;
@@ -26,6 +30,11 @@ public class WebPromotionPanel extends VBox {
 	private Button backButton;
 	private Text title;
 
+	/**
+	 * @throws RemoteException
+	 * 网站促销策略面板
+	 * 
+	 */
 	public WebPromotionPanel() throws RemoteException{
 
 		webPromotionList = BLFactory.getInstance().getPromotionBLService().getWebPromotionList();
@@ -65,7 +74,13 @@ public class WebPromotionPanel extends VBox {
 		this.getChildren().addAll(addBox, listPane);
 	}
 
+	/**
+	 * @param webPromotionList
+	 * 建立网站促销策略列表
+	 * 
+	 */
 	private void buildWebPromotionBox(List<WebPromotionVO> webPromotionList) {
+		
 		webPromotionBox.getChildren().clear();
 		for (WebPromotionVO vo : webPromotionList) {
 			webPromotionBox.getChildren().add(new WebPromotionCell(vo));

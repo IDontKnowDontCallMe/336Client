@@ -13,6 +13,11 @@ import javafx.scene.text.Text;
 import presentation.userui.CreditDialog;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * 客户信用值单元格
+ *
+ */
 public class CustomerCreditCell extends GridPane {
 
 	CustomerVO customerVO;
@@ -24,7 +29,13 @@ public class CustomerCreditCell extends GridPane {
 	private Text companyText;
 	private Button editButton;
 
+	/**
+	 * @param customerVO
+	 * 客户信用值单元格
+	 * 
+	 */
 	public CustomerCreditCell(CustomerVO customerVO) {
+		
 		super();
 		this.customerVO = customerVO;
 		infoPane = new GridPane();

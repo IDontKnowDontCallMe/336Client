@@ -3,13 +3,24 @@ package presentation.hotelui;
 import javafx.beans.property.SimpleStringProperty;
 import vo.CommentVO;
 
+/**
+ * @author samperson1997
+ * 评论单元格
+ *
+ */
 public class CommentCell {
+	
 	private SimpleStringProperty roomName;
 	private SimpleStringProperty customerID;
 	private SimpleStringProperty comment;
 	private SimpleStringProperty score;
 	private SimpleStringProperty producingDateTime;
 
+	/**
+	 * @param vo
+	 * 评论单元格
+	 * 
+	 */
 	public CommentCell(CommentVO vo) {
 
 		producingDateTime = new SimpleStringProperty(vo.produingDateTime.toString());

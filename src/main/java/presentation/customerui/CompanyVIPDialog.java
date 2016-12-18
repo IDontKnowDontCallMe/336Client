@@ -1,9 +1,7 @@
 package presentation.customerui;
 
-import java.time.LocalDate;
 
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -11,6 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * @author samperson1997
+ * 注册企业会员对话框
+ */
 public class CompanyVIPDialog extends Dialog {
 	private TextField companyTextField;
 	private GridPane gridPane;

@@ -31,6 +31,11 @@ import presentation.roomui.RoomCell;
 import vo.HotelVO;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员查看酒店详细信息界面
+ *
+ */
 public class WorkerHotelInfoPane extends GridPane {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
@@ -69,7 +74,14 @@ public class WorkerHotelInfoPane extends GridPane {
 	HotelVO hotelVO;
 	List<RoomVO> roomList;
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 酒店工作人员酒店详细信息面板
+	 * 
+	 */
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
+		
 		super();
 		this.setHgap(10);
 		this.setVgap(20);
@@ -103,7 +115,14 @@ public class WorkerHotelInfoPane extends GridPane {
 		});
 	}
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 酒店房间面板初始化
+	 * 
+	 */
 	private void initRoomPane(int hotelID) throws RemoteException {
+		
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
 		roomBox = new VBox();
@@ -198,7 +217,11 @@ public class WorkerHotelInfoPane extends GridPane {
 		//this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
+	/**
+	 * 酒店信息面板初始化
+	 */
 	private void initInfoPane() {
+		
 		infoPane = new GridPane();
 
 		infoPane.setHgap(10);

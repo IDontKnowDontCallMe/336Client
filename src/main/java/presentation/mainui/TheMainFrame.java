@@ -5,7 +5,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Stack;
-import java.util.TimerTask;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.application.Application;
@@ -14,6 +13,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import presentation.hotelui.ImageEditPane;
 
+/**
+ * @author samperson1997
+ * 主界面的方法
+ *
+ */
 public class TheMainFrame extends Application {
 
 	private static Stack<Parent> parentStack;
@@ -49,6 +53,10 @@ public class TheMainFrame extends Application {
 		launch(args);
 	}
 
+	/**
+	 * 连接至服务器
+	 * 
+	 */
 	private void linkToServer() {
 		// 172.26.102.100
 		try {

@@ -15,6 +15,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.HotelPromotionVO;
 
+/**
+ * @author samperson1997
+ * 酒店促销策略面板
+ *
+ */
 public class HotelPromotionPanel extends VBox {
 
 	private List<HotelPromotionVO> hotelPromotionList;
@@ -25,7 +30,14 @@ public class HotelPromotionPanel extends VBox {
 	private Button backButton;
 	private Text title;
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 酒店促销策略面板
+	 * 
+	 */
 	public HotelPromotionPanel(int hotelID) throws RemoteException {
+		
 		hotelPromotionList = BLFactory.getInstance().getPromotionBLService().getHotelPromotionList(hotelID);
 		hotelPromotionBox = new VBox();
 		hotelPromotionBox.setSpacing(15);
@@ -64,7 +76,13 @@ public class HotelPromotionPanel extends VBox {
 		this.getChildren().addAll(addBox, listPane);
 	}
 
+	/**
+	 * @param hotelPromotionList
+	 * 建立酒店促销策略列表
+	 * 
+	 */
 	private void buildHotelPromotionBox(List<HotelPromotionVO> hotelPromotionList) {
+		
 		hotelPromotionBox.getChildren().clear();
 		for (HotelPromotionVO vo : hotelPromotionList) {
 			hotelPromotionBox.getChildren().add(new HotelPromotionCell(vo));

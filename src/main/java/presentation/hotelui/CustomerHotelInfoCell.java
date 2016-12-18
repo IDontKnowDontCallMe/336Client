@@ -4,6 +4,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 客户查看酒店详细信息单元格
+ *
+ */
 public class CustomerHotelInfoCell extends GridPane {
 
 	OrderVO orderVO;
@@ -17,7 +22,13 @@ public class CustomerHotelInfoCell extends GridPane {
 	private Text totalText;
 	private Text stateText;
 
+	/**
+	 * @param orderVO
+	 * 客户查看酒店详细信息单元格
+	 * 
+	 */
 	public CustomerHotelInfoCell(OrderVO orderVO) {
+		
 		super();
 		this.orderVO = orderVO;
 

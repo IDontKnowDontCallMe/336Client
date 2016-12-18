@@ -13,11 +13,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
-import presentation.mainui.CustomerMainPane.SurvivalTast;
 import presentation.orderui.HotelOrdersPane;
 import presentation.orderui.ProducingOrderOfflineDialog;
 import presentation.promotionui.HotelPromotionPanel;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员主界面
+ *
+ */
 public class HotelWorkerMainPane extends AnchorPane {
 
 	private int hotelID;
@@ -147,6 +151,11 @@ public class HotelWorkerMainPane extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
 	}
 	
+	/**
+	 * @author samperson1997
+	 * 提醒服务器端此账号仍然登陆
+	 *
+	 */
 	public class SurvivalTast extends TimerTask{
 
 		@Override
