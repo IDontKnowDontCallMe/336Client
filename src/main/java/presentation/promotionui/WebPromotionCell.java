@@ -11,6 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.WebPromotionVO;
 
+/**
+ * @author samperson1997
+ * 网站促销策略单元格
+ *
+ */
 public class WebPromotionCell extends GridPane {
 
 	WebPromotionVO webPromotionVO;
@@ -24,7 +29,12 @@ public class WebPromotionCell extends GridPane {
 	private Button editButton;
 	private Button deleteButton;
 
+	/**
+	 * @param webPromotionVO
+	 * 网站促销策略单元格
+	 */
 	public WebPromotionCell(WebPromotionVO webPromotionVO) {
+		
 		super();
 		this.webPromotionVO = webPromotionVO;
 

@@ -11,11 +11,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 房间信息面板
+ *
+ */
 public class RoomInfoPanel extends GridPane {
 
 	private int hotelID;
 	private ScrollPane roomPane;
 
+	/**
+	 * @param roomList
+	 * 房间信息面板
+	 * 
+	 */
 	public RoomInfoPanel(List<RoomVO> roomList) {
 
 		super();

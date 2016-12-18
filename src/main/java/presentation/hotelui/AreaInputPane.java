@@ -15,6 +15,11 @@ import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
 
+/**
+ * @author samperson1997
+ * 城市和商圈选择面板
+ * 
+ */
 public class AreaInputPane extends AnchorPane {
 
 	final int COLUMN_COUNT = 10;
@@ -27,7 +32,13 @@ public class AreaInputPane extends AnchorPane {
 	private Button confirmButton;
 	private Button backButton;
 
+	/**
+	 * @param customerID
+	 * 城市和商圈选择面板
+	 * 
+	 */
 	public AreaInputPane(int customerID) {
+		
 		super();
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.customerID = customerID;

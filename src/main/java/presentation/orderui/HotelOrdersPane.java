@@ -20,6 +20,11 @@ import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员订单面板
+ *
+ */
 public class HotelOrdersPane extends VBox {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
@@ -37,7 +42,14 @@ public class HotelOrdersPane extends VBox {
 	private ScrollPane listPane;
 	private VBox orderBox;
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 酒店工作人员订单面板
+	 * 
+	 */
 	public HotelOrdersPane(int hotelID) throws RemoteException {
+		
 		this.hotelID = hotelID;
 		initRadioButton();
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getHotelOrder(hotelID);
@@ -58,7 +70,11 @@ public class HotelOrdersPane extends VBox {
 
 	}
 
+	/**
+	 * 初始化单选框按钮组件
+	 */
 	private void initRadioButton() {
+		
 		toggleGroup = new ToggleGroup();
 		allButton = new RadioButton("全部订单");
 		allButton.setUserData("全部订单");
@@ -144,6 +160,12 @@ public class HotelOrdersPane extends VBox {
 
 	}
 
+	/**
+	 * @param orderList
+	 * @throws RemoteException
+	 * 建立订单列表面板
+	 * 
+	 */
 	private void buildOrderBox(List<OrderVO> orderList) throws RemoteException {
 
 		orderBox.getChildren().clear();

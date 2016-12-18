@@ -23,6 +23,11 @@ import vo.AreaVO;
 import vo.HotelVO;
 import vo.SearchConditionVO;
 
+/**
+ * @author samperson1997
+ * 酒店搜索面板
+ *
+ */
 public class HotelSearchPane extends VBox {
 
 	private int customerID;
@@ -30,7 +35,15 @@ public class HotelSearchPane extends VBox {
 	private List<HotelVO> list;
 	private HotelListPane hotelListPane;
 
+	/**
+	 * @param areaVO
+	 * @param customerID
+	 * @throws RemoteException
+	 * 酒店搜索面板
+	 * 
+	 */
 	public HotelSearchPane(AreaVO areaVO, int customerID) throws RemoteException {
+		
 		this.customerID = customerID;
 		this.areaVO = areaVO;
 
@@ -42,7 +55,12 @@ public class HotelSearchPane extends VBox {
 		this.getStylesheets().add(getClass().getResource("HotelSearchPane.css").toExternalForm());
 	}
 
+	/**
+	 * 酒店搜索面板初始化
+	 * 
+	 */
 	private void initSearchPane() {
+		
 		GridPane gridPane = new GridPane();
 		gridPane.setHgap(15);
 		gridPane.setVgap(15);
@@ -236,7 +254,12 @@ public class HotelSearchPane extends VBox {
 
 	}
 
+	/**
+	 * 酒店排序面板初始化
+	 * 
+	 */
 	private void initSortingPane() {
+		
 		HBox hBox = new HBox();
 		hBox.setSpacing(15);
 
@@ -322,13 +345,24 @@ public class HotelSearchPane extends VBox {
 		this.getChildren().add(hBox);
 	}
 
+	/**
+	 * @throws RemoteException
+	 * 酒店列表面板初始化
+	 * 
+	 */
 	private void initHotelListPane() throws RemoteException {
+		
 		list = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
 		hotelListPane = new HotelListPane(list, customerID);
 		this.getChildren().add(hotelListPane);
 	}
 
+	/**
+	 * @throws RemoteException
+	 * 修改酒店列表
+	 */
 	private void changeHotelListPane() throws RemoteException {
+		
 		this.getChildren().remove(hotelListPane);
 		hotelListPane = new HotelListPane(list, customerID);
 

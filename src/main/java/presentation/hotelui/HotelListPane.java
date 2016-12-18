@@ -14,11 +14,24 @@ import presentation.orderui.ProducingOrderDialog;
 import vo.HotelVO;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 酒店列表面板
+ *
+ */
 public class HotelListPane extends ScrollPane {
 
 	private int customerID;
 
+	/**
+	 * @param hotelList
+	 * @param customerID
+	 * @throws RemoteException
+	 * 酒店列表面板
+	 * 
+	 */
 	public HotelListPane(List<HotelVO> hotelList, int customerID) throws RemoteException {
+		
 		super();
 		this.customerID = customerID;
 
@@ -31,6 +44,11 @@ public class HotelListPane extends ScrollPane {
 		}
 	}
 
+	/**
+	 * @author samperson1997
+	 * 酒店简略信息单元格
+	 *
+	 */
 	public class SimpleHotelCell extends GridPane {
 
 		private HotelVO hotelVO;

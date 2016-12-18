@@ -7,6 +7,11 @@ import java.util.List;
 import vo.CalculationConditionVO;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * order模块remote服务
+ *
+ */
 public interface RemoteOrderBLService extends Remote{
 
 public List<OrderVO> getCustomerOrder(int customerID) throws RemoteException;
@@ -19,8 +24,6 @@ public List<OrderVO> getCustomerOrder(int customerID) throws RemoteException;
 	
 	public List<OrderVO> filterHotelList(int hotelID, String state) throws RemoteException;
 
-	//public int calculateTotal() throws RemoteException;
-	
 	public int calculateTotal(CalculationConditionVO vo) throws RemoteException;
 	
 	public String canBeProduced(CalculationConditionVO vo) throws RemoteException;

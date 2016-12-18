@@ -10,6 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * 客户信息单元格
+ *
+ */
 public class CustomerInfoCell extends GridPane {
 
 	CustomerVO customerVO;
@@ -23,7 +28,13 @@ public class CustomerInfoCell extends GridPane {
 	private TextField phoneTextField;
 	private Button editButton;
 
+	/**
+	 * @param customerVO
+	 * 客户信息单元格
+	 * 
+	 */
 	public CustomerInfoCell(CustomerVO customerVO) {
+		
 		super();
 		this.customerVO = customerVO;
 		infoPane = new GridPane();

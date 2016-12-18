@@ -2,6 +2,11 @@ package vo;
 
 import java.io.Serializable;
 
+/**
+ * @author samperson1997
+ * 会员等级制度vo
+ *
+ */
 public class LevelVO implements Serializable{
 
 	/**

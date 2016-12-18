@@ -9,6 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员订单列表单元格
+ *
+ */
 public class HotelOrderCell extends GridPane {
 
 	OrderVO orderVO;
@@ -25,7 +30,13 @@ public class HotelOrderCell extends GridPane {
 	private Button button;
 	private Label orderID;
 
+	/**
+	 * @param orderVO
+	 * @throws RemoteException
+	 * 酒店工作人员订单列表单元格
+	 */
 	public HotelOrderCell(OrderVO orderVO) throws RemoteException {
+		
 		super();
 		this.orderVO = orderVO;
 		this.setId("gridp");
@@ -62,7 +73,14 @@ public class HotelOrderCell extends GridPane {
 
 	}
 
+	/**
+	 * @param state
+	 * @throws RemoteException
+	 * 设置按钮
+	 * 
+	 */
 	private void setButton(String state) throws RemoteException {
+		
 		if (state.equals("正常")) {
 			setExecutingButton();
 		} else if (state.equals("异常")) {
@@ -74,7 +92,11 @@ public class HotelOrderCell extends GridPane {
 		}
 	}
 
+	/**
+	 * 设置执行按钮
+	 */
 	private void setExecutingButton() {
+		
 		button = new Button("执行订单");
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
@@ -91,7 +113,11 @@ public class HotelOrderCell extends GridPane {
 		});
 	}
 
+	/**
+	 * 设置延迟入住按钮
+	 */
 	private void setDelayInButton() {
+		
 		button = new Button("延迟入住");
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
@@ -108,7 +134,11 @@ public class HotelOrderCell extends GridPane {
 		});
 	}
 
+	/**
+	 * 设置办理退房按钮
+	 */
 	private void setLeavingButton() {
+		
 		button = new Button("办理退房");
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {

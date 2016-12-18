@@ -16,6 +16,11 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.WebPromotionVO;
 
+/**
+ * @author samperson1997
+ * 增加网站促销策略对话框
+ *
+ */
 public class WebPromotionAddDialog extends Dialog {
 
 	WebPromotionVO webPromotionVO;
@@ -44,7 +49,12 @@ public class WebPromotionAddDialog extends Dialog {
 	private DatePicker endDatePicker;
 	private GridPane gridPane;
 
+	/**
+	 * 增加网站促销策略对话框
+	 * 
+	 */
 	public WebPromotionAddDialog() {
+		
 		super();
 
 		gridPane = new GridPane();
@@ -128,6 +138,11 @@ public class WebPromotionAddDialog extends Dialog {
 		this.getDialogPane().setContent(gridPane);
 	}
 
+	/**
+	 * @return
+	 * 显示折扣
+	 * 
+	 */
 	public HBox showDiscountBox() {
 
 		discountTextField = new TextField();
@@ -141,7 +156,12 @@ public class WebPromotionAddDialog extends Dialog {
 		return discountBox;
 	}
 
+	/**
+	 * 显示特定时间促销策略
+	 * 
+	 */
 	public void showTimePromotionBox() {
+		
 		startTimeLabel = new Label("选择起始时间: ");
 		endTimeLabel = new Label("选择结束时间: ");
 		startDatePicker = new DatePicker();
@@ -178,7 +198,12 @@ public class WebPromotionAddDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示特定商圈促销策略
+	 * 
+	 */
 	public void showBusinessCirclePromotionBox() {
+		
 		businessCircleLabel = new Label("选择城市和商圈");
 		ObservableList<String> cityList = FXCollections.observableArrayList("南京");
 		cityBox = new ComboBox<String>(cityList);

@@ -14,6 +14,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.LevelVO;
 
+/**
+ * @author samperson1997
+ * 编辑会员制度和会员制度促销策略面板
+ *
+ */
 public class LevelPanel extends GridPane {
 
 	final int COLUMN_COUNT = 4;
@@ -40,7 +45,13 @@ public class LevelPanel extends GridPane {
 	private VBox levelMethodBox;
 	LevelVO levelVO;
 
+	/**
+	 * @throws RemoteException
+	 * 编辑会员制度和会员制度促销策略面板
+	 * 
+	 */
 	public LevelPanel() throws RemoteException {
+		
 		super();
 		levelVO = BLFactory.getInstance().getPromotionBLService().getLevelMethod();
 

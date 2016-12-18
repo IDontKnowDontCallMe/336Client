@@ -10,6 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.HotelVO;
 
+/**
+ * @author samperson1997
+ * 酒店信息单元格
+ *
+ */
 public class HotelCell extends GridPane {
 	HotelVO hotelVO;
 	private GridPane infoPane;
@@ -20,7 +25,13 @@ public class HotelCell extends GridPane {
 	private TextField phoneTextField;
 	private Button editButton;
 
+	/**
+	 * @param hotelVO
+	 * 酒店信息单元格
+	 * 
+	 */
 	public HotelCell(HotelVO hotelVO) {
+		
 		super();
 		this.hotelVO = hotelVO;
 		infoPane = new GridPane();

@@ -10,6 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * @author samperson1997
+ * 注册生日会员对话框
+ *
+ */
 public class BirthVIPDialog extends Dialog {
 	private DatePicker birthdayPicker;
 	private GridPane gridPane;

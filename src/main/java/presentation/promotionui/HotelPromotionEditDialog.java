@@ -19,6 +19,11 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.HotelPromotionVO;
 
+/**
+ * @author samperson1997
+ * 编辑酒店促销策略对话框
+ *
+ */
 public class HotelPromotionEditDialog extends Dialog {
 
 	HotelPromotionVO hotelPromotionVO;
@@ -46,7 +51,13 @@ public class HotelPromotionEditDialog extends Dialog {
 	private DatePicker endDatePicker;
 	private GridPane gridPane;
 
+	/**
+	 * @param hotelPromotionVO
+	 * 编辑酒店促销策略对话框
+	 * 
+	 */
 	public HotelPromotionEditDialog(HotelPromotionVO hotelPromotionVO) {
+		
 		super();
 
 		gridPane = new GridPane();
@@ -125,7 +136,12 @@ public class HotelPromotionEditDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示折扣
+	 * 
+	 */
 	public void showDiscountBox() {
+		
 		discountLabel = new Label("输入折扣: ");
 		discountTextField = new TextField();
 		discountTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -140,7 +156,12 @@ public class HotelPromotionEditDialog extends Dialog {
 		promotionBox.getChildren().add(discountBox);
 	}
 
+	/**
+	 * 显示房间促销策略
+	 * 
+	 */
 	public void showRoomPromotionBox() {
+		
 		minNumLabel = new Label("输入最小房间数量: ");
 		minNumTextField = new TextField();
 		minNumTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -156,7 +177,12 @@ public class HotelPromotionEditDialog extends Dialog {
 		showDiscountBox();
 	}
 
+	/**
+	 * 显示特定时间促销策略
+	 * 
+	 */
 	public void showTimePromotionBox() {
+		
 		startTimeLabel = new Label("选择起始时间: ");
 		endTimeLabel = new Label("选择结束时间: ");
 		startDatePicker = new DatePicker();
@@ -196,7 +222,12 @@ public class HotelPromotionEditDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示合作企业促销策略
+	 * 
+	 */
 	public void showCompanyPromotionBox() {
+		
 		companyNameLabel = new Label("输入合作企业名称: ");
 		companyNameTextField = new TextField();
 		companyNameTextField.setText(hotelPromotionVO.companyName);
@@ -211,7 +242,12 @@ public class HotelPromotionEditDialog extends Dialog {
 		showDiscountBox();
 	}
 
+	/**
+	 * 显示会员生日促销策略
+	 * 
+	 */
 	public void showBirthdayPromotionBox() {
+		
 		showDiscountBox();
 	}
 }

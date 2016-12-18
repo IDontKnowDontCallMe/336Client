@@ -13,6 +13,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * 客户信息面板
+ *
+ */
 public class CustomerInfoPanel extends VBox {
 
 	private ScrollPane listPane;
@@ -21,7 +26,13 @@ public class CustomerInfoPanel extends VBox {
 	private Button backButton;
 	private Text title;
 
+	/**
+	 * @throws RemoteException
+	 * 客户信息面板
+	 * 
+	 */
 	public CustomerInfoPanel() throws RemoteException {
+		
 		List<CustomerVO> customerList = BLFactory.getInstance().getUserBLService().getCustomerList();
 
 		customerBox = new VBox();
@@ -39,7 +50,13 @@ public class CustomerInfoPanel extends VBox {
 		this.getChildren().addAll(titleBox, listPane);
 	}
 
+	/**
+	 * @param customerList
+	 * 建立客户信息列表
+	 * 
+	 */
 	public void buildCustomerBox(List<CustomerVO> customerList) {
+		
 		customerBox.getChildren().clear();
 		for (CustomerVO vo : customerList) {
 			customerBox.getChildren().addAll(new CustomerInfoCell(vo));

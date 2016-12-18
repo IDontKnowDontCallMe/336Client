@@ -11,6 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.HotelPromotionVO;
 
+/**
+ * @author samperson1997
+ * 酒店促销策略单元格
+ *
+ */
 public class HotelPromotionCell extends GridPane {
 
 	HotelPromotionVO hotelPromotionVO;

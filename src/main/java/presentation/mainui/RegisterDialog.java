@@ -12,6 +12,11 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
+/**
+ * @author samperson1997
+ * 注册对话框
+ *
+ */
 public class RegisterDialog extends Dialog<Integer> {
 
 	private GridPane gridPane;

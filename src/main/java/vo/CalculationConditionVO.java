@@ -3,6 +3,11 @@ package vo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * @author samperson1997
+ * 计算条件vo
+ *
+ */
 public class CalculationConditionVO implements Serializable{
 
 	/**

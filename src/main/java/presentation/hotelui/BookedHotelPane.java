@@ -11,6 +11,11 @@ import javafx.scene.layout.VBox;
 import presentation.mainui.TheMainFrame;
 import vo.HotelVO;
 
+/**
+ * @author samperson1997
+ * 预订过的酒店面板
+ *
+ */
 public class BookedHotelPane extends VBox {
 
 	public BookedHotelPane(int customerID) throws RemoteException {

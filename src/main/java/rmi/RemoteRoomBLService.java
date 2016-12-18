@@ -6,7 +6,13 @@ import java.util.List;
 
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * room模块remote服务
+ * 
+ */
 public interface RemoteRoomBLService extends Remote{
+	
 	public boolean addRoomType(int hotelID, RoomVO roomVO) throws RemoteException;
 	
 	public boolean updateRoomType(int hotelID, RoomVO roomVO) throws RemoteException;

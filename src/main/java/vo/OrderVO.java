@@ -5,8 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import sun.misc.GC.LatencyRequest;
-
+/**
+ * @author samperson1997
+ * 订单vo
+ *
+ */
 public class OrderVO implements Serializable{
 
 	/**

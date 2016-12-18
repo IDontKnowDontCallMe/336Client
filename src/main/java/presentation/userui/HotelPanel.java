@@ -17,6 +17,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.HotelVO;
 
+/**
+ * @author samperson1997
+ * 酒店信息面板
+ *
+ */
 public class HotelPanel extends VBox {
 	private ScrollPane listPane;
 	private VBox hotelBox;
@@ -27,7 +32,13 @@ public class HotelPanel extends VBox {
 
 	private List<HotelVO> hotelList;
 
+	/**
+	 * @throws RemoteException
+	 * 酒店信息面板
+	 * 
+	 */
 	public HotelPanel() throws RemoteException {
+		
 		hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
 
 		hotelBox = new VBox();
@@ -71,7 +82,13 @@ public class HotelPanel extends VBox {
 		this.getChildren().addAll(titleBox, listPane);
 	}
 
+	/**
+	 * @param hotelList
+	 * 建立酒店信息列表
+	 * 
+	 */
 	public void buildHotelBox(List<HotelVO> hotelList) {
+		
 		hotelBox.getChildren().clear();
 		for (HotelVO vo : hotelList) {
 			hotelBox.getChildren().addAll(new HotelCell(vo));

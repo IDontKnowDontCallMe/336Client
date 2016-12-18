@@ -3,6 +3,11 @@ package vo;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @author samperson1997
+ * 信用值vo
+ *
+ */
 public class CreditVO implements Serializable{
 
 	

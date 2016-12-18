@@ -34,6 +34,11 @@ import vo.HotelVO;
 import vo.OrderVO;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 生产线下订单对话框
+ *
+ */
 public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 	int hotelID;
 	List<RoomVO> roomList;
@@ -57,7 +62,14 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 	CalculationConditionVO calculationConditionVO;
 	OrderVO orderVO;
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 生产线下订单对话框
+	 * 
+	 */
 	public ProducingOrderOfflineDialog(int hotelID) throws RemoteException {
+		
 		this.hotelID = hotelID;
 
 		tipBox = new HBox();
@@ -72,7 +84,13 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 
 	}
 
+	/**
+	 * @throws RemoteException
+	 * 初始化界面
+	 * 
+	 */
 	private void initUI() throws RemoteException {
+		
 		gridPane = new GridPane();
 
 		List<RoomVO> roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
@@ -290,6 +308,12 @@ public class ProducingOrderOfflineDialog extends Dialog<OrderVO> {
 		});
 	}
 
+	/**
+	 * @return
+	 * @throws RemoteException
+	 * 计算总价
+	 * 
+	 */
 	private CalculationConditionVO updateTotal() throws RemoteException {
 
 		HotelVO hotelVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);

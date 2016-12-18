@@ -9,6 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 网站营销人员订单列表单元格
+ *
+ */
 public class MarketerOrderCell extends GridPane {
 
 	OrderVO orderVO;
@@ -23,7 +28,12 @@ public class MarketerOrderCell extends GridPane {
 	private Button recoverAllButton;
 	private Button recoverHalfButton;
 
+	/**
+	 * @param orderVO
+	 * 网站营销人员订单列表单元格
+	 */
 	public MarketerOrderCell(OrderVO orderVO) {
+		
 		super();
 		this.orderVO = orderVO;
 
@@ -51,7 +61,12 @@ public class MarketerOrderCell extends GridPane {
 
 	}
 
+	/**
+	 * 设置按钮
+	 * 
+	 */
 	private void setButton() {
+		
 		recoverAllButton = new Button("恢复一半");
 		recoverHalfButton = new Button("恢复全部");
 		this.add(recoverHalfButton, 3, 3, 1, 1);
