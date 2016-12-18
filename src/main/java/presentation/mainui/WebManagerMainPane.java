@@ -24,6 +24,7 @@ import presentation.userui.WebMarketerPanel;
 public class WebManagerMainPane extends AnchorPane {
 
 	private int webManagerID;
+	private Timer surviveTimer;
 	
 	public WebManagerMainPane(int webManagerID) {
 		super();
@@ -112,9 +113,10 @@ public class WebManagerMainPane extends AnchorPane {
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
+			surviveTimer.cancel();
 		});
 		
-		Timer surviveTimer = new Timer(true);
+		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());

@@ -25,6 +25,7 @@ import presentation.orderui.CustomerOrdersPane;
 public class CustomerMainPane extends AnchorPane {
 
 	private int customerID;
+	private Timer surviveTimer;
 
 	public CustomerMainPane(int customerID) {
 		super();
@@ -129,10 +130,11 @@ public class CustomerMainPane extends AnchorPane {
 		});
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			surviveTimer.cancel();
 			TheMainFrame.backTo();
 		});
 		
-		Timer surviveTimer = new Timer(true);
+		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());

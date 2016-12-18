@@ -25,6 +25,7 @@ import presentation.userui.CustomerCreditPanel;
 public class WebMarketerMainPane extends AnchorPane {
 
 	private int webMarketerID;
+	private Timer surviveTimer;
 	
 	public WebMarketerMainPane(int webMarketerID) {
 		super();
@@ -137,9 +138,10 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
+			surviveTimer.cancel();
 		});
 		
-		Timer surviveTimer = new Timer(true);
+		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 		
 		this.getStylesheets().add(getClass().getResource("WebMarketerMainPane.css").toExternalForm());
