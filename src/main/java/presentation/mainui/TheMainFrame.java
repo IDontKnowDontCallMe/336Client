@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import presentation.hotelui.ImageEditPane;
 
 public class TheMainFrame extends Application {
 
@@ -32,10 +33,12 @@ public class TheMainFrame extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	//	linkToServer();
+		linkToServer();
+		
 		scene = new Scene(new LoginPane(), 1100, 700);
 		parentStack = new Stack<Parent>();
-
+		
+		
 		primaryStage.setScene(scene);
 
 		primaryStage.show();

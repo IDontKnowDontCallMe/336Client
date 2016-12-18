@@ -23,6 +23,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
@@ -71,6 +73,7 @@ public class WorkerHotelInfoPane extends GridPane {
 		super();
 		this.setHgap(10);
 		this.setVgap(20);
+		
 
 		this.hotelID = hotelID;
 		hotelVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
