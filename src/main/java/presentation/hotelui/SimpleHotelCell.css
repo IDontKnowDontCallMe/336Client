@@ -1,0 +1,102 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+	
+    .root{
+    	-fx-background-image:url(redbg3.png) ;
+    }
+    
+    .grid-pane{
+    		-fx-background-image:url(ordertest.png);
+    	-fx-min-height:170;
+    	-fx-min-width:800;
+  -fx-padding: 0;
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-border-radius: 1px;
+  -fx-effect:dropshadow(gaussian,rgba(0, 0, 0, 0.2),7.0,0.0,0.0,2.0);
+  	-fx-font-family: "PingFang SC";
+
+    }
+
+
+ .button{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+  	-fx-font-family: "PingFang SC";
+  -fx-text-fill:white;
+   }
+   .label{
+   	-fx-text-fill:white;
+   }
+  .button:hover .label{
+ 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 	 }
+ 	 .button:hover{
+ 	-fx-background-color: rgba(234, 246, 255, 0.9); 
+ 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   .button:pressed .label{
+    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+    .button:pressed{
+  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+    
+    #hotelname{
+    	-fx-min-width:260;
+    	-fx-min-height:42;
+    	-fx-font-size: 24px;
+    }
+    #state{
+    	-fx-min-width:133;
+    	-fx-min-height:35;
+    	-fx-font-size: 16px;
+    }
+    #orderid{
+    	-fx-min-width:400;
+    	-fx-min-height:25;
+    	-fx-font-size: 16px;
+    }
+    #roomname,#children,#num{
+    	-fx-min-width:95;
+    	-fx-min-height:24;
+    	-fx-font-size: 15px;
+    	-fx-alignment:center;
+    }
+    #total{
+    	-fx-min-width:86;
+    	-fx-max-width:86;
+    	-fx-font-size:16px;
+    	-fx-min-height:40;
+    	-fx-alignment:center;
+    }
+    #checkintime,#checkouttime{
+    	-fx-min-width:395;
+    	-fx-min-height:28;
+    	-fx-font-size: 18px;
+    }
+    #revoke{
+    	-fx-min-width:68;
+    	-fx-min-height:40;
+    	-fx-font-size:16px;
+    }
+    
+    
+    
+    
+    
+    
+    
+	
+	
