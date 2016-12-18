@@ -10,6 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * @author samperson1997
+ * 信用充值对话框
+ *
+ */
 public class CreditDialog extends Dialog {
 
 	final int COLUMN_COUNT = 8;
@@ -19,7 +24,13 @@ public class CreditDialog extends Dialog {
 	private TextField creditTextField;
 	private HBox creditBox;
 
+	/**
+	 * @param customerID
+	 * 信用充值对话框
+	 * 
+	 */
 	public CreditDialog(int customerID) {
+		
 		super();
 
 		gridPane = new GridPane();

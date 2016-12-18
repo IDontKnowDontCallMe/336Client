@@ -12,11 +12,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import presentation.mainui.CustomerMainPane.SurvivalTast;
 import presentation.userui.CustomerInfoPanel;
 import presentation.userui.HotelPanel;
 import presentation.userui.WebMarketerPanel;
 
+/**
+ * @author samperson1997
+ * 网站管理人员主界面
+ *
+ */
 public class WebManagerMainPane extends AnchorPane {
 
 	private int webManagerID;

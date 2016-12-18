@@ -14,6 +14,11 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.HotelVO;
 
+/**
+ * @author samperson1997
+ * 增加酒店对话框
+ *
+ */
 public class AddHotelDialog extends Dialog {
 	final int COLUMN_COUNT = 8;
 	private GridPane gridPane;
@@ -31,7 +36,12 @@ public class AddHotelDialog extends Dialog {
 	private HBox cityBox;
 	private ComboBox<String> cityComboBox;
 
+	/**
+	 * 增加酒店对话框
+	 * 
+	 */
 	public AddHotelDialog() {
+		
 		super();
 
 		gridPane = new GridPane();

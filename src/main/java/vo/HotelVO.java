@@ -2,6 +2,11 @@ package vo;
 
 import java.io.Serializable;
 
+/**
+ * @author samperson1997
+ * 酒店vo
+ *
+ */
 public class HotelVO implements Serializable{
 
 	/**

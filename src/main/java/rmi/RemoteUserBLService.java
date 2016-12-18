@@ -8,7 +8,13 @@ import vo.CustomerVO;
 import vo.HotelVO;
 import vo.WebMarketerVO;
 
+/**
+ * @author samperson1997
+ * user模块remote服务
+ *
+ */
 public interface RemoteUserBLService extends Remote{
+	
 	public List<CustomerVO> getCustomerList() throws RemoteException;
 	
 	public boolean addCustomer(CustomerVO customervo) throws RemoteException;

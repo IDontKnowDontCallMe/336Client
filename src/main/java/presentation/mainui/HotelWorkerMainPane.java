@@ -13,11 +13,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
-import presentation.mainui.CustomerMainPane.SurvivalTast;
 import presentation.orderui.HotelOrdersPane;
 import presentation.orderui.ProducingOrderOfflineDialog;
 import presentation.promotionui.HotelPromotionPanel;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员主界面
+ *
+ */
 public class HotelWorkerMainPane extends AnchorPane {
 
 	private int hotelID;

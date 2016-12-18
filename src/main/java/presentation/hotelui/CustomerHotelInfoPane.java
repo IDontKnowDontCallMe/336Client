@@ -23,6 +23,11 @@ import vo.HotelVO;
 import vo.OrderVO;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 客户查看酒店详细信息面板
+ *
+ */
 public class CustomerHotelInfoPane extends GridPane {
 
 	private int hotelID;
@@ -43,7 +48,15 @@ public class CustomerHotelInfoPane extends GridPane {
 	HotelVO hotelVO;
 	List<RoomVO> roomList;
 
+	/**
+	 * @param hotelID
+	 * @param customerID
+	 * @throws RemoteException
+	 * 客户查看酒店详细信息面板
+	 * 
+	 */
 	public CustomerHotelInfoPane(int hotelID, int customerID) throws RemoteException {
+		
 		super();
 		this.setHgap(10);
 		this.setVgap(20);
@@ -88,7 +101,14 @@ public class CustomerHotelInfoPane extends GridPane {
 		});
 	}
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 初始化房间列表
+	 * 
+	 */
 	private void initRoomPane(int hotelID) throws RemoteException {
+		
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
 		TableView<RoomCell> tableView = new TableView<>();
@@ -119,7 +139,14 @@ public class CustomerHotelInfoPane extends GridPane {
 
 	}
 
+	/**
+	 * @param hotelID
+	 * @throws RemoteException
+	 * 初始化评论列表
+	 * 
+	 */
 	public void initCommentPane(int hotelID) throws RemoteException {
+		
 		commentPane = new ScrollPane();
 
 		List<CommentVO> hotelCommentList = new ArrayList<CommentVO>();
@@ -157,7 +184,12 @@ public class CustomerHotelInfoPane extends GridPane {
 		tableView.setItems(commentCells);
 	}
 
+	/**
+	 * 初始化酒店详细信息面板
+	 * 
+	 */
 	private void initInfoPane() {
+		
 		infoPane = new GridPane();
 
 		infoPane.setHgap(10);
@@ -179,7 +211,15 @@ public class CustomerHotelInfoPane extends GridPane {
 
 	}
 
+	/**
+	 * @param hotelID
+	 * @param customerID
+	 * @throws RemoteException
+	 * 初始化订单面板
+	 * 
+	 */
 	private void initOrderPane(int hotelID, int customerID) throws RemoteException {
+		
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getOrderListOfHotel(hotelID, customerID);
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
@@ -189,7 +229,12 @@ public class CustomerHotelInfoPane extends GridPane {
 
 	}
 
+	/**
+	 * @param orderList
+	 * 初始化订单列表
+	 */
 	private void buildOrderBox(List<OrderVO> orderList) {
+		
 		orderBox.getChildren().clear();
 		for (OrderVO vo : orderList) {
 			orderBox.getChildren().add(new CustomerHotelInfoCell(vo));

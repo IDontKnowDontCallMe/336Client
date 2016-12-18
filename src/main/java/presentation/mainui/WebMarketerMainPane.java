@@ -12,12 +12,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import presentation.mainui.WebManagerMainPane.SurvivalTast;
 import presentation.orderui.MarketerOrdersPane;
 import presentation.promotionui.LevelPanel;
 import presentation.promotionui.WebPromotionPanel;
 import presentation.userui.CustomerCreditPanel;
 
+/**
+ * @author samperson1997
+ * 网站营销人员主界面
+ *
+ */
 public class WebMarketerMainPane extends AnchorPane {
 
 	private int webMarketerID;
@@ -95,12 +99,6 @@ public class WebMarketerMainPane extends AnchorPane {
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 
-		
-		
-		
-		
-		
-		
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
 				TheMainFrame.jumpTo(new WebPromotionPanel());

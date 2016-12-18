@@ -16,6 +16,11 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vo.HotelPromotionVO;
 
+/**
+ * @author samperson1997
+ * 增加酒店促销策略对话框
+ *
+ */
 public class HotelPromotionAddDialog extends Dialog {
 
 	private ComboBox<String> hotelPromotionTypeChoiceBox;
@@ -42,7 +47,13 @@ public class HotelPromotionAddDialog extends Dialog {
 	private DatePicker endDatePicker;
 	private GridPane gridPane;
 
+	/**
+	 * @param hotelID
+	 * 增加酒店促销策略对话框
+	 * 
+	 */
 	public HotelPromotionAddDialog(int hotelID) {
+		
 		super();
 
 		gridPane = new GridPane();
@@ -132,7 +143,13 @@ public class HotelPromotionAddDialog extends Dialog {
 		this.getDialogPane().setContent(gridPane);
 	}
 
+	/**
+	 * @return
+	 * 显示折扣
+	 * 
+	 */
 	public HBox showDiscountBox() {
+		
 		discountLabel = new Label("输入折扣: ");
 		discountTextField = new TextField();
 		discountTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -145,7 +162,12 @@ public class HotelPromotionAddDialog extends Dialog {
 		return discountBox;
 	}
 
+	/**
+	 * 显示房间促销策略
+	 * 
+	 */
 	public void showRoomPromotionBox() {
+		
 		minNumLabel = new Label("输入最小房间数量: ");
 		minNumTextField = new TextField();
 		minNumTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -159,7 +181,12 @@ public class HotelPromotionAddDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示特定时间促销策略
+	 * 
+	 */
 	public void showTimePromotionBox() {
+		
 		startTimeLabel = new Label("选择起始时间: ");
 		endTimeLabel = new Label("选择结束时间: ");
 		startDatePicker = new DatePicker();
@@ -196,7 +223,12 @@ public class HotelPromotionAddDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示合作企业促销策略
+	 * 
+	 */
 	public void showCompanyPromotionBox() {
+		
 		companyNameLabel = new Label("输入合作企业名称: ");
 		companyNameTextField = new TextField();
 		companyNameTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -210,7 +242,12 @@ public class HotelPromotionAddDialog extends Dialog {
 
 	}
 
+	/**
+	 * 显示会员生日促销策略
+	 * 
+	 */
 	public void showBirthdayPromotionBox() {
+		
 		promotionBox.getChildren().addAll(showDiscountBox());
 	}
 

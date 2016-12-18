@@ -7,7 +7,6 @@ import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
@@ -18,6 +17,11 @@ import javafx.util.Callback;
 import vo.CommentVO;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 评论对话框
+ *
+ */
 public class CommentDialog extends Dialog {
 
 	final int WIDTH_COUNT = 300;
@@ -25,7 +29,13 @@ public class CommentDialog extends Dialog {
 	GridPane gridPane;
 	private TextArea commentTextArea;
 
+	/**
+	 * @param orderVO
+	 * 评论对话框
+	 * 
+	 */
 	public CommentDialog(OrderVO orderVO) {
+		
 		super();
 		gridPane = new GridPane();
 		gridPane.setHgap(10);

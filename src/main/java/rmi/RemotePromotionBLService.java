@@ -10,6 +10,11 @@ import vo.HotelPromotionVO;
 import vo.LevelVO;
 import vo.WebPromotionVO;
 
+/**
+ * @author samperson1997
+ * promotion模块remote服务
+ *
+ */
 public interface RemotePromotionBLService extends Remote{
 	public List<HotelPromotionVO> getHotelPromotionList(int hotelID) throws RemoteException;
 	

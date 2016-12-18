@@ -20,6 +20,11 @@ import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
+/**
+ * @author samperson1997
+ * 客户订单列表面板
+ *
+ */
 public class CustomerOrdersPane extends VBox {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
@@ -39,6 +44,12 @@ public class CustomerOrdersPane extends VBox {
 	private ScrollPane listPane;
 	private VBox orderBox;
 
+	/**
+	 * @param customerID
+	 * @throws RemoteException
+	 * 客户订单面板
+	 * 
+	 */
 	public CustomerOrdersPane(int customerID) throws RemoteException {
 
 		this.customerID = customerID;
@@ -64,7 +75,11 @@ public class CustomerOrdersPane extends VBox {
 		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());
 	}
 
+	/**
+	 * 初始化单选框按钮组件
+	 */
 	private void initRadioButton() {
+		
 		toggleGroup = new ToggleGroup();
 		allButton = new RadioButton("全部订单");
 		allButton.setUserData("全部订单");
@@ -143,6 +158,11 @@ public class CustomerOrdersPane extends VBox {
 		AnchorPane.setTopAnchor(backButton, 10.0);
 	}
 
+	/**
+	 * @param orderList
+	 * 建立订单列表面板
+	 * 
+	 */
 	private void buildOrderBox(List<OrderVO> orderList) {
 
 		orderBox.getChildren().clear();

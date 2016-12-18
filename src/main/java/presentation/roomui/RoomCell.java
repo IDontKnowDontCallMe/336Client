@@ -3,6 +3,11 @@ package presentation.roomui;
 import javafx.beans.property.SimpleStringProperty;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 房间单元格
+ *
+ */
 public class RoomCell {
 	private SimpleStringProperty roomName;
 	private SimpleStringProperty price;
@@ -10,7 +15,13 @@ public class RoomCell {
 	private SimpleStringProperty service;
 	private SimpleStringProperty maxNumOfPeople;
 
+	/**
+	 * @param vo
+	 * 房间单元格
+	 * 
+	 */
 	public RoomCell(RoomVO vo) {
+		
 		roomName = new SimpleStringProperty(String.valueOf(vo.roomName));
 		price = new SimpleStringProperty(String.valueOf(vo.price));
 		numOfRoom = new SimpleStringProperty(String.valueOf(vo.numOfRoom));

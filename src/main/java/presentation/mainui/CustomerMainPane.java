@@ -17,6 +17,11 @@ import presentation.hotelui.AreaInputPane;
 import presentation.hotelui.BookedHotelPane;
 import presentation.orderui.CustomerOrdersPane;
 
+/**
+ * @author samperson1997
+ * 客户主界面
+ *
+ */
 public class CustomerMainPane extends AnchorPane {
 
 	private int customerID;

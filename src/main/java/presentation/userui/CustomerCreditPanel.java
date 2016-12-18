@@ -13,6 +13,11 @@ import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import vo.CustomerVO;
 
+/**
+ * @author samperson1997
+ * 客户信用值列表面板
+ *
+ */
 public class CustomerCreditPanel extends VBox {
 
 	private ScrollPane listPane;
@@ -23,7 +28,13 @@ public class CustomerCreditPanel extends VBox {
 
 	private List<CustomerVO> customerList;
 
+	/**
+	 * @throws RemoteException
+	 * 客户信用值列表面板
+	 * 
+	 */
 	public CustomerCreditPanel() throws RemoteException {
+		
 		customerList = BLFactory.getInstance().getUserBLService().getCustomerList();
 
 		customerBox = new VBox();
@@ -42,7 +53,13 @@ public class CustomerCreditPanel extends VBox {
 
 	}
 
+	/**
+	 * @param customerList
+	 * 建立客户信用值列表
+	 * 
+	 */
 	public void buildCustomerBox(List<CustomerVO> customerList) {
+		
 		customerBox.getChildren().clear();
 		for (CustomerVO vo : customerList) {
 			customerBox.getChildren().addAll(new CustomerCreditCell(vo));

@@ -3,6 +3,11 @@ package vo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * @author samperson1997
+ * 酒店促销策略vo
+ *
+ */
 public class HotelPromotionVO implements Serializable{
 	/**
 	 * 

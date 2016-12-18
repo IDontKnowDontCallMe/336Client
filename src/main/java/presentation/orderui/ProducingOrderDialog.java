@@ -35,6 +35,11 @@ import vo.HotelVO;
 import vo.OrderVO;
 import vo.RoomVO;
 
+/**
+ * @author samperson1997
+ * 生产订单对话框
+ *
+ */
 public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 	HotelVO hotelVO;
@@ -57,8 +62,17 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 	CalculationConditionVO calculationConditionVO;
 	OrderVO orderVO;
 
+	/**
+	 * @param customerID
+	 * @param hotelVO
+	 * @param roomList
+	 * @param roomIndex
+	 * @throws RemoteException
+	 * 生产订单对话框
+	 */
 	public ProducingOrderDialog(int customerID, HotelVO hotelVO, List<RoomVO> roomList, int roomIndex)
 			throws RemoteException {
+		
 		this.hotelVO = hotelVO;
 		this.roomList = roomList;
 
@@ -73,7 +87,14 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 
 	}
 
+	/**
+	 * @param customerID
+	 * @param roomIndex
+	 * @throws RemoteException
+	 * 初始化界面
+	 */
 	private void initUI(int customerID, int roomIndex) throws RemoteException {
+		
 		gridPane = new GridPane();
 
 		roomTypeChoiceBox = new ComboBox<String>();
@@ -299,6 +320,13 @@ public class ProducingOrderDialog extends Dialog<OrderVO> {
 		});
 	}
 
+	/**
+	 * @param customerID
+	 * @return
+	 * @throws RemoteException
+	 * 计算总价
+	 * 
+	 */
 	private CalculationConditionVO updateTotal(int customerID) throws RemoteException {
 
 		int roomIndex = roomTypeChoiceBox.getSelectionModel().selectedIndexProperty().getValue();

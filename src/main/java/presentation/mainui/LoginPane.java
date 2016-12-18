@@ -20,6 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @author samperson1997
+ * 登录界面
+ *
+ */
 public class LoginPane extends AnchorPane {
 
 	private TextField userIDTextField;
@@ -136,6 +141,12 @@ public class LoginPane extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("LoginPane.css").toExternalForm());
 	}
 
+	/**
+	 * @throws NumberFormatException
+	 * @throws RemoteException
+	 * 登陆方法，根据输入的用户名和密码判断登录状态
+	 * 
+	 */
 	private void login() throws NumberFormatException, RemoteException {
 
 		String res = BLFactory.getInstance().getUserBLService().login(Integer.parseInt(userIDTextField.getText()),
