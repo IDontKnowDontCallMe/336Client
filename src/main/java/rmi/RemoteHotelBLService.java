@@ -33,6 +33,10 @@ public interface RemoteHotelBLService extends Remote{
 	public HotelVO getHotelInfo(int hotelID) throws RemoteException;
 	
 	public int getHotelIDbyOrderID(int orderID) throws RemoteException;
+	
+	public byte[] getHotelImage(int hotelID) throws RemoteException;
+	
+	public boolean saveHotelImage(int hotelID, byte[] imageDate) throws RemoteException;	
 
 	public boolean update(HotelVO hotelVO) throws RemoteException;
 
