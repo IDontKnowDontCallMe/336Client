@@ -30,8 +30,7 @@ import vo.HotelVO;
 import vo.RoomVO;
 
 /**
- * @author samperson1997
- * 酒店工作人员查看酒店详细信息界面
+ * @author samperson1997 酒店工作人员查看酒店详细信息界面
  *
  */
 public class WorkerHotelInfoPane extends GridPane {
@@ -75,11 +74,11 @@ public class WorkerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 酒店工作人员酒店详细信息面板
+	 *             酒店工作人员酒店详细信息面板
 	 * 
 	 */
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
-		
+
 		super();
 		this.setHgap(10);
 		this.setVgap(20);
@@ -105,7 +104,9 @@ public class WorkerHotelInfoPane extends GridPane {
 		backButton.setShape(new Circle(31));
 		backButton.setMinSize(62, 62);
 		backButton.setMaxSize(62, 62);
-		
+
+		ImageEditPane imageEditPane = new ImageEditPane(hotelID);
+		this.add(imageEditPane, 1, 1, 1, 1);
 		this.add(backButton, 1, 0, 1, 1);
 		backButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
@@ -115,11 +116,11 @@ public class WorkerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 酒店房间面板初始化
+	 *             酒店房间面板初始化
 	 * 
 	 */
 	private void initRoomPane(int hotelID) throws RemoteException {
-		
+
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
 		roomBox = new VBox();
@@ -210,15 +211,15 @@ public class WorkerHotelInfoPane extends GridPane {
 		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
 		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton);
 		roomBox.getChildren().addAll(roomPane, addBox1, addBox2);
-		
-		//this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
+
+		// this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
 	/**
 	 * 酒店信息面板初始化
 	 */
 	private void initInfoPane() {
-		
+
 		infoPane = new GridPane();
 
 		infoPane.setHgap(10);
