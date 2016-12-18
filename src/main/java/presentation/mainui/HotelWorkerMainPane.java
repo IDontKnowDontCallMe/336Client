@@ -151,6 +151,11 @@ public class HotelWorkerMainPane extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
 	}
 	
+	/**
+	 * @author samperson1997
+	 * 提醒服务器端此账号仍然登陆
+	 *
+	 */
 	public class SurvivalTast extends TimerTask{
 
 		@Override

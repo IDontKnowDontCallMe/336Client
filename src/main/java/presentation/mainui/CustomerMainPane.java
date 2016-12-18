@@ -140,6 +140,11 @@ public class CustomerMainPane extends AnchorPane {
 	}
 	
 	
+	/**
+	 * @author samperson1997
+	 * 提醒服务器端此账号仍然登陆
+	 *
+	 */
 	public class SurvivalTast extends TimerTask{
 
 		@Override
