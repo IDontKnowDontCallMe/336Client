@@ -40,7 +40,6 @@ public class WorkerHotelInfoPane extends GridPane {
 	private GridPane infoPane;
 	private ScrollPane roomPane;
 	private HBox addBox1;
-	private HBox addBox2;
 	private VBox roomBox;
 
 	final int COLUMN = 15;
@@ -125,10 +124,8 @@ public class WorkerHotelInfoPane extends GridPane {
 		roomPane = new ScrollPane();
 		roomBox = new VBox();
 		addBox1 = new HBox();
-		addBox2 = new HBox();
 		roomBox.setSpacing(10);
 		addBox1.setSpacing(10);
-		addBox2.setSpacing(10);
 
 		TableView<RoomCell> tableView = new TableView<>();
 
@@ -181,37 +178,49 @@ public class WorkerHotelInfoPane extends GridPane {
 			RoomCell cell = new RoomCell(vo);
 			roomCells.add(cell);
 		}
+		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField,
+				addServiceTextField, addMaxNumOfPeopleTextField);
+		
 		addButton = new Button("新增房间类型");
 		addButton.setOnAction((ActionEvent e) -> {
-			roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
-					addNumOfRoomTextField.getText(), addServiceTextField.getText(),
-					addMaxNumOfPeopleTextField.getText()));
-			RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(), Integer.parseInt(addPriceTextField.getText()),
-					Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
-					Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
-			roomList.add(newVO);
+			if(addButton.getText().equals("确认添加")){
+				roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
+						addNumOfRoomTextField.getText(), addServiceTextField.getText(),
+						addMaxNumOfPeopleTextField.getText()));
+				RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(), Integer.parseInt(addPriceTextField.getText()),
+						Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
+						Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
+				roomList.add(newVO);
 
-			addRoomNameTextField.clear();
-			addNumOfRoomTextField.clear();
-			addServiceTextField.clear();
-			addMaxNumOfPeopleTextField.clear();
-			addPriceTextField.clear();
+				addRoomNameTextField.clear();
+				addNumOfRoomTextField.clear();
+				addServiceTextField.clear();
+				addMaxNumOfPeopleTextField.clear();
+				addPriceTextField.clear();
 
-			try {
-				if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
-					System.out.print("add a room type successfully.");
+				try {
+					if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
+						System.out.print("add a room type successfully.");
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
+				roomBox.getChildren().clear();
+				roomBox.getChildren().addAll(roomPane, addButton);
+				addButton.setText("新增房间类型");
 			}
+			else if(addButton.getText().equals("新增房间类型")){
+				roomBox.getChildren().clear();
+				roomBox.getChildren().addAll(roomPane, addBox1, addButton);
+				addButton.setText("确认添加");
+			}
+			
 		});
 
 		tableView.setItems(roomCells);
 
-		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
-		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton);
-		roomBox.getChildren().addAll(roomPane, addBox1, addBox2);
-
+		
+		
 		// this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
