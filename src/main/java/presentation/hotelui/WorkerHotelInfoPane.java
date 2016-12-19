@@ -30,7 +30,8 @@ import vo.HotelVO;
 import vo.RoomVO;
 
 /**
- * @author samperson1997 酒店工作人员查看酒店详细信息界面
+ * @author samperson1997 
+ * 酒店工作人员查看酒店详细信息界面
  *
  */
 public class WorkerHotelInfoPane extends GridPane {
@@ -73,7 +74,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 *             酒店工作人员酒店详细信息面板
+	 * 酒店工作人员酒店详细信息面板
 	 * 
 	 */
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
@@ -182,32 +183,41 @@ public class WorkerHotelInfoPane extends GridPane {
 				addServiceTextField, addMaxNumOfPeopleTextField);
 		
 		addButton = new Button("新增房间类型");
+		roomBox.getChildren().addAll(roomPane, addButton);
 		addButton.setOnAction((ActionEvent e) -> {
-			if(addButton.getText().equals("确认添加")){
-				roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
-						addNumOfRoomTextField.getText(), addServiceTextField.getText(),
-						addMaxNumOfPeopleTextField.getText()));
-				RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(), Integer.parseInt(addPriceTextField.getText()),
-						Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
-						Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
-				roomList.add(newVO);
+			if (addButton.getText().equals("确认添加")) {
+				if (addRoomNameTextField.getText().equals("") || addPriceTextField.getText().equals("") 
+						|| addNumOfRoomTextField.getText().equals("")  || addServiceTextField.getText().equals("") 
+						|| addMaxNumOfPeopleTextField.getText().equals("") ) {
+					
+				}else{
+					roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
+							addNumOfRoomTextField.getText(), addServiceTextField.getText(),
+							addMaxNumOfPeopleTextField.getText()));
+					RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(),
+							Integer.parseInt(addPriceTextField.getText()),
+							Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
+							Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
+					roomList.add(newVO);
 
-				addRoomNameTextField.clear();
-				addNumOfRoomTextField.clear();
-				addServiceTextField.clear();
-				addMaxNumOfPeopleTextField.clear();
-				addPriceTextField.clear();
+					addRoomNameTextField.clear();
+					addNumOfRoomTextField.clear();
+					addServiceTextField.clear();
+					addMaxNumOfPeopleTextField.clear();
+					addPriceTextField.clear();
 
-				try {
-					if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
-						System.out.print("add a room type successfully.");
+					try {
+						if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
+							System.out.print("add a room type successfully.");
+						}
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
 					}
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
+					roomBox.getChildren().clear();
+					roomBox.getChildren().addAll(roomPane, addButton);
+					addButton.setText("新增房间类型");
 				}
-				roomBox.getChildren().clear();
-				roomBox.getChildren().addAll(roomPane, addButton);
-				addButton.setText("新增房间类型");
+				
 			}
 			else if(addButton.getText().equals("新增房间类型")){
 				roomBox.getChildren().clear();

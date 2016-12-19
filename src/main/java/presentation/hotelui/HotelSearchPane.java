@@ -281,7 +281,7 @@ public class HotelSearchPane extends VBox {
 			}
 			else if(priceSortButton.getText().equals("↓")){
 				try {
-					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从低至高");
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高到低");
 					changeHotelListPane();
 				} catch (RemoteException e) {
 					e.printStackTrace();
