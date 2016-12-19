@@ -7,13 +7,18 @@ import java.util.Optional;
 import bussinesslogic.factory.BLFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import presentation.mainui.TheMainFrame;
 import vo.HotelVO;
 
@@ -61,6 +66,22 @@ public class HotelPanel extends VBox {
 							System.out.println("add hotel!");
 							hotelList.add(result.get());
 							buildHotelBox(hotelList);
+							Stage popup1 = new Stage();
+							popup1.setAlwaysOnTop(true);
+							popup1.initModality(Modality.APPLICATION_MODAL);
+							Button closeButton1 = new Button("确定");
+							closeButton1.setOnAction(e -> {
+								popup1.close();
+							});
+							VBox root1 = new VBox();
+							root1.setAlignment(Pos.BASELINE_CENTER);
+							root1.setSpacing(20);
+							root1.getChildren().addAll(new Label("酒店已添加，默认密码为123456"), 
+									new Label("请尽快联系酒店工作人员修改酒店详细信息"), closeButton1);
+							Scene scene1 = new Scene(root1, 250, 120);
+							popup1.setScene(scene1);
+							popup1.setTitle("提示");
+							popup1.show();
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
