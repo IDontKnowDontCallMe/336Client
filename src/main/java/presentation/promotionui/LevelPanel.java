@@ -153,6 +153,7 @@ public class LevelPanel extends GridPane {
 
 			}
 		});
+		this.getStylesheets().add(getClass().getResource("LevelPane.css").toExternalForm());
 
 	}
 }

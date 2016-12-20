@@ -72,6 +72,8 @@ public class WebPromotionPanel extends VBox {
 		addBox.setPrefWidth(500);
 		addBox.getChildren().addAll(title, addButton, backButton);
 		this.getChildren().addAll(addBox, listPane);
+		
+		this.getStylesheets().add(getClass().getResource("WebPromotionPane.css").toExternalForm());
 	}
 
 	/**

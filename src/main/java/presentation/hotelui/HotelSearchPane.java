@@ -271,79 +271,84 @@ public class HotelSearchPane extends VBox {
 
 		GridPane priceGridPane = new GridPane();
 		Text priceText = new Text("价格排序");
-		Button priceLowToHighButton = new Button("↑");
-		Button priceHighToLowButton = new Button("↓");
+		Button priceSortButton = new Button("↑");
 		priceGridPane.add(priceText, 0, 0, 1, 2);
-		priceGridPane.add(priceLowToHighButton, 1, 1, 1, 1);
-		priceGridPane.add(priceHighToLowButton, 2, 1, 1, 1);
 
-		priceLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		priceGridPane.add(priceSortButton, 1, 0, 1, 1);
+		
+		priceSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(priceSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				priceSortButton.setText("↓");
+			}
+			else if(priceSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高到低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				priceSortButton.setText("↑");
 			}
 		});
-
-		priceHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		});
-
+		
 		GridPane scoreGridPane = new GridPane();
 		Text scoreText = new Text("星级排序");
-		Button scoreLowToHighButton = new Button("↑");
-		Button scoreHighToLowButton = new Button("↓");
+		Button scoreSortButton = new Button("↑");
 		scoreGridPane.add(scoreText, 0, 0, 1, 2);
-		scoreGridPane.add(scoreLowToHighButton, 1, 0, 1, 1);
-		scoreGridPane.add(scoreHighToLowButton, 1, 1, 1, 1);
+		scoreGridPane.add(scoreSortButton, 1, 0, 1, 1);
 
-		scoreLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		scoreSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(scoreSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				scoreSortButton.setText("↓");
 			}
-		});
-
-		scoreHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+			else if(scoreSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从高至低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				scoreSortButton.setText("↑");
 			}
+			
 		});
 
 		GridPane commentGridPane = new GridPane();
 		Text commentText = new Text("评分排序");
-		Button commentLowToHighButton = new Button("↑");
-		Button commentHighToLowButton = new Button("↓");
+		Button commentSortButton = new Button("↑");
 		commentGridPane.add(commentText, 0, 0, 1, 2);
-		commentGridPane.add(commentLowToHighButton, 1, 0, 1, 1);
-		commentGridPane.add(commentHighToLowButton, 1, 1, 1, 1);
+		commentGridPane.add(commentSortButton, 1, 0, 1, 1);
 
-		commentLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		commentSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(commentSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				commentSortButton.setText("↑");
 			}
-		});
-
-		commentHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+			else if(commentSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从高至低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				commentSortButton.setText("↓");
 			}
 		});
 

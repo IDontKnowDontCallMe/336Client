@@ -4,18 +4,27 @@
 	.root{
 	-fx-background-image: url(bluebg.png);
 }
-
-	.text-field{
-		
+	
+	#hotelIn{
+		-fx-background-color:white;
+		-fx-min-width : 100.0;
+		-fx-border-style:solid ;
+		-fx-border-color:rgb(177,2,161);
+		-fx-min-height:30px;
+			
 	}
 	
+	.text{
+		-fx-font-family: "PingFang SC";
+		-fx-text-fill:white;
+	}
 	
 	.label{
 		-fx-font-family: "PingFang SC";
 		-fx-text-fill:white;
 	}
 
-	     .button {
+	     #back, #search {
   -fx-background-color: #1B9AF7;
   -fx-border-color: #1B9AF7;
   -fx-text-fill: #FFF;
@@ -30,19 +39,44 @@
  }
  
 
- .button:hover, .button:focus {
+ #back:hover, #search:hover, #back:focused, #search:focused {
   	-fx-background-color: #4cb0f9;
     -fx-border-color: #4cb0f9;
     -fx-text-fill: #FFF; 
     }
-  .button:pressed {
+  #search:pressed, #back:pressed {
     -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
             -fx-background-color: #2798eb;
     -fx-border-color: #2798eb;
     -fx-text-fill: #0880d7;
             }
  
-	   .combo-box .list-cell{
+ 
+ 
+   .combo-box {
+    	-fx-padding: 0;
+    -fx-min-height :40px;
+    -fx-min-width : 180px;
+  -fx-mark-color:white;
+  -fx-background-color: rgb(40,156,244);
+  -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  	-fx-font-family: "PingFang SC";
+    }
+    
+    .text-input{
+  -fx-background-color: rgb(40,156,244);
+      	  	-fx-text-fill:white;
+  
+    }
+    
+    .text-input:hover{
+    	  	-fx-background-color: #4cb0f9;
+    	
+    }
+    
+    .combo-box .list-cell{
     	-fx-text-fill: white;
     	-fx-alignment: center ;
     	
@@ -78,4 +112,4 @@
 		    -fx-background-color: rgb(28,144,237);
     -fx-text-fill:white;
 }
-	
+    
