@@ -11,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -34,6 +35,8 @@ public class HotelSearchPane extends VBox {
 	private AreaVO areaVO;
 	private List<HotelVO> list;
 	private HotelListPane hotelListPane;
+	private Button searchButton;
+	private Button backButton;
 
 	/**
 	 * @param areaVO
@@ -65,17 +68,20 @@ public class HotelSearchPane extends VBox {
 		gridPane.setHgap(15);
 		gridPane.setVgap(15);
 
-		Text hotelNameText = new Text("酒店名称");
+		Label hotelNameText = new Label("酒店名称");
 		TextField hotelNameTextField = new TextField();
+		hotelNameTextField.setId("hotelIn");
 		gridPane.add(new HBox(hotelNameText, hotelNameTextField), 0, 0, 3, 1);
-		Button searchButton = new Button("搜索");
+		searchButton = new Button("搜索");
+		searchButton.setId("search");
 
-		Button backButton = new Button("退出搜索");
+		backButton = new Button("退出搜索");
+		backButton.setId("back");
 		gridPane.add(searchButton, 3, 0, 1, 1);
 		gridPane.add(backButton, 4, 0, 1, 1);
 
-		Text checkInText = new Text("入: ");
-		Text checkOutText = new Text("离: ");
+		Label checkInText = new Label("入: ");
+		Label checkOutText = new Label("离: ");
 		DatePicker checkInDatePicker = new DatePicker();
 		DatePicker checkOutDatePicker = new DatePicker();
 
@@ -268,8 +274,8 @@ public class HotelSearchPane extends VBox {
 		Button priceLowToHighButton = new Button("↑");
 		Button priceHighToLowButton = new Button("↓");
 		priceGridPane.add(priceText, 0, 0, 1, 2);
-		priceGridPane.add(priceLowToHighButton, 1, 0, 1, 1);
-		priceGridPane.add(priceHighToLowButton, 1, 1, 1, 1);
+		priceGridPane.add(priceLowToHighButton, 1, 1, 1, 1);
+		priceGridPane.add(priceHighToLowButton, 2, 1, 1, 1);
 
 		priceLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
