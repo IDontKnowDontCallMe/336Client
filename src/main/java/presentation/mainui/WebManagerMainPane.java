@@ -89,7 +89,7 @@ public class WebManagerMainPane extends GridPane {
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
-		WebManagerInfoPane webManagerInfoPane = new WebManagerInfoPane(webManagerID);
+		WebManagerPilot webManagerInfoPane = new WebManagerPilot(webManagerID);
 		this.add(webManagerInfoPane, 0, 0);
 		this.add(anchorPane, 1, 0);
 		

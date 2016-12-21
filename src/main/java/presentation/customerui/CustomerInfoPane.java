@@ -27,6 +27,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.CreditVO;
 import vo.CustomerVO;
@@ -34,7 +35,7 @@ import vo.CustomerVO;
 /**
  * @author samperson1997 客户面板
  */
-public class CustomerInfoPane extends Pane {
+public class CustomerInfoPane extends GridPane {
 
 	private int customerID;
 
@@ -64,6 +65,7 @@ public class CustomerInfoPane extends Pane {
 		this.customerID = customerID;
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
+		Pane pane = new Pane();
 		titleBox = new HBox();
 		
 		Label back = new Label();
@@ -85,7 +87,7 @@ public class CustomerInfoPane extends Pane {
 		initInfoPane();
 		initCreditList();
 		
-		this.getChildren().addAll(backButton,titleBox,infoPane,creditPane);
+		pane.getChildren().addAll(backButton,titleBox,infoPane,creditPane);
 		infoPane.setLayoutX(100.0);
 		infoPane.setLayoutY(90.0);
 		creditPane.setLayoutX(210.0);
@@ -93,6 +95,10 @@ public class CustomerInfoPane extends Pane {
 		backButton.setLayoutX(985.0);
 		backButton.setLayoutY(30.0);
 
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+
+		this.add(customerPilot, 0, 0);
+		this.add(pane, 1, 0);
 		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 

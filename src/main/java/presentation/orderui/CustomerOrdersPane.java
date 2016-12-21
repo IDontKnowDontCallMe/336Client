@@ -13,10 +13,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import presentation.customerui.CustomerInfoPane;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
@@ -25,7 +28,7 @@ import vo.OrderVO;
  * 客户订单列表面板
  *
  */
-public class CustomerOrdersPane extends VBox {
+public class CustomerOrdersPane extends GridPane {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 	private int customerID;
@@ -65,11 +68,14 @@ public class CustomerOrdersPane extends VBox {
 		
 		radioBox.setId("radio");
 
+		VBox vBox= new VBox();
 		
-		this.getChildren().addAll(radioBox, listPane);
+		vBox.getChildren().addAll(radioBox, listPane);
 		
-		
-		
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+
+		this.add(customerPilot, 0, 0);
+		this.add(vBox, 1, 0);
 		
 		this.setPrefWidth(500);
 		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());

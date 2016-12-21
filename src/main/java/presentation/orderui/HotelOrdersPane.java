@@ -13,10 +13,12 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
@@ -25,7 +27,7 @@ import vo.OrderVO;
  * 酒店工作人员订单面板
  *
  */
-public class HotelOrdersPane extends VBox {
+public class HotelOrdersPane extends GridPane {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 	private int hotelID;
@@ -63,8 +65,13 @@ public class HotelOrdersPane extends VBox {
 
 		radioBox.setId("radio");
 
-		this.getChildren().addAll(radioBox,listPane);
-		this.setPrefWidth(500);
+		HotelWorkerPilot hotelWorkerInfoPane = new HotelWorkerPilot(hotelID);
+		VBox vBox = new VBox();
+		vBox.getChildren().addAll(radioBox,listPane);
+		vBox.setPrefWidth(500);
+		
+		this.add(hotelWorkerInfoPane, 0, 0);
+		this.add(vBox, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 

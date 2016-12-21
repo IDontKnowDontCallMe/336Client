@@ -107,8 +107,8 @@ public class HotelWorkerMainPane extends GridPane {
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
-		HotelWorkerInfoPane hotelWorkerInfoPane = new HotelWorkerInfoPane(hotelID);
-		this.add(hotelWorkerInfoPane, 0, 0);
+		HotelWorkerPilot hotelWorkerPilot = new HotelWorkerPilot(hotelID);
+		this.add(hotelWorkerPilot, 0, 0);
 		this.add(anchorPane, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());

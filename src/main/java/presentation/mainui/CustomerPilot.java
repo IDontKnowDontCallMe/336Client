@@ -1,5 +1,6 @@
 package presentation.mainui;
 
+import java.util.Timer;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -7,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class CustomerInfoPane extends AnchorPane{
+public class CustomerPilot extends AnchorPane{
 	Label customerID;
 	Label name;
 	Button searchButton;
@@ -15,10 +16,13 @@ public class CustomerInfoPane extends AnchorPane{
 	Button bookedhotelButton;
 	Button infoButton;
 	Button backButton;
+	int ID;
+
 	
-	public CustomerInfoPane(int customerid ) {
+	public CustomerPilot(int customerid ) {
 		Font icon = Font.loadFont(getClass().getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.customerID = new Label(Integer.toString(customerid));
+		this.ID = customerid;
 		customerID.setId("id");
 		this.setId("pane");
 		int width = 146;
@@ -100,7 +104,11 @@ public class CustomerInfoPane extends AnchorPane{
 		this.setMaxSize(180, 700);
 		this.setMinSize(180, 700);
 		
+		
+		
 		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
+	
 
 }
+

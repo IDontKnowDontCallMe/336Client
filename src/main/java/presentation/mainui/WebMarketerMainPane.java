@@ -101,7 +101,7 @@ public class WebMarketerMainPane extends GridPane {
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
-		WebMarketerInfoPane webMarketerInfoPane = new WebMarketerInfoPane(webMarketerID);
+		WebMarketerPilot webMarketerInfoPane = new WebMarketerPilot(webMarketerID);
 		this.add(webMarketerInfoPane, 0, 0);
 		this.add(anchorPane, 1, 0);
 		

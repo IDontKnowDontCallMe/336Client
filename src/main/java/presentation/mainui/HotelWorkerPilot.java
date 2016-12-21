@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class HotelWorkerInfoPane extends AnchorPane{
+public class HotelWorkerPilot extends AnchorPane{
 	Label hotelID;
 	Label name;
 	Button manageButton;
@@ -16,7 +16,7 @@ public class HotelWorkerInfoPane extends AnchorPane{
 	Button orderListButton;
 	Button backButton;
 	
-	public HotelWorkerInfoPane(int hotelid) {
+	public HotelWorkerPilot(int hotelid) {
 		Font icon = Font.loadFont(getClass().getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.hotelID = new Label(Integer.toString(hotelid));
 		hotelID.setId("id");

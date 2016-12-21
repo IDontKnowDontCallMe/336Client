@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class WebMarketerInfoPane extends AnchorPane{
+public class WebMarketerPilot extends AnchorPane{
 	Label webMarketerID;
 	Label name;
 	Button webPromotionButton;
@@ -16,7 +16,7 @@ public class WebMarketerInfoPane extends AnchorPane{
 	Button creditButton;
 	Button backButton;
 	
-	public WebMarketerInfoPane(int id ) {
+	public WebMarketerPilot(int id ) {
 		Font icon = Font.loadFont(getClass().getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.webMarketerID = new Label(Integer.toString(id));
 		webMarketerID.setId("id");
