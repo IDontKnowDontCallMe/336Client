@@ -38,6 +38,7 @@ public class HotelListPane extends ScrollPane {
 		vBox.setSpacing(20);
 		this.setContent(vBox);
 
+
 		for (HotelVO vo : hotelList) {
 			vBox.getChildren().add(new SimpleHotelCell(vo));
 		}

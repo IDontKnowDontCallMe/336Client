@@ -39,7 +39,7 @@ public class HotelOrderCell extends Pane {
 		super();
 		this.orderVO = orderVO;
 		this.setId("gridp");
-		orderID = new Label(Integer.toString(orderVO.orderID));
+		orderID = new Label("订单号"+Integer.toString(orderVO.orderID));
 		orderID.setLayoutX(12.0);
 		orderID.setLayoutY(3.0);
 		orderID.setId("orderid");
@@ -49,9 +49,9 @@ public class HotelOrderCell extends Pane {
 		customerName.setLayoutX(16.0);
 		customerName.setLayoutY(41.0);
 		customerName.setId("customername");
-		customerPhone = new Label(orderVO.customerPhoneNumber);
+		customerPhone = new Label("客户号码"+orderVO.customerPhoneNumber);
 		this.getChildren().add(customerPhone);
-		customerPhone.setLayoutX(86.0);
+		customerPhone.setLayoutX(286.0);
 		customerName.setLayoutY(41.0);
 		customerPhone.setId("customerPhone");
 		state = new Label(orderVO.orderState);
@@ -146,6 +146,8 @@ public class HotelOrderCell extends Pane {
 	private void setDelayInButton() {
 		
 		button = new Button("延迟入住");
+		button.setLayoutX(710);
+		button.setLayoutY(80);
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
@@ -167,6 +169,7 @@ public class HotelOrderCell extends Pane {
 	private void setLeavingButton() {
 		
 		button = new Button("办理退房");
+		button.setLayoutX(10);
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
