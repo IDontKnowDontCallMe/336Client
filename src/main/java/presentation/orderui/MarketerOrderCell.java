@@ -53,7 +53,7 @@ public class MarketerOrderCell extends GridPane {
 		numText = new Text(String.valueOf(orderVO.roomNum) + "间");
 		this.add(numText, 2, 2, 1, 1);
 
-		setButton();
+		setButton(orderVO.orderState);
 
 		this.setHgap(10);
 		this.setVgap(20);
@@ -65,8 +65,13 @@ public class MarketerOrderCell extends GridPane {
 	 * 设置按钮
 	 * 
 	 */
-	private void setButton() {
-		
+	private void setButton(String state) {
+		if (state.equals("异常")) {
+			setHandleButton();
+		}
+	}
+	
+	private void setHandleButton(){
 		recoverAllButton = new Button("恢复一半");
 		recoverHalfButton = new Button("恢复全部");
 		this.add(recoverHalfButton, 3, 3, 1, 1);
@@ -75,10 +80,9 @@ public class MarketerOrderCell extends GridPane {
 			try {
 				if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "恢复全部")) {
 					this.getChildren().removeAll(recoverAllButton, recoverHalfButton);
-					this.add(new Text("已处理"), 3, 3, 2, 1);
+					this.add(new Text("已处理，恢复全部信用值"), 3, 3, 2, 1);
 				}
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -87,10 +91,9 @@ public class MarketerOrderCell extends GridPane {
 			try {
 				if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "恢复一半")) {
 					this.getChildren().removeAll(recoverAllButton, recoverHalfButton);
-					this.add(new Text("已处理"), 3, 3, 2, 1);
+					this.add(new Text("已处理，恢复一半信用值"), 3, 3, 2, 1);
 				}
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
