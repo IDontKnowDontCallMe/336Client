@@ -2,10 +2,10 @@
 /* The main scrollbar **track** CSS class  */
 	
 	.root{
-	-fx-background-image:url(green4.png);
+	-fx-background-image:url(purple.png);
     }
 
- .button{
+  .button{
    -fx-background-color:null;
   -fx-border-width: 2.0px;
   -fx-border-style: solid;
@@ -18,11 +18,11 @@
    	-fx-text-fill:white;
    }
   .button:hover .label{
- 		 	-fx-text-fill:rgba(165, 245, 59, 0.9) ; 
+ 		 	-fx-text-fill:rgba(149, 13, 135, 0.9) ; 
  	 }
  	 .button:hover{
- 	-fx-background-color: rgba(246, 255, 234, 0.9); 
- 		 	-fx-text-fill:rgba(165, 245, 59, 0.9) ; 
+ 	-fx-background-color: rgba(230, 245, 255, 0.9); 
+ 		 	-fx-text-fill:rgba(149, 13, 135, 0.9) ; 
  		
  	 }
  	 
@@ -31,7 +31,7 @@
     	-fx-opacity:3.0
     } 
     .button:pressed{
-  	-fx-background-color: rgba(162, 208, 78, 0.7) ;
+  	-fx-background-color: rgba(122, 6, 110, 0.7) ;
   	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
   	
     -fx-opacity:3.0 ; 

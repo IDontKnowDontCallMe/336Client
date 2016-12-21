@@ -101,6 +101,8 @@ public class HotelPanel extends VBox {
 		titleBox = new HBox();
 		titleBox.getChildren().addAll(title, addButton, backButton);
 		this.getChildren().addAll(titleBox, listPane);
+		
+		this.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
 	}
 
 	/**

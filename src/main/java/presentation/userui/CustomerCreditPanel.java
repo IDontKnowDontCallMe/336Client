@@ -50,6 +50,7 @@ public class CustomerCreditPanel extends VBox {
 		});
 		titleBox.getChildren().addAll(title, backButton);
 		this.getChildren().addAll(titleBox, listPane);
+		this.getStylesheets().add(getClass().getResource("CustomerCreditPane.css").toExternalForm());
 
 	}
 

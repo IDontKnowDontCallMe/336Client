@@ -1,12 +1,11 @@
 package presentation.orderui;
 
 import java.rmi.RemoteException;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import vo.OrderVO;
 
 /**
@@ -14,7 +13,7 @@ import vo.OrderVO;
  * 酒店工作人员订单列表单元格
  *
  */
-public class HotelOrderCell extends GridPane {
+public class HotelOrderCell extends Pane {
 
 	OrderVO orderVO;
 
@@ -41,34 +40,62 @@ public class HotelOrderCell extends GridPane {
 		this.orderVO = orderVO;
 		this.setId("gridp");
 		orderID = new Label(Integer.toString(orderVO.orderID));
+		orderID.setLayoutX(12.0);
+		orderID.setLayoutY(3.0);
+		orderID.setId("orderid");
 		this.getChildren().add(orderID);
 		customerName = new Label(orderVO.customerName);
-		this.add(customerName, 0, 0, 1, 1);
+		this.getChildren().add(customerName);
+		customerName.setLayoutX(16.0);
+		customerName.setLayoutY(41.0);
+		customerName.setId("customername");
 		customerPhone = new Label(orderVO.customerPhoneNumber);
-		this.add(customerPhone, 1, 0, 2, 1);
+		this.getChildren().add(customerPhone);
+		customerPhone.setLayoutX(86.0);
+		customerName.setLayoutY(41.0);
+		customerPhone.setId("customerPhone");
 		state = new Label(orderVO.orderState);
-		this.add(state, 4, 0, 1, 1);
+		this.getChildren().add(state);
+		state.setLayoutX(15.0);
+		state.setLayoutY(132.0);
+		state.setId("state");
 		roomName = new Label(orderVO.roomName);
-		this.add(roomName, 0, 1, 2, 1);
+		this.getChildren().add(roomName);
+		roomName.setLayoutX(521.0);
+		roomName.setLayoutY(50.0);
+		roomName.setId("roomname");
 		total = new Label("¥" + String.valueOf(orderVO.total));
-		this.add(total, 4, 1, 1, 1);
+		this.getChildren().add(total);
+		total.setLayoutX(618.0);
+		total.setLayoutY(78.0);
+		total.setId("total");
 		checkInTime = new Label("入 " + orderVO.checkInTime);
-		this.add(checkInTime, 0, 2, 1, 1);
+		this.getChildren().add(checkInTime);
+		checkInTime.setLayoutX(13.0);
+		checkInTime.setLayoutY(96.0);
+		checkInTime.setId("checkintime");
 		checkOutTime = new Label("离" + orderVO.checkOutTime);
-		this.add(checkOutTime, 1, 2, 1, 1);
+		this.getChildren().add(checkOutTime);
+		checkOutTime.setLayoutX(250.0);
+		checkOutTime.setLayoutY(96.0);
+		checkOutTime.setId("checkouttime");
 		num = new Label(String.valueOf(orderVO.roomNum) + "间");
-		this.add(num, 1, 1, 1, 1);
+		this.getChildren().add(num);
+		num.setLayoutX(521.0);
+		num.setLayoutY(85.0);
+		num.setId("num");
 		children = new Label(orderVO.hasChildren ? "有" : "无" + "儿童");
-		this.add(children, 2, 1, 1, 1);
+		this.getChildren().add(children);
+		children.setLayoutX(521.0);
+		children.setLayoutY(120.0);
+		children.setId("children");
 
 		setButton(orderVO.orderState);
 		if (button != null) {
 			button.setId("btn");
-			this.add(button, 4, 2, 1, 1);
+			this.getChildren().add(button);
 		}
 
-		this.setHgap(10);
-		this.setVgap(20);
 		this.getStylesheets().add(getClass().getResource("HotelOrderCell.css").toExternalForm());
 
 	}

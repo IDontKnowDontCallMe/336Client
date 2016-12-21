@@ -47,6 +47,8 @@ public class WebMarketerPanel extends VBox {
 		});
 		titleBox.getChildren().addAll(title, backButton);
 		this.getChildren().addAll(titleBox, listPane);
+		
+		this.getStylesheets().add(getClass().getResource("WebMarketerPane.css").toExternalForm());
 	}
 
 	/**

@@ -1,15 +1,13 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
-	
- 	.root{
-	-fx-background-image:url(purple.png);
+	.root{
+	-fx-background-image:url(bluebg.png);
     }
     
 
 	  .scroll-bar:horizontal .track,
 	 .scroll-bar:vertical .track{
 		-fx-background-color: rgb(45,161,250);
-	    -fx-border-color:transparent;
 	    -fx-background-radius: 0em;
 	    -fx-border-radius:2em;
 	}
@@ -90,8 +88,10 @@
     }
     
     .scroll-pane{
-    	-fx-border-width:0;
-    }
+		-fx-border-color:rgb(45,161,250) ;
+		-fx-border-style:solid;
+		-fx-border-width:1px;
+	}
     
     .scroll-pane > .viewport {
    -fx-background-image: url(bluebg.png);
@@ -133,19 +133,22 @@
     
     
     
-    .radio-button .dot{
-  -fx-mark-color: #1B9AF7 ;
+     #hotelname{
+    	-fx-min-width:260;
+    	-fx-min-height:42;
+    	-fx-font-size: 24px;
     }
-    
-    .radio-button {
-  	-fx-font-family: "PingFang SC";
-    	-fx-text-fill:white;
-    	-fx-font-size:14px;
-    	
+        #price{
+    	-fx-min-width:86;
+    	-fx-max-width:86;
+    	-fx-font-size:20px;
+    	-fx-min-height:40;
+    	-fx-alignment:center;
     }
- 
- .radio-button .radio {
-  -fx-background-color: white;
-}
-	
+	#star{
+		-fx-min-width:95;
+    	-fx-min-height:24;
+    	-fx-font-size: 18px;
+    	-fx-alignment:center;
+	}
 	

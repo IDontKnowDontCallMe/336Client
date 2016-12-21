@@ -48,6 +48,8 @@ public class CustomerInfoPanel extends VBox {
 		});
 		titleBox.getChildren().addAll(title, backButton);
 		this.getChildren().addAll(titleBox, listPane);
+		
+		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	/**
