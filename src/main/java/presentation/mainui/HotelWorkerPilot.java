@@ -1,25 +1,49 @@
 package presentation.mainui;
 
+import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import presentation.hotelui.WorkerHotelInfoPane;
+import presentation.orderui.HotelOrdersPane;
+import presentation.orderui.ProducingOrderOfflineDialog;
+import presentation.promotionui.HotelPromotionPanel;
 
+/**
+ * @author samperson1997
+ * 酒店工作人员导航栏
+ *
+ */
 public class HotelWorkerPilot extends AnchorPane{
-	Label hotelID;
-	Label name;
-	Button manageButton;
-	Button hotelPromotionButton;
-	Button offlineButton;
-	Button orderListButton;
-	Button backButton;
+	private Label hotelID;
+	private Label name;
+	private Button manageButton;
+	private Button hotelPromotionButton;
+	private Button offlineButton;
+	private Button orderListButton;
+	private Button backButton;
+	private int ID;
+
+	private Timer surviveTimer;
 	
+	/**
+	 * @param hotelid
+	 * 酒店工作人员导航栏
+	 */
 	public HotelWorkerPilot(int hotelid) {
+		
 		Font icon = Font.loadFont(getClass().getResourceAsStream("fontawesome-webfont.ttf"), -1);
 		this.hotelID = new Label(Integer.toString(hotelid));
 		hotelID.setId("id");
+		this.ID = hotelid;
 		this.setId("pane");
 		int width = 146;
 		
@@ -80,8 +104,8 @@ public class HotelWorkerPilot extends AnchorPane{
 		user.setText(String.valueOf('\uf2bd'));
 		user.setId("user");
 		
-		VBox customerinfo = new VBox(user,hotelID);
-		customerinfo.setSpacing(10.0);
+		VBox hotelinfo = new VBox(user,hotelID);
+		hotelinfo.setSpacing(10.0);
 		//hotelID.setTranslateX(-6.0);
 		VBox buttonbox = new VBox(manageButton,hotelPromotionButton,offlineButton,orderListButton);
 		buttonbox.setSpacing(5.0);
@@ -100,6 +124,72 @@ public class HotelWorkerPilot extends AnchorPane{
 		this.setMaxSize(180, 700);
 		this.setMinSize(180, 700);
 		this.getStylesheets().add(getClass().getResource("HotelWorkerInfoPane.css").toExternalForm());
+	
+		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			try {
+				TheMainFrame.jumpTo(new WorkerHotelInfoPane(hotelid));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+
+		hotelPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			try {
+				TheMainFrame.jumpTo(new HotelPromotionPanel(hotelid));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+
+		offlineButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			try {
+				ProducingOrderOfflineDialog producingOrderOfflineDialog = new ProducingOrderOfflineDialog(hotelid);
+				producingOrderOfflineDialog.show();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+
+		orderListButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			try {
+				TheMainFrame.jumpTo(new HotelOrdersPane(hotelid));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			surviveTimer.cancel();
+			TheMainFrame.jumpTo(new LoginPane());
+		});
+		
+		surviveTimer = new Timer(true);
+		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+
+	}
+	
+	/**
+	 * @author samperson1997
+	 * 提醒服务器端此账号仍然登陆
+	 *
+	 */
+	public class SurvivalTast extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				BLFactory.getInstance().getUserBLService().survivalConfirm(ID);
+				
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }
