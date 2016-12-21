@@ -81,7 +81,9 @@ public class HotelSearchPane extends VBox {
 		gridPane.add(backButton, 4, 0, 1, 1);
 
 		Label checkInText = new Label("入: ");
+		checkInText.setId("in");
 		Label checkOutText = new Label("离: ");
+		checkOutText.setId("out");
 		DatePicker checkInDatePicker = new DatePicker();
 		DatePicker checkOutDatePicker = new DatePicker();
 
@@ -172,10 +174,18 @@ public class HotelSearchPane extends VBox {
 		CheckBox getBookedHotelCheckBox = new CheckBox("只搜索预订过的酒店");
 		isInteractiveCheckBox.setSelected(true);
 
-		gridPane.add(new HBox(new Text("房间类型"), roomTypeChoiceBox), 0, 2, 1, 1);
-		gridPane.add(new HBox(new Text("价格区间"), priceIntervalChoiceBox), 1, 2, 1, 1);
-		gridPane.add(new HBox(new Text("星级"), scoreChoiceBox), 2, 2, 1, 1);
-		gridPane.add(new HBox(new Text("评分"), commentScoreChoiceBox), 3, 2, 1, 1);
+		Label roomtype = new Label("房间类型");
+		Label price = new Label("价格区间");
+		Label star = new Label("星级");
+		Label score = new Label("评分");
+		roomtype.setId("roomtype");
+		price.setId("p");
+		star.setId("s");
+		score.setId("so");
+		gridPane.add(new HBox(roomtype, roomTypeChoiceBox), 0, 2, 1, 1);
+		gridPane.add(new HBox(price, priceIntervalChoiceBox), 1, 2, 1, 1);
+		gridPane.add(new HBox(star, scoreChoiceBox), 2, 2, 1, 1);
+		gridPane.add(new HBox(score, commentScoreChoiceBox), 3, 2, 1, 1);
 		gridPane.add(isInteractiveCheckBox, 0, 3, 1, 1);
 		gridPane.add(getBookedHotelCheckBox, 1, 3, 1, 1);
 
@@ -270,8 +280,10 @@ public class HotelSearchPane extends VBox {
 		hBox.setSpacing(15);
 
 		GridPane priceGridPane = new GridPane();
-		Text priceText = new Text("价格排序");
+		Label priceText = new Label("价格排序 ");
+		priceText.setId("pt");
 		Button priceSortButton = new Button("↑");
+		priceSortButton.setId("pb");
 		priceGridPane.add(priceText, 0, 0, 1, 2);
 
 		priceGridPane.add(priceSortButton, 1, 0, 1, 1);
@@ -298,8 +310,10 @@ public class HotelSearchPane extends VBox {
 		});
 		
 		GridPane scoreGridPane = new GridPane();
-		Text scoreText = new Text("星级排序");
+		Label scoreText = new Label("星级排序 ");
+		scoreText.setId("st");
 		Button scoreSortButton = new Button("↑");
+		scoreSortButton.setId("sb");
 		scoreGridPane.add(scoreText, 0, 0, 1, 2);
 		scoreGridPane.add(scoreSortButton, 1, 0, 1, 1);
 
@@ -326,8 +340,10 @@ public class HotelSearchPane extends VBox {
 		});
 
 		GridPane commentGridPane = new GridPane();
-		Text commentText = new Text("评分排序");
+		Label commentText = new Label("评分排序 ");
+		commentText.setId("ct");
 		Button commentSortButton = new Button("↑");
+		commentSortButton.setId("cb");
 		commentGridPane.add(commentText, 0, 0, 1, 2);
 		commentGridPane.add(commentSortButton, 1, 0, 1, 1);
 

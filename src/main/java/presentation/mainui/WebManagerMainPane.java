@@ -10,6 +10,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.userui.CustomerInfoPanel;
@@ -21,7 +22,7 @@ import presentation.userui.WebMarketerPanel;
  * 网站管理人员主界面
  *
  */
-public class WebManagerMainPane extends AnchorPane {
+public class WebManagerMainPane extends GridPane {
 
 	private int webManagerID;
 	private Timer surviveTimer;
@@ -76,7 +77,8 @@ public class WebManagerMainPane extends AnchorPane {
 		logoutButton.setMaxSize(84, 84);
 		
 
-		this.getChildren().addAll(customerManageButton, hotelManageButton, webMarketerManageButton, logoutButton);
+		AnchorPane anchorPane = new AnchorPane();
+		anchorPane.getChildren().addAll(customerManageButton, hotelManageButton, webMarketerManageButton, logoutButton);
 		
 		AnchorPane.setLeftAnchor(customerManageButton, 124.0);
 		AnchorPane.setTopAnchor(customerManageButton, 250.0);
@@ -86,6 +88,10 @@ public class WebManagerMainPane extends AnchorPane {
 		AnchorPane.setTopAnchor(webMarketerManageButton, 250.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
+		WebManagerInfoPane webManagerInfoPane = new WebManagerInfoPane(webManagerID);
+		this.add(webManagerInfoPane, 0, 0);
+		this.add(anchorPane, 1, 0);
 		
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {

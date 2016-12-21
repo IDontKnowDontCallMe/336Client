@@ -1,0 +1,88 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+
+	
+#pane{	
+	-fx-background-image: url(resource/red.png);
+
+	 -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+}
+
+#user{
+	-fx-text-fill:white;
+		-fx-min-width:100;
+		-fx-alignment:center;
+	
+}
+#id{
+	-fx-font-size:16px;
+	-fx-min-width:100;
+	-fx-alignment:center;
+}
+
+.label{
+	-fx-text-fill:white;
+}
+
+	     .button {
+  -fx-background-color: rgb(252,70,85);
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-text-fill: #FFF;
+  -fx-font-family: "PingFang SC";
+  
+ }
+ .button.label{
+ 	-fx-text-fill:white;
+ }
+
+ .button:hover, .button:focus {
+  	-fx-background-color: rgb(253,119,130);
+    -fx-border-color: #4cb0f9;
+    
+    -fx-text-fill: #FFF; 
+    }
+    
+    
+  .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: rgb(243,78,93);
+    -fx-border-color: rgb(243,78,93);
+    -fx-text-fill: rgb(252,24,45);
+            }
+            
+   	     #back {
+  -fx-background-color: #1B9AF7;
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-text-fill: #FFF;
+  -fx-font-weight: 300;
+  -fx-font-size: 15px;
+  -fx-font-family: "PingFang SC";
+  -fx-text-alignment: center;
+  -fx-min-height: 35px;
+  -fx-padding: 0 40px;
+  -fx-cursor: pointer;
+  -fx-min-width:100px;
+  
+ }
+ 
+
+ #back:hover, #back:focus {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #4cb0f9;
+    -fx-text-fill: #FFF; 
+    }
+ #back:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;
+    -fx-text-fill: #0880d7;
+            }         
+ 
+	
+	

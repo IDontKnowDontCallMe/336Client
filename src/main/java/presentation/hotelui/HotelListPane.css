@@ -136,19 +136,31 @@
      #hotelname{
     	-fx-min-width:260;
     	-fx-min-height:42;
-    	-fx-font-size: 24px;
+    	-fx-font-size: 27px;
     }
         #price{
     	-fx-min-width:86;
-    	-fx-max-width:86;
-    	-fx-font-size:20px;
+    	-fx-font-size:22px;
     	-fx-min-height:40;
     	-fx-alignment:center;
     }
+	#commentscore{
+		-fx-min-width:95;
+    	-fx-min-height:24;
+    	-fx-font-size: 18px;
+    	-fx-alignment:center;
+	}
 	#star{
 		-fx-min-width:95;
     	-fx-min-height:24;
     	-fx-font-size: 18px;
     	-fx-alignment:center;
 	}
-	
+	#address{
+		-fx-min-width:95;
+    	-fx-min-height:24;
+    	-fx-font-size: 20px;
+	}
+	#ifbook{
+		-fx-font-size: 15px;
+	}

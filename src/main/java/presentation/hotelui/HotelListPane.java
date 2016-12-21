@@ -90,6 +90,7 @@ public class HotelListPane extends ScrollPane {
 			minPrice.setId("price");
 			this.getChildren().add(minPrice);
 			Label address = new Label(String.valueOf(hotelVO.address));
+			address.setId("address");
 			this.getChildren().add(address);
 
 			produceButton = new Button("下订单");
@@ -120,14 +121,20 @@ public class HotelListPane extends ScrollPane {
 			hotelName.setLayoutX(230.0);
 			hotelName.setLayoutY(16.0);
 			star.setLayoutX(240.0);
-			star.setLayoutY(46.0);
-			minPrice.setLayoutX(600.0);
-			minPrice.setLayoutY(80.0);
+			star.setLayoutY(56.0);
+			minPrice.setLayoutX(520.0);
+			minPrice.setLayoutY(62.0);
 			commentScore.setLayoutX(240.0);
 			commentScore.setLayoutY(86.0);
-			ifbooked.setLayoutX(700.0);
-			ifbooked.setLayoutY(70.0);
-
+			ifbooked.setLayoutX(720.0);
+			ifbooked.setLayoutY(10.0);
+			produceButton.setLayoutX(700.0);
+			produceButton.setLayoutY(80.0);
+			address.setLayoutX(230.0);
+			address.setLayoutY(150.0);
+			detailedButton.setLayoutX(537.0);
+			detailedButton.setLayoutY(105.0);
+			
 			ImagePane imagePane = new ImagePane(hotelVO.hotelID);
 			this.getChildren().add(imagePane);
 			imagePane.setLayoutY(6.0);

@@ -3,13 +3,13 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
@@ -22,7 +22,7 @@ import presentation.promotionui.HotelPromotionPanel;
  * 酒店工作人员主界面
  *
  */
-public class HotelWorkerMainPane extends AnchorPane {
+public class HotelWorkerMainPane extends GridPane {
 
 	private int hotelID;
 	private Timer surviveTimer;
@@ -92,19 +92,27 @@ public class HotelWorkerMainPane extends AnchorPane {
 		logoutButton.setMinSize(84, 84);
 		logoutButton.setMaxSize(84, 84);
 		
+		AnchorPane anchorPane = new AnchorPane();
 		
-		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
+		anchorPane.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
 
-		AnchorPane.setLeftAnchor(orderListButton, 250.0);
+		AnchorPane.setLeftAnchor(orderListButton, 170.0);
 		AnchorPane.setTopAnchor(orderListButton, 100.0);
-		AnchorPane.setLeftAnchor(offlineButton, 600.0);
+		AnchorPane.setLeftAnchor(offlineButton, 520.0);
 		AnchorPane.setTopAnchor(offlineButton, 100.0);
-		AnchorPane.setLeftAnchor(hotelPromotionButton, 250.0);
+		AnchorPane.setLeftAnchor(hotelPromotionButton, 170.0);
 		AnchorPane.setTopAnchor(hotelPromotionButton, 400.0);
-		AnchorPane.setLeftAnchor(manageButton, 600.0);
+		AnchorPane.setLeftAnchor(manageButton, 520.0);
 		AnchorPane.setTopAnchor(manageButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
+		HotelWorkerInfoPane hotelWorkerInfoPane = new HotelWorkerInfoPane(hotelID);
+		this.add(hotelWorkerInfoPane, 0, 0);
+		this.add(anchorPane, 1, 0);
+		
+		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
+		
 		
 		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
@@ -150,7 +158,6 @@ public class HotelWorkerMainPane extends AnchorPane {
 		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
-		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
 	}
 	
 	/**

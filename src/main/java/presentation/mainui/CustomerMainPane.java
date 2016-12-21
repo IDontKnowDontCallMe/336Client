@@ -10,6 +10,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.customerui.CustomerInfoPane;
@@ -22,18 +23,18 @@ import presentation.orderui.CustomerOrdersPane;
  * 客户主界面
  *
  */
-public class CustomerMainPane extends AnchorPane {
+public class CustomerMainPane extends GridPane {
 
 	private int customerID;
 	private Timer surviveTimer;
 
-	public CustomerMainPane(int customerID) {
+	public CustomerMainPane(int customerid) throws RemoteException {
 		super();
-		this.customerID = customerID;
+		this.customerID = customerid;
 		int r =200;
 		int dim = 130;
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
-
+		AnchorPane anchorPane = new AnchorPane();
 		Label search = new Label();
 		search.setFont(Font.font(icon.getFamily(), dim));
 		search.setText(String.valueOf('\uf002'));
@@ -86,18 +87,23 @@ public class CustomerMainPane extends AnchorPane {
 		logoutButton.setMinSize(84, 84);
 		logoutButton.setMaxSize(84, 84);
 		
-		this.getChildren().addAll(searchButton, orderListButton, hotelListButton, infoButton, logoutButton);
+		anchorPane.getChildren().addAll(searchButton, orderListButton, hotelListButton, infoButton, logoutButton);
 
-		AnchorPane.setLeftAnchor(searchButton, 250.0);
+		AnchorPane.setLeftAnchor(searchButton, 170.0);
 		AnchorPane.setTopAnchor(searchButton, 100.0);
-		AnchorPane.setLeftAnchor(orderListButton, 600.0);
+		AnchorPane.setLeftAnchor(orderListButton, 520.0);
 		AnchorPane.setTopAnchor(orderListButton, 100.0);
-		AnchorPane.setLeftAnchor(hotelListButton, 250.0);
+		AnchorPane.setLeftAnchor(hotelListButton, 170.0);
 		AnchorPane.setTopAnchor(hotelListButton, 400.0);
-		AnchorPane.setLeftAnchor(infoButton, 600.0);
+		AnchorPane.setLeftAnchor(infoButton, 520.0);
 		AnchorPane.setTopAnchor(infoButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
+		CustomerInfoPane customerInfoPane = new CustomerInfoPane(customerID);
+		this.add(customerInfoPane, 0, 0);
+		this.add(anchorPane, 1, 0);
+		
 
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.jumpTo(new AreaInputPane(customerID));
@@ -136,6 +142,10 @@ public class CustomerMainPane extends AnchorPane {
 		
 		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+		
+		CustomerInfoPane customerInfoPane1 = new CustomerInfoPane(customerID);
+		this.add(customerInfoPane1, 0, 0);
+		this.add(anchorPane, 1, 0);
 
 		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());
 

@@ -59,7 +59,12 @@ public class LoginPane extends AnchorPane {
 				Button closeButton1 = new Button("确定");
 				closeButton1.setOnAction(e -> {
 					popup1.close();
-					TheMainFrame.jumpTo(new CustomerMainPane(ID));
+					try {
+						TheMainFrame.jumpTo(new CustomerMainPane(ID));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				});
 				VBox root1 = new VBox();
 				root1.setAlignment(Pos.BASELINE_CENTER);
