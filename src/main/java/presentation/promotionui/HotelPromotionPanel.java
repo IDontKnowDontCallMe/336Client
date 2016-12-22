@@ -3,15 +3,16 @@ package presentation.promotionui;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Optional;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.HotelPromotionVO;
 
@@ -20,7 +21,7 @@ import vo.HotelPromotionVO;
  * 酒店促销策略面板
  *
  */
-public class HotelPromotionPanel extends VBox {
+public class HotelPromotionPanel extends GridPane {
 
 	private List<HotelPromotionVO> hotelPromotionList;
 	private ScrollPane listPane;
@@ -28,7 +29,7 @@ public class HotelPromotionPanel extends VBox {
 	private HBox addBox;
 	private Button addButton;
 	private Button backButton;
-	private Text title;
+	private Label title;
 
 	/**
 	 * @param hotelID
@@ -43,9 +44,13 @@ public class HotelPromotionPanel extends VBox {
 		hotelPromotionBox.setSpacing(15);
 		buildHotelPromotionBox(hotelPromotionList);
 		listPane = new ScrollPane(hotelPromotionBox);
+		listPane.setMinWidth(920.0);
+		hotelPromotionBox.setTranslateX(20.0);
 		listPane.getStyleClass().add("edge-to-edge");		
 
-		title = new Text("酒店促销策略");
+		title = new Label("酒店促销策略");
+		title.setId("title");
+		title.setTranslateY(2.0);
 		addButton = new Button("新增");
 		addButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			Dialog<HotelPromotionVO> hotelPeomotionAddDialog = new HotelPromotionAddDialog(hotelID);
@@ -72,9 +77,17 @@ public class HotelPromotionPanel extends VBox {
 		});
 		addBox = new HBox();
 		addBox.setSpacing(10);
-		addBox.setPrefWidth(500);
+		addBox.setMinHeight(50.0);
+		addBox.setTranslateX(20.0);
 		addBox.getChildren().addAll(title, addButton, backButton);
-		this.getChildren().addAll(addBox, listPane);
+		
+		GridPane gridPane = new GridPane();
+		gridPane.add(addBox, 0, 0);
+		gridPane.add(listPane,0,1);
+		
+		HotelWorkerPilot hotelWorkerPilot = new HotelWorkerPilot(hotelID);
+		this.add(hotelWorkerPilot, 0, 0);
+		this.add(gridPane, 1, 0);
 		this.getStylesheets().add(getClass().getResource("HotelPromotionPane.css").toExternalForm());
 	}
 

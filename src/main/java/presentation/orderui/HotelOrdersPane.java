@@ -75,6 +75,7 @@ public class HotelOrdersPane extends GridPane {
 		this.add(vBox, 1, 0);
 		
 		vBox.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("HotelOrderPane2.css").toExternalForm());
 
 	}
 

@@ -48,7 +48,6 @@ public class WorkerHotelInfoPane extends GridPane {
 	private VBox roomBox;
 
 	final int COLUMN = 15;
-	private Button backButton;
 	private Button infoEditButton;
 	private Button addButton;
 	private Button editPasswordButton;
@@ -93,29 +92,20 @@ public class WorkerHotelInfoPane extends GridPane {
 		initInfoPane();
 		initRoomPane(hotelID);
 
-		this.add(new Text("酒店基本信息"), 0, 0, 1, 1);
+		Label label = new Label("酒店基本信息");
+		this.add(label, 0, 0, 1, 1);
 		this.add(infoPane, 0, 1, 1, 1);
 
-		this.add(new Text("房型列表"), 0, 2, 1, 1);
+		Label label2 = new Label("房型列表");
+		this.add(label2, 0, 2, 1, 1);
 		this.add(roomBox, 0, 3, 2, 1);
-
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("back");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
+		
 
 		ImageEditPane imageEditPane = new ImageEditPane(hotelID);
 		this.add(imageEditPane, 1, 1, 1, 1);
-		this.add(backButton, 1, 0, 1, 1);
-		backButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
+		
+		
+		
 	}
 
 	/**
@@ -233,7 +223,7 @@ public class WorkerHotelInfoPane extends GridPane {
 						e1.printStackTrace();
 					}
 					roomBox.getChildren().clear();
-					roomBox.getChildren().addAll(roomPane, addButton);
+					roomBox.getChildren().addAll(addButton, roomPane);
 					addButton.setText("新增房间类型");
 				}
 
