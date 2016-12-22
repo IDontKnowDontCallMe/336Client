@@ -51,6 +51,8 @@ public class HotelOrderCell extends Pane {
 		customerName.setId("customername");
 
 		customerPhone = new Label("联系方式: "+orderVO.customerPhoneNumber);
+		customerPhone.setLayoutX(200.0);
+		customerPhone.setLayoutY(3.0);
 
 		this.getChildren().add(customerPhone);
 
