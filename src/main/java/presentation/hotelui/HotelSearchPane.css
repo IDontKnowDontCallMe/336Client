@@ -16,13 +16,34 @@
 	}
 	
 
-	
-	.label{
-		-fx-font-family: "PingFang SC";
-		-fx-text-fill:white;
-	}
+	     #ab, #sub{
+  -fx-background-color: #1B9AF7;
+  -fx-border-color: #d4d4d4;
+  -fx-text-fill: #FFF;
+  -fx-font-weight: 300;
+  -fx-font-family: "PingFang SC";
+  -fx-text-alignment: center;
+  -fx-cursor: pointer;
+  
+ }
+ 
 
-	     #back, #search {
+ #ab:hover, #sub:hover {
+  	-fx-background-color: #4cb0f9;
+    -fx-border-color: #d4d4d4;
+    -fx-text-fill: #FFF; 
+    }
+  #ab:pressed, #sub:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: #2798eb;
+    -fx-border-color: #2798eb;
+    -fx-text-fill: #0880d7;
+            }
+	
+	
+	
+
+	     #back, #search{
   -fx-background-color: #1B9AF7;
   -fx-border-color: #1B9AF7;
   -fx-text-fill: #FFF;
@@ -37,7 +58,7 @@
  }
  
 
- #back:hover, #search:hover, #back:focused, #search:focused {
+ #back:hover, #search:hover {
   	-fx-background-color: #4cb0f9;
     -fx-border-color: #4cb0f9;
     -fx-text-fill: #FFF; 
@@ -54,7 +75,7 @@
    .combo-box {
     	-fx-padding: 0;
     -fx-min-height :30px;
-    -fx-min-width : 150px;
+    -fx-min-width : 120px;
   -fx-mark-color:white;
   -fx-background-color: rgb(40,156,244);
   -fx-border-style: solid;
@@ -111,7 +132,16 @@
     -fx-text-fill:white;
 }
 
-#roomtype,#p,#s,#so,#in,#out,#pt,#ct,#st{
+#in,#out,#pt,#ct,#st,#hotelt,#roomnum{
+	     	-fx-text-fill:white;
+	     		-fx-font-family:"PingFang SC";
+	-fx-font-size:16px;
+}
+
+#roomtype,#p,#s,#so{
+	    -fx-min-height :30px;
+		     	-fx-text-fill:white;
+	     		-fx-font-family:"PingFang SC";
 	-fx-font-size:16px;
 }
 

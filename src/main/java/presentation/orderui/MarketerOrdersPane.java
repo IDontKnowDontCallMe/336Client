@@ -16,11 +16,13 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebMarketerPilot;
 import vo.HotelVO;
 import vo.OrderVO;
 
@@ -29,7 +31,7 @@ import vo.OrderVO;
  * 网站营销人员订单面板
  *
  */
-public class MarketerOrdersPane extends VBox {
+public class MarketerOrdersPane extends GridPane {
 
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 	private AnchorPane radioBox;
@@ -41,13 +43,14 @@ public class MarketerOrdersPane extends VBox {
 	private ScrollPane listPane;
 	private VBox orderBox;
 	private List<OrderVO> orderList;
+	private VBox vBox;
 
 	/**
 	 * @throws RemoteException
 	 * 网站营销人员订单面板
 	 * 
 	 */
-	public MarketerOrdersPane() throws RemoteException {
+	public MarketerOrdersPane(int id) throws RemoteException {
 
 		initRadioButton();
 		orderList = BLFactory.getInstance().getOrderBLService().getAbnormalOrdersOfToday();
@@ -55,10 +58,15 @@ public class MarketerOrdersPane extends VBox {
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
 		listPane = new ScrollPane(orderBox);
-		this.getChildren().addAll(radioBox, listPane);
-		this.setPrefWidth(500);
+		listPane.getStyleClass().add("edge-to-edge");		
 
-		this.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
+		vBox = new VBox();
+		vBox.getChildren().addAll(radioBox, listPane);
+		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
+		this.add(webMarketerPilot, 0, 0);
+		this.add(vBox, 1, 0);
+
+		vBox.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
 	}
 
 	/**

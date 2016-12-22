@@ -6,6 +6,7 @@ import java.util.List;
 import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -17,8 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
 import vo.HotelVO;
@@ -29,7 +30,7 @@ import vo.SearchConditionVO;
  * 酒店搜索面板
  *
  */
-public class HotelSearchPane extends VBox {
+public class HotelSearchPane extends GridPane {
 
 	private int customerID;
 	private AreaVO areaVO;
@@ -37,6 +38,8 @@ public class HotelSearchPane extends VBox {
 	private HotelListPane hotelListPane;
 	private Button searchButton;
 	private Button backButton;
+	private VBox vBox = new VBox();
+
 
 	/**
 	 * @param areaVO
@@ -50,10 +53,14 @@ public class HotelSearchPane extends VBox {
 		this.customerID = customerID;
 		this.areaVO = areaVO;
 
-		this.setSpacing(20);
+		vBox.setSpacing(20);
 		initSearchPane();
 		initSortingPane();
 		initHotelListPane();
+		
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+		this.add(customerPilot, 0, 0);
+		this.add(vBox, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("HotelSearchPane.css").toExternalForm());
 	}
@@ -68,7 +75,8 @@ public class HotelSearchPane extends VBox {
 		gridPane.setHgap(15);
 		gridPane.setVgap(15);
 
-		Label hotelNameText = new Label("酒店名称");
+		Label hotelNameText = new Label("  酒店名称");
+		hotelNameText.setId("hotelt");
 		TextField hotelNameTextField = new TextField();
 		hotelNameTextField.setId("hotelIn");
 		gridPane.add(new HBox(hotelNameText, hotelNameTextField), 0, 0, 3, 1);
@@ -77,12 +85,12 @@ public class HotelSearchPane extends VBox {
 
 		backButton = new Button("退出搜索");
 		backButton.setId("back");
-		gridPane.add(searchButton, 3, 0, 1, 1);
-		gridPane.add(backButton, 4, 0, 1, 1);
+		gridPane.add(searchButton, 2, 0, 1, 1);
+		gridPane.add(backButton, 3, 0, 1, 1);
 
-		Label checkInText = new Label("入: ");
+		Label checkInText = new Label("   入: ");
 		checkInText.setId("in");
-		Label checkOutText = new Label("离: ");
+		Label checkOutText = new Label("         离: ");
 		checkOutText.setId("out");
 		DatePicker checkInDatePicker = new DatePicker();
 		DatePicker checkOutDatePicker = new DatePicker();
@@ -124,10 +132,15 @@ public class HotelSearchPane extends VBox {
 		};
 		checkOutDatePicker.setDayCellFactory(checkOutDayCellFactory);
 
+		Label label = new Label("房间数量: ");
+		label.setId("roomnum");
 		Button addButton = new Button("+");
+		addButton.setId("ab");
 		Button subButton = new Button("-");
+		subButton.setId("sub");
 		subButton.setDisable(true);
 		TextField numTextField = new TextField("1");
+		numTextField.setAlignment(Pos.CENTER);
 		numTextField.setEditable(false);
 		numTextField.setPrefColumnCount(2);
 
@@ -151,8 +164,8 @@ public class HotelSearchPane extends VBox {
 		});
 
 		gridPane.add(new HBox(checkInText, checkInDatePicker), 0, 1, 2, 1);
-		gridPane.add(new HBox(checkOutText, checkOutDatePicker), 2, 1, 2, 1);
-		gridPane.add(new HBox(subButton, numTextField, addButton), 4, 1, 1, 1);
+		gridPane.add(new HBox(checkOutText, checkOutDatePicker), 1, 1, 2, 1);
+		gridPane.add(new HBox(label,subButton, numTextField, addButton), 3, 1, 1, 1);
 
 		ObservableList<String> roomTypeList = FXCollections.observableArrayList("不限", "单人间(1人)", "双人房(2人)", "三人房(3人)");
 		ComboBox<String> roomTypeChoiceBox = new ComboBox<>(roomTypeList);
@@ -174,10 +187,10 @@ public class HotelSearchPane extends VBox {
 		CheckBox getBookedHotelCheckBox = new CheckBox("只搜索预订过的酒店");
 		isInteractiveCheckBox.setSelected(true);
 
-		Label roomtype = new Label("房间类型");
-		Label price = new Label("价格区间");
-		Label star = new Label("星级");
-		Label score = new Label("评分");
+		Label roomtype = new Label("  房间类型 ");
+		Label price = new Label("  价格区间 ");
+		Label star = new Label("  星级 ");
+		Label score = new Label("  评分 ");
 		roomtype.setId("roomtype");
 		price.setId("p");
 		star.setId("s");
@@ -186,8 +199,8 @@ public class HotelSearchPane extends VBox {
 		gridPane.add(new HBox(price, priceIntervalChoiceBox), 1, 2, 1, 1);
 		gridPane.add(new HBox(star, scoreChoiceBox), 2, 2, 1, 1);
 		gridPane.add(new HBox(score, commentScoreChoiceBox), 3, 2, 1, 1);
-		gridPane.add(isInteractiveCheckBox, 0, 3, 1, 1);
-		gridPane.add(getBookedHotelCheckBox, 1, 3, 1, 1);
+		gridPane.add(isInteractiveCheckBox, 1, 3, 1, 1);
+		gridPane.add(getBookedHotelCheckBox, 2, 3, 1, 1);
 
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			boolean hasRoomTypeLimit = false;
@@ -266,7 +279,7 @@ public class HotelSearchPane extends VBox {
 			TheMainFrame.backTo();
 		});
 
-		this.getChildren().add(gridPane);
+		vBox.getChildren().add(gridPane);
 
 	}
 
@@ -280,7 +293,7 @@ public class HotelSearchPane extends VBox {
 		hBox.setSpacing(15);
 
 		GridPane priceGridPane = new GridPane();
-		Label priceText = new Label("价格排序 ");
+		Label priceText = new Label("   价格排序 ");
 		priceText.setId("pt");
 		Button priceSortButton = new Button("↑");
 		priceSortButton.setId("pb");
@@ -300,7 +313,7 @@ public class HotelSearchPane extends VBox {
 			}
 			else if(priceSortButton.getText().equals("↓")){
 				try {
-					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高到低");
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高至低");
 					changeHotelListPane();
 				} catch (RemoteException e) {
 					e.printStackTrace();
@@ -369,7 +382,7 @@ public class HotelSearchPane extends VBox {
 		});
 
 		hBox.getChildren().addAll(priceGridPane, scoreGridPane, commentGridPane);
-		this.getChildren().add(hBox);
+		vBox.getChildren().add(hBox);
 	}
 
 	/**
@@ -381,7 +394,7 @@ public class HotelSearchPane extends VBox {
 		
 		list = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
 		hotelListPane = new HotelListPane(list, customerID);
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 	/**
@@ -390,10 +403,10 @@ public class HotelSearchPane extends VBox {
 	 */
 	private void changeHotelListPane() throws RemoteException {
 		
-		this.getChildren().remove(hotelListPane);
+		vBox.getChildren().remove(hotelListPane);
 		hotelListPane = new HotelListPane(list, customerID);
 
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 }

@@ -9,7 +9,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.hotelui.WorkerHotelInfoPane;
@@ -22,7 +21,7 @@ import presentation.promotionui.HotelPromotionPanel;
  * 酒店工作人员主界面
  *
  */
-public class HotelWorkerMainPane extends GridPane {
+public class HotelWorkerMainPane extends AnchorPane {
 
 	private int hotelID;
 	private Timer surviveTimer;
@@ -92,27 +91,21 @@ public class HotelWorkerMainPane extends GridPane {
 		logoutButton.setMinSize(84, 84);
 		logoutButton.setMaxSize(84, 84);
 		
-		AnchorPane anchorPane = new AnchorPane();
 		
-		anchorPane.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
+		this.getChildren().addAll(manageButton, hotelPromotionButton, offlineButton, orderListButton, logoutButton);
 
-		AnchorPane.setLeftAnchor(orderListButton, 170.0);
+		AnchorPane.setLeftAnchor(orderListButton, 250.0);
 		AnchorPane.setTopAnchor(orderListButton, 100.0);
-		AnchorPane.setLeftAnchor(offlineButton, 520.0);
+		AnchorPane.setLeftAnchor(offlineButton, 600.0);
 		AnchorPane.setTopAnchor(offlineButton, 100.0);
-		AnchorPane.setLeftAnchor(hotelPromotionButton, 170.0);
+		AnchorPane.setLeftAnchor(hotelPromotionButton, 250.0);
 		AnchorPane.setTopAnchor(hotelPromotionButton, 400.0);
-		AnchorPane.setLeftAnchor(manageButton, 520.0);
+		AnchorPane.setLeftAnchor(manageButton, 600.0);
 		AnchorPane.setTopAnchor(manageButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
-		HotelWorkerPilot hotelWorkerPilot = new HotelWorkerPilot(hotelID);
-		this.add(hotelWorkerPilot, 0, 0);
-		this.add(anchorPane, 1, 0);
-		
 		this.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
-		
 		
 		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {

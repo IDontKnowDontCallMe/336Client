@@ -49,10 +49,14 @@ public class HotelOrderCell extends Pane {
 		customerName.setLayoutX(16.0);
 		customerName.setLayoutY(41.0);
 		customerName.setId("customername");
-		customerPhone = new Label("客户号码"+orderVO.customerPhoneNumber);
+
+		customerPhone = new Label("联系方式: "+orderVO.customerPhoneNumber);
+
 		this.getChildren().add(customerPhone);
-		customerPhone.setLayoutX(286.0);
-		customerName.setLayoutY(41.0);
+
+		customerPhone.setLayoutX(166.0);
+		customerPhone.setLayoutY(51.0);
+
 		customerPhone.setId("customerPhone");
 		state = new Label(orderVO.orderState);
 		this.getChildren().add(state);
@@ -94,6 +98,8 @@ public class HotelOrderCell extends Pane {
 		if (button != null) {
 			button.setId("btn");
 			this.getChildren().add(button);
+			button.setLayoutX(711.0);
+			button.setLayoutY(70.0);
 		}
 
 		this.getStylesheets().add(getClass().getResource("HotelOrderCell.css").toExternalForm());

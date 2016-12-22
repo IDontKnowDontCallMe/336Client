@@ -47,51 +47,15 @@
 	 
 	}
 
- .button{
-   -fx-background-color:null;
-  -fx-border-width: 2.0px;
-  -fx-border-style: solid;
-  -fx-border-color:white;
-  -fx-max-height: 10.0px;
-  	-fx-font-family: "PingFang SC";
-  -fx-text-fill:white;
-   }
-   .label{
-   	-fx-text-fill:white;
-   }
-  .button:hover .label{
- 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
- 	 }
- 	 .button:hover{
- 	-fx-background-color: rgba(234, 246, 255, 0.9); 
- 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
- 		
- 	 }
- 	 
-   .button:pressed .label{
-    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
-    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-    	-fx-opacity:3.0
-    } 
-    .button:pressed{
-  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
-  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-  	
-    -fx-opacity:3.0 ; 
-    }
-          
 
-    
+
     #radio{
     	-fx-min-height:80;
     	
     }
     
-    .scroll-pane{
-		-fx-border-color:rgb(45,161,250) ;
-		-fx-border-style:solid;
-		-fx-border-width:1px;
-	}
+    
+
     
     .scroll-pane > .viewport {
    -fx-background-image: url(bluebg.png);

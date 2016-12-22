@@ -109,7 +109,7 @@ public class WebMarketerMainPane extends GridPane {
 
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebPromotionPanel());
+				TheMainFrame.jumpTo(new WebPromotionPanel(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -119,7 +119,7 @@ public class WebMarketerMainPane extends GridPane {
 		
 		levelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new LevelPanel());
+				TheMainFrame.jumpTo(new LevelPanel(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,7 +128,7 @@ public class WebMarketerMainPane extends GridPane {
 
 		marketerOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new MarketerOrdersPane());
+				TheMainFrame.jumpTo(new MarketerOrdersPane(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -137,7 +137,7 @@ public class WebMarketerMainPane extends GridPane {
 
 		creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerCreditPanel());
+				TheMainFrame.jumpTo(new CustomerCreditPanel(webMarketerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

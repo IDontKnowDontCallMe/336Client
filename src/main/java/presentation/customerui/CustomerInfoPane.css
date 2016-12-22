@@ -25,13 +25,18 @@
 		-fx-font-family:"PingFang SC"
 	}
 	
+	#compl,#bid{
+		-fx-text-fill:white;
+			-fx-font-size: 17px;
+		
+	}
 	
  .button{
    -fx-background-color:null;
   -fx-border-width: 2.0px;
   -fx-border-style: solid;
   -fx-border-color:white;
-  -fx-max-height: 10.0px;
+  -fx-max-height: 8.0px;
     -fx-font-family: "PingFang SC";
   -fx-text-fill:white;
    }
@@ -62,7 +67,8 @@
 
 
 #lb1,#lb2{
-	-fx-font-family: "Helvetica Neue",sans-serif, "Microsoft Yahei", "MingLiU";
+	-fx-text-fill:white;
+	-fx-font-family: "PingFang SC";
 	-fx-font-size: 18px;
 }
     

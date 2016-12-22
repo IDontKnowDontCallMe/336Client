@@ -34,8 +34,12 @@ public class HotelListPane extends ScrollPane {
 		super();
 		this.customerID = customerID;
 
+		this.getStyleClass().add("edge-to-edge");
+		this.setMinWidth(920.0);
+		
 		VBox vBox = new VBox();
 		vBox.setSpacing(20);
+		vBox.setTranslateX(50.0);
 		this.setContent(vBox);
 
 
@@ -138,6 +142,7 @@ public class HotelListPane extends ScrollPane {
 			
 			ImagePane imagePane = new ImagePane(hotelVO.hotelID);
 			this.getChildren().add(imagePane);
+			imagePane.setLayoutX(6.0);
 			imagePane.setLayoutY(6.0);
 
 			this.getStylesheets().add(getClass().getResource("SimpleHotelCell.css").toExternalForm());
