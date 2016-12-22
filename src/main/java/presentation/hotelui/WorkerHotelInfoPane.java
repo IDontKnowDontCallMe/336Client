@@ -6,6 +6,8 @@ import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
@@ -23,6 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.PasswordEditDialog;
 import presentation.mainui.TheMainFrame;
@@ -31,8 +35,7 @@ import vo.HotelVO;
 import vo.RoomVO;
 
 /**
- * @author samperson1997 
- * 酒店工作人员查看酒店详细信息界面
+ * @author samperson1997 酒店工作人员查看酒店详细信息界面
  *
  */
 public class WorkerHotelInfoPane extends GridPane {
@@ -49,7 +52,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	private Button infoEditButton;
 	private Button addButton;
 	private Button editPasswordButton;
-	
+
 	private Text nameText;
 	private Text addressText;
 	private Text introductionText;
@@ -76,7 +79,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 酒店工作人员酒店详细信息面板
+	 *             酒店工作人员酒店详细信息面板
 	 * 
 	 */
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
@@ -183,16 +186,30 @@ public class WorkerHotelInfoPane extends GridPane {
 		}
 		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField,
 				addServiceTextField, addMaxNumOfPeopleTextField);
-		
+
 		addButton = new Button("新增房间类型");
 		roomBox.getChildren().addAll(roomPane, addButton);
 		addButton.setOnAction((ActionEvent e) -> {
 			if (addButton.getText().equals("确认添加")) {
-				if (addRoomNameTextField.getText().equals("") || addPriceTextField.getText().equals("") 
-						|| addNumOfRoomTextField.getText().equals("")  || addServiceTextField.getText().equals("") 
-						|| addMaxNumOfPeopleTextField.getText().equals("") ) {
-					
-				}else{
+				if (addRoomNameTextField.getText().equals("") || addPriceTextField.getText().equals("")
+						|| addNumOfRoomTextField.getText().equals("") || addServiceTextField.getText().equals("")
+						|| addMaxNumOfPeopleTextField.getText().equals("")) {
+					Stage popup3 = new Stage();
+					popup3.setAlwaysOnTop(true);
+					popup3.initModality(Modality.APPLICATION_MODAL);
+					Button closeButton3 = new Button("确定");
+					closeButton3.setOnAction(e1 -> {
+						popup3.close();
+					});
+					VBox root3 = new VBox();
+					root3.setAlignment(Pos.BASELINE_CENTER);
+					root3.setSpacing(20);
+					root3.getChildren().addAll(new Label("请将客房信息填写完整！"), closeButton3);
+					Scene scene3 = new Scene(root3, 200, 90);
+					popup3.setScene(scene3);
+					popup3.setTitle("提示");
+					popup3.show();
+				} else {
 					roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
 							addNumOfRoomTextField.getText(), addServiceTextField.getText(),
 							addMaxNumOfPeopleTextField.getText()));
@@ -219,20 +236,17 @@ public class WorkerHotelInfoPane extends GridPane {
 					roomBox.getChildren().addAll(roomPane, addButton);
 					addButton.setText("新增房间类型");
 				}
-				
-			}
-			else if(addButton.getText().equals("新增房间类型")){
+
+			} else if (addButton.getText().equals("新增房间类型")) {
 				roomBox.getChildren().clear();
 				roomBox.getChildren().addAll(roomPane, addBox1, addButton);
 				addButton.setText("确认添加");
 			}
-			
+
 		});
 
 		tableView.setItems(roomCells);
 
-		
-		
 		// this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
@@ -274,13 +288,13 @@ public class WorkerHotelInfoPane extends GridPane {
 		infoPane.add(scoreText, 1, 6, 1, 1);
 
 		editPasswordButton = new Button("修改密码");
-		infoPane.add(editPasswordButton, 0, 1, 1, 1);
-		
+		infoPane.add(editPasswordButton, 1, 0, 1, 1);
+
 		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(hotelID);
 			passwordEditDialog.show();
 		});
-		
+
 		infoEditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (infoEditButton.getText().equals("编辑")) {
 				infoPane.getChildren().removeAll(nameText, addressText, introductionText, serviceText,

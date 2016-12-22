@@ -207,7 +207,7 @@ public class CustomerInfoPane extends GridPane {
 		phoneTextField.setPrefColumnCount(8);
 
 		editPasswordButton = new Button("修改密码");
-		infoPane.add(editPasswordButton, 5, 2, 1, 1);
+		infoPane.add(editPasswordButton, 6, 1, 1, 1);
 		
 		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(customerID);
