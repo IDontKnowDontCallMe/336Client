@@ -58,11 +58,9 @@ public class TheMainFrame extends Application {
 		// 172.26.102.100
 		try {
 			blFactory = BLFactory.getInstance();
-<<<<<<< HEAD
+
 			blFactory.setRemote(Naming.lookup("rmi://114.212.43.130:8888/controllerRemoteFactory"));
-=======
-			blFactory.setRemote(Naming.lookup("rmi://172.26.205.187:8888/controllerRemoteFactory"));
->>>>>>> refs/remotes/origin/master
+
 			System.out.println("linked");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

@@ -396,7 +396,7 @@ public class HotelSearchPane extends GridPane {
 	 */
 	private void changeHotelListPane() throws RemoteException {
 		
-		this.getChildren().remove(hotelListPane);
+		vBox.getChildren().remove(hotelListPane);
 		hotelListPane = new HotelListPane(list, customerID);
 
 		vBox.getChildren().add(hotelListPane);
