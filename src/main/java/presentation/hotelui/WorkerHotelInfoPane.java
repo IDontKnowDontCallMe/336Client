@@ -28,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.PasswordEditDialog;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
@@ -52,12 +53,12 @@ public class WorkerHotelInfoPane extends GridPane {
 	private Button addButton;
 	private Button editPasswordButton;
 
-	private Text nameText;
-	private Text addressText;
-	private Text introductionText;
-	private Text serviceText;
-	private Text businessCircleText;
-	private Text scoreText;
+	private Label nameText;
+	private Label addressText;
+	private Label introductionText;
+	private Label serviceText;
+	private Label businessCircleText;
+	private Label scoreText;
 	private TextField nameTextField;
 	private TextField addressTextField;
 	private TextField introductionTextField;
@@ -84,8 +85,11 @@ public class WorkerHotelInfoPane extends GridPane {
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
 
 		super();
-		this.setHgap(10);
-		this.setVgap(20);
+		GridPane gridPane = new GridPane();
+		gridPane.setId("grid");
+
+		gridPane.setHgap(10);
+		gridPane.setVgap(20);
 
 		this.hotelID = hotelID;
 		hotelVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
@@ -93,19 +97,24 @@ public class WorkerHotelInfoPane extends GridPane {
 		initRoomPane(hotelID);
 
 		Label label = new Label("酒店基本信息");
-		this.add(label, 0, 0, 1, 1);
-		this.add(infoPane, 0, 1, 1, 1);
+		label.setId("l1");
+		gridPane.add(label, 1, 0, 2, 1);
+		gridPane.add(infoPane, 2, 1, 2, 1);
 
 		Label label2 = new Label("房型列表");
-		this.add(label2, 0, 2, 1, 1);
-		this.add(roomBox, 0, 3, 2, 1);
-		
+		label2.setId("l2");
+		gridPane.add(label2, 1, 2, 1, 1);
+		gridPane.add(roomBox, 1, 3, 2, 1);
+		roomBox.setTranslateX(50.0);
 
 		ImageEditPane imageEditPane = new ImageEditPane(hotelID);
-		this.add(imageEditPane, 1, 1, 1, 1);
-		
-		
-		
+		gridPane.add(imageEditPane, 4, 1, 2, 1);
+
+		HotelWorkerPilot hotelWorkerPilot = new HotelWorkerPilot(hotelID);
+		this.add(hotelWorkerPilot, 0, 0);
+		this.add(gridPane, 1, 0);
+		gridPane.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane.css").toExternalForm());
+
 	}
 
 	/**
@@ -118,6 +127,7 @@ public class WorkerHotelInfoPane extends GridPane {
 
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
+		//roomPane.getStyleClass().add("edge-to-edge");
 		roomBox = new VBox();
 		addBox1 = new HBox();
 		roomBox.setSpacing(10);
@@ -149,7 +159,7 @@ public class WorkerHotelInfoPane extends GridPane {
 		maxNumOfPeopleCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
 
 		tableView.getColumns().addAll(roomNameCol, priceCol, numOfRoomCol, serviceCol, maxNumOfPeopleCol);
-		tableView.setPrefWidth(450);
+		tableView.autosize();
 		ObservableList<RoomCell> roomCells = FXCollections.observableArrayList();
 
 		addRoomNameTextField = new TextField();
@@ -178,7 +188,7 @@ public class WorkerHotelInfoPane extends GridPane {
 				addServiceTextField, addMaxNumOfPeopleTextField);
 
 		addButton = new Button("新增房间类型");
-		roomBox.getChildren().addAll(roomPane, addButton);
+		roomBox.getChildren().addAll(addButton, roomPane);
 		addButton.setOnAction((ActionEvent e) -> {
 			if (addButton.getText().equals("确认添加")) {
 				if (addRoomNameTextField.getText().equals("") || addPriceTextField.getText().equals("")
@@ -229,7 +239,7 @@ public class WorkerHotelInfoPane extends GridPane {
 
 			} else if (addButton.getText().equals("新增房间类型")) {
 				roomBox.getChildren().clear();
-				roomBox.getChildren().addAll(roomPane, addBox1, addButton);
+				roomBox.getChildren().addAll(addButton, addBox1, roomPane);
 				addButton.setText("确认添加");
 			}
 
@@ -237,7 +247,6 @@ public class WorkerHotelInfoPane extends GridPane {
 
 		tableView.setItems(roomCells);
 
-		// this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
 	/**
@@ -246,6 +255,7 @@ public class WorkerHotelInfoPane extends GridPane {
 	private void initInfoPane() {
 
 		infoPane = new GridPane();
+		infoPane.setId("infopane");
 
 		infoPane.setHgap(10);
 		infoPane.setVgap(10);
@@ -253,28 +263,28 @@ public class WorkerHotelInfoPane extends GridPane {
 		infoEditButton = new Button("编辑");
 		infoPane.add(infoEditButton, 0, 0, 1, 1);
 
-		infoPane.add(new Text("酒店名称"), 0, 1, 1, 1);
-		nameText = new Text(hotelVO.hotelName);
+		infoPane.add(new Label("酒店名称"), 0, 1, 1, 1);
+		nameText = new Label(hotelVO.hotelName);
 		infoPane.add(nameText, 1, 1, 1, 1);
 
-		infoPane.add(new Text("酒店地址"), 0, 2, 1, 1);
-		addressText = new Text(hotelVO.address);
+		infoPane.add(new Label("酒店地址"), 0, 2, 1, 1);
+		addressText = new Label(hotelVO.address);
 		infoPane.add(addressText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("酒店简介"), 0, 3, 1, 1);
-		introductionText = new Text(hotelVO.introduction);
+		infoPane.add(new Label("酒店简介"), 0, 3, 1, 1);
+		introductionText = new Label(hotelVO.introduction);
 		infoPane.add(introductionText, 1, 3, 1, 1);
 
-		infoPane.add(new Text("设施服务"), 0, 4, 1, 1);
-		serviceText = new Text(hotelVO.service);
+		infoPane.add(new Label("设施服务"), 0, 4, 1, 1);
+		serviceText = new Label(hotelVO.service);
 		infoPane.add(serviceText, 1, 4, 1, 1);
 
-		infoPane.add(new Text("所在商圈名"), 0, 5, 1, 1);
-		businessCircleText = new Text(hotelVO.businessCircle);
+		infoPane.add(new Label("所在商圈名"), 0, 5, 1, 1);
+		businessCircleText = new Label(hotelVO.businessCircle);
 		infoPane.add(businessCircleText, 1, 5, 1, 1);
 
-		infoPane.add(new Text("酒店星级"), 0, 6, 1, 1);
-		scoreText = new Text(hotelVO.score + "星");
+		infoPane.add(new Label("酒店星级"), 0, 6, 1, 1);
+		scoreText = new Label(hotelVO.score + "星");
 		infoPane.add(scoreText, 1, 6, 1, 1);
 
 		editPasswordButton = new Button("修改密码");

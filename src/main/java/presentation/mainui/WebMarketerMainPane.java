@@ -23,7 +23,7 @@ import presentation.userui.CustomerCreditPanel;
  * 网站营销人员主界面
  *
  */
-public class WebMarketerMainPane extends GridPane {
+public class WebMarketerMainPane extends AnchorPane {
 
 	private int webMarketerID;
 	private Timer surviveTimer;
@@ -87,23 +87,19 @@ public class WebMarketerMainPane extends GridPane {
 		logoutButton.setMaxSize(84, 84);		
 
 		
-		AnchorPane anchorPane = new AnchorPane();
-		anchorPane.getChildren().addAll(webPromotionButton, levelButton, marketerOrderButton, creditButton, logoutButton);
+		this.getChildren().addAll(webPromotionButton, levelButton, marketerOrderButton, creditButton, logoutButton);
 		
-		AnchorPane.setLeftAnchor(webPromotionButton, 170.0);
+		AnchorPane.setLeftAnchor(webPromotionButton, 250.0);
 		AnchorPane.setTopAnchor(webPromotionButton, 100.0);
-		AnchorPane.setLeftAnchor(levelButton, 520.0);
+		AnchorPane.setLeftAnchor(levelButton, 600.0);
 		AnchorPane.setTopAnchor(levelButton, 100.0);
-		AnchorPane.setLeftAnchor(marketerOrderButton, 170.0);
+		AnchorPane.setLeftAnchor(marketerOrderButton, 250.0);
 		AnchorPane.setTopAnchor(marketerOrderButton, 400.0);
-		AnchorPane.setLeftAnchor(creditButton, 520.0);
+		AnchorPane.setLeftAnchor(creditButton, 600.0);
 		AnchorPane.setTopAnchor(creditButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
-		WebMarketerPilot webMarketerInfoPane = new WebMarketerPilot(webMarketerID);
-		this.add(webMarketerInfoPane, 0, 0);
-		this.add(anchorPane, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("WebMarketerMainPane.css").toExternalForm());
 

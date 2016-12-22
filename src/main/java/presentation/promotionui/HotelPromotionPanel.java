@@ -79,6 +79,7 @@ public class HotelPromotionPanel extends GridPane {
 		addBox.setSpacing(10);
 		addBox.setMinHeight(50.0);
 		addBox.setTranslateX(20.0);
+		addBox.setTranslateY(10.0);
 		addBox.getChildren().addAll(title, addButton, backButton);
 		
 		GridPane gridPane = new GridPane();

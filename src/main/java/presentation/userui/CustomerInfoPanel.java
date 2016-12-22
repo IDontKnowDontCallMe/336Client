@@ -2,9 +2,9 @@ package presentation.userui;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -25,9 +25,7 @@ public class CustomerInfoPanel extends GridPane {
 	private ScrollPane listPane;
 	private VBox customerBox;
 	private HBox titleBox;
-	private Button backButton;
-	private Text title;
-	private VBox vBox;
+	private Label title;
 
 	/**
 	 * @throws RemoteException
@@ -42,20 +40,19 @@ public class CustomerInfoPanel extends GridPane {
 		customerBox.setSpacing(15);
 		buildCustomerBox(customerList);
 		listPane = new ScrollPane(customerBox);
-
-		title = new Text("客户列表");
+		listPane.setMinWidth(920.0);
+		listPane.getStyleClass().add("edge-to-edge");		
+		title = new Label("客户列表");
 		titleBox = new HBox();
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-		titleBox.getChildren().addAll(title, backButton);
 		
-		vBox.getChildren().addAll(titleBox, listPane);
+		GridPane gridPane = new GridPane();
+		this.getChildren().addAll(titleBox, listPane);
+		gridPane.add(title, 0, 0);
+		gridPane.add(listPane, 0, 1);
 		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
 		this.add(webManagerPilot, 0, 0);
-		this.add(vBox, 1, 0);
-		vBox.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
+		this.add(gridPane, 1, 0);
+		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	/**
