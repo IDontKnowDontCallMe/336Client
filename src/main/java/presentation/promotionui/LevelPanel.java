@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebMarketerPilot;
 import vo.LevelVO;
 
 /**
@@ -50,7 +51,7 @@ public class LevelPanel extends GridPane {
 	 * 编辑会员制度和会员制度促销策略面板
 	 * 
 	 */
-	public LevelPanel() throws RemoteException {
+	public LevelPanel(int id) throws RemoteException {
 		
 		super();
 		levelVO = BLFactory.getInstance().getPromotionBLService().getLevelMethod();
@@ -101,7 +102,10 @@ public class LevelPanel extends GridPane {
 		vacant = new Text("\n");
 		levelMethodBox = new VBox();
 		levelMethodBox.getChildren().addAll(creditDistanceBox, maxLevelBox, discountDistanceBox, vacant);
-		this.add(levelMethodBox, 0, 1, 1, 1);
+		
+		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
+		this.add(webMarketerPilot, 0, 0);
+		this.add(levelMethodBox, 1, 0);
 
 		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (editButton.getText().equals("编辑")) {
@@ -153,7 +157,7 @@ public class LevelPanel extends GridPane {
 
 			}
 		});
-		this.getStylesheets().add(getClass().getResource("LevelPane.css").toExternalForm());
+		levelMethodBox.getStylesheets().add(getClass().getResource("LevelPane.css").toExternalForm());
 
 	}
 }

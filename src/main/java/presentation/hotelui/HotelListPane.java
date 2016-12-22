@@ -34,6 +34,7 @@ public class HotelListPane extends ScrollPane {
 		super();
 		this.customerID = customerID;
 
+		this.getStyleClass().add("edge-to-edge");
 		VBox vBox = new VBox();
 		vBox.setSpacing(20);
 		this.setContent(vBox);

@@ -17,8 +17,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
 import vo.HotelVO;
@@ -29,7 +29,7 @@ import vo.SearchConditionVO;
  * 酒店搜索面板
  *
  */
-public class HotelSearchPane extends VBox {
+public class HotelSearchPane extends GridPane {
 
 	private int customerID;
 	private AreaVO areaVO;
@@ -37,6 +37,8 @@ public class HotelSearchPane extends VBox {
 	private HotelListPane hotelListPane;
 	private Button searchButton;
 	private Button backButton;
+	private VBox vBox = new VBox();
+
 
 	/**
 	 * @param areaVO
@@ -50,10 +52,14 @@ public class HotelSearchPane extends VBox {
 		this.customerID = customerID;
 		this.areaVO = areaVO;
 
-		this.setSpacing(20);
+		vBox.setSpacing(20);
 		initSearchPane();
 		initSortingPane();
 		initHotelListPane();
+		
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+		this.add(customerPilot, 0, 0);
+		this.add(vBox, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("HotelSearchPane.css").toExternalForm());
 	}
@@ -266,7 +272,7 @@ public class HotelSearchPane extends VBox {
 			TheMainFrame.backTo();
 		});
 
-		this.getChildren().add(gridPane);
+		vBox.getChildren().add(gridPane);
 
 	}
 
@@ -369,7 +375,7 @@ public class HotelSearchPane extends VBox {
 		});
 
 		hBox.getChildren().addAll(priceGridPane, scoreGridPane, commentGridPane);
-		this.getChildren().add(hBox);
+		vBox.getChildren().add(hBox);
 	}
 
 	/**
@@ -381,7 +387,7 @@ public class HotelSearchPane extends VBox {
 		
 		list = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
 		hotelListPane = new HotelListPane(list, customerID);
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 	/**
@@ -393,7 +399,7 @@ public class HotelSearchPane extends VBox {
 		this.getChildren().remove(hotelListPane);
 		hotelListPane = new HotelListPane(list, customerID);
 
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 }

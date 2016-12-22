@@ -61,6 +61,7 @@ public class HotelOrdersPane extends GridPane {
 		buildOrderBox(orderList);
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
+		listPane.getStyleClass().add("edge-to-edge");		
 		orderBox.setTranslateX(150.0);
 
 		radioBox.setId("radio");
@@ -73,7 +74,7 @@ public class HotelOrdersPane extends GridPane {
 		this.add(hotelWorkerInfoPane, 0, 0);
 		this.add(vBox, 1, 0);
 		
-		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+		vBox.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 
 	}
 
