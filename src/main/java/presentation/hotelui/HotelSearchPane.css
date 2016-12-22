@@ -17,10 +17,6 @@
 	
 
 	
-	.label{
-		-fx-font-family: "PingFang SC";
-		-fx-text-fill:white;
-	}
 
 	     #back, #search {
   -fx-background-color: #1B9AF7;

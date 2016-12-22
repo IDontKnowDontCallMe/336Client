@@ -107,7 +107,7 @@ public class HotelWorkerPilot extends AnchorPane{
 		VBox hotelinfo = new VBox(user,hotelID);
 		hotelinfo.setSpacing(10.0);
 		//hotelID.setTranslateX(-6.0);
-		VBox buttonbox = new VBox(manageButton,hotelPromotionButton,offlineButton,orderListButton);
+		VBox buttonbox = new VBox(orderListButton,offlineButton,hotelPromotionButton,manageButton);
 		buttonbox.setSpacing(5.0);
 		
 		this.getChildren().addAll(user,hotelID,buttonbox,backButton);

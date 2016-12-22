@@ -39,7 +39,6 @@ public class HotelOrdersPane extends GridPane {
 	private RadioButton revokedButton;
 	private RadioButton leftButton;
 	private RadioButton abnormalButton;
-	private Button backButton;
 
 	private ScrollPane listPane;
 	private VBox orderBox;
@@ -61,8 +60,9 @@ public class HotelOrdersPane extends GridPane {
 		buildOrderBox(orderList);
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
+		listPane.setMinWidth(920.0);
 		listPane.getStyleClass().add("edge-to-edge");		
-		orderBox.setTranslateX(150.0);
+		orderBox.setTranslateX(50.0);
 
 		radioBox.setId("radio");
 
@@ -132,23 +132,9 @@ public class HotelOrdersPane extends GridPane {
 					}
 				});
 
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("back");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-
 		
 		radioBox = new AnchorPane();
-		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton,leftButton);
 		
 		AnchorPane.setLeftAnchor(allButton, 53.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
@@ -163,8 +149,6 @@ public class HotelOrdersPane extends GridPane {
 		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
 		
-		AnchorPane.setRightAnchor(backButton, 20.0);
-		AnchorPane.setTopAnchor(backButton, 10.0);
 
 	}
 
