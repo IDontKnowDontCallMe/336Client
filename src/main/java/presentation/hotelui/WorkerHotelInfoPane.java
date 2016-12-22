@@ -24,6 +24,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.PasswordEditDialog;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
@@ -47,7 +48,8 @@ public class WorkerHotelInfoPane extends GridPane {
 	private Button backButton;
 	private Button infoEditButton;
 	private Button addButton;
-
+	private Button editPasswordButton;
+	
 	private Text nameText;
 	private Text addressText;
 	private Text introductionText;
@@ -271,6 +273,14 @@ public class WorkerHotelInfoPane extends GridPane {
 		scoreText = new Text(hotelVO.score + "星");
 		infoPane.add(scoreText, 1, 6, 1, 1);
 
+		editPasswordButton = new Button("修改密码");
+		infoPane.add(editPasswordButton, 0, 1, 1, 1);
+		
+		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(hotelID);
+			passwordEditDialog.show();
+		});
+		
 		infoEditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (infoEditButton.getText().equals("编辑")) {
 				infoPane.getChildren().removeAll(nameText, addressText, introductionText, serviceText,

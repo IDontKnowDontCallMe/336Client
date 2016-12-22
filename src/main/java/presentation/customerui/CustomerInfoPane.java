@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.CustomerPilot;
+import presentation.mainui.PasswordEditDialog;
 import presentation.mainui.TheMainFrame;
 import vo.CreditVO;
 import vo.CustomerVO;
@@ -47,6 +48,7 @@ public class CustomerInfoPane extends GridPane {
 	private Button setCompanyVIPButton;
 	private TextField nameTextField;
 	private TextField phoneTextField;
+	private Button editPasswordButton;
 	private Button editButton;
 	private Button backButton;
 	private HBox titleBox;
@@ -67,7 +69,7 @@ public class CustomerInfoPane extends GridPane {
 
 		Pane pane = new Pane();
 		titleBox = new HBox();
-		
+
 		Label back = new Label();
 		back.setFont(Font.font(icon.getFamily(), 30));
 		back.setText(String.valueOf('\uf112'));
@@ -76,7 +78,7 @@ public class CustomerInfoPane extends GridPane {
 		backButton.setContentDisplay(ContentDisplay.TOP);
 		backButton.setId("backButton");
 		backButton.setShape(new Circle(35));
-		backButton.setMinSize(70,70);
+		backButton.setMinSize(70, 70);
 		backButton.setMaxSize(70, 70);
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
@@ -86,8 +88,8 @@ public class CustomerInfoPane extends GridPane {
 
 		initInfoPane();
 		initCreditList();
-		
-		pane.getChildren().addAll(backButton,titleBox,infoPane,creditPane);
+
+		pane.getChildren().addAll(backButton, titleBox, infoPane, creditPane);
 		infoPane.setLayoutX(100.0);
 		infoPane.setLayoutY(90.0);
 		creditPane.setLayoutX(210.0);
@@ -154,9 +156,9 @@ public class CustomerInfoPane extends GridPane {
 				}
 			});
 		} else {
-			infoPane.add(new Text("已注册，生日为" + customerVO.birthday.toString()), 1, 3, 1, 1);
+			infoPane.add(new Label("已注册，生日为" + customerVO.birthday.toString()), 1, 3, 1, 1);
 		}
-		
+
 		Label comp = new Label("企业会员");
 		comp.setId("comp");
 		infoPane.add(comp, 0, 4, 1, 1);
@@ -173,7 +175,7 @@ public class CustomerInfoPane extends GridPane {
 						if (BLFactory.getInstance().getCustomerBLService().registerCompanyVIP(customerID,
 								result.get())) {
 							infoPane.getChildren().remove(setCompanyVIPButton);
-							infoPane.add(new Text("已注册，企业名称为 " + result.get()), 1, 4, 1, 1);
+							infoPane.add(new Label("已注册，企业名称为 " + result.get()), 1, 4, 1, 1);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -194,6 +196,14 @@ public class CustomerInfoPane extends GridPane {
 		phoneTextField = new TextField();
 		phoneTextField.setPrefColumnCount(8);
 
+		editPasswordButton = new Button("修改密码");
+		infoPane.add(editPasswordButton, 5, 2, 1, 1);
+		
+		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(customerID);
+			passwordEditDialog.show();
+		});
+		
 		editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (editButton.getText().equals("编辑")) {
 				infoPane.getChildren().removeAll(nameText, phoneNumberText);
