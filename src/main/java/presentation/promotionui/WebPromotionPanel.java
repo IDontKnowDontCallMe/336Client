@@ -9,10 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebMarketerPilot;
 import vo.WebPromotionVO;
 
 /**
@@ -20,7 +22,7 @@ import vo.WebPromotionVO;
  * 网站促销策略面板
  *
  */
-public class WebPromotionPanel extends VBox {
+public class WebPromotionPanel extends GridPane {
 
 	private List<WebPromotionVO> webPromotionList;
 	private ScrollPane listPane;
@@ -29,13 +31,14 @@ public class WebPromotionPanel extends VBox {
 	private Button addButton;
 	private Button backButton;
 	private Text title;
+	private VBox vBox;
 
 	/**
 	 * @throws RemoteException
 	 * 网站促销策略面板
 	 * 
 	 */
-	public WebPromotionPanel() throws RemoteException{
+	public WebPromotionPanel(int id) throws RemoteException{
 
 		webPromotionList = BLFactory.getInstance().getPromotionBLService().getWebPromotionList();
 		webPromotionBox = new VBox();
@@ -71,9 +74,12 @@ public class WebPromotionPanel extends VBox {
 		addBox.setSpacing(10);
 		addBox.setPrefWidth(500);
 		addBox.getChildren().addAll(title, addButton, backButton);
-		this.getChildren().addAll(addBox, listPane);
+		vBox.getChildren().addAll(addBox, listPane);
+		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
+		this.add(webMarketerPilot, 0, 0);
+		this.add(vBox, 1, 0);
 		
-		this.getStylesheets().add(getClass().getResource("WebPromotionPane.css").toExternalForm());
+		vBox.getStylesheets().add(getClass().getResource("WebPromotionPane.css").toExternalForm());
 	}
 
 	/**

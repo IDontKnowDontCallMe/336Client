@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -33,7 +34,7 @@ public class CustomerOrdersPane extends GridPane {
 
 	private int customerID;
 	
-	private AnchorPane radioBox;
+	private HBox radioBox;
 
 	private ToggleGroup toggleGroup;
 	private RadioButton allButton;
@@ -42,7 +43,6 @@ public class CustomerOrdersPane extends GridPane {
 	private RadioButton revokedButton;
 	private RadioButton abnormalButton;
 	private RadioButton leftButton;
-	private Button backButton;
 
 	private ScrollPane listPane;
 	private VBox orderBox;
@@ -64,20 +64,22 @@ public class CustomerOrdersPane extends GridPane {
 		
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
-		orderBox.setTranslateX(150.0);
-		
+		listPane.getStyleClass().add("edge-to-edge");		
+		orderBox.setTranslateX(70.0);
+		orderBox.setId("ob");
+		listPane.setMinWidth(800.0);
 		radioBox.setId("radio");
 
 		VBox vBox= new VBox();
-		
+		radioBox.setTranslateY(20.0);
+		radioBox.setTranslateX(20.0);
 		vBox.getChildren().addAll(radioBox, listPane);
-		
+		vBox.setMinWidth(920.0);
 		CustomerPilot customerPilot = new CustomerPilot(customerID);
 
 		this.add(customerPilot, 0, 0);
 		this.add(vBox, 1, 0);
 		
-		this.setPrefWidth(500);
 		this.getStylesheets().add(getClass().getResource("CustomerOrderPane.css").toExternalForm());
 	}
 
@@ -129,39 +131,11 @@ public class CustomerOrdersPane extends GridPane {
 				}
 				);
 		
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("backButton");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
 		
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED	, (event)->{
-			TheMainFrame.backTo();
-		});
+		radioBox = new HBox();
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton,leftButton);
 		
-		radioBox = new AnchorPane();
-		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
-		
-		AnchorPane.setLeftAnchor(allButton, 53.0);
-		AnchorPane.setTopAnchor(allButton, 30.0);
-		AnchorPane.setLeftAnchor(unexecutedButton, 165.0);
-		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
-		AnchorPane.setLeftAnchor(executedButton, 290.0);
-		AnchorPane.setTopAnchor(executedButton, 30.0);
-		AnchorPane.setLeftAnchor(leftButton, 455.0);
-		AnchorPane.setTopAnchor(leftButton, 30.0);
-		AnchorPane.setLeftAnchor(revokedButton, 620.0);
-		AnchorPane.setTopAnchor(revokedButton, 30.0);
-		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
-		AnchorPane.setTopAnchor(abnormalButton, 30.0);
-		
-		AnchorPane.setRightAnchor(backButton, 20.0);
-		AnchorPane.setTopAnchor(backButton, 10.0);
+		radioBox.setSpacing(15.0);
 	}
 
 	/**

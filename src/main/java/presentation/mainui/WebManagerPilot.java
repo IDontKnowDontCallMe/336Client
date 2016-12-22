@@ -107,7 +107,7 @@ public class WebManagerPilot extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("WebManagerInfoPane.css").toExternalForm());
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPanel());
+				TheMainFrame.jumpTo(new CustomerInfoPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -115,7 +115,7 @@ public class WebManagerPilot extends AnchorPane {
 
 		hotelManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPanel());
+				TheMainFrame.jumpTo(new HotelPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -123,7 +123,7 @@ public class WebManagerPilot extends AnchorPane {
 
 		webMarketerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebMarketerPanel());
+				TheMainFrame.jumpTo(new WebMarketerPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

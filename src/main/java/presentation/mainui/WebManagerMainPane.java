@@ -95,7 +95,7 @@ public class WebManagerMainPane extends GridPane {
 		
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPanel());
+				TheMainFrame.jumpTo(new CustomerInfoPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -103,7 +103,7 @@ public class WebManagerMainPane extends GridPane {
 
 		hotelManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPanel());
+				TheMainFrame.jumpTo(new HotelPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -111,7 +111,7 @@ public class WebManagerMainPane extends GridPane {
 
 		webMarketerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebMarketerPanel());
+				TheMainFrame.jumpTo(new WebMarketerPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -125,7 +125,7 @@ public class WebManagerMainPane extends GridPane {
 		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
-		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());
+		anchorPane.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());
 
 	}
 	

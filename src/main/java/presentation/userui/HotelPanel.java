@@ -14,12 +14,14 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebManagerPilot;
 import vo.HotelVO;
 
 /**
@@ -27,13 +29,14 @@ import vo.HotelVO;
  * 酒店信息面板
  *
  */
-public class HotelPanel extends VBox {
+public class HotelPanel extends GridPane {
 	private ScrollPane listPane;
 	private VBox hotelBox;
 	private Text title;
 	private Button addButton;
 	private Button backButton;
 	private HBox titleBox;
+	private VBox vBox;
 
 	private List<HotelVO> hotelList;
 
@@ -42,7 +45,7 @@ public class HotelPanel extends VBox {
 	 * 酒店信息面板
 	 * 
 	 */
-	public HotelPanel() throws RemoteException {
+	public HotelPanel(int id) throws RemoteException {
 		
 		hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
 
@@ -100,9 +103,12 @@ public class HotelPanel extends VBox {
 		});
 		titleBox = new HBox();
 		titleBox.getChildren().addAll(title, addButton, backButton);
-		this.getChildren().addAll(titleBox, listPane);
 		
-		this.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
+		vBox.getChildren().addAll(titleBox, listPane);
+		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
+		this.add(webManagerPilot, 0, 0);
+		this.add(vBox, 1, 0);
+		vBox.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
 	}
 
 	/**

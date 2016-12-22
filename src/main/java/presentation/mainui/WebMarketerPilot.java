@@ -122,7 +122,7 @@ public class WebMarketerPilot extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("WebMarketerInfoPane.css").toExternalForm());
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebPromotionPanel());
+				TheMainFrame.jumpTo(new WebPromotionPanel(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -132,7 +132,7 @@ public class WebMarketerPilot extends AnchorPane {
 		
 		levelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new LevelPanel());
+				TheMainFrame.jumpTo(new LevelPanel(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -141,7 +141,7 @@ public class WebMarketerPilot extends AnchorPane {
 
 		marketerOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new MarketerOrdersPane());
+				TheMainFrame.jumpTo(new MarketerOrdersPane(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -150,7 +150,7 @@ public class WebMarketerPilot extends AnchorPane {
 
 		creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerCreditPanel());
+				TheMainFrame.jumpTo(new CustomerCreditPanel(ID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
