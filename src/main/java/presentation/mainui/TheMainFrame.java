@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import presentation.hotelui.ImageEditPane;
 
 /**
+ * 
  * @author samperson1997
  * 主界面的方法
  *

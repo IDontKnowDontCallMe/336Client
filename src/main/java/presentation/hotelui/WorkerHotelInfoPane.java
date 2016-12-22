@@ -307,6 +307,7 @@ public class WorkerHotelInfoPane extends GridPane {
 				newVO.service = serviceTextField.getText();
 				newVO.businessCircle = businessCircleBox.getValue().toString();
 				newVO.score = scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1;
+				
 
 				try {
 					if (BLFactory.getInstance().getHotelBLService().updateSimpleHotelInfo(newVO)) {
