@@ -41,7 +41,7 @@
 
  .button:hover, .button:focus {
   	-fx-background-color: rgb(253,119,130);
-    -fx-border-color: #4cb0f9;
+    -fx-border-color: rgb(253,119,130);
     
     -fx-text-fill: #FFF; 
     }
@@ -54,9 +54,7 @@
     -fx-text-fill: rgb(252,24,45);
             }
  
- /*            
    	     #back {
-  -fx-background-color: #1B9AF7;
    -fx-border-style: solid;
   -fx-border-width: 1px;
   -fx-border-color: #d4d4d4;
@@ -74,16 +72,12 @@
  
 
  #back:hover, #back:focus {
-  	-fx-background-color: #4cb0f9;
-    -fx-border-color: #4cb0f9;
     -fx-text-fill: #FFF; 
     }
  #back:pressed {
     -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
-            -fx-background-color: #2798eb;
-    -fx-border-color: #2798eb;
-    -fx-text-fill: #0880d7;
+        -fx-text-fill: rgb(252,24,45);
+    
             }         
- */
 	
 	

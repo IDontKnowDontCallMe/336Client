@@ -49,7 +49,7 @@ public class WebManagerPilot extends AnchorPane {
 		customerManageButton.setId("searchButton");
 		customerManageButton.setMinSize(width, 40);
 		customerManageButton.setMaxSize(width, 40);
-		customermanage.setTranslateX(-18.0);
+		customermanage.setTranslateX(-28.0);
 		customerManageButton.setGraphicTextGap(-5.0);
 
 		Label hotelManage = new Label();
@@ -61,8 +61,8 @@ public class WebManagerPilot extends AnchorPane {
 		hotelManageButton.setId("orderButton");
 		hotelManageButton.setMinSize(width, 40);
 		hotelManageButton.setMaxSize(width, 40);
-		hotelManage.setTranslateX(-18.0);
-		hotelManageButton.setGraphicTextGap(-5.0);
+		hotelManage.setTranslateX(-5.0);
+		hotelManageButton.setGraphicTextGap(-2.0);
 
 		Label info = new Label();
 		info.setFont(Font.font(icon.getFamily(), 26));
@@ -73,8 +73,8 @@ public class WebManagerPilot extends AnchorPane {
 		webMarketerManageButton.setId("hotelButton");
 		webMarketerManageButton.setMinSize(width, 40);
 		webMarketerManageButton.setMaxSize(width, 40);
-		info.setTranslateX(-18.0);
-		webMarketerManageButton.setGraphicTextGap(-5.0);
+		info.setTranslateX(-5.0);
+		webMarketerManageButton.setGraphicTextGap(-2.0);
 
 		backButton = new Button("退出登录");
 		backButton.setId("back");

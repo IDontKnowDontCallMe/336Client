@@ -45,6 +45,7 @@ public class WebPromotionPanel extends GridPane {
 		webPromotionBox.setSpacing(15);
 		buildWebPromotionBox(webPromotionList);
 		listPane = new ScrollPane(webPromotionBox);
+		listPane.getStyleClass().add("edge-to-edge");		
 
 		title = new Text("网站促销策略");
 		addButton = new Button("新增");

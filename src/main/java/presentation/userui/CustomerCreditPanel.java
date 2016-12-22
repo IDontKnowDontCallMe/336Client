@@ -44,6 +44,7 @@ public class CustomerCreditPanel extends GridPane {
 		customerBox.setSpacing(15);
 		buildCustomerBox(customerList);
 		listPane = new ScrollPane(customerBox);
+		listPane.getStyleClass().add("edge-to-edge");		
 
 		title = new Text("客户列表");
 		titleBox = new HBox();
@@ -57,7 +58,7 @@ public class CustomerCreditPanel extends GridPane {
 		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
 		this.add(webMarketerPilot, 0, 0);
 		this.add(vBox, 1, 0);
-		this.getStylesheets().add(getClass().getResource("CustomerCreditPane.css").toExternalForm());
+		vBox.getStylesheets().add(getClass().getResource("CustomerCreditPane.css").toExternalForm());
 
 	}
 

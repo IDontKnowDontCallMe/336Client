@@ -58,14 +58,15 @@ public class MarketerOrdersPane extends GridPane {
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
 		listPane = new ScrollPane(orderBox);
-		
+		listPane.getStyleClass().add("edge-to-edge");		
+
 		vBox = new VBox();
 		vBox.getChildren().addAll(radioBox, listPane);
 		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
 		this.add(webMarketerPilot, 0, 0);
 		this.add(vBox, 1, 0);
 
-		this.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
+		vBox.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
 	}
 
 	/**

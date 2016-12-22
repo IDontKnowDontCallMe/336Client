@@ -43,6 +43,7 @@ public class HotelPromotionPanel extends VBox {
 		hotelPromotionBox.setSpacing(15);
 		buildHotelPromotionBox(hotelPromotionList);
 		listPane = new ScrollPane(hotelPromotionBox);
+		listPane.getStyleClass().add("edge-to-edge");		
 
 		title = new Text("酒店促销策略");
 		addButton = new Button("新增");

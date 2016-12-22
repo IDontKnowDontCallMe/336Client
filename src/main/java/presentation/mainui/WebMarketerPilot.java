@@ -52,8 +52,8 @@ public class WebMarketerPilot extends AnchorPane {
 		webPromotionButton.setId("searchButton");
 		webPromotionButton.setMinSize(width, 40);
 		webPromotionButton.setMaxSize(width, 40);
-		webPromotion.setTranslateX(-18.0);
-		webPromotionButton.setGraphicTextGap(-5.0);
+		webPromotion.setTranslateX(-5.0);
+		webPromotionButton.setGraphicTextGap(-4.0);
 
 		Label level = new Label();
 		level.setFont(Font.font(icon.getFamily(), 26));
@@ -76,8 +76,8 @@ public class WebMarketerPilot extends AnchorPane {
 		marketerOrderButton.setId("hotelButton");
 		marketerOrderButton.setMinSize(width, 40);
 		marketerOrderButton.setMaxSize(width, 40);
-		marketerOrder.setTranslateX(-5.0);
-		marketerOrderButton.setGraphicTextGap(-1.0);
+		marketerOrder.setTranslateX(-15.0);
+		marketerOrderButton.setGraphicTextGap(-5.0);
 
 		Label credit = new Label();
 		credit.setFont(Font.font(icon.getFamily(), 26));
@@ -88,8 +88,9 @@ public class WebMarketerPilot extends AnchorPane {
 		creditButton.setId("hotelButton");
 		creditButton.setMinSize(width, 40);
 		creditButton.setMaxSize(width, 40);
-		credit.setTranslateX(-18.0);
-		creditButton.setGraphicTextGap(-5.0);
+		credit.setTranslateX(-28.0);
+		creditButton.setGraphicTextGap(-10.0);
+
 
 		backButton = new Button("退出登录");
 		backButton.setId("back");

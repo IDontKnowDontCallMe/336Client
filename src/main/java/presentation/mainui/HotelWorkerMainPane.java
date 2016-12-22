@@ -112,7 +112,7 @@ public class HotelWorkerMainPane extends GridPane {
 		this.add(anchorPane, 1, 0);
 		
 		anchorPane.getStylesheets().add(getClass().getResource("HotelWorkerMainPane.css").toExternalForm());
-		
+		anchorPane.setId("pane");
 		
 		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {

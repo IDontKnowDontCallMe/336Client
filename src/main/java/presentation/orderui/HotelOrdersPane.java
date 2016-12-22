@@ -61,6 +61,7 @@ public class HotelOrdersPane extends GridPane {
 		buildOrderBox(orderList);
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
+		listPane.getStyleClass().add("edge-to-edge");		
 		orderBox.setTranslateX(150.0);
 
 		radioBox.setId("radio");
