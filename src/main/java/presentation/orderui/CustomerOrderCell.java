@@ -91,7 +91,6 @@ public class CustomerOrderCell extends Pane {
 			button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 				try {
 					if (BLFactory.getInstance().getOrderBLService().changeOrderState(orderVO.orderID, "已撤销")) {
-						System.out.println("revoke");
 						state.setText("已撤销");
 						this.getChildren().remove(button);
 					}

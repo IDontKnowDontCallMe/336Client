@@ -101,19 +101,19 @@ public class AreaInputPane extends GridPane {
 			}
 		});
 		AnchorPane.setTopAnchor(chooseCity, 222.0);
-		AnchorPane.setLeftAnchor(chooseCity, 420.0);
+		AnchorPane.setLeftAnchor(chooseCity, 310.0);
 		AnchorPane.setTopAnchor(cityBox, 213.0);
-		AnchorPane.setLeftAnchor(cityBox, 546.0);
+		AnchorPane.setLeftAnchor(cityBox, 436.0);
 
 		AnchorPane.setTopAnchor(chooseBussin, 312.0);
-		AnchorPane.setLeftAnchor(chooseBussin, 420.0);
+		AnchorPane.setLeftAnchor(chooseBussin, 310.0);
 		AnchorPane.setTopAnchor(businessCircleBox, 305.0);
-		AnchorPane.setLeftAnchor(businessCircleBox, 546.0);
+		AnchorPane.setLeftAnchor(businessCircleBox, 436.0);
 
 		AnchorPane.setTopAnchor(confirmButton, 410.0);
-		AnchorPane.setLeftAnchor(confirmButton, 450.0);
+		AnchorPane.setLeftAnchor(confirmButton, 340.0);
 		AnchorPane.setTopAnchor(backButton, 410.0);
-		AnchorPane.setLeftAnchor(backButton, 580.0);
+		AnchorPane.setLeftAnchor(backButton, 470.0);
 
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();

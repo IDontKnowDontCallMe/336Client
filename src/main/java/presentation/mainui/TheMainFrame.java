@@ -58,7 +58,11 @@ public class TheMainFrame extends Application {
 		// 172.26.102.100
 		try {
 			blFactory = BLFactory.getInstance();
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> refs/remotes/origin/master
 			blFactory.setRemote(Naming.lookup("rmi://114.212.43.130:8888/controllerRemoteFactory"));
 
 			System.out.println("linked");

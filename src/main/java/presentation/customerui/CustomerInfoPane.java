@@ -53,6 +53,8 @@ public class CustomerInfoPane extends GridPane {
 	private Button backButton;
 	private HBox titleBox;
 	private TableView<CreditCell> tableView;
+	private Label complabel;
+	private Label birthlabel;
 
 	private ScrollPane creditPane;
 
@@ -92,7 +94,7 @@ public class CustomerInfoPane extends GridPane {
 		pane.getChildren().addAll(backButton, titleBox, infoPane, creditPane);
 		infoPane.setLayoutX(100.0);
 		infoPane.setLayoutY(90.0);
-		creditPane.setLayoutX(210.0);
+		creditPane.setLayoutX(120.0);
 		creditPane.setLayoutY(260.0);
 		backButton.setLayoutX(985.0);
 		backButton.setLayoutY(30.0);
@@ -146,7 +148,9 @@ public class CustomerInfoPane extends GridPane {
 					try {
 						if (BLFactory.getInstance().getCustomerBLService().registerBirthVIP(customerID, result.get())) {
 							infoPane.getChildren().remove(setBirthVIPButton);
-							infoPane.add(new Text("已注册，生日为" + result.get().toString()), 1, 3, 1, 1);
+							birthlabel = new Label("  已注册，生日为" + result.get().toString());
+							birthlabel.setId("bid");
+							infoPane.add(birthlabel, 1, 3, 1, 1);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -156,7 +160,9 @@ public class CustomerInfoPane extends GridPane {
 				}
 			});
 		} else {
-			infoPane.add(new Label("已注册，生日为" + customerVO.birthday.toString()), 1, 3, 1, 1);
+			birthlabel = new Label("  已注册，生日为" + customerVO.birthday.toString());
+			birthlabel.setId("bid");
+			infoPane.add(birthlabel, 1, 3, 1, 1);
 		}
 
 		Label comp = new Label("企业会员");
@@ -175,7 +181,9 @@ public class CustomerInfoPane extends GridPane {
 						if (BLFactory.getInstance().getCustomerBLService().registerCompanyVIP(customerID,
 								result.get())) {
 							infoPane.getChildren().remove(setCompanyVIPButton);
-							infoPane.add(new Label("已注册，企业名称为 " + result.get()), 1, 4, 1, 1);
+							complabel = new Label("  已注册，企业名称为 " + result.get());
+							complabel.setId("compl");
+							infoPane.add(comp, 1, 4, 1, 1);
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -185,7 +193,9 @@ public class CustomerInfoPane extends GridPane {
 				}
 			});
 		} else {
-			infoPane.add(new Text("已注册，企业名称为" + customerVO.companyName), 1, 4, 1, 1);
+			complabel = new Label("  已注册，企业名称为" + customerVO.companyName);
+			complabel.setId("compl");
+			infoPane.add(complabel, 1, 4, 1, 1);
 		}
 
 		editButton = new Button("编辑");

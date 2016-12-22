@@ -3,7 +3,7 @@
 
 	
 #pane{	
-	-fx-background-image: url(resource/red.png);
+	-fx-background-image: url(red.png);
 
 	 -fx-border-style: solid;
   -fx-border-width: 1px;
