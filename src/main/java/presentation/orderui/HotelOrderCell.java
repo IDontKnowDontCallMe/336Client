@@ -39,7 +39,7 @@ public class HotelOrderCell extends Pane {
 		super();
 		this.orderVO = orderVO;
 		this.setId("gridp");
-		orderID = new Label("订单号"+Integer.toString(orderVO.orderID));
+		orderID = new Label("订单编号   " +Integer.toString(orderVO.orderID));
 		orderID.setLayoutX(12.0);
 		orderID.setLayoutY(3.0);
 		orderID.setId("orderid");
@@ -53,9 +53,6 @@ public class HotelOrderCell extends Pane {
 		customerPhone = new Label("联系方式: "+orderVO.customerPhoneNumber);
 
 		this.getChildren().add(customerPhone);
-
-		customerPhone.setLayoutX(166.0);
-		customerPhone.setLayoutY(51.0);
 
 		customerPhone.setId("customerPhone");
 		state = new Label(orderVO.orderState);
