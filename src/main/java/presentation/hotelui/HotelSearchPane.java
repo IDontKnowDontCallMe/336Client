@@ -313,7 +313,7 @@ public class HotelSearchPane extends GridPane {
 			}
 			else if(priceSortButton.getText().equals("↓")){
 				try {
-					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高到低");
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高至低");
 					changeHotelListPane();
 				} catch (RemoteException e) {
 					e.printStackTrace();
