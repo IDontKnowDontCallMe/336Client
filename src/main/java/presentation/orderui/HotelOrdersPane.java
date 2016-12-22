@@ -13,10 +13,12 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.OrderVO;
 
@@ -25,7 +27,7 @@ import vo.OrderVO;
  * 酒店工作人员订单面板
  *
  */
-public class HotelOrdersPane extends VBox {
+public class HotelOrdersPane extends GridPane {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 
 	private int hotelID;
@@ -37,7 +39,6 @@ public class HotelOrdersPane extends VBox {
 	private RadioButton revokedButton;
 	private RadioButton leftButton;
 	private RadioButton abnormalButton;
-	private Button backButton;
 
 	private ScrollPane listPane;
 	private VBox orderBox;
@@ -59,14 +60,22 @@ public class HotelOrdersPane extends VBox {
 		buildOrderBox(orderList);
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
-		orderBox.setTranslateX(150.0);
+		listPane.setMinWidth(920.0);
+		listPane.getStyleClass().add("edge-to-edge");		
+		orderBox.setTranslateX(50.0);
 
 		radioBox.setId("radio");
 
-		this.getChildren().addAll(radioBox,listPane);
-		this.setPrefWidth(500);
+		HotelWorkerPilot hotelWorkerInfoPane = new HotelWorkerPilot(hotelID);
+		VBox vBox = new VBox();
+		vBox.getChildren().addAll(radioBox,listPane);
+		vBox.setPrefWidth(500);
 		
-		this.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+		this.add(hotelWorkerInfoPane, 0, 0);
+		this.add(vBox, 1, 0);
+		
+		vBox.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("HotelOrderPane2.css").toExternalForm());
 
 	}
 
@@ -124,23 +133,9 @@ public class HotelOrdersPane extends VBox {
 					}
 				});
 
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("back");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-
 		
 		radioBox = new AnchorPane();
-		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton, backButton,leftButton);
+		radioBox.getChildren().addAll(allButton,unexecutedButton,executedButton,revokedButton,abnormalButton,leftButton);
 		
 		AnchorPane.setLeftAnchor(allButton, 53.0);
 		AnchorPane.setTopAnchor(allButton, 30.0);
@@ -155,8 +150,6 @@ public class HotelOrdersPane extends VBox {
 		AnchorPane.setLeftAnchor(abnormalButton, 745.0);
 		AnchorPane.setTopAnchor(abnormalButton, 30.0);
 		
-		AnchorPane.setRightAnchor(backButton, 20.0);
-		AnchorPane.setTopAnchor(backButton, 10.0);
 
 	}
 

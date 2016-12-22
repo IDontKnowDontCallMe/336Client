@@ -2,15 +2,17 @@ package presentation.userui;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebManagerPilot;
 import vo.CustomerVO;
 
 /**
@@ -18,20 +20,19 @@ import vo.CustomerVO;
  * 客户信息面板
  *
  */
-public class CustomerInfoPanel extends VBox {
+public class CustomerInfoPanel extends GridPane {
 
 	private ScrollPane listPane;
 	private VBox customerBox;
 	private HBox titleBox;
-	private Button backButton;
-	private Text title;
+	private Label title;
 
 	/**
 	 * @throws RemoteException
 	 * 客户信息面板
 	 * 
 	 */
-	public CustomerInfoPanel() throws RemoteException {
+	public CustomerInfoPanel(int id) throws RemoteException {
 		
 		List<CustomerVO> customerList = BLFactory.getInstance().getUserBLService().getCustomerList();
 
@@ -39,15 +40,19 @@ public class CustomerInfoPanel extends VBox {
 		customerBox.setSpacing(15);
 		buildCustomerBox(customerList);
 		listPane = new ScrollPane(customerBox);
-
-		title = new Text("客户列表");
+		listPane.setMinWidth(920.0);
+		listPane.getStyleClass().add("edge-to-edge");		
+		title = new Label("客户列表");
 		titleBox = new HBox();
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-		titleBox.getChildren().addAll(title, backButton);
+		
+		GridPane gridPane = new GridPane();
 		this.getChildren().addAll(titleBox, listPane);
+		gridPane.add(title, 0, 0);
+		gridPane.add(listPane, 0, 1);
+		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
+		this.add(webManagerPilot, 0, 0);
+		this.add(gridPane, 1, 0);
+		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	/**

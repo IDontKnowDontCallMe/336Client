@@ -39,7 +39,7 @@ public class TheMainFrame extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		linkToServer();
-		
+
 		scene = new Scene(new LoginPane(), 1100, 700);
 		parentStack = new Stack<Parent>();
 		
@@ -60,9 +60,12 @@ public class TheMainFrame extends Application {
 	 */
 	private void linkToServer() {
 		// 172.26.102.100
+		// 114.212.43.130
 		try {
 			blFactory = BLFactory.getInstance();
-			blFactory.setRemote(Naming.lookup("rmi://localhost:8888/controllerRemoteFactory"));
+
+			blFactory.setRemote(Naming.lookup("rmi://172.26.102.100:8888/controllerRemoteFactory"));
+
 			System.out.println("linked");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

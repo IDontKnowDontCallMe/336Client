@@ -1,39 +1,149 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
-	.root{
+	#grid{
 	-fx-background-image:url(redbg3.png);
+	-fx-min-width:920;
     }
 
-          
-  #back{
-   -fx-background-color:null;
-  -fx-border-width: 2.0px;
-  -fx-border-style: solid;
-  -fx-border-color:white;
-  -fx-max-height: 10.0px;
-  -fx-font-size:15px;
-    -fx-font-family:"PingFang SC";
-  -fx-text-fill:white;
-   }
-   .label{
-   	-fx-text-fill:white;
-   }
-  #back:hover .label{
- 		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
- 	 }
- 	#back:hover{
- 	-fx-background-color: rgba(255, 234, 246, 0.9); 
- 		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
- 		
- 	 }
- 	 
-   #back:pressed .label{
-    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-    	-fx-opacity:3.0
-    } 
-    #back:pressed{
-  	-fx-background-color: rgba(252, 90, 101, 0.7) ;
-  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
-  	
-    -fx-opacity:3.0 ; 
+ #infopane .label{
+ 	-fx-text-fill:white ;
+ 	  -fx-font-family: "PingFang SC";
+ 	  -fx-font-size:15px;
+ }
+ 
+ #l1,#l2{
+ 	-fx-text-fill:white ;
+ 	  -fx-font-family: "PingFang SC";
+ 	  -fx-font-size:15px;
+ }
+ 
+ 
+ 
+        
+ 	     .button {
+  -fx-background-color: rgb(252,70,85);
+   -fx-border-style: solid;
+  -fx-border-width: 1px;
+  -fx-border-color: #d4d4d4;
+  -fx-text-fill: #FFF;
+  -fx-font-family: "PingFang SC";
+  
+ }
+ .button.label{
+ 	-fx-text-fill:white;
+ }
+
+ .button:hover, .button:focus {
+  	-fx-background-color: rgb(253,119,130);
+    -fx-border-color: rgb(253,119,130);
+    
+    -fx-text-fill: #FFF; 
     }
+    
+    
+  .button:pressed {
+    -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
+            -fx-background-color: rgb(243,78,93);
+    -fx-border-color: rgb(243,78,93);
+    -fx-text-fill: rgb(252,24,45);
+            }
+            
+            
+            
+   	  .scroll-bar:horizontal .track,
+	 .scroll-bar:vertical .track{
+		-fx-background-color: rgb(252,70,85);
+	    -fx-background-radius: 0em;
+	    -fx-border-radius:2em;
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 .scroll-bar:horizontal .increment-button ,
+	 .scroll-bar:horizontal .decrement-button {
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 0 10 0;
+	 
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 
+	.scroll-bar:vertical .increment-button ,
+	.scroll-bar:vertical .decrement-button {
+	 
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 10 0 0;
+	 
+	}
+	 
+ 	.scroll-bar .increment-arrow,
+	.scroll-bar .decrement-arrow
+	{
+	    -fx-shape: " ";
+	    -fx-padding:0;
+	}
+	 
+	 .scroll-bar:horizontal .thumb,
+	 .scroll-bar:vertical .thumb {
+	    -fx-background-color:white;
+	    -fx-background-insets: 2, 0, 0;
+	    -fx-background-radius: 5em;
+	 
+	}
+    
+    
+    
+    
+    
+.table-view{
+  -fx-background-color: rgb(252,70,85);
+  }
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+  -fx-background-color: rgb(252,70,85);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+        -fx-font-family:"PingFang SC";
+    
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, rgb(252,70,85);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+    -fx-font-family:"PingFang SC";
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, rgb(249,62,77);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */  
+        -fx-font-family:"PingFang SC";
+    
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgb(243,78,93);
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+
+                
+            

@@ -1,0 +1,40 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+	
+	.root{
+	-fx-background-image:url(green.png);
+    }
+
+ .button{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+-fx-font-size:15px;
+    -fx-font-family:"PingFang SC";  -fx-text-fill:white;
+   }
+   .label{
+   	-fx-text-fill:white;
+   }
+  .button:hover .label{
+ 		 	-fx-text-fill:rgba(165, 245, 59, 0.9) ; 
+ 	 }
+ 	 .button:hover{
+ 	-fx-background-color: rgba(246, 255, 234, 0.9); 
+ 		 	-fx-text-fill:rgba(165, 245, 59, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   .button:pressed .label{
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+    .button:pressed{
+  	-fx-background-color: rgba(162, 208, 78, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+	
+	

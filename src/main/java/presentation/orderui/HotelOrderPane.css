@@ -5,6 +5,11 @@
 	-fx-background-image:url(redbg3.png);
     }
     
+    #radio{
+    		-fx-background-image:url(redbg3.png);
+    	
+    }
+    
     
 	  .scroll-bar:horizontal .track,
 	 .scroll-bar:vertical .track{
@@ -46,32 +51,33 @@
 	 
 	}
 
-  #back{
+ .button{
    -fx-background-color:null;
   -fx-border-width: 2.0px;
   -fx-border-style: solid;
   -fx-border-color:white;
   -fx-max-height: 10.0px;
-    -fx-font-family:"PingFang SC"; 
-     -fx-text-fill:white;
+  -fx-font-size:15px;
+    -fx-font-family:"PingFang SC";
+  -fx-text-fill:white;
    }
-    #back.label{
+   .label{
    	-fx-text-fill:white;
    }
-   #back:hover .label{
+  .button:hover .label{
  		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
  	 }
- 	 #back:hover{
+ 	 .button:hover{
  	-fx-background-color: rgba(255, 234, 246, 0.9); 
  		 	-fx-text-fill:rgba(251, 66, 81, 0.9) ; 
  		
  	 }
  	 
-    #back:pressed .label{
+   .button:pressed .label{
     	-fx-text-fill:rgba(255, 255, 255, 0.5);
     	-fx-opacity:3.0
     } 
-     #back:pressed{
+    .button:pressed{
   	-fx-background-color: rgba(252, 90, 101, 0.7) ;
   	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
   	

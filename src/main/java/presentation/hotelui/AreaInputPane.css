@@ -27,7 +27,6 @@
  	 }
  	 
     #comfirmButton:pressed .label, #backButton:pressed .label{
-    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
     	-fx-text-fill:rgba(255, 255, 255, 0.5);
     	-fx-opacity:3.0
     } 

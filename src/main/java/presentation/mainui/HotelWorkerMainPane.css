@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
 	.root{
-	-fx-background-image:url(redbg3.png);
+	-fx-background-image:url(resource/red.png);
     }
 
           

@@ -25,14 +25,14 @@ import presentation.orderui.CustomerOrdersPane;
 public class CustomerMainPane extends AnchorPane {
 
 	private int customerID;
+	private Timer surviveTimer;
 
-	public CustomerMainPane(int customerID) {
+	public CustomerMainPane(int customerid) throws RemoteException {
 		super();
-		this.customerID = customerID;
+		this.customerID = customerid;
 		int r =200;
 		int dim = 130;
 		Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
-
 		Label search = new Label();
 		search.setFont(Font.font(icon.getFamily(), dim));
 		search.setText(String.valueOf('\uf002'));
@@ -97,9 +97,17 @@ public class CustomerMainPane extends AnchorPane {
 		AnchorPane.setTopAnchor(infoButton, 400.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
+		
+		
+		
 
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new AreaInputPane(customerID));
+			try {
+				TheMainFrame.jumpTo(new AreaInputPane(customerID));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 
 		orderListButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
@@ -129,11 +137,13 @@ public class CustomerMainPane extends AnchorPane {
 		});
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			surviveTimer.cancel();
 			TheMainFrame.backTo();
 		});
 		
-		Timer surviveTimer = new Timer(true);
+		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+		
 
 		this.getStylesheets().add(getClass().getResource("customerMainPane.css").toExternalForm());
 

@@ -7,10 +7,12 @@ import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebManagerPilot;
 import vo.WebMarketerVO;
 
 /**
@@ -18,19 +20,20 @@ import vo.WebMarketerVO;
  * 网站营销人员信息面板
  *
  */
-public class WebMarketerPanel extends VBox {
+public class WebMarketerPanel extends GridPane {
 
 	private ScrollPane listPane;
 	private VBox webMarketerBox;
 	private HBox titleBox;
 	private Button backButton;
 	private Text title;
+	private VBox vBox;
 
 	/**
 	 * @throws RemoteException
 	 * 网站营销人员信息面板
 	 */
-	public WebMarketerPanel() throws RemoteException {
+	public WebMarketerPanel(int id) throws RemoteException {
 		
 		List<WebMarketerVO> webMarketerList = BLFactory.getInstance().getUserBLService().getWebMarketerList();
 
@@ -46,7 +49,12 @@ public class WebMarketerPanel extends VBox {
 			TheMainFrame.backTo();
 		});
 		titleBox.getChildren().addAll(title, backButton);
-		this.getChildren().addAll(titleBox, listPane);
+		vBox.getChildren().addAll(titleBox, listPane);
+		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
+		this.add(webManagerPilot, 0, 0);
+		this.add(vBox, 1, 0);
+		
+		vBox.getStylesheets().add(getClass().getResource("WebMarketerPane.css").toExternalForm());
 	}
 
 	/**

@@ -7,14 +7,21 @@ import java.util.Optional;
 import bussinesslogic.factory.BLFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import presentation.mainui.TheMainFrame;
+import presentation.mainui.WebManagerPilot;
 import vo.HotelVO;
 
 /**
@@ -22,13 +29,14 @@ import vo.HotelVO;
  * 酒店信息面板
  *
  */
-public class HotelPanel extends VBox {
+public class HotelPanel extends GridPane {
 	private ScrollPane listPane;
 	private VBox hotelBox;
 	private Text title;
 	private Button addButton;
 	private Button backButton;
 	private HBox titleBox;
+	private VBox vBox;
 
 	private List<HotelVO> hotelList;
 
@@ -37,7 +45,7 @@ public class HotelPanel extends VBox {
 	 * 酒店信息面板
 	 * 
 	 */
-	public HotelPanel() throws RemoteException {
+	public HotelPanel(int id) throws RemoteException {
 		
 		hotelList = BLFactory.getInstance().getUserBLService().getHotelList();
 
@@ -61,6 +69,22 @@ public class HotelPanel extends VBox {
 							System.out.println("add hotel!");
 							hotelList.add(result.get());
 							buildHotelBox(hotelList);
+							Stage popup1 = new Stage();
+							popup1.setAlwaysOnTop(true);
+							popup1.initModality(Modality.APPLICATION_MODAL);
+							Button closeButton1 = new Button("确定");
+							closeButton1.setOnAction(e -> {
+								popup1.close();
+							});
+							VBox root1 = new VBox();
+							root1.setAlignment(Pos.BASELINE_CENTER);
+							root1.setSpacing(20);
+							root1.getChildren().addAll(new Label("酒店已添加，默认密码为123456"), 
+									new Label("请尽快联系酒店工作人员修改酒店详细信息"), closeButton1);
+							Scene scene1 = new Scene(root1, 250, 120);
+							popup1.setScene(scene1);
+							popup1.setTitle("提示");
+							popup1.show();
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -79,7 +103,12 @@ public class HotelPanel extends VBox {
 		});
 		titleBox = new HBox();
 		titleBox.getChildren().addAll(title, addButton, backButton);
-		this.getChildren().addAll(titleBox, listPane);
+		
+		vBox.getChildren().addAll(titleBox, listPane);
+		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
+		this.add(webManagerPilot, 0, 0);
+		this.add(vBox, 1, 0);
+		vBox.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
 	}
 
 	/**

@@ -24,8 +24,7 @@ import vo.OrderVO;
 import vo.RoomVO;
 
 /**
- * @author samperson1997
- * 客户查看酒店详细信息面板
+ * @author samperson1997 客户查看酒店详细信息面板
  *
  */
 public class CustomerHotelInfoPane extends GridPane {
@@ -52,11 +51,11 @@ public class CustomerHotelInfoPane extends GridPane {
 	 * @param hotelID
 	 * @param customerID
 	 * @throws RemoteException
-	 * 客户查看酒店详细信息面板
+	 *             客户查看酒店详细信息面板
 	 * 
 	 */
 	public CustomerHotelInfoPane(int hotelID, int customerID) throws RemoteException {
-		
+
 		super();
 		this.setHgap(10);
 		this.setVgap(20);
@@ -104,11 +103,11 @@ public class CustomerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 初始化房间列表
+	 *             初始化房间列表
 	 * 
 	 */
 	private void initRoomPane(int hotelID) throws RemoteException {
-		
+
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
 		TableView<RoomCell> tableView = new TableView<>();
@@ -142,11 +141,11 @@ public class CustomerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 初始化评论列表
+	 *             初始化评论列表
 	 * 
 	 */
 	public void initCommentPane(int hotelID) throws RemoteException {
-		
+
 		commentPane = new ScrollPane();
 
 		List<CommentVO> hotelCommentList = new ArrayList<CommentVO>();
@@ -187,9 +186,11 @@ public class CustomerHotelInfoPane extends GridPane {
 	/**
 	 * 初始化酒店详细信息面板
 	 * 
+	 * @throws RemoteException
+	 * 
 	 */
-	private void initInfoPane() {
-		
+	private void initInfoPane() throws RemoteException {
+
 		infoPane = new GridPane();
 
 		infoPane.setHgap(10);
@@ -209,17 +210,20 @@ public class CustomerHotelInfoPane extends GridPane {
 		serviceText = new Text(hotelVO.service);
 		infoPane.add(serviceText, 1, 3, 1, 1);
 
+		ImagePane imagePane = new ImagePane(hotelID);
+		infoPane.add(imagePane, 0, 4, 2, 1);
+
 	}
 
 	/**
 	 * @param hotelID
 	 * @param customerID
 	 * @throws RemoteException
-	 * 初始化订单面板
+	 *             初始化订单面板
 	 * 
 	 */
 	private void initOrderPane(int hotelID, int customerID) throws RemoteException {
-		
+
 		List<OrderVO> orderList = BLFactory.getInstance().getOrderBLService().getOrderListOfHotel(hotelID, customerID);
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
@@ -231,10 +235,10 @@ public class CustomerHotelInfoPane extends GridPane {
 
 	/**
 	 * @param orderList
-	 * 初始化订单列表
+	 *            初始化订单列表
 	 */
 	private void buildOrderBox(List<OrderVO> orderList) {
-		
+
 		orderBox.getChildren().clear();
 		for (OrderVO vo : orderList) {
 			orderBox.getChildren().add(new CustomerHotelInfoCell(vo));

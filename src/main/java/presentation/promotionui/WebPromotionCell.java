@@ -6,8 +6,10 @@ import java.util.Optional;
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import vo.WebPromotionVO;
 
@@ -20,11 +22,11 @@ public class WebPromotionCell extends GridPane {
 
 	WebPromotionVO webPromotionVO;
 
-	private Text webPromotionTypeText;
-	private Text startTimeText;
-	private Text endTimeText;
-	private Text businessCircleText;
-	private Text discountText;
+	private Label webPromotionTypeText;
+	private Label startTimeText;
+	private Label endTimeText;
+	private Label businessCircleText;
+	private Label discountText;
 
 	private Button editButton;
 	private Button deleteButton;
@@ -37,21 +39,21 @@ public class WebPromotionCell extends GridPane {
 		
 		super();
 		this.webPromotionVO = webPromotionVO;
-
-		webPromotionTypeText = new Text(webPromotionVO.promotionType);
-		this.add(webPromotionTypeText, 0, 0, 3, 1);
+		this.setId("pane");
+		webPromotionTypeText = new Label("  "+webPromotionVO.promotionType);
+		this.add(webPromotionTypeText, 0, 0, 1, 1);
 		if (webPromotionVO.startTime != null && webPromotionVO.endTime != null) {
-			startTimeText = new Text("开始时间: " + webPromotionVO.startTime.toString());
-			endTimeText = new Text("结束时间: " + webPromotionVO.endTime.toString());
-			discountText = new Text("折扣: " + webPromotionVO.discount);
-			this.add(discountText, 3, 0, 3, 1);
-			this.add(startTimeText, 0, 1, 3, 1);
-			this.add(endTimeText, 4, 1, 3, 1);
+			startTimeText = new Label("  开始时间: " + webPromotionVO.startTime.toString());
+			endTimeText = new Label("   结束时间: " + webPromotionVO.endTime.toString());
+			discountText = new Label("折扣: " + webPromotionVO.discount);
+			this.add(discountText, 1, 0, 1, 1);
+			this.add(startTimeText, 0, 1, 1, 1);
+			this.add(endTimeText, 1, 1, 1, 1);
 		}
 		if (webPromotionVO.businessCircleName != null) {
-			businessCircleText = new Text("特定商圈名称: " + webPromotionVO.businessCircleName);
-			discountText = new Text("会员每升一级在该商圈订酒店折扣减少: " + webPromotionVO.discount);
-			this.add(discountText, 3, 0, 3, 1);
+			businessCircleText = new Label("  特定商圈名称: " + webPromotionVO.businessCircleName);
+			discountText = new Label("会员每升一级在该商圈订酒店折扣减少: " + webPromotionVO.discount);
+			this.add(discountText, 3, 1, 3, 1);
 			this.add(businessCircleText, 0, 1, 3, 1);
 		}
 
@@ -96,11 +98,14 @@ public class WebPromotionCell extends GridPane {
 
 		});
 
-		this.add(editButton, 10, 0, 1, 1);
-		this.add(deleteButton, 12, 0, 1, 1);
+		HBox hBox =new HBox(editButton,deleteButton);
+		hBox.setSpacing(10.0);
+		hBox.setTranslateY(5.0);
+		this.add(hBox, 3, 0, 1, 1);
 
 		this.setHgap(10);
 		this.setVgap(20);
+		this.getStylesheets().add(getClass().getResource("WebPromotionCell.css").toExternalForm());
 
 	}
 

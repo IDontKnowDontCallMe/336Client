@@ -3,7 +3,6 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -24,6 +23,7 @@ import presentation.userui.WebMarketerPanel;
 public class WebManagerMainPane extends AnchorPane {
 
 	private int webManagerID;
+	private Timer surviveTimer;
 	
 	public WebManagerMainPane(int webManagerID) {
 		super();
@@ -74,21 +74,21 @@ public class WebManagerMainPane extends AnchorPane {
 		logoutButton.setMinSize(84, 84);
 		logoutButton.setMaxSize(84, 84);
 		
-
 		this.getChildren().addAll(customerManageButton, hotelManageButton, webMarketerManageButton, logoutButton);
 		
-		AnchorPane.setLeftAnchor(customerManageButton, 124.0);
+		AnchorPane.setLeftAnchor(customerManageButton, 204.0);
 		AnchorPane.setTopAnchor(customerManageButton, 250.0);
-		AnchorPane.setLeftAnchor(hotelManageButton, 450.0);
+		AnchorPane.setLeftAnchor(hotelManageButton, 530.0);
 		AnchorPane.setTopAnchor(hotelManageButton, 250.0);
-		AnchorPane.setLeftAnchor(webMarketerManageButton, 776.0);
+		AnchorPane.setLeftAnchor(webMarketerManageButton, 856.0);
 		AnchorPane.setTopAnchor(webMarketerManageButton, 250.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
 		
+		
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPanel());
+				TheMainFrame.jumpTo(new CustomerInfoPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -96,7 +96,7 @@ public class WebManagerMainPane extends AnchorPane {
 
 		hotelManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPanel());
+				TheMainFrame.jumpTo(new HotelPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -104,7 +104,7 @@ public class WebManagerMainPane extends AnchorPane {
 
 		webMarketerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebMarketerPanel());
+				TheMainFrame.jumpTo(new WebMarketerPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -112,9 +112,10 @@ public class WebManagerMainPane extends AnchorPane {
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
+			surviveTimer.cancel();
 		});
 		
-		Timer surviveTimer = new Timer(true);
+		surviveTimer = new Timer(true);
 		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());

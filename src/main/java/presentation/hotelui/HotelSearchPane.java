@@ -6,18 +6,20 @@ import java.util.List;
 import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import vo.AreaVO;
 import vo.HotelVO;
@@ -28,12 +30,16 @@ import vo.SearchConditionVO;
  * 酒店搜索面板
  *
  */
-public class HotelSearchPane extends VBox {
+public class HotelSearchPane extends GridPane {
 
 	private int customerID;
 	private AreaVO areaVO;
 	private List<HotelVO> list;
 	private HotelListPane hotelListPane;
+	private Button searchButton;
+	private Button backButton;
+	private VBox vBox = new VBox();
+
 
 	/**
 	 * @param areaVO
@@ -47,10 +53,14 @@ public class HotelSearchPane extends VBox {
 		this.customerID = customerID;
 		this.areaVO = areaVO;
 
-		this.setSpacing(20);
+		vBox.setSpacing(20);
 		initSearchPane();
 		initSortingPane();
 		initHotelListPane();
+		
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+		this.add(customerPilot, 0, 0);
+		this.add(vBox, 1, 0);
 		
 		this.getStylesheets().add(getClass().getResource("HotelSearchPane.css").toExternalForm());
 	}
@@ -65,17 +75,23 @@ public class HotelSearchPane extends VBox {
 		gridPane.setHgap(15);
 		gridPane.setVgap(15);
 
-		Text hotelNameText = new Text("酒店名称");
+		Label hotelNameText = new Label("  酒店名称");
+		hotelNameText.setId("hotelt");
 		TextField hotelNameTextField = new TextField();
+		hotelNameTextField.setId("hotelIn");
 		gridPane.add(new HBox(hotelNameText, hotelNameTextField), 0, 0, 3, 1);
-		Button searchButton = new Button("搜索");
+		searchButton = new Button("搜索");
+		searchButton.setId("search");
 
-		Button backButton = new Button("退出搜索");
-		gridPane.add(searchButton, 3, 0, 1, 1);
-		gridPane.add(backButton, 4, 0, 1, 1);
+		backButton = new Button("退出搜索");
+		backButton.setId("back");
+		gridPane.add(searchButton, 2, 0, 1, 1);
+		gridPane.add(backButton, 3, 0, 1, 1);
 
-		Text checkInText = new Text("入: ");
-		Text checkOutText = new Text("离: ");
+		Label checkInText = new Label("   入: ");
+		checkInText.setId("in");
+		Label checkOutText = new Label("         离: ");
+		checkOutText.setId("out");
 		DatePicker checkInDatePicker = new DatePicker();
 		DatePicker checkOutDatePicker = new DatePicker();
 
@@ -116,10 +132,15 @@ public class HotelSearchPane extends VBox {
 		};
 		checkOutDatePicker.setDayCellFactory(checkOutDayCellFactory);
 
+		Label label = new Label("房间数量: ");
+		label.setId("roomnum");
 		Button addButton = new Button("+");
+		addButton.setId("ab");
 		Button subButton = new Button("-");
+		subButton.setId("sub");
 		subButton.setDisable(true);
 		TextField numTextField = new TextField("1");
+		numTextField.setAlignment(Pos.CENTER);
 		numTextField.setEditable(false);
 		numTextField.setPrefColumnCount(2);
 
@@ -143,8 +164,8 @@ public class HotelSearchPane extends VBox {
 		});
 
 		gridPane.add(new HBox(checkInText, checkInDatePicker), 0, 1, 2, 1);
-		gridPane.add(new HBox(checkOutText, checkOutDatePicker), 2, 1, 2, 1);
-		gridPane.add(new HBox(subButton, numTextField, addButton), 4, 1, 1, 1);
+		gridPane.add(new HBox(checkOutText, checkOutDatePicker), 1, 1, 2, 1);
+		gridPane.add(new HBox(label,subButton, numTextField, addButton), 3, 1, 1, 1);
 
 		ObservableList<String> roomTypeList = FXCollections.observableArrayList("不限", "单人间(1人)", "双人房(2人)", "三人房(3人)");
 		ComboBox<String> roomTypeChoiceBox = new ComboBox<>(roomTypeList);
@@ -166,12 +187,20 @@ public class HotelSearchPane extends VBox {
 		CheckBox getBookedHotelCheckBox = new CheckBox("只搜索预订过的酒店");
 		isInteractiveCheckBox.setSelected(true);
 
-		gridPane.add(new HBox(new Text("房间类型"), roomTypeChoiceBox), 0, 2, 1, 1);
-		gridPane.add(new HBox(new Text("价格区间"), priceIntervalChoiceBox), 1, 2, 1, 1);
-		gridPane.add(new HBox(new Text("星级"), scoreChoiceBox), 2, 2, 1, 1);
-		gridPane.add(new HBox(new Text("评分"), commentScoreChoiceBox), 3, 2, 1, 1);
-		gridPane.add(isInteractiveCheckBox, 0, 3, 1, 1);
-		gridPane.add(getBookedHotelCheckBox, 1, 3, 1, 1);
+		Label roomtype = new Label("  房间类型 ");
+		Label price = new Label("  价格区间 ");
+		Label star = new Label("  星级 ");
+		Label score = new Label("  评分 ");
+		roomtype.setId("roomtype");
+		price.setId("p");
+		star.setId("s");
+		score.setId("so");
+		gridPane.add(new HBox(roomtype, roomTypeChoiceBox), 0, 2, 1, 1);
+		gridPane.add(new HBox(price, priceIntervalChoiceBox), 1, 2, 1, 1);
+		gridPane.add(new HBox(star, scoreChoiceBox), 2, 2, 1, 1);
+		gridPane.add(new HBox(score, commentScoreChoiceBox), 3, 2, 1, 1);
+		gridPane.add(isInteractiveCheckBox, 1, 3, 1, 1);
+		gridPane.add(getBookedHotelCheckBox, 2, 3, 1, 1);
 
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			boolean hasRoomTypeLimit = false;
@@ -250,7 +279,7 @@ public class HotelSearchPane extends VBox {
 			TheMainFrame.backTo();
 		});
 
-		this.getChildren().add(gridPane);
+		vBox.getChildren().add(gridPane);
 
 	}
 
@@ -264,85 +293,96 @@ public class HotelSearchPane extends VBox {
 		hBox.setSpacing(15);
 
 		GridPane priceGridPane = new GridPane();
-		Text priceText = new Text("价格排序");
-		Button priceLowToHighButton = new Button("↑");
-		Button priceHighToLowButton = new Button("↓");
+		Label priceText = new Label("   价格排序 ");
+		priceText.setId("pt");
+		Button priceSortButton = new Button("↑");
+		priceSortButton.setId("pb");
 		priceGridPane.add(priceText, 0, 0, 1, 2);
-		priceGridPane.add(priceLowToHighButton, 1, 0, 1, 1);
-		priceGridPane.add(priceHighToLowButton, 1, 1, 1, 1);
 
-		priceLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		priceGridPane.add(priceSortButton, 1, 0, 1, 1);
+		
+		priceSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(priceSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				priceSortButton.setText("↓");
+			}
+			else if(priceSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高至低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				priceSortButton.setText("↑");
 			}
 		});
-
-		priceHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "价格从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		});
-
+		
 		GridPane scoreGridPane = new GridPane();
-		Text scoreText = new Text("星级排序");
-		Button scoreLowToHighButton = new Button("↑");
-		Button scoreHighToLowButton = new Button("↓");
+		Label scoreText = new Label("星级排序 ");
+		scoreText.setId("st");
+		Button scoreSortButton = new Button("↑");
+		scoreSortButton.setId("sb");
 		scoreGridPane.add(scoreText, 0, 0, 1, 2);
-		scoreGridPane.add(scoreLowToHighButton, 1, 0, 1, 1);
-		scoreGridPane.add(scoreHighToLowButton, 1, 1, 1, 1);
+		scoreGridPane.add(scoreSortButton, 1, 0, 1, 1);
 
-		scoreLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		scoreSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(scoreSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				scoreSortButton.setText("↓");
 			}
-		});
-
-		scoreHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+			else if(scoreSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "星级从高至低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				scoreSortButton.setText("↑");
 			}
+			
 		});
 
 		GridPane commentGridPane = new GridPane();
-		Text commentText = new Text("评分排序");
-		Button commentLowToHighButton = new Button("↑");
-		Button commentHighToLowButton = new Button("↓");
+		Label commentText = new Label("评分排序 ");
+		commentText.setId("ct");
+		Button commentSortButton = new Button("↑");
+		commentSortButton.setId("cb");
 		commentGridPane.add(commentText, 0, 0, 1, 2);
-		commentGridPane.add(commentLowToHighButton, 1, 0, 1, 1);
-		commentGridPane.add(commentHighToLowButton, 1, 1, 1, 1);
+		commentGridPane.add(commentSortButton, 1, 0, 1, 1);
 
-		commentLowToHighButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从低至高");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		commentSortButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
+			if(commentSortButton.getText().equals("↓")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从低至高");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				commentSortButton.setText("↑");
 			}
-		});
-
-		commentHighToLowButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			try {
-				list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从高至低");
-				changeHotelListPane();
-			} catch (RemoteException e) {
-				e.printStackTrace();
+			else if(commentSortButton.getText().equals("↑")){
+				try {
+					list = BLFactory.getInstance().getHotelBLService().sort(customerID, "评分从高至低");
+					changeHotelListPane();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				commentSortButton.setText("↓");
 			}
 		});
 
 		hBox.getChildren().addAll(priceGridPane, scoreGridPane, commentGridPane);
-		this.getChildren().add(hBox);
+		vBox.getChildren().add(hBox);
 	}
 
 	/**
@@ -354,7 +394,7 @@ public class HotelSearchPane extends VBox {
 		
 		list = BLFactory.getInstance().getHotelBLService().getHotelVOsOfArea(areaVO, customerID);
 		hotelListPane = new HotelListPane(list, customerID);
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 	/**
@@ -363,10 +403,10 @@ public class HotelSearchPane extends VBox {
 	 */
 	private void changeHotelListPane() throws RemoteException {
 		
-		this.getChildren().remove(hotelListPane);
+		vBox.getChildren().remove(hotelListPane);
 		hotelListPane = new HotelListPane(list, customerID);
 
-		this.getChildren().add(hotelListPane);
+		vBox.getChildren().add(hotelListPane);
 	}
 
 }

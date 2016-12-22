@@ -1,0 +1,151 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* The main scrollbar **track** CSS class  */
+	.root{
+	-fx-background-image:url(bluebg.png);
+    }
+    
+
+	  .scroll-bar:horizontal .track,
+	 .scroll-bar:vertical .track{
+		-fx-background-color: rgb(45,161,250);
+	    -fx-background-radius: 0em;
+	    -fx-border-radius:2em;
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 .scroll-bar:horizontal .increment-button ,
+	 .scroll-bar:horizontal .decrement-button {
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 0 10 0;
+	 
+	}
+	 
+	/* The increment and decrement button CSS class of scrollbar */
+	 
+	.scroll-bar:vertical .increment-button ,
+	.scroll-bar:vertical .decrement-button {
+	 
+	    -fx-background-color:transparent;
+	    -fx-background-radius: 0em;
+	    -fx-padding:0 10 0 0;
+	 
+	}
+	 
+ 	.scroll-bar .increment-arrow,
+	.scroll-bar .decrement-arrow
+	{
+	    -fx-shape: " ";
+	    -fx-padding:0;
+	}
+	 
+	 .scroll-bar:horizontal .thumb,
+	 .scroll-bar:vertical .thumb {
+	    -fx-background-color:white;
+	    -fx-background-insets: 2, 0, 0;
+	    -fx-background-radius: 5em;
+	 
+	}
+
+ .button{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+  	-fx-font-family: "PingFang SC";
+  -fx-text-fill:white;
+   }
+   .label{
+   	-fx-text-fill:white;
+   }
+  .button:hover .label{
+ 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 	 }
+ 	 .button:hover{
+ 	-fx-background-color: rgba(234, 246, 255, 0.9); 
+ 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   .button:pressed .label{
+    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+    .button:pressed{
+  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+          
+
+    
+    #radio{
+    	-fx-min-height:80;
+    	
+    }
+    
+    .scroll-pane{
+		-fx-border-color:rgb(45,161,250) ;
+		-fx-border-style:solid;
+		-fx-border-width:1px;
+	}
+    
+    .scroll-pane > .viewport {
+   -fx-background-image: url(bluebg.png);
+}
+    
+
+ #backbutton{
+   -fx-background-color:null;
+  -fx-border-width: 2.0px;
+  -fx-border-style: solid;
+  -fx-border-color:white;
+  -fx-max-height: 10.0px;
+    -fx-font-family:"PingFang SC";  
+    -fx-text-fill:white;
+   }
+    #backbutton.label{
+   	-fx-text-fill:white;
+   }
+   #backbutton:hover .label{
+ 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 	 }
+ 	  #backbutton:hover{
+ 	-fx-background-color: rgba(234, 246, 255, 0.9); 
+ 		 	-fx-text-fill:rgba(59, 165, 245, 0.9) ; 
+ 		
+ 	 }
+ 	 
+   #backbutton:pressed .label{
+    	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+    	-fx-opacity:3.0
+    } 
+     #backbutton:pressed{
+  	-fx-background-color: rgba(90, 181, 251, 0.7) ;
+  	    	-fx-text-fill:rgba(255, 255, 255, 0.5);
+  	
+    -fx-opacity:3.0 ; 
+    }
+    
+    
+    
+    .radio-button .dot{
+  -fx-mark-color: #1B9AF7 ;
+    }
+    
+    .radio-button {
+  	-fx-font-family: "PingFang SC";
+    	-fx-text-fill:white;
+    	-fx-font-size:14px;
+    	
+    }
+ 
+ .radio-button .radio {
+  -fx-background-color: white;
+}
+	
+	

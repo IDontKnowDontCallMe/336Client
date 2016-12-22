@@ -2,7 +2,7 @@
 /* The main scrollbar **track** CSS class  */
 
 	.root{
-	-fx-background-image: url(NJUbg.png);
+	-fx-background-image: url(resource/NJUbg.png);
 }
 
     
@@ -96,11 +96,12 @@
     -fx-border-color:rgb(159,19,144);
     -fx-text-fill: #FFF; 
     }
+    
   #loginbutton:pressed {
     -fx-effect: dropshadow(gaussian,rgba(255, 255, 255, 0.3),10,0,0,1px);
             -fx-background-color: rgb(159,0,144);
     -fx-border-color: rgb(159,0,144);
     -fx-text-fill: rgb(162,81,153);
-            }
+   }
 	
 	

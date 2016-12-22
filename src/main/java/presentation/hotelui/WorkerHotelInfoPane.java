@@ -6,6 +6,8 @@ import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
@@ -24,16 +26,19 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.HotelWorkerPilot;
+import presentation.mainui.PasswordEditDialog;
 import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
 import vo.RoomVO;
 
 /**
- * @author samperson1997
- * 酒店工作人员查看酒店详细信息界面
+ * @author samperson1997 酒店工作人员查看酒店详细信息界面
  *
  */
 public class WorkerHotelInfoPane extends GridPane {
@@ -43,20 +48,19 @@ public class WorkerHotelInfoPane extends GridPane {
 	private GridPane infoPane;
 	private ScrollPane roomPane;
 	private HBox addBox1;
-	private HBox addBox2;
 	private VBox roomBox;
 
 	final int COLUMN = 15;
-	private Button backButton;
 	private Button infoEditButton;
 	private Button addButton;
+	private Button editPasswordButton;
 
-	private Text nameText;
-	private Text addressText;
-	private Text introductionText;
-	private Text serviceText;
-	private Text businessCircleText;
-	private Text scoreText;
+	private Label nameText;
+	private Label addressText;
+	private Label introductionText;
+	private Label serviceText;
+	private Label businessCircleText;
+	private Label scoreText;
 	private TextField nameTextField;
 	private TextField addressTextField;
 	private TextField introductionTextField;
@@ -77,60 +81,59 @@ public class WorkerHotelInfoPane extends GridPane {
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 酒店工作人员酒店详细信息面板
+	 *             酒店工作人员酒店详细信息面板
 	 * 
 	 */
 	public WorkerHotelInfoPane(int hotelID) throws RemoteException {
-		
+
 		super();
-		this.setHgap(10);
-		this.setVgap(20);
-		
+		GridPane gridPane = new GridPane();
+		gridPane.setId("grid");
+
+		gridPane.setHgap(10);
+		gridPane.setVgap(20);
 
 		this.hotelID = hotelID;
 		hotelVO = BLFactory.getInstance().getHotelBLService().getHotelInfo(hotelID);
 		initInfoPane();
 		initRoomPane(hotelID);
 
-		this.add(new Text("酒店基本信息"), 0, 0, 1, 1);
-		this.add(infoPane, 0, 1, 1, 1);
+		Label label = new Label("酒店基本信息");
+		label.setId("l1");
+		gridPane.add(label, 1, 0, 2, 1);
+		gridPane.add(infoPane, 2, 1, 2, 1);
 
-		this.add(new Text("房型列表"), 0, 2, 1, 1);
-		this.add(roomBox, 0, 3, 2, 1);
+		Label label2 = new Label("房型列表");
+		label2.setId("l2");
+		gridPane.add(label2, 1, 2, 1, 1);
+		gridPane.add(roomBox, 1, 3, 2, 1);
+		roomBox.setTranslateX(50.0);
 
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("back");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
-		
-		this.add(backButton, 1, 0, 1, 1);
-		backButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
+		ImageEditPane imageEditPane = new ImageEditPane(hotelID);
+		gridPane.add(imageEditPane, 4, 1, 2, 1);
+
+		HotelWorkerPilot hotelWorkerPilot = new HotelWorkerPilot(hotelID);
+		this.add(hotelWorkerPilot, 0, 0);
+		this.add(gridPane, 1, 0);
+		gridPane.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane.css").toExternalForm());
+
 	}
 
 	/**
 	 * @param hotelID
 	 * @throws RemoteException
-	 * 酒店房间面板初始化
+	 *             酒店房间面板初始化
 	 * 
 	 */
 	private void initRoomPane(int hotelID) throws RemoteException {
-		
+
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
+		//roomPane.getStyleClass().add("edge-to-edge");
 		roomBox = new VBox();
 		addBox1 = new HBox();
-		addBox2 = new HBox();
 		roomBox.setSpacing(10);
 		addBox1.setSpacing(10);
-		addBox2.setSpacing(10);
 
 		TableView<RoomCell> tableView = new TableView<>();
 
@@ -158,7 +161,7 @@ public class WorkerHotelInfoPane extends GridPane {
 		maxNumOfPeopleCol.setCellFactory(TextFieldTableCell.<RoomCell>forTableColumn());
 
 		tableView.getColumns().addAll(roomNameCol, priceCol, numOfRoomCol, serviceCol, maxNumOfPeopleCol);
-		tableView.setPrefWidth(450);
+		tableView.autosize();
 		ObservableList<RoomCell> roomCells = FXCollections.observableArrayList();
 
 		addRoomNameTextField = new TextField();
@@ -183,46 +186,78 @@ public class WorkerHotelInfoPane extends GridPane {
 			RoomCell cell = new RoomCell(vo);
 			roomCells.add(cell);
 		}
+		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField,
+				addServiceTextField, addMaxNumOfPeopleTextField);
+
 		addButton = new Button("新增房间类型");
+		roomBox.getChildren().addAll(addButton, roomPane);
 		addButton.setOnAction((ActionEvent e) -> {
-			roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
-					addNumOfRoomTextField.getText(), addServiceTextField.getText(),
-					addMaxNumOfPeopleTextField.getText()));
-			RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(), Integer.parseInt(addPriceTextField.getText()),
-					Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
-					Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
-			roomList.add(newVO);
+			if (addButton.getText().equals("确认添加")) {
+				if (addRoomNameTextField.getText().equals("") || addPriceTextField.getText().equals("")
+						|| addNumOfRoomTextField.getText().equals("") || addServiceTextField.getText().equals("")
+						|| addMaxNumOfPeopleTextField.getText().equals("")) {
+					Stage popup3 = new Stage();
+					popup3.setAlwaysOnTop(true);
+					popup3.initModality(Modality.APPLICATION_MODAL);
+					Button closeButton3 = new Button("确定");
+					closeButton3.setOnAction(e1 -> {
+						popup3.close();
+					});
+					VBox root3 = new VBox();
+					root3.setAlignment(Pos.BASELINE_CENTER);
+					root3.setSpacing(20);
+					root3.getChildren().addAll(new Label("请将客房信息填写完整！"), closeButton3);
+					Scene scene3 = new Scene(root3, 200, 90);
+					popup3.setScene(scene3);
+					popup3.setTitle("提示");
+					popup3.show();
+				} else {
+					roomCells.add(new RoomCell(addRoomNameTextField.getText(), addPriceTextField.getText(),
+							addNumOfRoomTextField.getText(), addServiceTextField.getText(),
+							addMaxNumOfPeopleTextField.getText()));
+					RoomVO newVO = new RoomVO(-1, addRoomNameTextField.getText(),
+							Integer.parseInt(addPriceTextField.getText()),
+							Integer.parseInt(addNumOfRoomTextField.getText()), addServiceTextField.getText(),
+							Integer.parseInt(addMaxNumOfPeopleTextField.getText()));
+					roomList.add(newVO);
 
-			addRoomNameTextField.clear();
-			addNumOfRoomTextField.clear();
-			addServiceTextField.clear();
-			addMaxNumOfPeopleTextField.clear();
-			addPriceTextField.clear();
+					addRoomNameTextField.clear();
+					addNumOfRoomTextField.clear();
+					addServiceTextField.clear();
+					addMaxNumOfPeopleTextField.clear();
+					addPriceTextField.clear();
 
-			try {
-				if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
-					System.out.print("add a room type successfully.");
+					try {
+						if (BLFactory.getInstance().getRoomBLService().addRoomType(hotelID, newVO)) {
+							System.out.print("add a room type successfully.");
+						}
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+					roomBox.getChildren().clear();
+					roomBox.getChildren().addAll(addButton, roomPane);
+					addButton.setText("新增房间类型");
 				}
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
+
+			} else if (addButton.getText().equals("新增房间类型")) {
+				roomBox.getChildren().clear();
+				roomBox.getChildren().addAll(addButton, addBox1, roomPane);
+				addButton.setText("确认添加");
 			}
+
 		});
 
 		tableView.setItems(roomCells);
 
-		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
-		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, addButton);
-		roomBox.getChildren().addAll(roomPane, addBox1, addBox2);
-		
-		//this.getStylesheets().add(getClass().getResource("WorkerHotelInfoPane").toExternalForm());
 	}
 
 	/**
 	 * 酒店信息面板初始化
 	 */
 	private void initInfoPane() {
-		
+
 		infoPane = new GridPane();
+		infoPane.setId("infopane");
 
 		infoPane.setHgap(10);
 		infoPane.setVgap(10);
@@ -230,29 +265,37 @@ public class WorkerHotelInfoPane extends GridPane {
 		infoEditButton = new Button("编辑");
 		infoPane.add(infoEditButton, 0, 0, 1, 1);
 
-		infoPane.add(new Text("酒店名称"), 0, 1, 1, 1);
-		nameText = new Text(hotelVO.hotelName);
+		infoPane.add(new Label("酒店名称"), 0, 1, 1, 1);
+		nameText = new Label(hotelVO.hotelName);
 		infoPane.add(nameText, 1, 1, 1, 1);
 
-		infoPane.add(new Text("酒店地址"), 0, 2, 1, 1);
-		addressText = new Text(hotelVO.address);
+		infoPane.add(new Label("酒店地址"), 0, 2, 1, 1);
+		addressText = new Label(hotelVO.address);
 		infoPane.add(addressText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("酒店简介"), 0, 3, 1, 1);
-		introductionText = new Text(hotelVO.introduction);
+		infoPane.add(new Label("酒店简介"), 0, 3, 1, 1);
+		introductionText = new Label(hotelVO.introduction);
 		infoPane.add(introductionText, 1, 3, 1, 1);
 
-		infoPane.add(new Text("设施服务"), 0, 4, 1, 1);
-		serviceText = new Text(hotelVO.service);
+		infoPane.add(new Label("设施服务"), 0, 4, 1, 1);
+		serviceText = new Label(hotelVO.service);
 		infoPane.add(serviceText, 1, 4, 1, 1);
 
-		infoPane.add(new Text("所在商圈名"), 0, 5, 1, 1);
-		businessCircleText = new Text(hotelVO.businessCircle);
+		infoPane.add(new Label("所在商圈名"), 0, 5, 1, 1);
+		businessCircleText = new Label(hotelVO.businessCircle);
 		infoPane.add(businessCircleText, 1, 5, 1, 1);
 
-		infoPane.add(new Text("酒店星级"), 0, 6, 1, 1);
-		scoreText = new Text(hotelVO.score + "星");
+		infoPane.add(new Label("酒店星级"), 0, 6, 1, 1);
+		scoreText = new Label(hotelVO.score + "星");
 		infoPane.add(scoreText, 1, 6, 1, 1);
+
+		editPasswordButton = new Button("修改密码");
+		infoPane.add(editPasswordButton, 1, 0, 1, 1);
+
+		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(hotelID);
+			passwordEditDialog.show();
+		});
 
 		infoEditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (infoEditButton.getText().equals("编辑")) {
