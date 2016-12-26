@@ -32,7 +32,6 @@ public class WebMarketerPilot extends AnchorPane {
 	private Button creditButton;
 	private Button backButton;
 	
-	private Timer surviveTimer;
 	private int ID;
 
 	public WebMarketerPilot(int id) {
@@ -123,7 +122,7 @@ public class WebMarketerPilot extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("WebMarketerInfoPane.css").toExternalForm());
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebPromotionPanel(ID));
+				TheMainFrame.changeTo(new WebPromotionPanel(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -133,7 +132,7 @@ public class WebMarketerPilot extends AnchorPane {
 		
 		levelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new LevelPanel(ID));
+				TheMainFrame.changeTo(new LevelPanel(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -142,7 +141,7 @@ public class WebMarketerPilot extends AnchorPane {
 
 		marketerOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new MarketerOrdersPane(ID));
+				TheMainFrame.changeTo(new MarketerOrdersPane(ID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -151,42 +150,20 @@ public class WebMarketerPilot extends AnchorPane {
 
 		creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerCreditPanel(ID));
+				TheMainFrame.changeTo(new CustomerCreditPanel(ID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		});
 
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new LoginPane());;
-			surviveTimer.cancel();
+			TheMainFrame.jumpTo(new LoginPane());
+			TheMainFrame.setLoginID(-1);
 		});
 		
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 		
 	}
 	
-	/**
-	 * @author samperson1997
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-				BLFactory.getInstance().getUserBLService().survivalConfirm(ID);
-				
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
 
 }

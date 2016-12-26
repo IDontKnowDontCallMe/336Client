@@ -47,7 +47,4 @@ public interface RemoteHotelBLService extends Remote {
 
 	public boolean delete(HotelVO hotelVO) throws RemoteException;
 
-	public byte[] getHotelImage(int hotelID) throws RemoteException;
-
-	public boolean saveHotelImage(int hotelID, byte[] transitionImageData) throws RemoteException;
 }
