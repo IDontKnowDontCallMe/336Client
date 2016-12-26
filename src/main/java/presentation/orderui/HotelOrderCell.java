@@ -49,10 +49,13 @@ public class HotelOrderCell extends Pane {
 		customerName.setLayoutX(16.0);
 		customerName.setLayoutY(41.0);
 		customerName.setId("customername");
+
 		customerPhone = new Label("联系方式: "+orderVO.customerPhoneNumber);
+		customerPhone.setLayoutX(200.0);
+		customerPhone.setLayoutY(3.0);
+
 		this.getChildren().add(customerPhone);
-		customerPhone.setLayoutX(210.0);
-		customerPhone.setLayoutY(49.0);
+
 		customerPhone.setId("customerPhone");
 		state = new Label(orderVO.orderState);
 		this.getChildren().add(state);
@@ -148,6 +151,8 @@ public class HotelOrderCell extends Pane {
 	private void setDelayInButton() {
 		
 		button = new Button("延迟入住");
+		button.setLayoutX(710);
+		button.setLayoutY(80);
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {
@@ -169,6 +174,7 @@ public class HotelOrderCell extends Pane {
 	private void setLeavingButton() {
 		
 		button = new Button("办理退房");
+		button.setLayoutX(10);
 		
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
 			try {

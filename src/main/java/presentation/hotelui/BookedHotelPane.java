@@ -27,6 +27,8 @@ public class BookedHotelPane extends GridPane {
 
 		CustomerPilot customerPilot = new CustomerPilot(customerID);
 
+		vBox.setTranslateY(20.0);
+		vBox.setTranslateX(60.0);
 		this.add(customerPilot, 0, 0);
 		this.add(vBox, 1, 0);
 

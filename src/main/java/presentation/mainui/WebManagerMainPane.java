@@ -76,11 +76,11 @@ public class WebManagerMainPane extends AnchorPane {
 		
 		this.getChildren().addAll(customerManageButton, hotelManageButton, webMarketerManageButton, logoutButton);
 		
-		AnchorPane.setLeftAnchor(customerManageButton, 204.0);
+		AnchorPane.setLeftAnchor(customerManageButton, 154.0);
 		AnchorPane.setTopAnchor(customerManageButton, 250.0);
-		AnchorPane.setLeftAnchor(hotelManageButton, 530.0);
+		AnchorPane.setLeftAnchor(hotelManageButton, 480.0);
 		AnchorPane.setTopAnchor(hotelManageButton, 250.0);
-		AnchorPane.setLeftAnchor(webMarketerManageButton, 856.0);
+		AnchorPane.setLeftAnchor(webMarketerManageButton, 806.0);
 		AnchorPane.setTopAnchor(webMarketerManageButton, 250.0);
 		AnchorPane.setLeftAnchor(logoutButton, 985.0);
 		AnchorPane.setTopAnchor(logoutButton, 30.0);
