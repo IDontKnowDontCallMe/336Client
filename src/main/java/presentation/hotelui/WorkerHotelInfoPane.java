@@ -10,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -22,15 +21,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.PasswordEditDialog;
-import presentation.mainui.TheMainFrame;
 import presentation.roomui.RoomCell;
 import vo.HotelVO;
 import vo.RoomVO;
@@ -46,11 +42,13 @@ public class WorkerHotelInfoPane extends GridPane {
 	private GridPane infoPane;
 	private ScrollPane roomPane;
 	private HBox addBox1;
+	private HBox addBox2;
 	private VBox roomBox;
 
-	final int COLUMN = 15;
+	final int COLUMN = 8;
 	private Button infoEditButton;
 	private Button addButton;
+	private Button cancelButton;
 	private Button editPasswordButton;
 
 	private Label nameText;
@@ -127,11 +125,13 @@ public class WorkerHotelInfoPane extends GridPane {
 
 		roomList = BLFactory.getInstance().getRoomBLService().getRoomTypeList(hotelID);
 		roomPane = new ScrollPane();
-		//roomPane.getStyleClass().add("edge-to-edge");
+		// roomPane.getStyleClass().add("edge-to-edge");
 		roomBox = new VBox();
 		addBox1 = new HBox();
+		addBox2 = new HBox();
 		roomBox.setSpacing(10);
 		addBox1.setSpacing(10);
+		addBox2.setSpacing(10);
 
 		TableView<RoomCell> tableView = new TableView<>();
 
@@ -184,8 +184,9 @@ public class WorkerHotelInfoPane extends GridPane {
 			RoomCell cell = new RoomCell(vo);
 			roomCells.add(cell);
 		}
-		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField,
-				addServiceTextField, addMaxNumOfPeopleTextField);
+		cancelButton = new Button("取消添加");
+		addBox1.getChildren().addAll(addRoomNameTextField, addPriceTextField, addNumOfRoomTextField);
+		addBox2.getChildren().addAll(addServiceTextField, addMaxNumOfPeopleTextField, cancelButton);
 
 		addButton = new Button("新增房间类型");
 		roomBox.getChildren().addAll(addButton, roomPane);
@@ -239,10 +240,16 @@ public class WorkerHotelInfoPane extends GridPane {
 
 			} else if (addButton.getText().equals("新增房间类型")) {
 				roomBox.getChildren().clear();
-				roomBox.getChildren().addAll(addButton, addBox1, roomPane);
+				roomBox.getChildren().addAll(addButton, addBox1, addBox2, roomPane);
 				addButton.setText("确认添加");
 			}
 
+		});
+
+		cancelButton.setOnAction((ActionEvent e) -> {
+			roomBox.getChildren().clear();
+			roomBox.getChildren().addAll(addButton, roomPane);
+			addButton.setText("新增房间类型");
 		});
 
 		tableView.setItems(roomCells);
@@ -348,6 +355,7 @@ public class WorkerHotelInfoPane extends GridPane {
 				newVO.service = serviceTextField.getText();
 				newVO.businessCircle = businessCircleBox.getValue().toString();
 				newVO.score = scoreChoiceBox.getSelectionModel().getSelectedIndex() + 1;
+				
 
 				try {
 					if (BLFactory.getInstance().getHotelBLService().updateSimpleHotelInfo(newVO)) {

@@ -32,7 +32,6 @@ public class CustomerPilot extends AnchorPane {
 	private Button infoButton;
 	private Button backButton;
 	private int ID;
-	private Timer surviveTimer;
 
 	/**
 	 * @param customerid
@@ -125,7 +124,7 @@ public class CustomerPilot extends AnchorPane {
 
 		searchButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new AreaInputPane(customerid));
+				TheMainFrame.changeTo(new AreaInputPane(customerid));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -134,7 +133,7 @@ public class CustomerPilot extends AnchorPane {
 
 		orderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerOrdersPane(customerid));
+				TheMainFrame.changeTo(new CustomerOrdersPane(customerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -142,7 +141,7 @@ public class CustomerPilot extends AnchorPane {
 
 		bookedhotelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new BookedHotelPane(customerid));
+				TheMainFrame.changeTo(new BookedHotelPane(customerid));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -151,7 +150,7 @@ public class CustomerPilot extends AnchorPane {
 
 		infoButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPane(customerid));
+				TheMainFrame.changeTo(new CustomerInfoPane(customerid));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -159,35 +158,14 @@ public class CustomerPilot extends AnchorPane {
 		});
 
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			surviveTimer.cancel();
-			TheMainFrame.jumpTo(new LoginPane());
+			TheMainFrame.changeTo(new LoginPane());
+			TheMainFrame.setLoginID(-1);
 		});
 
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+		
 
 		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
-	/**
-	 * @author samperson1997 
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask {
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-
-				BLFactory.getInstance().getUserBLService().survivalConfirm(ID);
-
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
+	
 }

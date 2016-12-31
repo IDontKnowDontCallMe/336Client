@@ -60,19 +60,23 @@ public class HotelOrdersPane extends GridPane {
 		buildOrderBox(orderList);
 		listPane = new ScrollPane();
 		listPane.setContent(orderBox);
+
 		listPane.setMinWidth(920.0);
 		listPane.getStyleClass().add("edge-to-edge");		
 		orderBox.setTranslateX(50.0);
+
 
 		radioBox.setId("radio");
 
 		HotelWorkerPilot hotelWorkerInfoPane = new HotelWorkerPilot(hotelID);
 		VBox vBox = new VBox();
 		vBox.getChildren().addAll(radioBox,listPane);
-		vBox.setPrefWidth(500);
+		vBox.setPrefWidth(920);
 		
 		this.add(hotelWorkerInfoPane, 0, 0);
 		this.add(vBox, 1, 0);
+		vBox.setTranslateX(20);
+		vBox.setTranslateY(20);
 		
 		vBox.getStylesheets().add(getClass().getResource("HotelOrderPane.css").toExternalForm());
 		this.getStylesheets().add(getClass().getResource("HotelOrderPane2.css").toExternalForm());

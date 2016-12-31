@@ -29,7 +29,6 @@ public class WebManagerPilot extends AnchorPane {
 	private Button webMarketerManageButton;
 	private Button backButton;
 	
-	private Timer surviveTimer;
 	private int ID;
 
 	public WebManagerPilot(int webManagerid) {
@@ -107,7 +106,7 @@ public class WebManagerPilot extends AnchorPane {
 		this.getStylesheets().add(getClass().getResource("WebManagerInfoPane.css").toExternalForm());
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPanel(webManagerid));
+				TheMainFrame.changeTo(new CustomerInfoPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -115,7 +114,7 @@ public class WebManagerPilot extends AnchorPane {
 
 		hotelManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPanel(webManagerid));
+				TheMainFrame.changeTo(new HotelPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -123,43 +122,21 @@ public class WebManagerPilot extends AnchorPane {
 
 		webMarketerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebMarketerPanel(webManagerid));
+				TheMainFrame.changeTo(new WebMarketerPanel(webManagerid));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		});
 
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			surviveTimer.cancel();
-			TheMainFrame.jumpTo(new LoginPane());
+			TheMainFrame.changeTo(new LoginPane());
+			TheMainFrame.setLoginID(-1);
 		});
 		
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
 
 		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());
 
 	}
 	
-	/**
-	 * @author samperson1997
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-				BLFactory.getInstance().getUserBLService().survivalConfirm(ID);
-				
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
 }

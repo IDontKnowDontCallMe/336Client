@@ -42,6 +42,7 @@ public class HotelListPane extends ScrollPane {
 		vBox.setTranslateX(50.0);
 		this.setContent(vBox);
 
+
 		for (HotelVO vo : hotelList) {
 			vBox.getChildren().add(new SimpleHotelCell(vo));
 		}
