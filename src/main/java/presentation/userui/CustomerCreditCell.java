@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import presentation.userui.CreditDialog;
@@ -22,11 +23,11 @@ public class CustomerCreditCell extends GridPane {
 
 	CustomerVO customerVO;
 	private GridPane infoPane;
-	private Text nameText;
-	private Text phoneNumberText;
-	private Text creditText;
-	private Text birthdayText;
-	private Text companyText;
+	private Label nameText;
+	private Label phoneNumberText;
+	private Label creditText;
+	private Label birthdayText;
+	private Label companyText;
 	private Button editButton;
 
 	/**
@@ -41,31 +42,31 @@ public class CustomerCreditCell extends GridPane {
 		infoPane = new GridPane();
 
 		// 这部分代码和CustomerInfoPane是差不多的，做美化的时候可以省点力气
-		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
-		nameText = new Text(customerVO.customerName);
+		infoPane.add(new Label("姓名"), 0, 0, 1, 1);
+		nameText = new Label(customerVO.customerName);
 		infoPane.add(nameText, 1, 0, 1, 1);
 
-		infoPane.add(new Text("电话"), 0, 1, 1, 1);
-		phoneNumberText = new Text(customerVO.phoneNumber);
+		infoPane.add(new Label("电话"), 0, 1, 1, 1);
+		phoneNumberText = new Label(customerVO.phoneNumber);
 		infoPane.add(phoneNumberText, 1, 1, 1, 1);
 
-		infoPane.add(new Text("信用值"), 0, 2, 1, 1);
-		creditText = new Text(String.valueOf(customerVO.credit));
+		infoPane.add(new Label("信用值"), 0, 2, 1, 1);
+		creditText = new Label(String.valueOf(customerVO.credit));
 		infoPane.add(creditText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("生日会员"), 0, 3, 1, 1);
+		infoPane.add(new Label("生日会员"), 0, 3, 1, 1);
 		if (customerVO.isBirthVIP) {
-			birthdayText = new Text(String.valueOf(customerVO.birthday));
+			birthdayText = new Label(String.valueOf(customerVO.birthday));
 		} else {
-			birthdayText = new Text("无");
+			birthdayText = new Label("无");
 		}
 		infoPane.add(birthdayText, 1, 3, 1, 1);
 
-		infoPane.add(new Text("企业会员"), 0, 4, 1, 1);
+		infoPane.add(new Label("企业会员"), 0, 4, 1, 1);
 		if (customerVO.isCompanyVIP) {
-			companyText = new Text(customerVO.companyName);
+			companyText = new Label(customerVO.companyName);
 		} else {
-			companyText = new Text("无");
+			companyText = new Label("无");
 		}
 		infoPane.add(companyText, 1, 4, 1, 1);
 

@@ -3,15 +3,12 @@ package presentation.userui;
 import java.rmi.RemoteException;
 import java.util.List;
 import bussinesslogic.factory.BLFactory;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import presentation.mainui.TheMainFrame;
+
 import presentation.mainui.WebManagerPilot;
 import vo.CustomerVO;
 
@@ -52,7 +49,8 @@ public class CustomerInfoPanel extends GridPane {
 		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
 		this.add(webManagerPilot, 0, 0);
 		this.add(gridPane, 1, 0);
-		this.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
+		gridPane.setId("pane");
+		gridPane.getStylesheets().add(getClass().getResource("CustomerInfoPane.css").toExternalForm());
 	}
 
 	/**

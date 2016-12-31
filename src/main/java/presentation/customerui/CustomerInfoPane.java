@@ -199,7 +199,7 @@ public class CustomerInfoPane extends GridPane {
 		}
 
 		editButton = new Button("编辑");
-		infoPane.add(editButton, 5, 1, 1, 1);
+		infoPane.add(editButton, 3, 1, 1, 1);
 
 		nameTextField = new TextField();
 		nameTextField.setPrefColumnCount(8);
@@ -207,7 +207,7 @@ public class CustomerInfoPane extends GridPane {
 		phoneTextField.setPrefColumnCount(8);
 
 		editPasswordButton = new Button("修改密码");
-		infoPane.add(editPasswordButton, 6, 1, 1, 1);
+		infoPane.add(editPasswordButton, 3, 0, 1, 1);
 		
 		editPasswordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			PasswordEditDialog passwordEditDialog = new PasswordEditDialog(customerID);

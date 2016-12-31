@@ -4,10 +4,10 @@ import java.rmi.RemoteException;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import vo.WebMarketerVO;
 
 /**
@@ -20,8 +20,8 @@ public class WebMarketerCell extends GridPane {
 	WebMarketerVO webMarketerVO;
 
 	private GridPane infoPane;
-	private Text nameText;
-	private Text phoneNumberText;
+	private Label nameText;
+	private Label phoneNumberText;
 	private TextField nameTextField;
 	private TextField phoneTextField;
 	private Button editButton;
@@ -37,12 +37,12 @@ public class WebMarketerCell extends GridPane {
 		this.webMarketerVO = webMarketerVO;
 		infoPane = new GridPane();
 
-		infoPane.add(new Text("姓名"), 0, 0, 1, 1);
-		nameText = new Text(webMarketerVO.name);
+		infoPane.add(new Label("姓名"), 0, 0, 1, 1);
+		nameText = new Label(webMarketerVO.name);
 		infoPane.add(nameText, 1, 0, 1, 1);
 
-		infoPane.add(new Text("电话"), 0, 1, 1, 1);
-		phoneNumberText = new Text(webMarketerVO.phoneNumber);
+		infoPane.add(new Label("电话"), 0, 1, 1, 1);
+		phoneNumberText = new Label(webMarketerVO.phoneNumber);
 		infoPane.add(phoneNumberText, 1, 1, 1, 1);
 
 		editButton = new Button("编辑");

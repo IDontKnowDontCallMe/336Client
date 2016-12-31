@@ -1,9 +1,17 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
 	
-	.root{
+	#pane{
 	-fx-background-image:url(purple.png);
-    }
+	-fx-font-size:15px;
+   -fx-text-fill:white;
+  }
+       .scroll-pane > .viewport {
+   -fx-background-image: url(purple.png);
+   -fx-font-size:15px;
+   -fx-text-fill:white;
+}
+
 
   .button{
    -fx-background-color:null;
@@ -12,10 +20,15 @@
   -fx-border-color:white;
   -fx-max-height: 10.0px;
 -fx-font-size:15px;
-    -fx-font-family:"PingFang SC";  -fx-text-fill:white;
+    -fx-font-family:"PingFang SC"; 
+     -fx-text-fill:white;
    }
    .label{
+   	    -fx-font-family:"PingFang SC"; 
+   	
    	-fx-text-fill:white;
+   	   -fx-font-size:15px;
+   	
    }
   .button:hover .label{
  		 	-fx-text-fill:rgba(149, 13, 135, 0.9) ; 

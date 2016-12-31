@@ -80,7 +80,7 @@ public class CustomerOrderCell extends Pane {
 		num.setLayoutX(521.0);
 		num.setLayoutY(85.0);
 		num.setId("num");
-		children = new Label(orderVO.hasChildren ? "有" : "无" + "儿童");
+		children = new Label(orderVO.hasChildren ? "有儿童" : "无儿童");
 		this.getChildren().add(children);
 		children.setLayoutX(521.0);
 		children.setLayoutY(120.0);

@@ -28,7 +28,6 @@ public class HotelPromotionPanel extends GridPane {
 	private VBox hotelPromotionBox;
 	private HBox addBox;
 	private Button addButton;
-	private Button backButton;
 	private Label title;
 
 	/**
@@ -71,16 +70,12 @@ public class HotelPromotionPanel extends GridPane {
 
 		});
 
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-			TheMainFrame.backTo();
-		});
 		addBox = new HBox();
 		addBox.setSpacing(10);
 		addBox.setMinHeight(50.0);
 		addBox.setTranslateX(20.0);
 		addBox.setTranslateY(10.0);
-		addBox.getChildren().addAll(title, addButton, backButton);
+		addBox.getChildren().addAll(title, addButton);
 		
 		GridPane gridPane = new GridPane();
 		gridPane.add(addBox, 0, 0);

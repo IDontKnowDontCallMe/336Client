@@ -141,8 +141,8 @@ public class HotelListPane extends ScrollPane {
 			
 			ImagePane imagePane = new ImagePane(hotelVO.hotelID);
 			this.getChildren().add(imagePane);
-			imagePane.setLayoutX(6.0);
-			imagePane.setLayoutY(6.0);
+			imagePane.setLayoutX(11.0);
+			imagePane.setLayoutY(11.0);
 
 			this.getStylesheets().add(getClass().getResource("SimpleHotelCell.css").toExternalForm());
 		}

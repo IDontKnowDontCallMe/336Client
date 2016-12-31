@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.mainui.CustomerMainPane;
+import presentation.mainui.HotelWorkerPilot;
 import presentation.mainui.TheMainFrame;
 import presentation.mainui.WebMarketerPilot;
 import vo.HotelVO;
@@ -36,14 +37,12 @@ public class MarketerOrdersPane extends GridPane {
 	Font icon = Font.loadFont(CustomerMainPane.class.getResourceAsStream("fontawesome-webfont.ttf"), -1);
 	private AnchorPane radioBox;
 
-	private Button backButton;
 	private ToggleGroup toggleGroup;
 	private RadioButton abnormalButton;
 	private RadioButton unexecutedButton;
 	private ScrollPane listPane;
 	private VBox orderBox;
 	private List<OrderVO> orderList;
-	private VBox vBox;
 
 	/**
 	 * @throws RemoteException
@@ -55,18 +54,27 @@ public class MarketerOrdersPane extends GridPane {
 		initRadioButton();
 		orderList = BLFactory.getInstance().getOrderBLService().getAbnormalOrdersOfToday();
 		orderBox = new VBox();
-		orderBox.setSpacing(15);
+		orderBox.setSpacing(10);
 		buildOrderBox(orderList);
-		listPane = new ScrollPane(orderBox);
+		listPane = new ScrollPane();
+		listPane.setContent(orderBox);
+		listPane.setMinWidth(920.0);
 		listPane.getStyleClass().add("edge-to-edge");		
+		orderBox.setTranslateX(50.0);
 
-		vBox = new VBox();
-		vBox.getChildren().addAll(radioBox, listPane);
+		radioBox.setId("radio");
+
 		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
+		VBox vBox = new VBox();
+		vBox.getChildren().addAll(radioBox,listPane);
+		vBox.setPrefWidth(500);
+		
 		this.add(webMarketerPilot, 0, 0);
 		this.add(vBox, 1, 0);
 
 		vBox.getStylesheets().add(getClass().getResource("MarketerOrdersPane.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("MarketerOrderPane2.css").toExternalForm());
+
 	}
 
 	/**
@@ -114,22 +122,13 @@ public class MarketerOrdersPane extends GridPane {
 
 				});
 
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 28));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("back");
-		backButton.setShape(new Circle(31));
-		backButton.setMinSize(62, 62);
-		backButton.setMaxSize(62, 62);
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-
+		
 		radioBox = new AnchorPane();
-		radioBox.getChildren().addAll(unexecutedButton, abnormalButton, backButton);
+		radioBox.getChildren().addAll(unexecutedButton, abnormalButton);
+		AnchorPane.setLeftAnchor(abnormalButton, 53.0);
+		AnchorPane.setTopAnchor(abnormalButton, 30.0);
+		AnchorPane.setLeftAnchor(unexecutedButton, 165.0);
+		AnchorPane.setTopAnchor(unexecutedButton, 30.0);
 
 	}
 

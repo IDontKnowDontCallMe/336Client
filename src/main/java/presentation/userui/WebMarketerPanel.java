@@ -5,12 +5,12 @@ import java.util.List;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import presentation.mainui.TheMainFrame;
 import presentation.mainui.WebManagerPilot;
 import vo.WebMarketerVO;
@@ -26,8 +26,7 @@ public class WebMarketerPanel extends GridPane {
 	private VBox webMarketerBox;
 	private HBox titleBox;
 	private Button backButton;
-	private Text title;
-	private VBox vBox;
+	private Label title;
 
 	/**
 	 * @throws RemoteException
@@ -41,20 +40,23 @@ public class WebMarketerPanel extends GridPane {
 		webMarketerBox.setSpacing(15);
 		buildWebMarketerBox(webMarketerList);
 		listPane = new ScrollPane(webMarketerBox);
-
-		title = new Text("网站营销人员列表");
+		listPane.setMinWidth(920.0);
+		listPane.getStyleClass().add("edge-to-edge");
+		title = new Label("网站营销人员列表");
 		titleBox = new HBox();
 		backButton = new Button("返回");
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
 		titleBox.getChildren().addAll(title, backButton);
-		vBox.getChildren().addAll(titleBox, listPane);
+		GridPane gridPane = new GridPane();
+		gridPane.add(titleBox, 0, 0);
+		gridPane.add(listPane, 0, 1);
 		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
 		this.add(webManagerPilot, 0, 0);
-		this.add(vBox, 1, 0);
-		
-		vBox.getStylesheets().add(getClass().getResource("WebMarketerPane.css").toExternalForm());
+		this.add(gridPane, 1, 0);
+		gridPane.setId("pane");
+		gridPane.getStylesheets().add(getClass().getResource("WebMarketerPane.css").toExternalForm());
 	}
 
 	/**

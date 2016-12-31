@@ -3,7 +3,6 @@ package presentation.userui;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Optional;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import presentation.mainui.TheMainFrame;
@@ -32,11 +30,10 @@ import vo.HotelVO;
 public class HotelPanel extends GridPane {
 	private ScrollPane listPane;
 	private VBox hotelBox;
-	private Text title;
+	private Label title;
 	private Button addButton;
 	private Button backButton;
 	private HBox titleBox;
-	private VBox vBox;
 
 	private List<HotelVO> hotelList;
 
@@ -53,8 +50,9 @@ public class HotelPanel extends GridPane {
 		hotelBox.setSpacing(15);
 		buildHotelBox(hotelList);
 		listPane = new ScrollPane(hotelBox);
-
-		title = new Text("酒店及酒店工作人员列表");
+		listPane.setMinWidth(920.0);
+		listPane.getStyleClass().add("edge-to-edge");
+		title = new Label("酒店及酒店工作人员列表");
 		addButton = new Button("新增酒店及酒店工作人员");
 
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -103,12 +101,15 @@ public class HotelPanel extends GridPane {
 		});
 		titleBox = new HBox();
 		titleBox.getChildren().addAll(title, addButton, backButton);
-		
-		vBox.getChildren().addAll(titleBox, listPane);
+		titleBox.setSpacing(20.0);
+		GridPane gridPane = new GridPane();
+		gridPane.add(titleBox, 0, 0);
+		gridPane.add(listPane, 0, 1);
 		WebManagerPilot webManagerPilot = new WebManagerPilot(id);
 		this.add(webManagerPilot, 0, 0);
-		this.add(vBox, 1, 0);
-		vBox.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
+		this.add(gridPane, 1, 0);
+		gridPane.setId("pane");
+		gridPane.getStylesheets().add(getClass().getResource("HotelPane.css").toExternalForm());
 	}
 
 	/**

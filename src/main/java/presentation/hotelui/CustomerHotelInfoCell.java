@@ -1,5 +1,6 @@
 package presentation.hotelui;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vo.OrderVO;
@@ -13,14 +14,14 @@ public class CustomerHotelInfoCell extends GridPane {
 
 	OrderVO orderVO;
 
-	private Text hotelText;
-	private Text roomText;
-	private Text checkInText;
-	private Text checkOutText;
-	private Text numText;
-	private Text childrenText;
-	private Text totalText;
-	private Text stateText;
+	private Label hotelText;
+	private Label roomText;
+	private Label checkInText;
+	private Label checkOutText;
+	private Label numText;
+	private Label childrenText;
+	private Label totalText;
+	private Label stateText;
 
 	/**
 	 * @param orderVO
@@ -32,21 +33,21 @@ public class CustomerHotelInfoCell extends GridPane {
 		super();
 		this.orderVO = orderVO;
 
-		hotelText = new Text(orderVO.hotelName);
+		hotelText = new Label(orderVO.hotelName);
 		this.add(hotelText, 0, 0, 3, 1);
-		stateText = new Text(orderVO.orderState);
+		stateText = new Label(orderVO.orderState);
 		this.add(stateText, 4, 0, 1, 1);
-		roomText = new Text(orderVO.roomName);
+		roomText = new Label(orderVO.roomName);
 		this.add(roomText, 0, 1, 2, 1);
-		totalText = new Text("¥" + String.valueOf(orderVO.total));
+		totalText = new Label("¥" + String.valueOf(orderVO.total));
 		this.add(totalText, 4, 1, 1, 1);
-		checkInText = new Text("入 " + orderVO.checkInTime.toString());
+		checkInText = new Label("入 " + orderVO.checkInTime.toString());
 		this.add(checkInText, 0, 2, 1, 1);
-		checkOutText = new Text("离" + orderVO.checkOutTime.toString());
+		checkOutText = new Label("离" + orderVO.checkOutTime.toString());
 		this.add(checkOutText, 1, 2, 1, 1);
-		numText = new Text(String.valueOf(orderVO.roomNum) + "间");
+		numText = new Label(String.valueOf(orderVO.roomNum) + "间");
 		this.add(numText, 1, 1, 1, 1);
-		childrenText = new Text(orderVO.hasChildren ? "有" : "无" + "儿童");
+		childrenText = new Label(orderVO.hasChildren ? "有" : "无" + "儿童");
 		this.add(childrenText, 2, 1, 1, 1);
 
 		this.setHgap(10);
