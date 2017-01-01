@@ -12,6 +12,7 @@ import bussinesslogic.factory.BLFactory;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import presentation.hotelui.ImageEditPane;
 
@@ -91,20 +92,43 @@ public class TheMainFrame extends Application {
 	private void linkToServer() {
 		// 172.26.102.100
 		// 114.212.43.130
-		try {
-			blFactory = BLFactory.getInstance();
-
-			blFactory.setRemote(Naming.lookup("rmi://localhost:8888/controllerRemoteFactory"));
+		while(true){
 			
-			loginTimer.schedule(new SurvivalTast(), 1000, 1000);
+			try {
+				
+				String url = null;
+				
+				Dialog<String> ipDialog = new ServerIPDialog();
+				
+				url = ipDialog.showAndWait().get();
+				if(url.equals("cancel")){
+					System.out.println("退出");
+					System.exit(0);
+				}
+				
+				blFactory = BLFactory.getInstance();
 
-			System.out.println("linked");
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
+				blFactory.setRemote(Naming.lookup("rmi://" + url + "/controllerRemoteFactory"));
+				
+				loginTimer.schedule(new SurvivalTast(), 1000, 1000);
+
+				System.out.println("linked");
+				
+				break;
+			} catch (MalformedURLException e) {
+				//e.printStackTrace();
+				System.out.println("地址输入格式有误");
+				continue;
+			} catch (RemoteException e) {
+				//e.printStackTrace();
+				System.out.println("连接失败");
+				continue;
+			} catch (NotBoundException e) {
+				//e.printStackTrace();
+				System.out.println("连接失败");
+				continue;
+			}
+			
 		}
 	}
 	
