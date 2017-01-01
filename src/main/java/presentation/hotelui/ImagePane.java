@@ -26,8 +26,8 @@ public class ImagePane extends VBox {
 		imageView = new ImageView();
 		imageView.setImage(preImage);
 		imageView.setPreserveRatio(false);
-		imageView.setFitHeight(188);
-		imageView.setFitWidth(210);
+		imageView.setFitHeight(178);
+		imageView.setFitWidth(200);
 
 		this.getChildren().add(imageView);
 

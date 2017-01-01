@@ -1,10 +1,12 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 /* The main scrollbar **track** CSS class  */
 	
-	.root{
+	#pane{
 	-fx-background-image:url(green.png);
     }
-
+ .scroll-pane > .viewport {
+   -fx-background-image: url(green.png);
+}
  .button{
    -fx-background-color:null;
   -fx-border-width: 2.0px;
@@ -16,6 +18,7 @@
    }
    .label{
    	-fx-text-fill:white;
+   	-fx-font-size:16px;
    }
   .button:hover .label{
  		 	-fx-text-fill:rgba(165, 245, 59, 0.9) ; 

@@ -52,7 +52,7 @@ public class WebPromotionCell extends GridPane {
 		}
 		if (webPromotionVO.businessCircleName != null) {
 			businessCircleText = new Label("  特定商圈名称: " + webPromotionVO.businessCircleName);
-			discountText = new Label("会员每升一级在该商圈订酒店折扣减少: " + webPromotionVO.discount);
+			discountText = new Label("会员每升一级在该商圈订酒店折扣减少: " + webPromotionVO.discount+"  ");
 			this.add(discountText, 3, 1, 3, 1);
 			this.add(businessCircleText, 0, 1, 3, 1);
 		}

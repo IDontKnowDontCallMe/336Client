@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
@@ -23,18 +24,17 @@ import vo.LevelVO;
 public class LevelPanel extends GridPane {
 
 	final int COLUMN_COUNT = 4;
-	private Text creditDistanceTitle;
-	private Text maxLevelTitle;
-	private Text discountDistanceTitle;
-	private Text creditDistanceText;
-	private Text maxLevelText;
-	private Text discountDistanceText;
-	private Text percent;
-	private Text title;
-	private Text vacant;
+	private Label creditDistanceTitle;
+	private Label maxLevelTitle;
+	private Label discountDistanceTitle;
+	private Label creditDistanceText;
+	private Label maxLevelText;
+	private Label discountDistanceText;
+	private Label percent;
+	private Label title;
+	private Label vacant;
 
 	private Button editButton;
-	private Button backButton;
 	private TextField creditDistanceTextField;
 	private TextField maxLevelTextField;
 	private TextField discountDistanceTextField;
@@ -56,27 +56,20 @@ public class LevelPanel extends GridPane {
 		super();
 		levelVO = BLFactory.getInstance().getPromotionBLService().getLevelMethod();
 
-		this.setHgap(10);
-		this.setVgap(20);
-
 		int creditDistance = levelVO.creditDistance;
 		int maxLevel = levelVO.maxLevel;
 		double discountDistance = BLFactory.getInstance().getPromotionBLService().getLevelPromotion().discountDistance;
 
-		title = new Text("会员等级制度");
+		title = new Label("会员等级制度");
 		editButton = new Button("编辑");
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
 		titleBox = new HBox();
-		titleBox.getChildren().addAll(title, editButton, backButton);
-		this.add(titleBox, 0, 0, 1, 1);
+		titleBox.getChildren().addAll(title, editButton);
+		title.setTranslateY(5.0);
 
-		creditDistanceTitle = new Text("增加一级需要的信用值数: ");
-		maxLevelTitle = new Text("最大会员等级: ");
-		discountDistanceTitle = new Text("每升一级, 预订酒店时可享折扣增加百分数: ");
-		percent = new Text("%");
+		creditDistanceTitle = new Label("增加一级需要的信用值数: ");
+		maxLevelTitle = new Label("最大会员等级: ");
+		discountDistanceTitle = new Label("每升一级, 预订酒店时可享折扣增加百分数: ");
+		percent = new Label("%");
 
 		creditDistanceTextField = new TextField();
 		creditDistanceTextField.setPrefColumnCount(COLUMN_COUNT);
@@ -88,9 +81,9 @@ public class LevelPanel extends GridPane {
 		discountDistanceTextField.setPrefColumnCount(COLUMN_COUNT);
 		discountDistanceTextField.setTooltip(new Tooltip("输入不大于100的整数"));
 
-		creditDistanceText = new Text(String.valueOf(creditDistance));
-		maxLevelText = new Text(String.valueOf(maxLevel));
-		discountDistanceText = new Text(String.valueOf(discountDistance) + "            ");
+		creditDistanceText = new Label(String.valueOf(creditDistance));
+		maxLevelText = new Label(String.valueOf(maxLevel));
+		discountDistanceText = new Label(String.valueOf(discountDistance) + "            ");
 
 		creditDistanceBox = new HBox();
 		maxLevelBox = new HBox();
@@ -99,9 +92,19 @@ public class LevelPanel extends GridPane {
 		maxLevelBox.getChildren().addAll(maxLevelTitle, maxLevelText);
 		discountDistanceBox.getChildren().addAll(discountDistanceTitle, discountDistanceText, percent);
 
-		vacant = new Text("\n");
+		vacant = new Label("\n");
 		levelMethodBox = new VBox();
+		levelMethodBox.getChildren().add(titleBox);
 		levelMethodBox.getChildren().addAll(creditDistanceBox, maxLevelBox, discountDistanceBox, vacant);
+		levelMethodBox.setMinWidth(920.0);
+		levelMethodBox.setSpacing(20);
+		titleBox.setTranslateX(15.0);
+		titleBox.setTranslateY(10.0);
+		titleBox.setSpacing(3.0);
+		creditDistanceBox.setTranslateX(15.0);
+		maxLevelBox.setTranslateX(15.0);
+		discountDistanceBox.setTranslateX(15.0);
+		
 		
 		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
 		this.add(webMarketerPilot, 0, 0);
@@ -157,6 +160,7 @@ public class LevelPanel extends GridPane {
 
 			}
 		});
+		levelMethodBox.setId("pane");
 		levelMethodBox.getStylesheets().add(getClass().getResource("LevelPane.css").toExternalForm());
 
 	}

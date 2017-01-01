@@ -5,6 +5,7 @@ import java.util.List;
 
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -24,9 +25,7 @@ public class CustomerCreditPanel extends GridPane {
 
 	private ScrollPane listPane;
 	private VBox customerBox;
-	private HBox titleBox;
-	private Text title;
-	private Button backButton;
+	private Label title;
 	private VBox vBox;
 
 	private List<CustomerVO> customerList;
@@ -45,20 +44,19 @@ public class CustomerCreditPanel extends GridPane {
 		buildCustomerBox(customerList);
 		listPane = new ScrollPane(customerBox);
 		listPane.getStyleClass().add("edge-to-edge");		
+		listPane.setMinWidth(920.0);
 
-		title = new Text("客户列表");
-		titleBox = new HBox();
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
-		titleBox.getChildren().addAll(title, backButton);
+		title = new Label("客户列表");
+		
 		vBox = new VBox();
-		vBox.getChildren().addAll(titleBox, listPane);
+		vBox.getChildren().addAll(title,listPane);
+		
 		WebMarketerPilot webMarketerPilot = new WebMarketerPilot(id);
 		this.add(webMarketerPilot, 0, 0);
 		this.add(vBox, 1, 0);
+		vBox.setId("pane");
 		vBox.getStylesheets().add(getClass().getResource("CustomerCreditPane.css").toExternalForm());
+		
 
 	}
 

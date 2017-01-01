@@ -3,14 +3,12 @@ package presentation.mainui;
 import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import presentation.orderui.MarketerOrdersPane;

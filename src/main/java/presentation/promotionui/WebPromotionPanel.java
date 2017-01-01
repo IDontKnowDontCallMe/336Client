@@ -3,7 +3,6 @@ package presentation.promotionui;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Optional;
-
 import bussinesslogic.factory.BLFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
@@ -13,8 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import presentation.mainui.TheMainFrame;
+
 import presentation.mainui.WebMarketerPilot;
 import vo.WebPromotionVO;
 
@@ -30,7 +28,6 @@ public class WebPromotionPanel extends GridPane {
 	private VBox webPromotionBox;
 	private HBox addBox;
 	private Button addButton;
-	private Button backButton;
 	private Label title;
 
 	/**
@@ -71,17 +68,14 @@ public class WebPromotionPanel extends GridPane {
 			}
 		});
 
-		backButton = new Button("返回");
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
+		
 		
 		addBox = new HBox();
 		addBox.setSpacing(10);
 		addBox.setMinHeight(50.0);
 		addBox.setTranslateX(20.0);
 		addBox.setTranslateY(10.0);
-		addBox.getChildren().addAll(title, addButton, backButton);
+		addBox.getChildren().addAll(title, addButton);
 		
 		GridPane gridPane = new GridPane();
 		gridPane.add(addBox, 0, 0);

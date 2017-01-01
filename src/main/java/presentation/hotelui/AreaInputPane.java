@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import presentation.customerui.CustomerInfoPane;
 import presentation.mainui.CustomerMainPane;
 import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
@@ -32,7 +31,6 @@ public class AreaInputPane extends GridPane {
 	private ComboBox<String> businessCircleBox;
 
 	private Button confirmButton;
-	private Button backButton;
 
 	/**
 	 * @param customerID
@@ -65,24 +63,13 @@ public class AreaInputPane extends GridPane {
 		confirmButton.setMinSize(84, 84);
 		confirmButton.setMaxSize(84, 84);
 
-		Label back = new Label();
-		back.setFont(Font.font(icon.getFamily(), 46));
-		back.setText(String.valueOf('\uf112'));
-		backButton = new Button("返回", back);
-		backButton.setWrapText(true);
-		backButton.setContentDisplay(ContentDisplay.TOP);
-		backButton.setId("backButton");
-		backButton.setShape(new Circle(42));
-		backButton.setMinSize(84, 84);
-		backButton.setMaxSize(84, 84);
-
 		Label chooseCity = new Label("请选择城市：");
 		chooseCity.setId("lb1");
 		Label chooseBussin = new Label("请选择商圈：");
 		chooseBussin.setId("lb2");
 
 		AnchorPane anchorPane = new AnchorPane();
-		anchorPane.getChildren().addAll(cityBox, businessCircleBox, confirmButton, backButton, chooseCity,
+		anchorPane.getChildren().addAll(cityBox, businessCircleBox, confirmButton, chooseCity,
 				chooseBussin);
 
 		CustomerPilot customerPilot = new CustomerPilot(customerID);
@@ -119,17 +106,10 @@ public class AreaInputPane extends GridPane {
 
 
 		AnchorPane.setTopAnchor(confirmButton, 410.0);
-
-		AnchorPane.setLeftAnchor(confirmButton, 340.0);
-
-		AnchorPane.setTopAnchor(backButton, 410.0);
-
-		AnchorPane.setLeftAnchor(backButton, 470.0);
+		AnchorPane.setLeftAnchor(confirmButton, 400.0);
+		
 
 
-		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.backTo();
-		});
 		this.getStylesheets().add(getClass().getResource("AreaInputPane.css").toExternalForm());
 	}
 

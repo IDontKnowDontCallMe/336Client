@@ -37,7 +37,7 @@ public class WebManagerPilot extends AnchorPane {
 		WebmanagerID.setId("id");
 		this.setId("pane");
 		this.ID = webManagerid;
-		int width = 146;
+		int width = 158;
 
 		Label customermanage = new Label();
 		customermanage.setFont(Font.font(icon.getFamily(), 26));
@@ -54,14 +54,14 @@ public class WebManagerPilot extends AnchorPane {
 		Label hotelManage = new Label();
 		hotelManage.setFont(Font.font(icon.getFamily(), 26));
 		hotelManage.setText(String.valueOf('\uf1ad'));
-		hotelManageButton = new Button("网站营销人员管理", hotelManage);
+		hotelManageButton = new Button("酒店营销人员管理", hotelManage);
 		hotelManageButton.setWrapText(true);
 		hotelManageButton.setContentDisplay(ContentDisplay.LEFT);
 		hotelManageButton.setId("orderButton");
 		hotelManageButton.setMinSize(width, 40);
 		hotelManageButton.setMaxSize(width, 40);
-		hotelManage.setTranslateX(-5.0);
-		hotelManageButton.setGraphicTextGap(-2.0);
+		hotelManage.setTranslateX(-10.0);
+		hotelManageButton.setGraphicTextGap(-10.0);
 
 		Label info = new Label();
 		info.setFont(Font.font(icon.getFamily(), 26));
@@ -72,8 +72,8 @@ public class WebManagerPilot extends AnchorPane {
 		webMarketerManageButton.setId("hotelButton");
 		webMarketerManageButton.setMinSize(width, 40);
 		webMarketerManageButton.setMaxSize(width, 40);
-		info.setTranslateX(-5.0);
-		webMarketerManageButton.setGraphicTextGap(-2.0);
+		info.setTranslateX(-10.0);
+		webMarketerManageButton.setGraphicTextGap(-10.0);
 
 		backButton = new Button("退出登录");
 		backButton.setId("back");
@@ -95,7 +95,7 @@ public class WebManagerPilot extends AnchorPane {
 		AnchorPane.setTopAnchor(user, 60.0);
 		AnchorPane.setLeftAnchor(WebmanagerID, 40.0);
 		AnchorPane.setTopAnchor(WebmanagerID, 150.0);
-		AnchorPane.setLeftAnchor(buttonbox, 16.0);
+		AnchorPane.setLeftAnchor(buttonbox, 11.0);
 		AnchorPane.setBottomAnchor(buttonbox, 200.0);
 		AnchorPane.setLeftAnchor(backButton, 18.0);
 		AnchorPane.setBottomAnchor(backButton, 100.0);

@@ -7,6 +7,7 @@ import bussinesslogic.factory.BLFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import presentation.mainui.CustomerPilot;
 import presentation.mainui.TheMainFrame;
 import presentation.orderui.ProducingOrderDialog;
 import presentation.roomui.RoomCell;
@@ -40,9 +42,9 @@ public class CustomerHotelInfoPane extends GridPane {
 	private Button produceButton;
 	private VBox orderBox;
 
-	private Text addressText;
-	private Text introductionText;
-	private Text serviceText;
+	private Label addressText;
+	private Label introductionText;
+	private Label serviceText;
 
 	HotelVO hotelVO;
 	List<RoomVO> roomList;
@@ -57,8 +59,6 @@ public class CustomerHotelInfoPane extends GridPane {
 	public CustomerHotelInfoPane(int hotelID, int customerID) throws RemoteException {
 
 		super();
-		this.setHgap(10);
-		this.setVgap(20);
 
 		this.hotelID = hotelID;
 		this.customerID = customerID;
@@ -71,24 +71,26 @@ public class CustomerHotelInfoPane extends GridPane {
 		initCommentPane(hotelID);
 		initRoomPane(hotelID);
 
-		this.add(new Text(hotelName), 0, 0, 1, 1);
-		this.add(new Text("酒店信息"), 0, 1, 1, 1);
-		this.add(infoPane, 0, 2, 1, 1);
-		this.add(new Text("我的订单"), 2, 3, 1, 1);
-		this.add(orderPane, 2, 4, 1, 1);
-		this.add(new Text("评论列表"), 0, 3, 1, 1);
-		this.add(commentPane, 0, 4, 1, 1);
-		this.add(new Text("房型列表"), 2, 1, 1, 1);
-		this.add(roomPane, 2, 2, 1, 1);
+		GridPane gridPane = new GridPane();
+		infoPane.add(new Label(hotelName), 0, 0, 1, 1);
+		gridPane.add(infoPane, 0, 2, 1, 1);
+		gridPane.add(new Label("我的订单"), 2, 3, 1, 1);
+		gridPane.add(orderPane, 2, 4, 1, 1);
+		gridPane.add(new Label("评论列表"), 0, 3, 1, 1);
+		gridPane.add(commentPane, 0, 4, 1, 1);
+		gridPane.add(new Label("房型列表"), 2, 1, 1, 1);
+		gridPane.add(roomPane, 2, 2, 1, 1);
 
+		gridPane.setVgap(5.0);
+		gridPane.setHgap(5.0);
 		backButton = new Button("返回");
-		this.add(backButton, 1, 0, 1, 1);
+		infoPane.add(backButton, 3, 0, 1, 1);
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
 		});
 
 		produceButton = new Button("下订单");
-		this.add(produceButton, 2, 0, 1, 1);
+		infoPane.add(produceButton, 2, 0, 1, 1);
 		produceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			ProducingOrderDialog producingOrderDialog = null;
 			try {
@@ -98,6 +100,13 @@ public class CustomerHotelInfoPane extends GridPane {
 			}
 			producingOrderDialog.show();
 		});
+		
+		CustomerPilot customerPilot = new CustomerPilot(customerID);
+		this.add(customerPilot, 0, 0);
+		this.add(gridPane, 1, 0);
+		gridPane.setId("pane");
+		gridPane.getStylesheets().add(getClass().getResource("CustomerHotelInfoPane.css").toExternalForm());
+
 	}
 
 	/**
@@ -198,20 +207,21 @@ public class CustomerHotelInfoPane extends GridPane {
 		// 地址、简介、设施服务、客房类型、各房型价格、
 		// 该客户在该酒店的订单(正常订单、异常订单和撤销订单要分别标记)
 
-		infoPane.add(new Text("酒店地址"), 0, 1, 1, 1);
-		addressText = new Text(hotelVO.address);
+		infoPane.add(new Label("酒店地址"), 0, 1, 1, 1);
+		addressText = new Label(hotelVO.address);
 		infoPane.add(addressText, 1, 1, 1, 1);
 
-		infoPane.add(new Text("酒店简介"), 0, 2, 1, 1);
-		introductionText = new Text(hotelVO.introduction);
+		infoPane.add(new Label("酒店简介"), 0, 2, 1, 1);
+		introductionText = new Label(hotelVO.introduction);
 		infoPane.add(introductionText, 1, 2, 1, 1);
 
-		infoPane.add(new Text("设施服务"), 0, 3, 1, 1);
-		serviceText = new Text(hotelVO.service);
+		infoPane.add(new Label("设施服务"), 0, 3, 1, 1);
+		serviceText = new Label(hotelVO.service);
 		infoPane.add(serviceText, 1, 3, 1, 1);
 
 		ImagePane imagePane = new ImagePane(hotelID);
 		infoPane.add(imagePane, 0, 4, 2, 1);
+		
 
 	}
 
@@ -228,6 +238,7 @@ public class CustomerHotelInfoPane extends GridPane {
 		orderBox = new VBox();
 		orderBox.setSpacing(15);
 		buildOrderBox(orderList);
+		
 
 		orderPane = new ScrollPane(orderBox);
 
