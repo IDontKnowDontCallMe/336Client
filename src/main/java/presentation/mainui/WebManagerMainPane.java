@@ -23,7 +23,6 @@ import presentation.userui.WebMarketerPanel;
 public class WebManagerMainPane extends AnchorPane {
 
 	private int webManagerID;
-	private Timer surviveTimer;
 	
 	public WebManagerMainPane(int webManagerID) {
 		super();
@@ -91,7 +90,7 @@ public class WebManagerMainPane extends AnchorPane {
 		
 		customerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerInfoPanel(webManagerID));
+				TheMainFrame.changeTo(new CustomerInfoPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -99,7 +98,7 @@ public class WebManagerMainPane extends AnchorPane {
 
 		hotelManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPanel(webManagerID));
+				TheMainFrame.changeTo(new HotelPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -107,7 +106,7 @@ public class WebManagerMainPane extends AnchorPane {
 
 		webMarketerManageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebMarketerPanel(webManagerID));
+				TheMainFrame.changeTo(new WebMarketerPanel(webManagerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -115,35 +114,15 @@ public class WebManagerMainPane extends AnchorPane {
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
-			surviveTimer.cancel();
+			TheMainFrame.setLoginID(-1);
 		});
 		
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
+		TheMainFrame.setLoginID(webManagerID);
+		
 
 		this.getStylesheets().add(getClass().getResource("WebManagerMainPane.css").toExternalForm());
 
 	}
 	
-	/**
-	 * @author samperson1997
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-				BLFactory.getInstance().getUserBLService().survivalConfirm(webManagerID);
-				
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
 }

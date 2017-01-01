@@ -109,7 +109,7 @@ public class HotelWorkerMainPane extends AnchorPane {
 		
 		manageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WorkerHotelInfoPane(hotelID));
+				TheMainFrame.changeTo(new WorkerHotelInfoPane(hotelID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -118,7 +118,7 @@ public class HotelWorkerMainPane extends AnchorPane {
 
 		hotelPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelPromotionPanel(hotelID));
+				TheMainFrame.changeTo(new HotelPromotionPanel(hotelID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -137,40 +137,20 @@ public class HotelWorkerMainPane extends AnchorPane {
 
 		orderListButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new HotelOrdersPane(hotelID));
+				TheMainFrame.changeTo(new HotelOrdersPane(hotelID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		});
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			surviveTimer.cancel();
 			TheMainFrame.backTo();
+			TheMainFrame.setLoginID(-1);
 		});
 		
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
-
-	}
-	
-	/**
-	 * @author samperson1997
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-				BLFactory.getInstance().getUserBLService().survivalConfirm(hotelID);
-				
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		TheMainFrame.setLoginID(hotelID);
 		
 	}
+	
+	
 }

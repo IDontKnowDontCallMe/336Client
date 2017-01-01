@@ -161,7 +161,7 @@ public class HotelWorkerPilot extends AnchorPane{
 		});
 
 		backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-			TheMainFrame.jumpTo(new LoginPane());
+			TheMainFrame.changeTo(new LoginPane());
 			TheMainFrame.setLoginID(-1);
 		});
 		

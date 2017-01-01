@@ -24,7 +24,6 @@ import presentation.userui.CustomerCreditPanel;
 public class WebMarketerMainPane extends AnchorPane {
 
 	private int webMarketerID;
-	private Timer surviveTimer;
 	
 	public WebMarketerMainPane(int webMarketerID) {
 		super();
@@ -103,7 +102,7 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		webPromotionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new WebPromotionPanel(webMarketerID));
+				TheMainFrame.changeTo(new WebPromotionPanel(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,7 +112,7 @@ public class WebMarketerMainPane extends AnchorPane {
 		
 		levelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new LevelPanel(webMarketerID));
+				TheMainFrame.changeTo(new LevelPanel(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -122,7 +121,7 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		marketerOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new MarketerOrdersPane(webMarketerID));
+				TheMainFrame.changeTo(new MarketerOrdersPane(webMarketerID));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -131,7 +130,7 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			try {
-				TheMainFrame.jumpTo(new CustomerCreditPanel(webMarketerID));
+				TheMainFrame.changeTo(new CustomerCreditPanel(webMarketerID));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -139,33 +138,11 @@ public class WebMarketerMainPane extends AnchorPane {
 
 		logoutButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			TheMainFrame.backTo();
-			surviveTimer.cancel();
+			TheMainFrame.setLoginID(-1);
 		});
 		
-		surviveTimer = new Timer(true);
-		surviveTimer.schedule(new SurvivalTast(), 1, 1000);
-		
+		TheMainFrame.setLoginID(webMarketerID);
 	}
 	
-	/**
-	 * @author samperson1997
-	 * 提醒服务器端此账号仍然登陆
-	 *
-	 */
-	public class SurvivalTast extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			try {
-				BLFactory.getInstance().getUserBLService().survivalConfirm(webMarketerID);
-				
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
 }
