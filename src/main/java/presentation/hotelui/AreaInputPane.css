@@ -2,7 +2,7 @@
 /* The main scrollbar **track** CSS class  */
 	
 	.root{
-	-fx-background-image:url("蓝色1.png");
+	-fx-background-image:url(bluebg.png);
     }
 
  #comfirmButton, #backButton{
